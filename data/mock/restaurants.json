@@ -1,0 +1,64 @@
+[
+  {
+    "id": "nyc-f1",
+    "destination": "New York City",
+    "name": "Mock Green Kitchen",
+    "price": 18,
+    "unit": "per_person_meal",
+    "tags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "id": "nyc-f2",
+    "destination": "New York City",
+    "name": "Mock Market Cafe",
+    "price": 22,
+    "unit": "per_person_meal",
+    "tags": [
+      "vegetarian"
+    ]
+  },
+  {
+    "id": "nyc-f3",
+    "destination": "New York City",
+    "name": "Mock Harbor Table",
+    "price": 35,
+    "unit": "per_person_meal",
+    "tags": [
+      "seafood"
+    ]
+  },
+  {
+    "id": "bos-f1",
+    "destination": "Boston",
+    "name": "Mock Garden Cafe",
+    "price": 16,
+    "unit": "per_person_meal",
+    "tags": [
+      "vegetarian",
+      "vegan"
+    ]
+  },
+  {
+    "id": "bos-f2",
+    "destination": "Boston",
+    "name": "Mock Common Kitchen",
+    "price": 20,
+    "unit": "per_person_meal",
+    "tags": [
+      "vegetarian"
+    ]
+  },
+  {
+    "id": "bos-f3",
+    "destination": "Boston",
+    "name": "Mock Wharf Table",
+    "price": 30,
+    "unit": "per_person_meal",
+    "tags": [
+      "seafood"
+    ]
+  }
+]

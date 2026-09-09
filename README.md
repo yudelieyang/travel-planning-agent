@@ -1,7 +1,8 @@
 # Travel Agent
 
-本项目当前仅包含单 Agent 项目的本地基础设施，尚未实现 Agent、提示词、
-LangGraph workflow、RAG pipeline 或前端。所有检查均不调用 OpenAI API。
+本项目包含本地基础设施和 Phase 4 离线 Single-Agent 架构骨架。
+唯一 planner 目前是 `DeterministicTestPlanner`，不是 AI 模型；
+没有真实 LLM、RAG、前端或旅游 API。所有检查均不调用 OpenAI API。
 
 本项目使用标准 CPython 3.11 x64 创建虚拟环境，不使用 Anaconda 作为 base。
 此前 Anaconda 自带的旧 MSVC runtime 导致 Chroma 原生写入崩溃；解决方式是
@@ -158,4 +159,128 @@ deactivate
 
 `docker compose down` 保留 PostgreSQL named volume。
 不要默认使用 `docker compose down -v`：`-v` 会删除数据库数据。
-本项目不配置远程仓库、不自动 commit 或 push。
+本项目未配置远程仓库或 push。Phase 3 基线已按授权提交；Phase 4 保留为未提交改动。
+
+## Architecture — Phase 4
+
+**ONE Agent boundary, MULTIPLE tools.** 只有 `planner` 是未来的 LLM 决策节点。
+当前实现是固定规则测试替身，不是生产级 AI Agent；不存在 HotelAgent、FoodAgent
+或其他子 Agent。LangGraph 中其余节点全部为确定性代码。
+
+```mermaid
+flowchart TD
+    User --> API[FastAPI route]
+    API --> Service[TravelService: deterministic parser]
+    Service --> Preflight[preflight]
+    Preflight -->|INSUFFICIENT| Clarification[clarification]
+    Clarification --> End[END / structured response]
+    Preflight -->|SUFFICIENT| Planner[planner: ONE future Agent boundary]
+    Planner --> Tools[tools: attractions / hotels / restaurants / transport / budget]
+    Tools --> Validate[validate]
+    Validate --> Finalize[finalize]
+    Finalize --> End
+```
+
+| Layer | Responsibility |
+|---|---|
+| `agent/requirements.py` | Pydantic requirements、受限英语规则解析、preflight |
+| `agent/planner.py` | `PlannerProtocol` + `DeterministicTestPlanner`；唯一决策入口 |
+| `agent/state.py` | `TravelState`，结构化状态与 messages 分开 |
+| `tools/contracts.py` | 明确的 Pydantic 搜索/预算输入、统一 `ToolResult` |
+| `tools/mock.py` | 四类本地 JSON 查询，Decimal 预算算术 |
+| `agent/itinerary.py` | mock 行程组合、日序及费用一致性校验 |
+| `agent/graph.py` | LangGraph 节点、条件路由、工具错误处理 |
+| `agent/service.py` | 解析输入、运行 graph、映射响应 |
+| `api/travel.py` | HTTP 输入验证及调用 service，无 planner/tool 业务逻辑 |
+
+`TravelState` 包含 messages、requirements、requirement_status、missing_fields、
+tool_requests、tool_results、itinerary、budget_summary、warnings、errors 和
+clarification_question。每次请求新建状态，无 checkpointer、对话记忆或持久会话。
+工具结果保存在 tool_results，不塞入 messages；messages 不包含人工推理链。
+
+`build_graph(planner=...)` 接受任何符合 `PlannerProtocol` 的实现。未来可替换模型适配器，
+保留 graph 控制流。本阶段固定 mock slice 要求四类搜索后计算预算；尚未实现动态
+LLM tool-calling 循环。预算参数在工具搜索后由确定性代码填入，再交给 budget tool。
+
+### Requirements and Clarification
+
+必需条件仅为 destination，以及 duration_days 或完整 start_date + end_date。
+日期范围包含起止两日；显式 duration 与日期冲突返回 HTTP 422。
+未提供人数时 `travelers=null`，未提供预算时 `budget=null`；不补出 3 天、2 人或 $1000。
+当前有界演示支持 1–30 天、明确提供时 1–20 位旅客。
+
+解析器只用于离线验证，支持例如 `to Boston`、`to NYC`、`3-day`、`3 days`、
+`2 travelers`、`under $1000`、`budget USD 1000`、ISO 日期，以及文档内示例偏好词。
+它不是通用自然语言理解器；复杂句式、否定、其他语言和未识别偏好不能被可靠解释。
+起点会记录，但不查询跨城交通。未知目的地保留原值，由 tools 返回 NO_RESULTS。
+
+缺字段走 `clarification -> END`，不调用 planner 或任何旅游 tools。
+无匹配数据、工具异常、预算/行程不一致返回 `status=error` 和可读错误，
+不伪造 success。此状态补充原设计中的 success / needs_clarification。
+
+### Mock Tools and Cost Semantics
+
+`data/mock/` 中四个文件各 6 条固定数据，覆盖 New York City 和 Boston。
+所有名称、价格和报价单位都是测试素材，不代表真实商家、价格、营业时间或路线。
+搜索采用目的地、max_price 和严格偏好标签过滤，按价格及稳定 ID 排序；
+偏好无法同时满足时返回 NO_RESULTS，不自动改成其他偏好。
+
+所有工具使用 `ToolResult(tool_name, status, data, source, error, metadata)`。
+状态为 SUCCESS、NO_RESULTS、ERROR；搜索 source 为 mock，预算为 deterministic。
+搜索输入统一为 `SearchInput`，预算使用 `BudgetInput` / `CostItem`，
+不接收无约束字典来猜字段。
+
+费用规则明确标记为 mock 报价约定：每天一个景点、三餐、每日交通费，
+住宿为天数减一晚。每条 fixture 价格按人报价，不隐含房间分配。
+小数据集可能重复景点或餐厅，会提示。税、服务费、跨城交通和实时可用性不在报价内。
+constraints 仅记录并警告未核验，不宣称满足无障碍或其他约束。
+
+- 人数已给出：返回 group 总价，与同币种预算比较；超预算明确 warning。
+- 人数未知：返回 per_traveler 单位参考费用，within_budget 为 null，
+  明确提示不能据此核验整团预算。
+- mock 报价固定 USD；演示中 `$` 按 USD 解析。EUR/GBP 预算保留原币种，
+  不做汇率换算或直接与 USD 比较。
+- 四类费用通过 Decimal 确定性求和，再验证每日活动、每日总价及总预算一致。
+
+Phase 4 route 不使用 PostgreSQL、Redis 或 ChromaDB。
+`check_environment.py` 仍是独立的 Phase 3 基础设施检查，不是 RAG 或业务存储。
+本阶段没有 OpenAI/付费 API、远程模型下载、LangSmith tracing 或云配置。
+
+### API Examples
+
+启动后，在另一个 PowerShell 执行：
+
+```powershell
+$request = @{query = 'Plan a 3-day trip to New York City under $1000. I like museums and food.'}
+Invoke-RestMethod -Uri 'http://127.0.0.1:8000/api/v1/travel/plan' `
+  -Method Post -ContentType 'application/json' -Body ($request | ConvertTo-Json)
+
+$request = @{query = 'Plan a trip for me.'}
+Invoke-RestMethod -Uri 'http://127.0.0.1:8000/api/v1/travel/plan' `
+  -Method Post -ContentType 'application/json' -Body ($request | ConvertTo-Json)
+```
+
+完整请求返回 success、requirements、structured itinerary、budget 和 warnings。
+缺信息请求返回 needs_clarification、missing_fields、clarification_question，
+itinerary/budget 为 null。空 query、非法数字或冲突日期返回 HTTP 422。
+`GET /health` 保持原有返回格式。无 streaming、WebSocket 或认证。
+
+### Tests and Evaluation Seed
+
+```powershell
+pytest
+ruff check .
+python scripts/check_environment.py
+```
+
+`backend/tests/agent/` 的测试阻止 Internet DNS/连接尝试（仅允许本机事件循环需要的
+loopback socket），并在被测代码吞掉连接异常时仍判定失败。
+业务测试不依赖数据库服务、随机输入或真实 LLM。预算、失败状态、澄清不调用工具、
+planner 替换、跨请求状态隔离及真实 FastAPI TestClient 路由均有覆盖。
+
+`evals/datasets/travel_smoke_v1.json` 包含 6 个案例：正常请求、缺目的地、缺时长、
+低预算、素食偏好及博物馆偏好。字段包括 input、expected_requirement_fields、
+expected_status（preflight）、expected_api_status、required_tools、forbidden_tools、
+budget_constraint。pytest 会实际执行这些案例；不包含 expected_reasoning 或人工 CoT。
+
+已知上游 Starlette/AnyIO 的一条弃用警告不影响测试，未为屏蔽它变更锁定依赖。

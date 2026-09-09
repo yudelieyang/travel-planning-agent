@@ -1,0 +1,131 @@
+[
+  {
+    "id": "TRAVEL-001",
+    "input": "Plan a 3-day trip to New York City under $1000. I like museums and food.",
+    "expected_requirement_fields": {
+      "destination": "New York City",
+      "duration_days": 3,
+      "budget": 1000,
+      "travelers": null,
+      "interests": [
+        "museums",
+        "food"
+      ]
+    },
+    "expected_status": "SUFFICIENT",
+    "expected_api_status": "success",
+    "required_tools": [
+      "search_attractions",
+      "search_hotels",
+      "search_restaurants",
+      "search_transport",
+      "calculate_budget"
+    ],
+    "forbidden_tools": [],
+    "budget_constraint": {
+      "max_total": 1000
+    }
+  },
+  {
+    "id": "TRAVEL-002",
+    "input": "Plan a 3-day trip for me.",
+    "expected_requirement_fields": {
+      "destination": null,
+      "duration_days": 3
+    },
+    "expected_status": "INSUFFICIENT",
+    "expected_api_status": "needs_clarification",
+    "required_tools": [],
+    "forbidden_tools": [
+      "search_attractions",
+      "search_hotels",
+      "search_restaurants",
+      "search_transport",
+      "calculate_budget"
+    ],
+    "budget_constraint": null
+  },
+  {
+    "id": "TRAVEL-003",
+    "input": "Plan a trip to Boston.",
+    "expected_requirement_fields": {
+      "destination": "Boston",
+      "duration_days": null
+    },
+    "expected_status": "INSUFFICIENT",
+    "expected_api_status": "needs_clarification",
+    "required_tools": [],
+    "forbidden_tools": [
+      "search_attractions",
+      "search_hotels",
+      "search_restaurants",
+      "search_transport",
+      "calculate_budget"
+    ],
+    "budget_constraint": null
+  },
+  {
+    "id": "TRAVEL-004",
+    "input": "Plan a 3-day trip to NYC for 1 traveler under $50.",
+    "expected_requirement_fields": {
+      "destination": "New York City",
+      "duration_days": 3,
+      "travelers": 1,
+      "budget": 50
+    },
+    "expected_status": "SUFFICIENT",
+    "expected_api_status": "success",
+    "required_tools": [
+      "search_attractions",
+      "search_hotels",
+      "search_restaurants",
+      "calculate_budget"
+    ],
+    "forbidden_tools": [],
+    "budget_constraint": {
+      "max_total": 50,
+      "must_exceed": true
+    }
+  },
+  {
+    "id": "TRAVEL-005",
+    "input": "Plan a 2-day trip to Boston for 1 traveler under $500. I prefer vegetarian food.",
+    "expected_requirement_fields": {
+      "destination": "Boston",
+      "food_preferences": [
+        "vegetarian"
+      ],
+      "travelers": 1
+    },
+    "expected_status": "SUFFICIENT",
+    "expected_api_status": "success",
+    "required_tools": [
+      "search_restaurants",
+      "calculate_budget"
+    ],
+    "forbidden_tools": [],
+    "budget_constraint": {
+      "max_total": 500
+    }
+  },
+  {
+    "id": "TRAVEL-006",
+    "input": "Plan a 2-day trip to New York City for 1 traveler under $1000. I like museums.",
+    "expected_requirement_fields": {
+      "destination": "New York City",
+      "interests": [
+        "museums"
+      ]
+    },
+    "expected_status": "SUFFICIENT",
+    "expected_api_status": "success",
+    "required_tools": [
+      "search_attractions",
+      "calculate_budget"
+    ],
+    "forbidden_tools": [],
+    "budget_constraint": {
+      "max_total": 1000
+    }
+  }
+]

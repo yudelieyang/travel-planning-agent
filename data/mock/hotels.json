@@ -1,0 +1,66 @@
+[
+  {
+    "id": "nyc-h1",
+    "destination": "New York City",
+    "name": "Mock Midtown Lodge",
+    "price": 120,
+    "unit": "per_person_night",
+    "tags": [
+      "central",
+      "budget"
+    ]
+  },
+  {
+    "id": "nyc-h2",
+    "destination": "New York City",
+    "name": "Mock Garden Inn",
+    "price": 150,
+    "unit": "per_person_night",
+    "tags": [
+      "quiet"
+    ]
+  },
+  {
+    "id": "nyc-h3",
+    "destination": "New York City",
+    "name": "Mock Skyline Hotel",
+    "price": 250,
+    "unit": "per_person_night",
+    "tags": [
+      "central",
+      "luxury"
+    ]
+  },
+  {
+    "id": "bos-h1",
+    "destination": "Boston",
+    "name": "Mock Harbor Lodge",
+    "price": 100,
+    "unit": "per_person_night",
+    "tags": [
+      "central",
+      "budget"
+    ]
+  },
+  {
+    "id": "bos-h2",
+    "destination": "Boston",
+    "name": "Mock Garden House",
+    "price": 130,
+    "unit": "per_person_night",
+    "tags": [
+      "quiet"
+    ]
+  },
+  {
+    "id": "bos-h3",
+    "destination": "Boston",
+    "name": "Mock Bay Hotel",
+    "price": 220,
+    "unit": "per_person_night",
+    "tags": [
+      "central",
+      "luxury"
+    ]
+  }
+]
