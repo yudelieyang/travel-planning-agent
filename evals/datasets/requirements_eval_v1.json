@@ -1,0 +1,1174 @@
+[
+  {
+    "id": "REQ-001",
+    "query": "Plan a 3-day trip to Boston.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "explicit"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-002",
+    "query": "Plan a 4-day trip to NYC for 2 travelers under $800 total. I like museums.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "New York City",
+      "duration_days": 4,
+      "start_date": null,
+      "end_date": null,
+      "travelers": 2,
+      "budget_amount": 800,
+      "budget_scope": "TOTAL_TRIP",
+      "interests": [
+        "museums"
+      ],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "explicit",
+      "multi-traveler",
+      "budget"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-003",
+    "query": "I'll be in Boston for three days.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "number-words",
+      "phrasing"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-004",
+    "query": "Give me three days in Boston.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "number-words",
+      "phrasing"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-005",
+    "query": "I want to spend a long weekend in Boston.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": null,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": [
+        "ambiguous duration"
+      ]
+    },
+    "expected_status": "INSUFFICIENT",
+    "tags": [
+      "ambiguity",
+      "duration"
+    ],
+    "notes": "Long weekend does not specify an exact duration."
+  },
+  {
+    "id": "REQ-006",
+    "query": "Visit Boston from 2026-10-03 to 2026-10-06.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": null,
+      "start_date": "2026-10-03",
+      "end_date": "2026-10-06",
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "dates",
+      "iso"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-007",
+    "query": "Plan a 3-day trip to Boston. My total budget is $1000.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": 1000,
+      "budget_scope": "TOTAL_TRIP",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "budget"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-008",
+    "query": "Plan a 3-day trip to Boston. $1000 per person.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": 1000,
+      "budget_scope": "PER_PERSON",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "budget"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-009",
+    "query": "Plan a 2-day trip to Boston around $1000.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 2,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": 1000,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": [
+        "approximate budget"
+      ]
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "budget",
+      "approximate"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-010",
+    "query": "Plan a 2-day trip to Boston. I don't really have a budget.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 2,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "budget",
+      "no-amount"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-011",
+    "query": "Plan a 2-day trip to Boston. Keep it cheap.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 2,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": [
+        "keep it cheap"
+      ]
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "budget",
+      "qualitative"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-012",
+    "query": "Plan a 2-day trip to Boston. I'm traveling alone.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 2,
+      "start_date": null,
+      "end_date": null,
+      "travelers": 1,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "travelers"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-013",
+    "query": "A 3-day trip to Boston for two.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": 2,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "travelers",
+      "number-words"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-014",
+    "query": "Plan a 3-day trip to Boston for me and my partner.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": 2,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "travelers"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-015",
+    "query": "Plan a 3-day trip to Boston for a family of four.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": 4,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "travelers"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-016",
+    "query": "Plan a 3-day trip to Boston for three adults.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": 3,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "travelers",
+      "number-words"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-017",
+    "query": "We want a 3-day trip to Boston.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "travelers",
+      "ambiguity"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-018",
+    "query": "Plan a 2-day trip to Boston. I like museums and food.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 2,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [
+        "museums",
+        "food"
+      ],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "preferences"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-019",
+    "query": "Plan a 2-day trip to Boston. I don't want museums.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 2,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": [
+        "avoid museums"
+      ]
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "negation"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-020",
+    "query": "Plan a 2-day trip to Boston. No nightlife.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 2,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": [
+        "no nightlife"
+      ]
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "negation"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-021",
+    "query": "Plan a 2-day trip to Boston. I don't eat meat.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 2,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": [
+        "no meat"
+      ]
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "negation"
+    ],
+    "notes": "Do not infer vegetarian diet from one exclusion."
+  },
+  {
+    "id": "REQ-022",
+    "query": "Plan a 2-day trip to Boston. I don't want to rent a car.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 2,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": [
+        "no rental car"
+      ]
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "negation"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-023",
+    "query": "Plan a 2-day trip to Boston. Avoid expensive restaurants.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 2,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": [
+        "avoid expensive restaurants"
+      ]
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "negation"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-024",
+    "query": "Plan a 2-day trip to Boston. I must stay near downtown.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 2,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": [
+        "must stay near downtown"
+      ]
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "hard-constraint"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-025",
+    "query": "I want a luxury hotel in Boston but my total budget is $150 for three days.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": 150,
+      "budget_scope": "TOTAL_TRIP",
+      "interests": [],
+      "hotel_preferences": [
+        "luxury"
+      ],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "conflict"
+    ],
+    "notes": "Extract both luxury and amount; do not resolve affordability."
+  },
+  {
+    "id": "REQ-026",
+    "query": "Take me somewhere warm for four days.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": null,
+      "duration_days": 4,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "INSUFFICIENT",
+    "tags": [
+      "ambiguity",
+      "destination"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-027",
+    "query": "I want to go to New York or Boston for three days.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": null,
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": [
+        "ambiguous destination"
+      ]
+    },
+    "expected_status": "INSUFFICIENT",
+    "tags": [
+      "ambiguity",
+      "destination"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-028",
+    "query": "Tell me a joke.",
+    "split": "core",
+    "language": "en",
+    "expected_fields": {
+      "destination": null,
+      "duration_days": null,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "INSUFFICIENT",
+    "tags": [
+      "irrelevant"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-029",
+    "query": "  NYC   for   3 days pls  ",
+    "split": "robustness",
+    "language": "en",
+    "expected_fields": {
+      "destination": "New York City",
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "surface",
+      "abbreviation"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-030",
+    "query": "Boston, 4 days, $800.",
+    "split": "robustness",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 4,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": 800,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "surface",
+      "shorthand"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-031",
+    "query": "Boston from October 3 to October 6, 2026.",
+    "split": "robustness",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": null,
+      "start_date": "2026-10-03",
+      "end_date": "2026-10-06",
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "dates",
+      "month-name"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-032",
+    "query": "I'll be in NYC Oct 3–6.",
+    "split": "robustness",
+    "language": "en",
+    "expected_fields": {
+      "destination": "New York City",
+      "duration_days": null,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": [
+        "dates require year"
+      ]
+    },
+    "expected_status": "INSUFFICIENT",
+    "tags": [
+      "dates",
+      "missing-year"
+    ],
+    "notes": "Do not invent a year or dates."
+  },
+  {
+    "id": "REQ-033",
+    "query": "Boston from 10/03/2026 to 10/06/2026.",
+    "split": "robustness",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": null,
+      "start_date": "2026-10-03",
+      "end_date": "2026-10-06",
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "dates",
+      "slash-dates"
+    ],
+    "notes": "Dataset convention for this English case is MM/DD/YYYY; parser may leave unsupported."
+  },
+  {
+    "id": "REQ-034",
+    "query": "What's the weather today?",
+    "split": "robustness",
+    "language": "en",
+    "expected_fields": {
+      "destination": null,
+      "duration_days": null,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "INSUFFICIENT",
+    "tags": [
+      "irrelevant"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-035",
+    "query": "Book me a flight right now.",
+    "split": "robustness",
+    "language": "en",
+    "expected_fields": {
+      "destination": null,
+      "duration_days": null,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "INSUFFICIENT",
+    "tags": [
+      "unsupported"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-036",
+    "query": "For three days in Boston, I'd rather skip museums and enjoy parks.",
+    "split": "robustness",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [
+        "parks"
+      ],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": [
+        "avoid museums"
+      ]
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "negation",
+      "colloquial"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-037",
+    "query": "Three days in Boston; museums are not my thing.",
+    "split": "robustness",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": [
+        "avoid museums"
+      ]
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "negation",
+      "postposed"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-038",
+    "query": "Plan three days in Boston. Not only museums but also parks.",
+    "split": "robustness",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [
+        "museums",
+        "parks"
+      ],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "negation",
+      "not-only"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-039",
+    "query": "Plan a 2-day trip to Boston. I dislike loud hotels and prefer quiet ones.",
+    "split": "robustness",
+    "language": "en",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 2,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [
+        "quiet"
+      ],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": [
+        "avoid loud hotels"
+      ]
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "negation",
+      "preferences"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-040",
+    "query": "Plan a 2-day trip to somewhere warm.",
+    "split": "robustness",
+    "language": "en",
+    "expected_fields": {
+      "destination": null,
+      "duration_days": 2,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "INSUFFICIENT",
+    "tags": [
+      "ambiguity",
+      "destination"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-041",
+    "query": "Boston or NYC, four days, please.",
+    "split": "robustness",
+    "language": "en",
+    "expected_fields": {
+      "destination": null,
+      "duration_days": 4,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": [
+        "ambiguous destination"
+      ]
+    },
+    "expected_status": "INSUFFICIENT",
+    "tags": [
+      "ambiguity",
+      "surface"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-042",
+    "query": "帮我规划纽约三天旅行，预算1000美元。",
+    "split": "robustness",
+    "language": "zh",
+    "expected_fields": {
+      "destination": "New York City",
+      "duration_days": 3,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": 1000,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "language-gap"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-043",
+    "query": "我不想去博物馆。",
+    "split": "robustness",
+    "language": "zh",
+    "expected_fields": {
+      "destination": null,
+      "duration_days": null,
+      "start_date": null,
+      "end_date": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": [
+        "avoid museums"
+      ]
+    },
+    "expected_status": "INSUFFICIENT",
+    "tags": [
+      "language-gap",
+      "negation"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "REQ-044",
+    "query": "我们两个人去波士顿四天。",
+    "split": "robustness",
+    "language": "zh",
+    "expected_fields": {
+      "destination": "Boston",
+      "duration_days": 4,
+      "start_date": null,
+      "end_date": null,
+      "travelers": 2,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "expected_status": "SUFFICIENT",
+    "tags": [
+      "language-gap"
+    ],
+    "notes": ""
+  }
+]

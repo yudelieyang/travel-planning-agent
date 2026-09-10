@@ -57,7 +57,8 @@ def test_api_invalid_input(query):
 def test_evaluation_seed(case):
     requirements = parse_requirements(case["input"])
     for field, value in case["expected_requirement_fields"].items():
-        assert requirements.model_dump(mode="json")[field] == value
+        actual = requirements.model_dump(mode="json")[field]
+        assert (set(actual) == set(value)) if isinstance(value, list) else actual == value
     state = build_graph(tool_runner=scenario_runner(case)).invoke(
         {"requirements": requirements, "messages": []}
     )

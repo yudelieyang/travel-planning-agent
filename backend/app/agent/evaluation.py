@@ -104,7 +104,12 @@ def score_records(cases: list[dict], records: list[dict]) -> dict:
         if case["id"] != record["case_id"]:
             raise ValueError("Case/record order mismatch")
         fields = case["expected_requirement_fields"]
-        matched = sum(record["requirements"].get(k) == v for k, v in fields.items())
+        matched = sum(
+            set(record["requirements"].get(k, [])) == set(v)
+            if isinstance(v, list)
+            else record["requirements"].get(k) == v
+            for k, v in fields.items()
+        )
         totals["requirement_matches"] += matched
         totals["requirement_checks"] += len(fields)
         called = set(record["executed_tools"])

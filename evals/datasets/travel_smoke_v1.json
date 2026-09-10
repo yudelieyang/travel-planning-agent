@@ -338,9 +338,7 @@
         "wheelchair",
         "no walking"
       ],
-      "transport_preferences": [
-        "walking"
-      ]
+      "transport_preferences": []
     },
     "expected_status": "SUFFICIENT",
     "expected_api_status": "success",

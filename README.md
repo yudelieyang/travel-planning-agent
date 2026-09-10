@@ -382,3 +382,54 @@ TRAVEL-013 使用仅限评估的本地工具故障注入，不暴露到 HTTP 输
 和结构化 trace。planner=deterministic，dataset=travel_smoke_v1，prompt_version=N/A。
 这是固定 mock 数据集的回归分数，不能证明通用自然语言理解或真实 LLM 效果。
 指标测试包含故意篡改需求、工具、状态、预算和 warning 的负例，避免只验证全绿路径。
+
+## Phase 5B — Requirements Understanding Baseline
+
+Current input language: **English**（有限规则支持）。中文仅作为未来能力评估样本，
+未实现中文解析。Real LLM not yet enabled；无 LLMRequirementsExtractor、网络或付费调用。
+这不是通用自然语言理解器。
+
+本轮保持 `RequirementsExtractorProtocol` 和 schema 不变。增加的是有限通用规则：
+空白及弯引号归一化、one–twenty 数字词、常见明确人数表达、带货币符号/币种的金额、
+`total budget is`、前置否定词的局部作用范围。人数不从 `we` 推断，cheap/affordable
+不映射美元数值，冲突事实只提取、不解决。`around` 金额附加 approximate budget 约束。
+
+正向偏好仍进入 interests / 各类 preferences；识别的否定和 must 要求进入现有
+constraints，例如 `avoid museums`、`no meat`、`no rental car`、`must stay near downtown`。
+这不表示工具已经验证或强制满足约束；mock itinerary 仍提示 constraints 未核验。
+行为迁移：`no walking` 不再产生正向 walking 偏好；旧 TRAVEL-015 的错误预期已更正。
+无 JSON schema 字段迁移，偏好/约束列表比较忽略顺序。
+
+**日期支持**：仅显式 `YYYY-MM-DD` 单日期/起止日期，起止均给出时按包含两端计算天数；
+不猜缺失年份，不支持月份名称、斜杠日期、相对日期或 long weekend 的精确时长。
+识别到 `New York or Boston` 或 `somewhere warm` 时不选城市，继续要求 clarification。
+其他复杂歧义仍可能误提取，详见已知失败。
+
+独立提取评估与 planner/tool smoke 分离：
+
+```powershell
+python evals/evaluate_requirements.py
+python evals/evaluate_requirements.py --strict
+```
+
+`requirements_eval_v1.json` 固定 44 例，28 core + 16 robustness（其中 3 例中文）。
+数据集在规则改进前固定，并记录 SHA-256；没有根据 robustness 失败逐例追加修复。
+robustness 是预先标记的保留评估集，不宣称是独立第三方盲测。
+执行顺序严格为 query → real extractor → compare expected；不调用 planner 或 tools。
+ID、split、expected_fields 不传给 extractor。
+
+默认命令完成报告就返回 0，**不代表所有案例通过**。`--strict` 有任一失败即返回 1；
+当前确实返回 1，11 个能力失败未跳过或 xfail。pytest 测试的是实现承诺和评估器正确性，
+独立能力集衡量更广泛的未支持表达，二者分开报告。
+
+结果含 full-case exact match、逐字段正确率、各字段组准确率、core/robustness 分数、
+确定性 failure taxonomy、期望/实际差异。所有指标带分子分母；空值也是有效预期。
+另外提供 nonempty_target_metrics，防止空字段占比掩盖能力缺口。比如当前日期组总体
+42/44 正确，但实际要求提取日期的案例仅 1/3 正确。没有目标时指标为 null（N/A）。
+
+可读的前后对比和完整失败列表见 [requirements baseline](evals/requirements_baseline.md)。
+详细运行报告写入已忽略的 `evals/results/requirements-*.json`，不包含 CoT。
+
+当前重要限制：`skip`、后置否定、`not only`、`dislike` 等不能可靠解释；嵌套介词
+可能污染目的地（例如 `to spend a long weekend in Boston`）；月份/斜杠/缺年日期及
+中文未支持。金额和人数规则也不是完整语义解析，不应把通过 core 当作生产能力。

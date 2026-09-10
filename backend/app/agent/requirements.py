@@ -83,26 +83,53 @@ def assess_requirements(requirements: TravelRequirements) -> RequirementAssessme
 
 def parse_requirements(query: str) -> TravelRequirements:
     """Recognize documented patterns; never fill missing destination/duration/party size."""
+    query = " ".join(query.replace("’", "'").split())
     values = {}
     place = re.search(
         r"\b(?:to|in|visit)\s+([A-Za-z][A-Za-z ]*?)"
-        r"(?=\s+(?:under|for|with|from|on|starting|between)\b|[.,!?]|$)",
+        r"(?=\s+(?:under|for|with|from|on|starting|between|around|but|budget)\b|[.,!?;]|$)",
         query,
         re.I,
     )
     if place:
         values["destination"] = place[1].strip()
+    else:
+        # Shorthand supports existing city aliases only; no arbitrary adjective becomes a city.
+        short = re.match(r"(new york city|new york|nyc|boston)\b", query, re.I)
+        if short:
+            values["destination"] = short[1]
+            if re.match(r"\s+or\b", query[short.end() :], re.I):
+                values["destination"] = None
+                values["constraints"] = ["ambiguous destination"]
+    destination = values.get("destination")
+    if destination and re.search(r"\bor\b", destination, re.I):
+        values["destination"] = None
+        values["constraints"] = ["ambiguous destination"]
+    elif destination and re.match(
+        r"(?:somewhere|anywhere|rent|eat|stay|book)\b", destination, re.I
+    ):
+        values["destination"] = None
     origin = re.search(r"\bfrom\s+([A-Za-z][A-Za-z ]*?)\s+to\b", query, re.I)
     if origin:
         values["origin"] = origin[1].strip()
-    duration = re.search(r"(?<![\w.])(-?\d+)\s*[- ]\s*days?\b", query, re.I)
+    duration = re.search(rf"(?<![\w.])({NUMBER})\s*[- ]\s*days?\b", query, re.I)
     if duration:
-        values["duration_days"] = int(duration[1])
+        values["duration_days"] = number_value(duration[1])
     travelers = re.search(
-        r"(?<![\w.])(-?\d+)\s+(?:travelers?|people|persons?|adults?)\b", query, re.I
+        rf"(?<![\w.])({NUMBER})\s+(?:travelers?|people|persons?|adults?)\b", query, re.I
     )
+    if not travelers:
+        travelers = re.search(rf"\bfamily of\s+({NUMBER})\b", query, re.I)
+    if not travelers:
+        travelers = re.search(
+            rf"\bfor\s+({NUMBER})(?=\s*(?:[.,;!?]|$|under\b|with\b))", query, re.I
+        )
     if travelers:
-        values["travelers"] = int(travelers[1])
+        values["travelers"] = number_value(travelers[1])
+    elif re.search(r"\b(?:traveling|travelling) alone\b", query, re.I):
+        values["travelers"] = 1
+    elif re.search(r"\bme and my partner\b", query, re.I):
+        values["travelers"] = 2
     dates = re.findall(r"\b\d{4}-\d{2}-\d{2}\b", query)
     if len(dates) > 2:
         raise ValueError("Provide at most a start and an end date")
@@ -110,38 +137,82 @@ def parse_requirements(query: str) -> TravelRequirements:
         values["start_date"] = date.fromisoformat(dates[0])
     if len(dates) == 2:
         values["end_date"] = date.fromisoformat(dates[1])
-    amount = re.search(
-        r"(?:under|budget(?:\s+of)?|up to)\s*(?:(USD|EUR|GBP)\s*|([$€£])\s*)?"
-        r"(-?\d[\d,]*(?:\.\d+)?)\s*(USD|EUR|GBP)?",
+    for amount in re.finditer(
+        r"(?:(?P<intro>under|(?:total\s+)?budget(?:\s+(?:of|is))?|up to|around)\s*)?"
+        r"(?:(?P<code>USD|EUR|GBP)\s*|(?P<symbol>[$€£])\s*)?"
+        r"(?P<amount>-?\d[\d,]*(?:\.\d+)?)\s*(?P<currency>USD|EUR|GBP)?",
         query,
         re.I,
-    )
-    if amount:
-        values["budget_amount"] = float(amount[3].replace(",", ""))
-        # Only explicit scope adjacent to the amount is recognized. Party size never sets it.
+    ):
+        if not any(amount[k] for k in ("intro", "code", "symbol", "currency")):
+            continue  # A duration, date, or party count alone is not a monetary amount.
+        values["budget_amount"] = float(amount["amount"].replace(",", ""))
         scope_text = query[amount.end() :].lstrip()
-        per_person = re.match(r"(?:per (?:person|traveler)|each)\b", scope_text, re.I)
-        total = re.match(r"(?:total|for (?:the )?(?:whole|entire) trip)\b", scope_text, re.I)
-        if per_person:
+        if re.match(r"(?:per (?:person|traveler)|each)\b", scope_text, re.I):
             values["budget_scope"] = BudgetScope.PER_PERSON
-        elif total:
+        elif re.match(r"(?:total|for (?:the )?(?:whole|entire) trip)\b", scope_text, re.I) or (
+            amount["intro"] and "total" in amount["intro"].lower()
+        ):
             values["budget_scope"] = BudgetScope.TOTAL_TRIP
+        if amount["intro"] and amount["intro"].lower() == "around":
+            values.setdefault("constraints", []).append("approximate budget")
         values["currency"] = (
-            amount[1] or amount[4] or {"€": "EUR", "£": "GBP"}.get(amount[2], "USD")
+            amount["code"]
+            or amount["currency"]
+            or {"€": "EUR", "£": "GBP"}.get(amount["symbol"], "USD")
         ).upper()
+        break
     vocabulary = {
         "interests": ["museums", "food", "parks", "history", "art"],
         "hotel_preferences": ["quiet", "central", "budget", "luxury"],
         "food_preferences": ["vegetarian", "vegan", "seafood"],
         "transport_preferences": ["walking", "public transit", "taxi"],
-        "constraints": ["wheelchair", "no walking"],
     }
+    clauses = re.split(r"[.!?;]|\b(?:but|however)\b", query.lower())
+    constraints = values.setdefault("constraints", [])
     for field, terms in vocabulary.items():
-        # Monetary 'budget' is not a request for a budget hotel.
-        values[field] = [
-            term
-            for term in terms
-            if re.search(r"\b" + term + r"\b", query, re.I)
-            and (term != "budget" or re.search(r"budget hotel", query, re.I))
-        ]
+        values[field] = []
+        for term in terms:
+            for clause in clauses:
+                match = re.search(r"\b" + re.escape(term) + r"\b", clause)
+                if not match or (term == "budget" and not re.search(r"budget hotels?", clause)):
+                    continue
+                if re.search(NEGATOR, clause[: match.start()]):
+                    constraints.append("no walking" if term == "walking" else "avoid " + term)
+                elif term not in values[field]:
+                    values[field].append(term)
+    for clause in clauses:
+        for term, label in NEGATIVE_TERMS.items():
+            match = re.search(term, clause)
+            if match and re.search(NEGATOR, clause[: match.start()]):
+                constraints.append(label)
+        if re.search(r"\bwheelchair\b", clause):
+            constraints.append("wheelchair")
+        must = re.search(r"\bmust\s+.+", clause)
+        if must:
+            constraints.append(must[0].strip())
+        if re.search(r"\b(?:cheap|affordable)\b", clause):
+            constraints.append(clause.strip())
+    values["constraints"] = list(dict.fromkeys(constraints))
     return TravelRequirements(**values)
+
+
+NUMBER_WORDS = dict(
+    zip(
+        "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty".split(),
+        range(1, 21),
+        strict=True,
+    )
+)
+NUMBER = r"-?\d+|" + "|".join(NUMBER_WORDS)
+NEGATOR = r"\b(?:don't|do not|no|not|avoid|without|never)\b"
+NEGATIVE_TERMS = {
+    r"\bnightlife\b": "no nightlife",
+    r"\bmeat\b": "no meat",
+    r"\b(?:rent a car|rental car)\b": "no rental car",
+    r"\bexpensive restaurants?\b": "avoid expensive restaurants",
+}
+
+
+def number_value(token: str) -> int:
+    return NUMBER_WORDS[token.lower()] if token.lower() in NUMBER_WORDS else int(token)
