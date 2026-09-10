@@ -20,3 +20,4 @@ class TravelState(TypedDict, total=False):
     warnings: list[str]
     errors: list[str]
     clarification_question: str | None
+    validation_status: str

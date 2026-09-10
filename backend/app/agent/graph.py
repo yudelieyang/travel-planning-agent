@@ -6,11 +6,16 @@ from langchain_core.messages import AIMessage
 from langgraph.graph import END, START, StateGraph
 
 from app.agent.itinerary import Itinerary, compose_draft, validate_itinerary
-from app.agent.planner import DeterministicTestPlanner, PlannerProtocol
+from app.agent.planner import (
+    DeterministicTestPlanner,
+    PlannerDecision,
+    PlannerError,
+    PlannerProtocol,
+)
 from app.agent.requirements import RequirementStatus, assess_requirements
 from app.agent.state import TravelState
 from app.tools.contracts import BudgetRequest, BudgetSummary, ToolRequest, ToolResult, ToolStatus
-from app.tools.mock import run_tool
+from app.tools.mock import calculate_budget, run_tool
 
 ToolRunner = Callable[[ToolRequest], ToolResult]
 
@@ -30,6 +35,7 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
             "warnings": [],
             "errors": [],
             "clarification_question": None,
+            "validation_status": "not_reached",
         }
 
     def clarification(state: TravelState) -> dict:
@@ -42,7 +48,36 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
 
     def plan(state: TravelState) -> dict:
         try:
-            return {"tool_requests": planner.plan(state["requirements"])}
+            # An untrusted implementation receives a private copy, never graph-owned state.
+            snapshot = state["requirements"].model_dump(mode="json")
+            supplied = state["requirements"].model_copy(deep=True)
+            decision = planner.plan(supplied)
+            if supplied.model_dump(mode="json") != snapshot:
+                return {"errors": ["planner_modified_requirements"]}
+            decision = PlannerDecision.model_validate_json(decision.model_dump_json(), strict=True)
+            if not decision.can_proceed:
+                return {"errors": ["planner_cannot_proceed"], "warnings": decision.warnings}
+            for request in decision.tool_requests:
+                if not isinstance(request, BudgetRequest) and (
+                    request.arguments.destination.casefold()
+                    != state["requirements"].destination.casefold()
+                ):
+                    return {"errors": ["planner_destination_mismatch"]}
+                if not isinstance(request, BudgetRequest):
+                    expected = {
+                        "search_attractions": [
+                            x for x in state["requirements"].interests if x != "food"
+                        ],
+                        "search_hotels": state["requirements"].hotel_preferences,
+                        "search_restaurants": state["requirements"].food_preferences,
+                        "search_transport": state["requirements"].transport_preferences,
+                    }[request.tool_name]
+                    if not set(expected).issubset(request.arguments.preferences):
+                        return {"errors": ["planner_dropped_preferences"]}
+            return {"tool_requests": decision.tool_requests, "warnings": decision.warnings}
+        except PlannerError as exc:
+            suffix = " (retryable; no automatic retry)" if exc.retryable else ""
+            return {"errors": [exc.code + suffix]}
         except Exception as exc:
             return {"errors": [f"Planner failed ({type(exc).__name__})"]}
 
@@ -63,9 +98,14 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
 
         def invoke(request: ToolRequest) -> ToolResult:
             try:
-                result = tool_runner(request)
+                result = tool_runner(request.model_copy(deep=True))
                 if not isinstance(result, ToolResult) or result.tool_name != request.tool_name:
                     raise ValueError("Mismatched tool result")
+                result = ToolResult.model_validate_json(result.model_dump_json())
+                if isinstance(request, BudgetRequest):
+                    expected = calculate_budget(request.arguments)
+                    if result != expected:
+                        raise ValueError("Budget must match the deterministic calculator")
                 return result
             except Exception as exc:
                 return ToolResult(
@@ -98,7 +138,7 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
         ):
             return {**update, "errors": ["Budget calculation failed"]}
         budget = budget_result.data
-        warnings.extend(budget.warnings)
+        warnings = state["warnings"] + warnings + budget.warnings
         itinerary = Itinerary(
             destination=state["requirements"].destination,
             days=state["requirements"].trip_days,
@@ -110,10 +150,14 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
 
     def validate(state: TravelState) -> dict:
         if state["errors"]:
-            return {}
+            return {"validation_status": "failed"}
         if state["itinerary"] is None or state["budget_summary"] is None:
-            return {"errors": ["Planning did not produce an itinerary and budget"]}
-        return {"errors": validate_itinerary(state["itinerary"], state["budget_summary"])}
+            return {
+                "errors": ["Planning did not produce an itinerary and budget"],
+                "validation_status": "failed",
+            }
+        errors = validate_itinerary(state["itinerary"], state["budget_summary"])
+        return {"errors": errors, "validation_status": "failed" if errors else "passed"}
 
     def finalize(state: TravelState) -> dict:
         if state["errors"]:
@@ -121,7 +165,7 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
                 "itinerary": None,
                 "budget_summary": None,
                 "messages": [
-                    AIMessage(content="The offline mock planner could not produce a plan.")
+                    AIMessage(content="The planner could not produce a validated mock itinerary.")
                 ],
             }
         return {

@@ -1,8 +1,8 @@
 # Travel Agent
 
-本项目包含本地基础设施和 Phase 4 离线 Single-Agent 架构骨架。
-唯一 planner 目前是 `DeterministicTestPlanner`，不是 AI 模型；
-没有真实 LLM、RAG、前端或旅游 API。所有检查均不调用 OpenAI API。
+本项目包含本地基础设施、Single-Agent 架构及可选的 OpenAI planner 适配器。
+默认使用离线 `DeterministicTestPlanner`；pytest 和环境检查不调用 OpenAI API。
+真实模型接入尚待用户批准 live smoke，未验证线上兼容性；无 RAG、前端或旅游 API。
 
 本项目使用标准 CPython 3.11 x64 创建虚拟环境，不使用 Anaconda 作为 base。
 此前 Anaconda 自带的旧 MSVC runtime 导致 Chroma 原生写入崩溃；解决方式是
@@ -159,12 +159,12 @@ deactivate
 
 `docker compose down` 保留 PostgreSQL named volume。
 不要默认使用 `docker compose down -v`：`-v` 会删除数据库数据。
-本项目未配置远程仓库或 push。Phase 3 基线已按授权提交；Phase 4 保留为未提交改动。
+本项目未配置远程仓库或 push。Phase 4 基线已按授权提交（`8a72a5f`）。
 
 ## Architecture — Phase 4
 
-**ONE Agent boundary, MULTIPLE tools.** 只有 `planner` 是未来的 LLM 决策节点。
-当前实现是固定规则测试替身，不是生产级 AI Agent；不存在 HotelAgent、FoodAgent
+**ONE Agent boundary, MULTIPLE tools.** 只有 `planner` 是 LLM 决策节点。
+默认实现是固定规则测试替身，不是生产级 AI Agent；不存在 HotelAgent、FoodAgent
 或其他子 Agent。LangGraph 中其余节点全部为确定性代码。
 
 ```mermaid
@@ -174,7 +174,7 @@ flowchart TD
     Service --> Preflight[preflight]
     Preflight -->|INSUFFICIENT| Clarification[clarification]
     Clarification --> End[END / structured response]
-    Preflight -->|SUFFICIENT| Planner[planner: ONE future Agent boundary]
+    Preflight -->|SUFFICIENT| Planner[planner: ONE replaceable Agent boundary]
     Planner --> Tools[tools: attractions / hotels / restaurants / transport / budget]
     Tools --> Validate[validate]
     Validate --> Finalize[finalize]
@@ -184,13 +184,15 @@ flowchart TD
 | Layer | Responsibility |
 |---|---|
 | `agent/requirements.py` | Pydantic requirements、受限英语规则解析、preflight |
-| `agent/planner.py` | `PlannerProtocol` + `DeterministicTestPlanner`；唯一决策入口 |
+| `agent/planner.py` | `PlannerProtocol`、`PlannerDecision` 和离线 planner；唯一决策入口 |
+| `agent/openai_planner.py` | 可选 OpenAI Responses 结构化输出适配器 |
 | `agent/state.py` | `TravelState`，结构化状态与 messages 分开 |
 | `tools/contracts.py` | 明确的 Pydantic 搜索/预算输入、统一 `ToolResult` |
 | `tools/mock.py` | 四类本地 JSON 查询，Decimal 预算算术 |
 | `agent/itinerary.py` | mock 行程组合、日序及费用一致性校验 |
 | `agent/graph.py` | LangGraph 节点、条件路由、工具错误处理 |
-| `agent/service.py` | 解析输入、运行 graph、映射响应 |
+| `agent/extractor.py` | 可替换的需求提取协议及默认规则实现 |
+| `agent/service.py` | 通过 extractor 提取需求、运行 graph、映射响应 |
 | `api/travel.py` | HTTP 输入验证及调用 service，无 planner/tool 业务逻辑 |
 
 `TravelState` 包含 messages、requirements、requirement_status、missing_fields、
@@ -198,7 +200,7 @@ tool_requests、tool_results、itinerary、budget_summary、warnings、errors �
 clarification_question。每次请求新建状态，无 checkpointer、对话记忆或持久会话。
 工具结果保存在 tool_results，不塞入 messages；messages 不包含人工推理链。
 
-`build_graph(planner=...)` 接受任何符合 `PlannerProtocol` 的实现。未来可替换模型适配器，
+`build_graph(planner=...)` 接受任何符合 `PlannerProtocol` 的实现。可替换模型适配器，
 保留 graph 控制流。本阶段固定 mock slice 要求四类搜索后计算预算；尚未实现动态
 LLM tool-calling 循环。预算参数在工具搜索后由确定性代码填入，再交给 budget tool。
 
@@ -206,7 +208,7 @@ LLM tool-calling 循环。预算参数在工具搜索后由确定性代码填入
 
 必需条件仅为 destination，以及 duration_days 或完整 start_date + end_date。
 日期范围包含起止两日；显式 duration 与日期冲突返回 HTTP 422。
-未提供人数时 `travelers=null`，未提供预算时 `budget=null`；不补出 3 天、2 人或 $1000。
+未提供人数时 `travelers=null`，未提供预算时 `budget_amount=null`；不补出 3 天、2 人或 $1000。
 当前有界演示支持 1–30 天、明确提供时 1–20 位旅客。
 
 解析器只用于离线验证，支持例如 `to Boston`、`to NYC`、`3-day`、`3 days`、
@@ -235,16 +237,16 @@ LLM tool-calling 循环。预算参数在工具搜索后由确定性代码填入
 小数据集可能重复景点或餐厅，会提示。税、服务费、跨城交通和实时可用性不在报价内。
 constraints 仅记录并警告未核验，不宣称满足无障碍或其他约束。
 
-- 人数已给出：返回 group 总价，与同币种预算比较；超预算明确 warning。
-- 人数未知：返回 per_traveler 单位参考费用，within_budget 为 null，
-  明确提示不能据此核验整团预算。
+- 人数已给出：返回 group 总价；人数未知：返回 per_traveler 单位参考费用。
+- `budget_scope=TOTAL_TRIP` 仅在人数组及币种明确时比较整团费用；
+  `PER_PERSON` 比较每人费用，无需推断人数；`UNKNOWN` 不比较，within_budget 为 null。
 - mock 报价固定 USD；演示中 `$` 按 USD 解析。EUR/GBP 预算保留原币种，
   不做汇率换算或直接与 USD 比较。
 - 四类费用通过 Decimal 确定性求和，再验证每日活动、每日总价及总预算一致。
 
 Phase 4 route 不使用 PostgreSQL、Redis 或 ChromaDB。
 `check_environment.py` 仍是独立的 Phase 3 基础设施检查，不是 RAG 或业务存储。
-本阶段没有 OpenAI/付费 API、远程模型下载、LangSmith tracing 或云配置。
+默认离线执行没有 OpenAI/付费 API、远程模型下载、LangSmith tracing 或云配置。
 
 ### API Examples
 
@@ -278,9 +280,105 @@ loopback socket），并在被测代码吞掉连接异常时仍判定失败。
 业务测试不依赖数据库服务、随机输入或真实 LLM。预算、失败状态、澄清不调用工具、
 planner 替换、跨请求状态隔离及真实 FastAPI TestClient 路由均有覆盖。
 
-`evals/datasets/travel_smoke_v1.json` 包含 6 个案例：正常请求、缺目的地、缺时长、
-低预算、素食偏好及博物馆偏好。字段包括 input、expected_requirement_fields、
+`evals/datasets/travel_smoke_v1.json` 已扩展为 18 个案例：正常请求、缺目的地、缺时长、
+日期、预算范围、多人、偏好、未知目的地、故障及困难约束。字段包括 input、expected_requirement_fields、
 expected_status（preflight）、expected_api_status、required_tools、forbidden_tools、
 budget_constraint。pytest 会实际执行这些案例；不包含 expected_reasoning 或人工 CoT。
 
 已知上游 Starlette/AnyIO 的一条弃用警告不影响测试，未为屏蔽它变更锁定依赖。
+
+## Phase 5 — Planner Configuration and Offline Gate
+
+保持 `.env` 中 `AGENT_PLANNER=deterministic`（也是代码默认值）。新增配置见
+`.env.example`：`OPENAI_MODEL=`、`PLANNER_PROMPT_VERSION=planner_v1`。
+无需 key 即可运行全部离线测试。API 通过配置工厂创建 planner；图只依赖协议。
+`TravelService()` / `build_graph()` 的直接调用仍默认离线，显式注入可替换实现。
+切换 `.env` 后重启后端，使缓存 service 重新加载配置。
+
+只有获得 live 调用批准后才填写 `.env` 的 `OPENAI_API_KEY`、`OPENAI_MODEL`，并按需
+选择 `AGENT_PLANNER=openai`。缺少 key 或 model 时，API 在创建 service 的第一个请求
+返回清晰 HTTP 503；不会调用模型，也不会回退成假成功。`/health` 仅表示进程存活。
+模型名没有源码默认值。未联网查询模型可用性或价格，须在 live 批准时确定模型。
+
+OpenAI adapter 使用已锁定的 `openai` SDK Responses `parse(text_format=PlannerDecision)`，
+不更换依赖。一次 planner 执行最多一次请求，30 秒网络超时，零自动重试，
+输出上限 2000 tokens，`store=False`。固定官方 API 地址，不读取自定义代理/base URL。
+无 LangChain 模型 callback/tracing；传入模型的是结构化 requirements，而非 API Key
+或原始用户消息。未请求、存储或评价完整思维链。
+
+模型仅输出 `can_proceed`、`tool_requests`、简短 `warnings`。schema 禁止额外字段，
+工具参数使用 Pydantic 严格验证；未知工具、重复工具、错目的地及模型编造的预算输入
+均拒绝执行。现有 mock slice 仍需四类搜索和一次预算工具，不引入动态工具调用循环。
+预算参数只能在搜索完成后由确定性代码生成。模型警告保留，但不是事实或正确性证明。
+无效/空/拒绝/不完整响应、认证、限流、超时进入 `status=error`；错误只含安全分类，
+不会回显 provider 响应或 key。可重试错误仅标记，本阶段不自动重试。
+
+预算字段从 `budget` 调整为 `budget_amount` + `budget_scope`。受限英语解析器仅识别
+紧跟金额的 `total` / `for the whole trip`、`per person` / `per traveler` / `each`；
+没有明确范围就保持 `UNKNOWN`，即使人数已给出。例：`under $50 total`。
+TRAVEL-004 已补充 `total`，其余未明确范围的案例不声称预算已满足。
+
+```powershell
+python scripts/check_environment.py
+pytest
+ruff check .
+python scripts/evaluate_planners.py
+```
+
+评估脚本默认只跑 deterministic。固定四例 TRAVEL-001/002/004/005，结果写入被忽略的
+`evals/results/*.jsonl`，包括 planner/model/prompt、需求状态、工具验证、预算、最终状态、
+延迟和安全错误。拒绝的原始模型输出不会写入日志；无法获知其中非法工具名称时记录
+`invalid_tools=null`，而非宣称没有非法工具。当前不记录 token usage。
+
+**以下命令必须等用户明确批准 model、最多 3 次付费请求并配置 key 后才能运行：**
+
+```powershell
+python scripts/evaluate_planners.py --live --approved-model '<approved-model>'
+```
+
+该命令先跑相同四例的 deterministic 基线，再跑 OpenAI；澄清例不调用模型，因此
+最多 3 次 provider 请求。任一错误立即停止本轮，不自动重试。批准模型必须与
+`OPENAI_MODEL` 完全一致。此命令不代表已执行 live 验证，不应加入默认 pytest/CI。
+
+## Phase 5A — Offline Hardening
+
+本阶段不批准 live 调用，不配置 Key 或 billing。默认保持 deterministic。
+`RequirementsExtractorProtocol.extract(query)` 将需求提取从 service 中隔离；默认
+`RuleBasedRequirementsExtractor` 包装原有规则解析器，没有实现 LLM extractor。
+可通过 `TravelService(extractor=...)` 注入替代实现，不需要更改 graph。
+规则解析器仍有已知的句式及否定理解限制；困难约束只记录并提示未核验，不宣称满足。
+
+planner 接收 requirements 深拷贝，修改会导致 error；图中的原始需求保持不变。
+模型决定再次经 schema 验证，搜索不得改目的地或丢弃明确偏好。返回的 ToolResult
+也会重新验证，禁止 ERROR 携带成功数据。预算结果必须与本地 deterministic calculator
+完全一致（包括来源、范围和比较结果）；失败不会产生 itinerary 或 budget_summary。
+没有 `verified_facts` 字段，planner warnings 不作为事实验证证据。
+
+`TravelService.run()` 返回内部 state 和 `ExecutionTrace`；普通 `plan()` / HTTP 响应
+不包含 trace。trace 只含 run_id、planner_type、prompt_version、requirement_status、
+selected_tools、tool_statuses、validation_status、final_status、latency_ms。
+不包含原始 query、模型响应、Key、CoT 或自由文本错误；不使用 LangSmith。
+澄清未进入 validation 时标记 not_reached，错误路径 failed，通过路径 passed。
+
+运行完整离线评估：
+
+```powershell
+python evals/evaluate_travel.py
+```
+
+此入口无 live 模式，显式创建 deterministic planner，运行全部 18 个案例。
+TRAVEL-013 使用仅限评估的本地工具故障注入，不暴露到 HTTP 输入或模型工具名单。
+预期 error/needs_clarification 也是合法案例结果，按预先写好的 expectation 判分。
+
+指标定义：
+
+- Case pass rate：需求字段、preflight/最终状态、工具、预算、预期 warning 全部匹配的比例。
+- Requirement accuracy：数据集显式指定的 expected_requirement_fields 匹配数 / 检查数。
+- Required tool hit rate：要求执行的工具中实际执行过的比例；不等于工具成功率。
+- Forbidden tool violations：禁止执行的工具实际被执行的次数（按每案例唯一工具计数）。
+- Final status accuracy：最终状态与 expected_api_status 一致的案例比例。
+
+结果写到被 Git 忽略的 `evals/results/baseline-*.json`，包含指标分子/分母、逐例判分
+和结构化 trace。planner=deterministic，dataset=travel_smoke_v1，prompt_version=N/A。
+这是固定 mock 数据集的回归分数，不能证明通用自然语言理解或真实 LLM 效果。
+指标测试包含故意篡改需求、工具、状态、预算和 warning 的负例，避免只验证全绿路径。

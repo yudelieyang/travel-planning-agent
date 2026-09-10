@@ -5,12 +5,13 @@
     "expected_requirement_fields": {
       "destination": "New York City",
       "duration_days": 3,
-      "budget": 1000,
       "travelers": null,
       "interests": [
         "museums",
         "food"
-      ]
+      ],
+      "budget_amount": 1000,
+      "budget_scope": "UNKNOWN"
     },
     "expected_status": "SUFFICIENT",
     "expected_api_status": "success",
@@ -31,7 +32,8 @@
     "input": "Plan a 3-day trip for me.",
     "expected_requirement_fields": {
       "destination": null,
-      "duration_days": 3
+      "duration_days": 3,
+      "budget_scope": "UNKNOWN"
     },
     "expected_status": "INSUFFICIENT",
     "expected_api_status": "needs_clarification",
@@ -50,7 +52,8 @@
     "input": "Plan a trip to Boston.",
     "expected_requirement_fields": {
       "destination": "Boston",
-      "duration_days": null
+      "duration_days": null,
+      "budget_scope": "UNKNOWN"
     },
     "expected_status": "INSUFFICIENT",
     "expected_api_status": "needs_clarification",
@@ -66,12 +69,13 @@
   },
   {
     "id": "TRAVEL-004",
-    "input": "Plan a 3-day trip to NYC for 1 traveler under $50.",
+    "input": "Plan a 3-day trip to NYC for 1 traveler under $50 total.",
     "expected_requirement_fields": {
       "destination": "New York City",
       "duration_days": 3,
       "travelers": 1,
-      "budget": 50
+      "budget_amount": 50,
+      "budget_scope": "TOTAL_TRIP"
     },
     "expected_status": "SUFFICIENT",
     "expected_api_status": "success",
@@ -95,7 +99,8 @@
       "food_preferences": [
         "vegetarian"
       ],
-      "travelers": 1
+      "travelers": 1,
+      "budget_scope": "UNKNOWN"
     },
     "expected_status": "SUFFICIENT",
     "expected_api_status": "success",
@@ -115,7 +120,8 @@
       "destination": "New York City",
       "interests": [
         "museums"
-      ]
+      ],
+      "budget_scope": "UNKNOWN"
     },
     "expected_status": "SUFFICIENT",
     "expected_api_status": "success",
@@ -127,5 +133,302 @@
     "budget_constraint": {
       "max_total": 1000
     }
+  },
+  {
+    "id": "TRAVEL-007",
+    "input": "Plan a 2-day trip to Boston.",
+    "expected_requirement_fields": {
+      "destination": "Boston",
+      "duration_days": 2,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "travelers": null
+    },
+    "expected_status": "SUFFICIENT",
+    "expected_api_status": "success",
+    "required_tools": [
+      "search_attractions",
+      "search_hotels",
+      "search_restaurants",
+      "search_transport",
+      "calculate_budget"
+    ],
+    "forbidden_tools": [],
+    "budget_constraint": null,
+    "expected_warning": []
+  },
+  {
+    "id": "TRAVEL-008",
+    "input": "Plan a trip to Boston from 2026-10-01 to 2026-10-03 for 2 travelers under $1000 total.",
+    "expected_requirement_fields": {
+      "destination": "Boston",
+      "start_date": "2026-10-01",
+      "end_date": "2026-10-03",
+      "duration_days": null,
+      "travelers": 2,
+      "budget_scope": "TOTAL_TRIP"
+    },
+    "expected_status": "SUFFICIENT",
+    "expected_api_status": "success",
+    "required_tools": [
+      "search_attractions",
+      "search_hotels",
+      "search_restaurants",
+      "search_transport",
+      "calculate_budget"
+    ],
+    "forbidden_tools": [],
+    "budget_constraint": {
+      "within_budget": true,
+      "scope": "TOTAL_TRIP"
+    },
+    "expected_warning": [
+      "Dates determine duration only"
+    ]
+  },
+  {
+    "id": "TRAVEL-009",
+    "input": "Plan a 2-day trip to Boston for 2 travelers under $400 per person.",
+    "expected_requirement_fields": {
+      "travelers": 2,
+      "budget_amount": 400,
+      "budget_scope": "PER_PERSON"
+    },
+    "expected_status": "SUFFICIENT",
+    "expected_api_status": "success",
+    "required_tools": [
+      "search_attractions",
+      "search_hotels",
+      "search_restaurants",
+      "search_transport",
+      "calculate_budget"
+    ],
+    "forbidden_tools": [],
+    "budget_constraint": {
+      "within_budget": true,
+      "scope": "PER_PERSON"
+    },
+    "expected_warning": []
+  },
+  {
+    "id": "TRAVEL-010",
+    "input": "Plan a 2-day trip to Boston for 2 travelers under $300.",
+    "expected_requirement_fields": {
+      "travelers": 2,
+      "budget_scope": "UNKNOWN"
+    },
+    "expected_status": "SUFFICIENT",
+    "expected_api_status": "success",
+    "required_tools": [
+      "search_attractions",
+      "search_hotels",
+      "search_restaurants",
+      "search_transport",
+      "calculate_budget"
+    ],
+    "forbidden_tools": [],
+    "budget_constraint": {
+      "within_budget": null,
+      "scope": "UNKNOWN"
+    },
+    "expected_warning": [
+      "Budget scope is unknown"
+    ]
+  },
+  {
+    "id": "TRAVEL-011",
+    "input": "Plan a 2-day trip to Boston under $500 total.",
+    "expected_requirement_fields": {
+      "travelers": null,
+      "budget_scope": "TOTAL_TRIP"
+    },
+    "expected_status": "SUFFICIENT",
+    "expected_api_status": "success",
+    "required_tools": [
+      "search_attractions",
+      "search_hotels",
+      "search_restaurants",
+      "search_transport",
+      "calculate_budget"
+    ],
+    "forbidden_tools": [],
+    "budget_constraint": {
+      "within_budget": null
+    },
+    "expected_warning": [
+      "Group budget cannot be verified"
+    ]
+  },
+  {
+    "id": "TRAVEL-012",
+    "input": "Plan a 2-day trip to Atlantis.",
+    "expected_requirement_fields": {
+      "destination": "Atlantis",
+      "duration_days": 2
+    },
+    "expected_status": "SUFFICIENT",
+    "expected_api_status": "error",
+    "required_tools": [
+      "search_attractions",
+      "search_hotels",
+      "search_restaurants",
+      "search_transport"
+    ],
+    "forbidden_tools": [
+      "calculate_budget"
+    ],
+    "budget_constraint": null,
+    "expected_warning": []
+  },
+  {
+    "id": "TRAVEL-013",
+    "input": "Plan a 2-day trip to Boston for 1 traveler.",
+    "expected_requirement_fields": {
+      "destination": "Boston",
+      "travelers": 1
+    },
+    "expected_status": "SUFFICIENT",
+    "expected_api_status": "error",
+    "required_tools": [
+      "search_attractions",
+      "search_hotels",
+      "search_restaurants",
+      "search_transport"
+    ],
+    "forbidden_tools": [
+      "calculate_budget"
+    ],
+    "budget_constraint": null,
+    "expected_warning": [],
+    "tool_fault": {
+      "tool_name": "search_hotels",
+      "status": "ERROR"
+    }
+  },
+  {
+    "id": "TRAVEL-014",
+    "input": "Plan a 2-day trip to NYC. I like museums and parks.",
+    "expected_requirement_fields": {
+      "destination": "New York City",
+      "interests": [
+        "museums",
+        "parks"
+      ]
+    },
+    "expected_status": "SUFFICIENT",
+    "expected_api_status": "error",
+    "required_tools": [
+      "search_attractions",
+      "search_hotels",
+      "search_restaurants",
+      "search_transport"
+    ],
+    "forbidden_tools": [
+      "calculate_budget"
+    ],
+    "budget_constraint": null,
+    "expected_warning": []
+  },
+  {
+    "id": "TRAVEL-015",
+    "input": "Plan a 2-day trip to Boston. Wheelchair access and no walking.",
+    "expected_requirement_fields": {
+      "destination": "Boston",
+      "constraints": [
+        "wheelchair",
+        "no walking"
+      ],
+      "transport_preferences": [
+        "walking"
+      ]
+    },
+    "expected_status": "SUFFICIENT",
+    "expected_api_status": "success",
+    "required_tools": [
+      "search_attractions",
+      "search_hotels",
+      "search_restaurants",
+      "search_transport",
+      "calculate_budget"
+    ],
+    "forbidden_tools": [],
+    "budget_constraint": null,
+    "expected_warning": [
+      "Constraints are recorded but not verified"
+    ]
+  },
+  {
+    "id": "TRAVEL-016",
+    "input": "Plan a 2-day trip to Boston for 2 travelers under $300 total.",
+    "expected_requirement_fields": {
+      "travelers": 2,
+      "budget_amount": 300,
+      "budget_scope": "TOTAL_TRIP"
+    },
+    "expected_status": "SUFFICIENT",
+    "expected_api_status": "success",
+    "required_tools": [
+      "search_attractions",
+      "search_hotels",
+      "search_restaurants",
+      "search_transport",
+      "calculate_budget"
+    ],
+    "forbidden_tools": [],
+    "budget_constraint": {
+      "max_total": 300,
+      "must_exceed": true,
+      "within_budget": false
+    },
+    "expected_warning": [
+      "Estimated group cost exceeds"
+    ]
+  },
+  {
+    "id": "TRAVEL-017",
+    "input": "Plan a 2-day trip to Boston under $300 per person.",
+    "expected_requirement_fields": {
+      "travelers": null,
+      "budget_scope": "PER_PERSON"
+    },
+    "expected_status": "SUFFICIENT",
+    "expected_api_status": "success",
+    "required_tools": [
+      "search_attractions",
+      "search_hotels",
+      "search_restaurants",
+      "search_transport",
+      "calculate_budget"
+    ],
+    "forbidden_tools": [],
+    "budget_constraint": {
+      "within_budget": true
+    },
+    "expected_warning": [
+      "Traveler count is unspecified"
+    ]
+  },
+  {
+    "id": "TRAVEL-018",
+    "input": "Plan a 2-day trip to Boston. Quiet luxury hotels.",
+    "expected_requirement_fields": {
+      "hotel_preferences": [
+        "quiet",
+        "luxury"
+      ]
+    },
+    "expected_status": "SUFFICIENT",
+    "expected_api_status": "error",
+    "required_tools": [
+      "search_attractions",
+      "search_hotels",
+      "search_restaurants",
+      "search_transport"
+    ],
+    "forbidden_tools": [
+      "calculate_budget"
+    ],
+    "budget_constraint": null,
+    "expected_warning": []
   }
 ]

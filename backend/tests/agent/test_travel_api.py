@@ -4,8 +4,11 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
+from app.agent.evaluation import scenario_runner
 from app.agent.graph import build_graph
 from app.agent.requirements import parse_requirements
+from app.agent.service import TravelService
+from app.api.travel import get_travel_service
 from app.main import app
 
 DATASET = Path(__file__).resolve().parents[3] / "evals" / "datasets" / "travel_smoke_v1.json"
@@ -55,19 +58,32 @@ def test_evaluation_seed(case):
     requirements = parse_requirements(case["input"])
     for field, value in case["expected_requirement_fields"].items():
         assert requirements.model_dump(mode="json")[field] == value
-    state = build_graph().invoke({"requirements": requirements, "messages": []})
+    state = build_graph(tool_runner=scenario_runner(case)).invoke(
+        {"requirements": requirements, "messages": []}
+    )
     assert state["requirement_status"].value == case["expected_status"]
     called = {result.tool_name for result in state["tool_results"]}
     assert set(case["required_tools"]) <= called
     assert not set(case["forbidden_tools"]) & called
-    with TestClient(app) as client:
-        response = client.post("/api/v1/travel/plan", json={"query": case["input"]})
+    app.dependency_overrides[get_travel_service] = lambda: TravelService(
+        tool_runner=scenario_runner(case)
+    )
+    try:
+        with TestClient(app) as client:
+            response = client.post("/api/v1/travel/plan", json={"query": case["input"]})
+    finally:
+        app.dependency_overrides.pop(get_travel_service, None)
     assert response.status_code == 200
     assert response.json()["status"] == case["expected_api_status"]
     constraint = case["budget_constraint"]
     if constraint:
         cost = state["budget_summary"].estimated_total_cost
-        assert cost <= constraint["max_total"] or state["budget_summary"].warnings
+        if "max_total" in constraint:
+            assert cost <= constraint["max_total"] or state["budget_summary"].warnings
+        if "within_budget" in constraint:
+            assert state["budget_summary"].within_budget == constraint["within_budget"]
+        if "scope" in constraint:
+            assert state["budget_summary"].budget_scope == constraint["scope"]
         if constraint.get("must_exceed"):
             assert cost > constraint["max_total"]
             assert state["budget_summary"].within_budget is False

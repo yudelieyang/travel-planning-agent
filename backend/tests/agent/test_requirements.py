@@ -12,7 +12,7 @@ def test_parse_vertical_slice_without_inventing_travelers():
     requirements = parse_requirements(QUERY)
     assert requirements.destination == "New York City"
     assert requirements.duration_days == 3
-    assert requirements.budget == 1000
+    assert requirements.budget_amount == 1000
     assert requirements.currency == "USD"
     assert requirements.interests == ["museums", "food"]
     assert requirements.travelers is None
@@ -24,7 +24,7 @@ def test_no_invented_requirements():
     requirements = parse_requirements("Plan a trip for me.")
     assert requirements.destination is None
     assert requirements.duration_days is None
-    assert requirements.budget is None
+    assert requirements.budget_amount is None
     assert requirements.travelers is None
 
 
@@ -47,8 +47,8 @@ def test_dates_origin_preferences_and_travelers():
     [
         {"duration_days": 0},
         {"travelers": 0},
-        {"budget": -1},
-        {"budget": float("nan")},
+        {"budget_amount": -1},
+        {"budget_amount": float("nan")},
         {"start_date": "2026-10-03", "end_date": "2026-10-01"},
         {"start_date": "2026-10-01", "end_date": "2026-10-03", "duration_days": 2},
     ],

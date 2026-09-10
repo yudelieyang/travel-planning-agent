@@ -4,6 +4,7 @@ import json
 from decimal import Decimal
 from pathlib import Path
 
+from app.core.budget import BudgetScope
 from app.tools.contracts import (
     BudgetInput,
     BudgetRequest,
@@ -90,6 +91,12 @@ def calculate_budget(arguments: BudgetInput) -> ToolResult:
             warnings.append(
                 "Mock prices are USD; no currency conversion or budget comparison was made."
             )
+        elif arguments.budget_scope == BudgetScope.UNKNOWN:
+            warnings.append("Budget scope is unknown; no budget comparison was made.")
+        elif arguments.budget_scope == BudgetScope.PER_PERSON:
+            within = per_person <= Decimal(str(arguments.limit))
+            if not within:
+                warnings.append("Estimated per-person cost exceeds the supplied budget.")
         elif arguments.travelers is None:
             warnings.append("Group budget cannot be verified without a traveler count.")
             if total > Decimal(str(arguments.limit)):
@@ -106,6 +113,7 @@ def calculate_budget(arguments: BudgetInput) -> ToolResult:
         breakdown={key: money(value * multiplier) for key, value in breakdown.items()},
         provided_limit=arguments.limit,
         limit_currency=arguments.limit_currency,
+        budget_scope=arguments.budget_scope,
         within_budget=within,
         warnings=warnings,
     )

@@ -44,6 +44,7 @@ def test_budget_decimal_arithmetic_and_group_size():
         items=[CostItem(category="food", amount=0.1), CostItem(category="hotel", amount=0.2)],
         travelers=2,
         limit=0.6,
+        budget_scope="TOTAL_TRIP",
     )
     result = mock.calculate_budget(request)
     assert result.source == "deterministic"
@@ -56,7 +57,9 @@ def test_budget_decimal_arithmetic_and_group_size():
 
 def test_budget_unknown_party_and_currency_are_not_fabricated():
     unknown = mock.calculate_budget(
-        BudgetInput(items=[CostItem(category="food", amount=20)], limit=10)
+        BudgetInput(
+            items=[CostItem(category="food", amount=20)], limit=10, budget_scope="TOTAL_TRIP"
+        )
     ).data
     assert unknown.basis == "per_traveler"
     assert unknown.travelers is None

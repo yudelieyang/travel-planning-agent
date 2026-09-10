@@ -5,6 +5,8 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from app.core.budget import BudgetScope
+
 Category = Literal["attractions", "hotel", "food", "transport"]
 SearchToolName = Literal[
     "search_attractions", "search_hotels", "search_restaurants", "search_transport"
@@ -16,6 +18,7 @@ class ToolModel(BaseModel):
 
 
 class SearchInput(ToolModel):
+    model_config = ConfigDict(extra="forbid", strict=True, allow_inf_nan=False)
     destination: str = Field(min_length=1, max_length=100)
     max_price: float | None = Field(default=None, ge=0)
     preferences: list[str] = Field(default_factory=list)
@@ -48,6 +51,7 @@ class BudgetInput(ToolModel):
     travelers: int | None = Field(default=None, ge=1, le=20)
     limit: float | None = Field(default=None, ge=0)
     limit_currency: str = Field(default="USD", pattern=r"^[A-Z]{3}$")
+    budget_scope: BudgetScope = BudgetScope.UNKNOWN
 
 
 class BudgetSummary(ToolModel):
@@ -59,6 +63,7 @@ class BudgetSummary(ToolModel):
     breakdown: dict[Category, float]
     provided_limit: float | None
     limit_currency: str
+    budget_scope: BudgetScope = BudgetScope.UNKNOWN
     within_budget: bool | None
     warnings: list[str]
 

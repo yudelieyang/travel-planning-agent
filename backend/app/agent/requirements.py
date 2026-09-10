@@ -6,6 +6,8 @@ from enum import StrEnum
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from app.core.budget import BudgetScope
+
 
 class TravelRequirements(BaseModel):
     model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
@@ -16,7 +18,8 @@ class TravelRequirements(BaseModel):
     end_date: date | None = None
     duration_days: int | None = Field(default=None, ge=1, le=30)
     travelers: int | None = Field(default=None, ge=1, le=20)
-    budget: float | None = Field(default=None, ge=0)
+    budget_amount: float | None = Field(default=None, ge=0)
+    budget_scope: BudgetScope = BudgetScope.UNKNOWN
     currency: str = Field(default="USD", pattern=r"^[A-Z]{3}$")
     interests: list[str] = Field(default_factory=list)
     hotel_preferences: list[str] = Field(default_factory=list)
@@ -114,7 +117,15 @@ def parse_requirements(query: str) -> TravelRequirements:
         re.I,
     )
     if amount:
-        values["budget"] = float(amount[3].replace(",", ""))
+        values["budget_amount"] = float(amount[3].replace(",", ""))
+        # Only explicit scope adjacent to the amount is recognized. Party size never sets it.
+        scope_text = query[amount.end() :].lstrip()
+        per_person = re.match(r"(?:per (?:person|traveler)|each)\b", scope_text, re.I)
+        total = re.match(r"(?:total|for (?:the )?(?:whole|entire) trip)\b", scope_text, re.I)
+        if per_person:
+            values["budget_scope"] = BudgetScope.PER_PERSON
+        elif total:
+            values["budget_scope"] = BudgetScope.TOTAL_TRIP
         values["currency"] = (
             amount[1] or amount[4] or {"€": "EUR", "£": "GBP"}.get(amount[2], "USD")
         ).upper()

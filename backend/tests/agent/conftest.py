@@ -5,6 +5,18 @@ import socket
 
 import pytest
 
+from app.api.travel import get_travel_service
+
+
+@pytest.fixture(autouse=True)
+def deterministic_configuration(monkeypatch):
+    monkeypatch.setenv("AGENT_PLANNER", "deterministic")
+    monkeypatch.setenv("OPENAI_API_KEY", "")
+    monkeypatch.setenv("OPENAI_MODEL", "")
+    get_travel_service.cache_clear()
+    yield
+    get_travel_service.cache_clear()
+
 
 @pytest.fixture(autouse=True)
 def no_internet(monkeypatch):

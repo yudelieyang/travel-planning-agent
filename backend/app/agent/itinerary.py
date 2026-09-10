@@ -91,7 +91,8 @@ def compose_draft(
         BudgetInput(
             items=costs,
             travelers=requirements.travelers,
-            limit=requirements.budget,
+            limit=requirements.budget_amount,
+            budget_scope=requirements.budget_scope,
             limit_currency=requirements.currency,
         ),
         warnings,

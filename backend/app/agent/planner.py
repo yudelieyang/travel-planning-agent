@@ -1,17 +1,60 @@
-"""One replaceable planner boundary. The current implementation is NOT an AI model."""
+"""Shared decision contract and an offline regression planner."""
 
 from typing import Protocol
+
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from app.agent.requirements import TravelRequirements
 from app.tools.contracts import BudgetRequest, SearchInput, SearchRequest, ToolRequest
 
+TOOL_ALLOWLIST = frozenset(
+    {
+        "search_attractions",
+        "search_hotels",
+        "search_restaurants",
+        "search_transport",
+        "calculate_budget",
+    }
+)
+
+
+class PlannerError(RuntimeError):
+    def __init__(self, code: str, *, retryable: bool = False):
+        self.code = code
+        self.retryable = retryable
+        super().__init__(code)
+
+
+class PlannerDecision(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True, hide_input_in_errors=True)
+    can_proceed: bool
+    tool_requests: list[ToolRequest] = Field(max_length=5)
+    warnings: list[str] = Field(max_length=10)
+
+    @model_validator(mode="after")
+    def execution_contract(self):
+        names = [request.tool_name for request in self.tool_requests]
+        if any(name not in TOOL_ALLOWLIST for name in names) or len(names) != len(set(names)):
+            raise ValueError("Unknown or duplicate tool")
+        if self.can_proceed and set(names) != TOOL_ALLOWLIST:
+            raise ValueError("This mock slice requires four searches and a budget calculation")
+        if not self.can_proceed and self.tool_requests:
+            raise ValueError("Blocked decisions cannot request tools")
+        if any(
+            isinstance(r, BudgetRequest) and r.arguments is not None for r in self.tool_requests
+        ):
+            raise ValueError("Budget arguments must be resolved from tool results")
+        if any(len(warning) > 500 for warning in self.warnings):
+            raise ValueError("Warnings must be brief")
+        return self
+
 
 class PlannerProtocol(Protocol):
-    def plan(self, requirements: TravelRequirements) -> list[ToolRequest]: ...
+    def plan(self, requirements: TravelRequirements) -> PlannerDecision: ...
 
 
 class DeterministicTestPlanner:
-    def plan(self, requirements: TravelRequirements) -> list[ToolRequest]:
+    def plan(self, requirements: TravelRequirements) -> PlannerDecision:
         if not requirements.destination or requirements.trip_days is None:
             raise ValueError("Preflight must succeed before planning")
         preferences = {
@@ -20,7 +63,7 @@ class DeterministicTestPlanner:
             "search_restaurants": requirements.food_preferences,
             "search_transport": requirements.transport_preferences,
         }
-        return [
+        requests = [
             SearchRequest(
                 tool_name=name,
                 arguments=SearchInput(
@@ -30,3 +73,4 @@ class DeterministicTestPlanner:
             )
             for name, tags in preferences.items()
         ] + [BudgetRequest()]
+        return PlannerDecision(can_proceed=True, tool_requests=requests, warnings=[])

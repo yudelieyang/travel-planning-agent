@@ -1,6 +1,7 @@
 """Settings load on construction, never on module import."""
 
 from pathlib import Path
+from typing import Literal
 
 from pydantic import Field, SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -28,6 +29,9 @@ class Settings(BaseSettings):
     redis_port: int = Field(default=6379, ge=1, le=65535)
     chroma_persist_directory: Path = Path("./chroma_data")
     openai_api_key: SecretStr = SecretStr("")
+    openai_model: str = ""
+    agent_planner: Literal["deterministic", "openai"] = "deterministic"
+    planner_prompt_version: Literal["planner_v1"] = "planner_v1"
 
     @field_validator("chroma_persist_directory", mode="after")
     @classmethod
