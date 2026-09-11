@@ -1,0 +1,405 @@
+{
+  "version": "planner_live_smoke_v1",
+  "cases": [
+    {
+      "case_id": "LIVE-001",
+      "label": "normal NYC",
+      "query": "Plan a 3-day trip to NYC for 1 traveler.",
+      "expected_status": "success",
+      "required_tools": [
+        "search_attractions",
+        "search_hotels",
+        "search_restaurants",
+        "search_transport",
+        "calculate_budget"
+      ],
+      "optional_tools": [],
+      "forbidden_tools": [
+        "book_flight",
+        "google_search",
+        "weather_search"
+      ],
+      "expected_destination": "New York City",
+      "budget_constraint": {
+        "scope": "UNKNOWN",
+        "amount": null,
+        "within_budget": null
+      },
+      "expected_preferences": {
+        "interests": [],
+        "hotel_preferences": [],
+        "food_preferences": [],
+        "transport_preferences": []
+      },
+      "frozen_requirements": {
+        "destination": "New York City",
+        "origin": null,
+        "start_date": null,
+        "end_date": null,
+        "duration_days": 3,
+        "travelers": 1,
+        "budget_amount": null,
+        "budget_scope": "UNKNOWN",
+        "currency": "USD",
+        "interests": [],
+        "hotel_preferences": [],
+        "food_preferences": [],
+        "transport_preferences": [],
+        "constraints": []
+      }
+    },
+    {
+      "case_id": "LIVE-002",
+      "label": "normal Boston",
+      "query": "Plan a 2-day trip to Boston for 1 traveler.",
+      "expected_status": "success",
+      "required_tools": [
+        "search_attractions",
+        "search_hotels",
+        "search_restaurants",
+        "search_transport",
+        "calculate_budget"
+      ],
+      "optional_tools": [],
+      "forbidden_tools": [
+        "book_flight",
+        "google_search",
+        "weather_search"
+      ],
+      "expected_destination": "Boston",
+      "budget_constraint": {
+        "scope": "UNKNOWN",
+        "amount": null,
+        "within_budget": null
+      },
+      "expected_preferences": {
+        "interests": [],
+        "hotel_preferences": [],
+        "food_preferences": [],
+        "transport_preferences": []
+      },
+      "frozen_requirements": {
+        "destination": "Boston",
+        "origin": null,
+        "start_date": null,
+        "end_date": null,
+        "duration_days": 2,
+        "travelers": 1,
+        "budget_amount": null,
+        "budget_scope": "UNKNOWN",
+        "currency": "USD",
+        "interests": [],
+        "hotel_preferences": [],
+        "food_preferences": [],
+        "transport_preferences": [],
+        "constraints": []
+      }
+    },
+    {
+      "case_id": "LIVE-003",
+      "label": "museum preference",
+      "query": "Plan a 3-day trip to Boston for 1 traveler. I like museums.",
+      "expected_status": "success",
+      "required_tools": [
+        "search_attractions",
+        "search_hotels",
+        "search_restaurants",
+        "search_transport",
+        "calculate_budget"
+      ],
+      "optional_tools": [],
+      "forbidden_tools": [
+        "book_flight",
+        "google_search",
+        "weather_search"
+      ],
+      "expected_destination": "Boston",
+      "budget_constraint": {
+        "scope": "UNKNOWN",
+        "amount": null,
+        "within_budget": null
+      },
+      "expected_preferences": {
+        "interests": [
+          "museums"
+        ],
+        "hotel_preferences": [],
+        "food_preferences": [],
+        "transport_preferences": []
+      },
+      "frozen_requirements": {
+        "destination": "Boston",
+        "origin": null,
+        "start_date": null,
+        "end_date": null,
+        "duration_days": 3,
+        "travelers": 1,
+        "budget_amount": null,
+        "budget_scope": "UNKNOWN",
+        "currency": "USD",
+        "interests": [
+          "museums"
+        ],
+        "hotel_preferences": [],
+        "food_preferences": [],
+        "transport_preferences": [],
+        "constraints": []
+      }
+    },
+    {
+      "case_id": "LIVE-004",
+      "label": "vegetarian preference",
+      "query": "Plan a 2-day trip to Boston for 1 traveler. Vegetarian food.",
+      "expected_status": "success",
+      "required_tools": [
+        "search_attractions",
+        "search_hotels",
+        "search_restaurants",
+        "search_transport",
+        "calculate_budget"
+      ],
+      "optional_tools": [],
+      "forbidden_tools": [
+        "book_flight",
+        "google_search",
+        "weather_search"
+      ],
+      "expected_destination": "Boston",
+      "budget_constraint": {
+        "scope": "UNKNOWN",
+        "amount": null,
+        "within_budget": null
+      },
+      "expected_preferences": {
+        "interests": [
+          "food"
+        ],
+        "hotel_preferences": [],
+        "food_preferences": [
+          "vegetarian"
+        ],
+        "transport_preferences": []
+      },
+      "frozen_requirements": {
+        "destination": "Boston",
+        "origin": null,
+        "start_date": null,
+        "end_date": null,
+        "duration_days": 2,
+        "travelers": 1,
+        "budget_amount": null,
+        "budget_scope": "UNKNOWN",
+        "currency": "USD",
+        "interests": [
+          "food"
+        ],
+        "hotel_preferences": [],
+        "food_preferences": [
+          "vegetarian"
+        ],
+        "transport_preferences": [],
+        "constraints": []
+      }
+    },
+    {
+      "case_id": "LIVE-005",
+      "label": "total-trip low budget",
+      "query": "Plan a 3-day trip to NYC for 1 traveler under $50 total.",
+      "expected_status": "success",
+      "required_tools": [
+        "search_attractions",
+        "search_hotels",
+        "search_restaurants",
+        "search_transport",
+        "calculate_budget"
+      ],
+      "optional_tools": [],
+      "forbidden_tools": [
+        "book_flight",
+        "google_search",
+        "weather_search"
+      ],
+      "expected_destination": "New York City",
+      "budget_constraint": {
+        "scope": "TOTAL_TRIP",
+        "amount": 50.0,
+        "within_budget": false
+      },
+      "expected_preferences": {
+        "interests": [],
+        "hotel_preferences": [],
+        "food_preferences": [],
+        "transport_preferences": []
+      },
+      "frozen_requirements": {
+        "destination": "New York City",
+        "origin": null,
+        "start_date": null,
+        "end_date": null,
+        "duration_days": 3,
+        "travelers": 1,
+        "budget_amount": 50.0,
+        "budget_scope": "TOTAL_TRIP",
+        "currency": "USD",
+        "interests": [],
+        "hotel_preferences": [],
+        "food_preferences": [],
+        "transport_preferences": [],
+        "constraints": []
+      }
+    },
+    {
+      "case_id": "LIVE-006",
+      "label": "per-person budget",
+      "query": "Plan a 2-day trip to Boston for 2 travelers under $400 per person.",
+      "expected_status": "success",
+      "required_tools": [
+        "search_attractions",
+        "search_hotels",
+        "search_restaurants",
+        "search_transport",
+        "calculate_budget"
+      ],
+      "optional_tools": [],
+      "forbidden_tools": [
+        "book_flight",
+        "google_search",
+        "weather_search"
+      ],
+      "expected_destination": "Boston",
+      "budget_constraint": {
+        "scope": "PER_PERSON",
+        "amount": 400.0,
+        "within_budget": true
+      },
+      "expected_preferences": {
+        "interests": [],
+        "hotel_preferences": [],
+        "food_preferences": [],
+        "transport_preferences": []
+      },
+      "frozen_requirements": {
+        "destination": "Boston",
+        "origin": null,
+        "start_date": null,
+        "end_date": null,
+        "duration_days": 2,
+        "travelers": 2,
+        "budget_amount": 400.0,
+        "budget_scope": "PER_PERSON",
+        "currency": "USD",
+        "interests": [],
+        "hotel_preferences": [],
+        "food_preferences": [],
+        "transport_preferences": [],
+        "constraints": []
+      }
+    },
+    {
+      "case_id": "LIVE-007",
+      "label": "multiple interests",
+      "query": "Plan a 3-day trip to NYC for 1 traveler. I like museums and food.",
+      "expected_status": "success",
+      "required_tools": [
+        "search_attractions",
+        "search_hotels",
+        "search_restaurants",
+        "search_transport",
+        "calculate_budget"
+      ],
+      "optional_tools": [],
+      "forbidden_tools": [
+        "book_flight",
+        "google_search",
+        "weather_search"
+      ],
+      "expected_destination": "New York City",
+      "budget_constraint": {
+        "scope": "UNKNOWN",
+        "amount": null,
+        "within_budget": null
+      },
+      "expected_preferences": {
+        "interests": [
+          "museums",
+          "food"
+        ],
+        "hotel_preferences": [],
+        "food_preferences": [],
+        "transport_preferences": []
+      },
+      "frozen_requirements": {
+        "destination": "New York City",
+        "origin": null,
+        "start_date": null,
+        "end_date": null,
+        "duration_days": 3,
+        "travelers": 1,
+        "budget_amount": null,
+        "budget_scope": "UNKNOWN",
+        "currency": "USD",
+        "interests": [
+          "museums",
+          "food"
+        ],
+        "hotel_preferences": [],
+        "food_preferences": [],
+        "transport_preferences": [],
+        "constraints": []
+      }
+    },
+    {
+      "case_id": "LIVE-008",
+      "label": "no matching hotel",
+      "query": "Plan a 2-day trip to Boston for 1 traveler. Quiet luxury hotels.",
+      "expected_status": "error",
+      "required_tools": [
+        "search_attractions",
+        "search_hotels",
+        "search_restaurants",
+        "search_transport"
+      ],
+      "optional_tools": [],
+      "forbidden_tools": [
+        "book_flight",
+        "google_search",
+        "weather_search",
+        "calculate_budget"
+      ],
+      "expected_destination": "Boston",
+      "budget_constraint": {
+        "scope": "UNKNOWN",
+        "amount": null,
+        "within_budget": null
+      },
+      "expected_preferences": {
+        "interests": [],
+        "hotel_preferences": [
+          "quiet",
+          "luxury"
+        ],
+        "food_preferences": [],
+        "transport_preferences": []
+      },
+      "frozen_requirements": {
+        "destination": "Boston",
+        "origin": null,
+        "start_date": null,
+        "end_date": null,
+        "duration_days": 2,
+        "travelers": 1,
+        "budget_amount": null,
+        "budget_scope": "UNKNOWN",
+        "currency": "USD",
+        "interests": [],
+        "hotel_preferences": [
+          "quiet",
+          "luxury"
+        ],
+        "food_preferences": [],
+        "transport_preferences": [],
+        "constraints": []
+      }
+    }
+  ]
+}

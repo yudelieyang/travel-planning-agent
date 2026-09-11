@@ -1,5 +1,8 @@
 """Opt-in provider adapter. Construction does not make a network request."""
 
+from contextvars import ContextVar
+from time import perf_counter
+
 import httpx
 from openai import (
     APIConnectionError,
@@ -28,6 +31,7 @@ class OpenAIPlanner:
         if not settings.openai_model.strip():
             raise PlannerConfigurationError("OPENAI_MODEL is required for the OpenAI planner")
         self.model = settings.openai_model.strip()
+        self._observation = ContextVar("planner_observation", default=None)
         self.prompt_version = settings.planner_prompt_version
         if self.prompt_version not in PROMPTS:
             raise PlannerConfigurationError("Unsupported planner prompt version")
@@ -44,6 +48,16 @@ class OpenAIPlanner:
         )
 
     def plan(self, requirements: TravelRequirements) -> PlannerDecision:
+        metadata = {
+            "model": self.model,
+            "input_tokens": None,
+            "output_tokens": None,
+            "total_tokens": None,
+            "api_latency_ms": None,
+            "api_error_type": None,
+        }
+        diagnostics = {"invalid_tool": None, "invalid_arguments": None, "duplicate_tool": None}
+        started = perf_counter()
         try:
             response = self.client.responses.parse(
                 model=self.model,
@@ -53,25 +67,68 @@ class OpenAIPlanner:
                 max_output_tokens=2000,
                 store=False,
             )
+            usage = getattr(response, "usage", None)
+            for name in ("input_tokens", "output_tokens", "total_tokens"):
+                value = getattr(usage, name, None)
+                metadata[name] = value if type(value) is int and value >= 0 else None
             if response.status != "completed":
                 raise PlannerError("incomplete_response")
             decision = response.output_parsed
             if decision is None:
                 raise PlannerError("empty_or_refused_response")
             # Revalidate even if a mocked/constructed model bypassed Pydantic validation.
-            return PlannerDecision.model_validate_json(decision.model_dump_json(), strict=True)
+            validated = PlannerDecision.model_validate_json(decision.model_dump_json(), strict=True)
+            diagnostics = dict.fromkeys(diagnostics, False)
+            return validated
         except APITimeoutError:
+            metadata["api_error_type"] = "timeout"
             raise PlannerError("timeout", retryable=True) from None
         except AuthenticationError:
+            metadata["api_error_type"] = "authentication_error"
             raise PlannerError("authentication_error") from None
         except RateLimitError:
+            metadata["api_error_type"] = "rate_limit"
             raise PlannerError("rate_limit", retryable=True) from None
         except APIConnectionError:
+            metadata["api_error_type"] = "connection_error"
             raise PlannerError("connection_error", retryable=True) from None
-        except (ValidationError, ValueError, TypeError, AttributeError):
+        except ValidationError as exc:
+            # Error type only. Never copy ValidationError.input, message, or provider bodies.
+            kinds = {
+                error["type"] for error in exc.errors(include_input=False, include_context=False)
+            }
+            for index, kind in enumerate(("invalid_tool", "duplicate_tool", "invalid_arguments")):
+                if kind in kinds:
+                    diagnostics[kind] = True
+                    for passed in ("invalid_tool", "duplicate_tool", "invalid_arguments")[:index]:
+                        diagnostics[passed] = False
+                    break
+            metadata["api_error_type"] = "invalid_structured_decision"
+            raise PlannerError("invalid_structured_decision") from None
+        except (ValueError, TypeError, AttributeError):
+            metadata["api_error_type"] = "invalid_structured_decision"
             raise PlannerError("invalid_structured_decision") from None
         except APIError:
+            metadata["api_error_type"] = "provider_error"
             raise PlannerError("provider_error") from None
+        except PlannerError as exc:
+            metadata["api_error_type"] = exc.code
+            raise
+        finally:
+            metadata["api_latency_ms"] = round((perf_counter() - started) * 1000, 2)
+            self._observation.set({"metadata": metadata, "diagnostics": diagnostics})
+
+    def get_observation(self):
+        """Per-context metadata; no mutable process-wide last-response state."""
+        observation = self._observation.get()
+        return (
+            {
+                "metadata": dict(observation["metadata"]),
+                "diagnostics": dict(observation["diagnostics"]),
+            }
+            if observation
+            else None
+        )
 
 
 def create_planner(settings: Settings):

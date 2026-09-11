@@ -2,7 +2,8 @@
 
 from typing import Protocol
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
+from pydantic_core import PydanticCustomError
 
 from app.agent.requirements import TravelRequirements
 from app.tools.contracts import BudgetRequest, SearchInput, SearchRequest, ToolRequest
@@ -30,6 +31,33 @@ class PlannerDecision(BaseModel):
     can_proceed: bool
     tool_requests: list[ToolRequest] = Field(max_length=5)
     warnings: list[str] = Field(max_length=10)
+
+    @model_validator(mode="before")
+    @classmethod
+    def classify_tool_contract(cls, value):
+        """Safe error types for metrics; never persist the rejected provider payload."""
+        if not isinstance(value, dict) or not isinstance(value.get("tool_requests"), list):
+            return value
+        requests = [
+            r.model_dump(mode="json") if isinstance(r, (SearchRequest, BudgetRequest)) else r
+            for r in value["tool_requests"]
+        ]
+        names = [r.get("tool_name") if isinstance(r, dict) else None for r in requests]
+        if any(not isinstance(name, str) or name not in TOOL_ALLOWLIST for name in names):
+            raise PydanticCustomError("invalid_tool", "Unregistered or missing tool name")
+        if len(names) != len(set(names)):
+            raise PydanticCustomError("duplicate_tool", "Duplicate tool request")
+        for request in requests:
+            try:
+                if request["tool_name"] == "calculate_budget":
+                    BudgetRequest.model_validate(request, strict=True)
+                    if request.get("arguments") is not None:
+                        raise ValueError("Budget arguments must be tool-derived")
+                else:
+                    SearchRequest.model_validate(request, strict=True)
+            except (ValidationError, ValueError, TypeError):
+                raise PydanticCustomError("invalid_arguments", "Invalid tool arguments") from None
+        return value
 
     @model_validator(mode="after")
     def execution_contract(self):

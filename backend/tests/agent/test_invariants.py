@@ -143,6 +143,12 @@ def test_trace_is_metadata_only_and_not_in_api_response():
         "validation_status",
         "final_status",
         "latency_ms",
+        "model",
+        "input_tokens",
+        "output_tokens",
+        "total_tokens",
+        "api_latency_ms",
+        "api_error_type",
     }
     assert trace.final_status == "success"
     assert not state["errors"] and not second_state["errors"]

@@ -433,3 +433,71 @@ ID、split、expected_fields 不传给 extractor。
 当前重要限制：`skip`、后置否定、`not only`、`dislike` 等不能可靠解释；嵌套介词
 可能污染目的地（例如 `to spend a long weekend in Boston`）；月份/斜杠/缺年日期及
 中文未支持。金额和人数规则也不是完整语义解析，不应把通过 core 当作生产能力。
+
+## Phase 5C-Prep — Controlled Planner A/B Harness
+
+Phase 5B baseline commit: `e249ec3`。本轮冻结 rules、requirements 数据集、`planner_v1`
+以及 mock 数据；只准备评估设施，不批准真实 API 请求，不需要 billing 或真实 Key。
+
+`planner_live_smoke_v1.json` 有 8 个稳定案例：normal NYC、normal Boston、museum、
+vegetarian、低整团预算、按人预算、多个兴趣、酒店无匹配。每例有手工核对的完整需求
+快照及 golden contract（必需/可选/禁止执行工具、目的地、偏好、预算和最终状态）。
+无 expected_tool_order、CoT 或已知解析失败案例。
+
+每次运行先执行真正的 RuleBasedRequirementsExtractor，逐例对照冻结快照并检查
+preflight sufficient；不同即拒绝实验。随后 A/B 使用快照的独立深拷贝，运行同一 graph、
+tools、mock fixtures、budget calculator、validator、finalizer。默认 A 是 deterministic，
+B 才是 OpenAIPlanner。Golden 工具匹配按集合，不比较搜索顺序；当前产品仍是四次搜索
+后一次预算计算的固定 mock slice，没有放宽到任意工具循环。
+
+```powershell
+# 默认 dry-run，选前 3 例；即使环境配置 openai 也不会创建 provider client
+python evals/evaluate_planner_live.py
+python evals/evaluate_planner_live.py --dry-run
+
+# 完整 8 例离线模拟，SDK 使用内存 MockTransport；绝无真实 provider 请求
+python evals/evaluate_planner_live.py --simulate --max-cases 8
+```
+
+Dry-run 显示数据集、所选 ID、extractor/planner、模型配置状态及未来请求上限；
+本轮实发请求为 0。默认 `max_cases=3`，允许 1–8，超出硬上限或不足 1 立即拒绝。
+不支持自动扩展到 44 例 requirements 数据集。
+
+**以下入口仅供将来单独获批后使用，本阶段不要执行：**
+
+```powershell
+python evals/evaluate_planner_live.py --live --max-cases 3 --approved-model '<approved-model>'
+```
+
+真实模型只从 `OPENAI_MODEL` 读取，`--approved-model` 仅检查一致性、不选择模型。
+`--live` 下缺 Key、缺模型或模型不一致即 fail fast，无 deterministic fallback。
+先跑 A，A 任一 case 未符合 golden 则不创建 B；B 出现未符合 golden 的结果即停止，
+不自动重试。SDK `max_retries=0`、timeout=30 秒、max_output_tokens=2000，每例一次请求。
+代码 guard 不代替用户批准。旧四例 `scripts/evaluate_planners.py` 保留为 Phase 5 兼容入口；
+受控 A/B 实验统一使用本节的新入口，不混用两个入口计数。
+
+### Metrics and provenance
+
+实现 case success rate、required tool recall、forbidden tool violation rate、invalid tool rate、
+invalid argument rate、duplicate tool rate、destination/preference preservation rate、
+budget integrity rate、final status accuracy、factual provenance rate、mean latency。
+指标带分子和分母。required recall 按实际执行的能力计数，不要求成功工具的数量相同；
+forbidden violation 按案例是否执行禁止工具计数。无匹配案例正确返回 error 也可通过 golden。
+错误率按可观察到的 planner 决定计数；超时/认证等无法判断输出是否合法时为 null，
+不冒充 0%。没有产出预算/最终事实的案例，其完整性指标为 N/A，不算作已验证。
+
+Provenance check 对最终每个活动名称、报价、类别、目的地和币种关联到本轮搜索结果，
+并核对日程总价；预算完整性再次与 deterministic calculator 比较。不新增业务数据源。
+未知工具名统一记录 `<unregistered>`，只保存安全诊断分类，不持久化拒绝的原始输出。
+
+Trace 预留并在 harness 填充 model、input_tokens、output_tokens、total_tokens、
+api_latency_ms、api_error_type。没有可用 usage 就为 null；mock 不生成收费 token 统计。
+观测数据以 ContextVar 隔离并逐请求重置。原始响应、Key、CoT 不写日志；LangSmith 被禁用。
+
+每个记录携带 case_id、extractor、planner、model、prompt version、需求快照摘要、工具、
+各类完整性、最终状态、延迟、用量及安全错误；运行同时记录 dataset version/hash、Git commit、
+working-tree dirty 标记、代码/fixtures 摘要和 extractor 摘要。未提交代码不会被伪装成纯 commit。
+
+结果在被忽略的 `evals/results/planner-mock-*.json` 或将来的 `planner-live-*.json`。
+模拟报告同时显示 `Deterministic`、`OpenAI MOCK` 与 **`OpenAI: NOT RUN`**，不能用模拟分数
+推断真实模型效果或价格。当前尚未联网确定模型、可用性或价格。

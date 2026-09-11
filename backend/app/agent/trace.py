@@ -19,6 +19,12 @@ class ExecutionTrace(BaseModel):
     validation_status: Literal["passed", "failed", "not_reached"]
     final_status: Literal["success", "error", "needs_clarification"]
     latency_ms: float
+    model: str | None = None
+    input_tokens: int | None = Field(default=None, ge=0)
+    output_tokens: int | None = Field(default=None, ge=0)
+    total_tokens: int | None = Field(default=None, ge=0)
+    api_latency_ms: float | None = Field(default=None, ge=0)
+    api_error_type: str | None = None
 
 
 def final_status(state: TravelState) -> str:
