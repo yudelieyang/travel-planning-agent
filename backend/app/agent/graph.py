@@ -5,6 +5,7 @@ from collections.abc import Callable
 from langchain_core.messages import AIMessage
 from langgraph.graph import END, START, StateGraph
 
+from app.agent.execution import ExecutionStage, ValidationSummary
 from app.agent.itinerary import Itinerary, compose_draft, validate_itinerary
 from app.agent.planner import (
     DeterministicTestPlanner,
@@ -36,6 +37,8 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
             "errors": [],
             "clarification_question": None,
             "validation_status": "not_reached",
+            "approved_tool_requests": [],
+            "public_validation": ValidationSummary(),
         }
 
     def clarification(state: TravelState) -> dict:
@@ -74,7 +77,11 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
                     }[request.tool_name]
                     if not set(expected).issubset(request.arguments.preferences):
                         return {"errors": ["planner_dropped_preferences"]}
-            return {"tool_requests": decision.tool_requests, "warnings": decision.warnings}
+            return {
+                "tool_requests": decision.tool_requests,
+                "approved_tool_requests": [r.model_copy(deep=True) for r in decision.tool_requests],
+                "warnings": decision.warnings,
+            }
         except PlannerError as exc:
             suffix = " (retryable; no automatic retry)" if exc.retryable else ""
             return {"errors": [exc.code + suffix]}
@@ -150,14 +157,23 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
 
     def validate(state: TravelState) -> dict:
         if state["errors"]:
-            return {"validation_status": "failed"}
+            return {
+                "validation_status": "failed",
+                "public_validation": ValidationSummary(reason="prior_errors"),
+            }
         if state["itinerary"] is None or state["budget_summary"] is None:
             return {
                 "errors": ["Planning did not produce an itinerary and budget"],
                 "validation_status": "failed",
+                "public_validation": ValidationSummary(reason="missing_artifacts"),
             }
         errors = validate_itinerary(state["itinerary"], state["budget_summary"])
-        return {"errors": errors, "validation_status": "failed" if errors else "passed"}
+        outcome = "failed" if errors else "passed"
+        return {
+            "errors": errors,
+            "validation_status": outcome,
+            "public_validation": ValidationSummary(performed=True, outcome=outcome, reason=None),
+        }
 
     def finalize(state: TravelState) -> dict:
         if state["errors"]:
@@ -174,6 +190,32 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
             ]
         }
 
+    def observed(name, node):
+        """Record node completion without changing node outputs or routing."""
+
+        def execute(state):
+            update = node(state)
+            previous = [] if name == "preflight" else state["execution_stages"]
+            outcome = "completed"
+            if (
+                name == "preflight"
+                and update["requirement_status"] == RequirementStatus.INSUFFICIENT
+            ):
+                outcome = "clarification"
+            elif name == "tools" and state["errors"]:
+                outcome = "skipped"
+            elif name == "validation" and update["public_validation"].reason == "prior_errors":
+                outcome = "skipped"
+            elif name in ("planner", "tools", "validation") and update.get("errors"):
+                outcome = "failed"
+            return {
+                **update,
+                "execution_stages": previous
+                + [ExecutionStage(name=name, sequence=len(previous) + 1, outcome=outcome)],
+            }
+
+        return execute
+
     graph = StateGraph(TravelState)
     for name, node in [
         ("preflight", preflight),
@@ -183,7 +225,8 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
         ("validate", validate),
         ("finalize", finalize),
     ]:
-        graph.add_node(name, node)
+        public_name = {"validate": "validation", "finalize": "finalization"}.get(name, name)
+        graph.add_node(name, observed(public_name, node))
     graph.add_edge(START, "preflight")
     graph.add_conditional_edges(
         "preflight",

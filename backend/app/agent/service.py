@@ -6,9 +6,11 @@ from typing import Literal
 from langchain_core.messages import HumanMessage
 from pydantic import BaseModel, ConfigDict, Field
 
+from app.agent.execution import ExecutionStage, PublicExecutionSummary, project_tools
 from app.agent.extractor import RequirementsExtractorProtocol, RuleBasedRequirementsExtractor
 from app.agent.graph import ToolRunner, build_graph
 from app.agent.itinerary import Itinerary
+from app.agent.openai_planner import OpenAIPlanner
 from app.agent.planner import DeterministicTestPlanner, PlannerProtocol
 from app.agent.requirements import TravelRequirements
 from app.agent.trace import final_status, make_trace
@@ -30,6 +32,7 @@ class PlanResponse(BaseModel):
     clarification_question: str | None = None
     warnings: list[str] = Field(default_factory=list)
     errors: list[str] = Field(default_factory=list)
+    execution: PublicExecutionSummary | None = None
 
 
 class TravelService:
@@ -63,7 +66,50 @@ class TravelService:
         return state, trace
 
     def plan(self, query: str) -> PlanResponse:
-        state, _trace = self.run(query)
+        state, trace = self.run(query)
+        stages = state["execution_stages"]
+        visited = {stage.name: stage for stage in stages}
+        planner_stage = visited.get("planner")
+        mode = (
+            "demo"
+            if isinstance(self.planner, DeterministicTestPlanner)
+            else "live"
+            if isinstance(self.planner, OpenAIPlanner)
+            else "custom"
+        )
+        execution = PublicExecutionSummary(
+            run_id=trace.run_id,
+            mode=mode,
+            planner_type=trace.planner_type,
+            planner_invoked=planner_stage is not None,
+            prompt_version=trace.prompt_version,
+            latency_ms=trace.latency_ms,
+            requirement_status=state["requirement_status"],
+            planner_outcome=(
+                "not_invoked"
+                if planner_stage is None
+                else "accepted"
+                if planner_stage.outcome == "completed"
+                else "failed"
+            ),
+            stages=stages
+            + [
+                ExecutionStage(name=name, outcome="not_reached")
+                for name in (
+                    "preflight",
+                    "clarification",
+                    "planner",
+                    "tools",
+                    "validation",
+                    "finalization",
+                )
+                if name not in visited
+            ],
+            tools=project_tools(
+                state["approved_tool_requests"], state["tool_requests"], state["tool_results"]
+            ),
+            validation=state["public_validation"],
+        )
         return PlanResponse(
             status=final_status(state),
             requirements=state["requirements"],
@@ -73,4 +119,5 @@ class TravelService:
             clarification_question=state["clarification_question"],
             warnings=state["warnings"],
             errors=state["errors"],
+            execution=execution,
         )

@@ -24,6 +24,23 @@ class PlannerConfigurationError(ValueError):
     pass
 
 
+def infrastructure_error(exc, fallback):
+    """Persist only known error categories, never raw provider text."""
+    code = getattr(exc, "code", None)
+    known = {
+        "insufficient_quota": "insufficient_quota",
+        "billing_required": "billing_required",
+        "model_not_found": "model_not_available",
+        "model_not_available": "model_not_available",
+        "permission_denied": "permission_denied",
+    }
+    if isinstance(code, str) and code in known:
+        return known[code]
+    if getattr(exc, "status_code", None) == 403:
+        return "permission_denied"
+    return fallback
+
+
 class OpenAIPlanner:
     def __init__(self, settings: Settings, *, client=None):
         if not settings.openai_api_key.get_secret_value().strip():
@@ -31,6 +48,8 @@ class OpenAIPlanner:
         if not settings.openai_model.strip():
             raise PlannerConfigurationError("OPENAI_MODEL is required for the OpenAI planner")
         self.model = settings.openai_model.strip()
+        self.max_output_tokens = settings.openai_max_output_tokens
+        self.reasoning_effort = settings.openai_reasoning_effort
         self._observation = ContextVar("planner_observation", default=None)
         self.prompt_version = settings.planner_prompt_version
         if self.prompt_version not in PROMPTS:
@@ -64,7 +83,8 @@ class OpenAIPlanner:
                 instructions=PROMPTS[self.prompt_version],
                 input=requirements.model_dump_json(),
                 text_format=PlannerDecision,
-                max_output_tokens=2000,
+                max_output_tokens=self.max_output_tokens,
+                reasoning={"effort": self.reasoning_effort},
                 store=False,
             )
             usage = getattr(response, "usage", None)
@@ -86,9 +106,10 @@ class OpenAIPlanner:
         except AuthenticationError:
             metadata["api_error_type"] = "authentication_error"
             raise PlannerError("authentication_error") from None
-        except RateLimitError:
-            metadata["api_error_type"] = "rate_limit"
-            raise PlannerError("rate_limit", retryable=True) from None
+        except RateLimitError as exc:
+            code = infrastructure_error(exc, "rate_limit")
+            metadata["api_error_type"] = code
+            raise PlannerError(code, retryable=code == "rate_limit") from None
         except APIConnectionError:
             metadata["api_error_type"] = "connection_error"
             raise PlannerError("connection_error", retryable=True) from None
@@ -108,9 +129,10 @@ class OpenAIPlanner:
         except (ValueError, TypeError, AttributeError):
             metadata["api_error_type"] = "invalid_structured_decision"
             raise PlannerError("invalid_structured_decision") from None
-        except APIError:
-            metadata["api_error_type"] = "provider_error"
-            raise PlannerError("provider_error") from None
+        except APIError as exc:
+            code = infrastructure_error(exc, "provider_error")
+            metadata["api_error_type"] = code
+            raise PlannerError(code) from None
         except PlannerError as exc:
             metadata["api_error_type"] = exc.code
             raise

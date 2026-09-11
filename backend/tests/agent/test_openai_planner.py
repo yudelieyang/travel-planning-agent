@@ -102,7 +102,8 @@ def test_actual_sdk_structured_parsing_and_request_options():
         assert body["text"]["format"]["schema"]["additionalProperties"] is False
         assert body["store"] is False
         assert body["model"] == "offline-model"
-        assert body["max_output_tokens"] == 2000
+        assert body["max_output_tokens"] == 1024
+        assert body["reasoning"] == {"effort": "low"}
         assert json.loads(body["input"])["destination"] == "Boston"
         return httpx.Response(200, json=response_body(json.dumps(payload())))
 

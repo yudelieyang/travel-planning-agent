@@ -71,7 +71,12 @@ def test_replaceable_planner_and_no_cross_request_state():
     first = service.plan(query)
     assert first.status == "success"
     assert service.plan("Plan a trip for me.").status == "needs_clarification"
-    assert first == service.plan(query)
+    repeated = service.plan(query)
+    assert first.model_dump(exclude={"execution"}) == repeated.model_dump(exclude={"execution"})
+    assert first.execution.run_id != repeated.execution.run_id
+    assert first.execution.model_dump(exclude={"run_id", "latency_ms"}) == (
+        repeated.execution.model_dump(exclude={"run_id", "latency_ms"})
+    )
     assert planner.plan.call_count == 2
 
 

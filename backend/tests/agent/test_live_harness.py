@@ -267,3 +267,33 @@ def test_failed_deterministic_baseline_prevents_provider_factory():
     factory.assert_not_called()
     assert report["stopped_early"]
     assert report["comparison"]["OpenAI"] == "NOT RUN"
+
+
+@pytest.mark.parametrize(
+    "status,code,expected",
+    [
+        (429, "insufficient_quota", "insufficient_quota"),
+        (402, "billing_required", "billing_required"),
+        (404, "model_not_found", "model_not_available"),
+        (403, "permission_denied", "permission_denied"),
+    ],
+)
+def test_live_infrastructure_errors_are_distinct_and_not_retried(status, code, expected):
+    _, cases = prepare_cases(DATASET, 3)
+    handler = Mock(
+        return_value=httpx.Response(
+            status, json={"error": {"message": "private-canary", "code": code, "type": code}}
+        )
+    )
+    report = run_comparison(
+        cases,
+        metadata={},
+        mode="mock",
+        planner_factory=lambda: simulated_planner(configured(), handler),
+        model=MOCK_MODEL,
+    )
+    assert report["mock_requests"] == handler.call_count == 1
+    assert report["stopped_early"]
+    assert report["records"][-1]["trace"]["api_error_type"] == expected
+    assert report["records"][-1]["error"] == [expected]
+    assert "private-canary" not in json.dumps(report)

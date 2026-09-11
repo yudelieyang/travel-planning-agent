@@ -84,6 +84,7 @@ def calculate_budget(arguments: BudgetInput) -> ToolResult:
     total = per_person * multiplier
     warnings = []
     within = None
+    comparison = None
     if arguments.travelers is None:
         warnings.append("Traveler count is unspecified: costs are per traveler, not a group total.")
     if arguments.limit is not None:
@@ -94,6 +95,7 @@ def calculate_budget(arguments: BudgetInput) -> ToolResult:
         elif arguments.budget_scope == BudgetScope.UNKNOWN:
             warnings.append("Budget scope is unknown; no budget comparison was made.")
         elif arguments.budget_scope == BudgetScope.PER_PERSON:
+            comparison = per_person
             within = per_person <= Decimal(str(arguments.limit))
             if not within:
                 warnings.append("Estimated per-person cost exceeds the supplied budget.")
@@ -102,6 +104,7 @@ def calculate_budget(arguments: BudgetInput) -> ToolResult:
             if total > Decimal(str(arguments.limit)):
                 warnings.append("Even the per-traveler reference cost exceeds the supplied budget.")
         else:
+            comparison = total
             within = total <= Decimal(str(arguments.limit))
             if not within:
                 warnings.append("Estimated group cost exceeds the supplied budget.")
@@ -115,6 +118,10 @@ def calculate_budget(arguments: BudgetInput) -> ToolResult:
         limit_currency=arguments.limit_currency,
         budget_scope=arguments.budget_scope,
         within_budget=within,
+        comparison_cost=money(comparison) if comparison is not None else None,
+        remaining_budget=(
+            money(Decimal(str(arguments.limit)) - comparison) if comparison is not None else None
+        ),
         warnings=warnings,
     )
     return ToolResult(

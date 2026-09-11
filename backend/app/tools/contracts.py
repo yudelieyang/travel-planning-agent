@@ -65,6 +65,8 @@ class BudgetSummary(ToolModel):
     limit_currency: str
     budget_scope: BudgetScope = BudgetScope.UNKNOWN
     within_budget: bool | None
+    comparison_cost: float | None = None
+    remaining_budget: float | None = None
     warnings: list[str]
 
 

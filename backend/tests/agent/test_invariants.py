@@ -154,5 +154,11 @@ def test_trace_is_metadata_only_and_not_in_api_response():
     assert not state["errors"] and not second_state["errors"]
     assert state["budget_summary"] == state["tool_results"][-1].data
     assert state["tool_results"][-1].source == "deterministic"
-    assert "trace" not in service.plan(QUERY).model_dump()
+    response = service.plan(QUERY).model_dump()
+    assert "trace" not in response
+    assert response["execution"]["planner_type"] == "DeterministicTestPlanner"
+    assert response["execution"]["validation"]["performed"] is True
+    assert not {"messages", "tool_statuses", "api_error_type", "input_tokens"} & set(
+        response["execution"]
+    )
     assert trace.latency_ms >= 0

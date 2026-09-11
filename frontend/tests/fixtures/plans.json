@@ -1,0 +1,1739 @@
+{
+  "nyc": {
+    "status": "success",
+    "requirements": {
+      "destination": "New York City",
+      "origin": null,
+      "start_date": null,
+      "end_date": null,
+      "duration_days": 3,
+      "travelers": 1,
+      "budget_amount": 1000.0,
+      "budget_scope": "TOTAL_TRIP",
+      "currency": "USD",
+      "interests": [
+        "museums",
+        "food"
+      ],
+      "hotel_preferences": [],
+      "food_preferences": [
+        "vegetarian"
+      ],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "itinerary": {
+      "destination": "New York City",
+      "days": 3,
+      "currency": "USD",
+      "estimated_total_cost": 494.0,
+      "daily_plan": [
+        {
+          "day_number": 1,
+          "activities": [
+            {
+              "name": "Mock City Art Museum",
+              "category": "attractions",
+              "estimated_cost": 25.0
+            },
+            {
+              "name": "Mock Green Kitchen (breakfast)",
+              "category": "food",
+              "estimated_cost": 18.0
+            },
+            {
+              "name": "Mock Green Kitchen (lunch)",
+              "category": "food",
+              "estimated_cost": 18.0
+            },
+            {
+              "name": "Mock Green Kitchen (dinner)",
+              "category": "food",
+              "estimated_cost": 18.0
+            },
+            {
+              "name": "Mock Walking Allowance",
+              "category": "transport",
+              "estimated_cost": 0.0
+            },
+            {
+              "name": "Mock Midtown Lodge",
+              "category": "hotel",
+              "estimated_cost": 120.0
+            }
+          ],
+          "estimated_cost": 199.0
+        },
+        {
+          "day_number": 2,
+          "activities": [
+            {
+              "name": "Mock History Museum",
+              "category": "attractions",
+              "estimated_cost": 30.0
+            },
+            {
+              "name": "Mock Market Cafe (breakfast)",
+              "category": "food",
+              "estimated_cost": 22.0
+            },
+            {
+              "name": "Mock Market Cafe (lunch)",
+              "category": "food",
+              "estimated_cost": 22.0
+            },
+            {
+              "name": "Mock Market Cafe (dinner)",
+              "category": "food",
+              "estimated_cost": 22.0
+            },
+            {
+              "name": "Mock Walking Allowance",
+              "category": "transport",
+              "estimated_cost": 0.0
+            },
+            {
+              "name": "Mock Midtown Lodge",
+              "category": "hotel",
+              "estimated_cost": 120.0
+            }
+          ],
+          "estimated_cost": 216.0
+        },
+        {
+          "day_number": 3,
+          "activities": [
+            {
+              "name": "Mock City Art Museum",
+              "category": "attractions",
+              "estimated_cost": 25.0
+            },
+            {
+              "name": "Mock Green Kitchen (breakfast)",
+              "category": "food",
+              "estimated_cost": 18.0
+            },
+            {
+              "name": "Mock Green Kitchen (lunch)",
+              "category": "food",
+              "estimated_cost": 18.0
+            },
+            {
+              "name": "Mock Green Kitchen (dinner)",
+              "category": "food",
+              "estimated_cost": 18.0
+            },
+            {
+              "name": "Mock Walking Allowance",
+              "category": "transport",
+              "estimated_cost": 0.0
+            }
+          ],
+          "estimated_cost": 79.0
+        }
+      ],
+      "warnings": [
+        "Offline mock estimates only; no live availability, tax, tips or intercity fares.",
+        "Quote convention: three meals/day and days minus one lodging nights; prices per person.",
+        "Small mock dataset: some attractions repeat across days."
+      ]
+    },
+    "budget": {
+      "currency": "USD",
+      "basis": "group",
+      "travelers": 1,
+      "per_traveler_cost": 494.0,
+      "estimated_total_cost": 494.0,
+      "breakdown": {
+        "hotel": 240.0,
+        "food": 174.0,
+        "transport": 0.0,
+        "attractions": 80.0
+      },
+      "provided_limit": 1000.0,
+      "limit_currency": "USD",
+      "budget_scope": "TOTAL_TRIP",
+      "within_budget": true,
+      "comparison_cost": 494.0,
+      "remaining_budget": 506.0,
+      "warnings": []
+    },
+    "missing_fields": [],
+    "clarification_question": null,
+    "warnings": [
+      "Offline mock estimates only; no live availability, tax, tips or intercity fares.",
+      "Quote convention: three meals/day and days minus one lodging nights; prices per person.",
+      "Small mock dataset: some attractions repeat across days."
+    ],
+    "errors": [],
+    "execution": {
+      "run_id": "a8992a61bc5745ec97f70f1ab750baf9",
+      "mode": "demo",
+      "planner_type": "DeterministicTestPlanner",
+      "planner_invoked": true,
+      "prompt_version": null,
+      "latency_ms": 36.11,
+      "requirement_status": "SUFFICIENT",
+      "planner_outcome": "accepted",
+      "stages": [
+        {
+          "name": "preflight",
+          "sequence": 1,
+          "outcome": "completed"
+        },
+        {
+          "name": "planner",
+          "sequence": 2,
+          "outcome": "completed"
+        },
+        {
+          "name": "tools",
+          "sequence": 3,
+          "outcome": "completed"
+        },
+        {
+          "name": "validation",
+          "sequence": 4,
+          "outcome": "completed"
+        },
+        {
+          "name": "finalization",
+          "sequence": 5,
+          "outcome": "completed"
+        },
+        {
+          "name": "clarification",
+          "sequence": null,
+          "outcome": "not_reached"
+        }
+      ],
+      "tools": [
+        {
+          "tool_name": "search_attractions",
+          "selected": true,
+          "executed": true,
+          "execution_order": 1,
+          "requested_arguments": {
+            "destination": "New York City",
+            "max_price": null,
+            "preferences": [
+              "museums"
+            ]
+          },
+          "runtime_arguments": {
+            "destination": "New York City",
+            "max_price": null,
+            "preferences": [
+              "museums"
+            ]
+          },
+          "status": "SUCCESS",
+          "data": [
+            {
+              "id": "nyc-a1",
+              "destination": "New York City",
+              "name": "Mock City Art Museum",
+              "price": 25.0,
+              "currency": "USD",
+              "unit": "per_person_visit",
+              "tags": [
+                "museums",
+                "art"
+              ]
+            },
+            {
+              "id": "nyc-a2",
+              "destination": "New York City",
+              "name": "Mock History Museum",
+              "price": 30.0,
+              "currency": "USD",
+              "unit": "per_person_visit",
+              "tags": [
+                "museums",
+                "history"
+              ]
+            }
+          ],
+          "source": "mock",
+          "error_code": null
+        },
+        {
+          "tool_name": "search_hotels",
+          "selected": true,
+          "executed": true,
+          "execution_order": 2,
+          "requested_arguments": {
+            "destination": "New York City",
+            "max_price": null,
+            "preferences": []
+          },
+          "runtime_arguments": {
+            "destination": "New York City",
+            "max_price": null,
+            "preferences": []
+          },
+          "status": "SUCCESS",
+          "data": [
+            {
+              "id": "nyc-h1",
+              "destination": "New York City",
+              "name": "Mock Midtown Lodge",
+              "price": 120.0,
+              "currency": "USD",
+              "unit": "per_person_night",
+              "tags": [
+                "central",
+                "budget"
+              ]
+            },
+            {
+              "id": "nyc-h2",
+              "destination": "New York City",
+              "name": "Mock Garden Inn",
+              "price": 150.0,
+              "currency": "USD",
+              "unit": "per_person_night",
+              "tags": [
+                "quiet"
+              ]
+            },
+            {
+              "id": "nyc-h3",
+              "destination": "New York City",
+              "name": "Mock Skyline Hotel",
+              "price": 250.0,
+              "currency": "USD",
+              "unit": "per_person_night",
+              "tags": [
+                "central",
+                "luxury"
+              ]
+            }
+          ],
+          "source": "mock",
+          "error_code": null
+        },
+        {
+          "tool_name": "search_restaurants",
+          "selected": true,
+          "executed": true,
+          "execution_order": 3,
+          "requested_arguments": {
+            "destination": "New York City",
+            "max_price": null,
+            "preferences": [
+              "vegetarian"
+            ]
+          },
+          "runtime_arguments": {
+            "destination": "New York City",
+            "max_price": null,
+            "preferences": [
+              "vegetarian"
+            ]
+          },
+          "status": "SUCCESS",
+          "data": [
+            {
+              "id": "nyc-f1",
+              "destination": "New York City",
+              "name": "Mock Green Kitchen",
+              "price": 18.0,
+              "currency": "USD",
+              "unit": "per_person_meal",
+              "tags": [
+                "vegetarian",
+                "vegan"
+              ]
+            },
+            {
+              "id": "nyc-f2",
+              "destination": "New York City",
+              "name": "Mock Market Cafe",
+              "price": 22.0,
+              "currency": "USD",
+              "unit": "per_person_meal",
+              "tags": [
+                "vegetarian"
+              ]
+            }
+          ],
+          "source": "mock",
+          "error_code": null
+        },
+        {
+          "tool_name": "search_transport",
+          "selected": true,
+          "executed": true,
+          "execution_order": 4,
+          "requested_arguments": {
+            "destination": "New York City",
+            "max_price": null,
+            "preferences": []
+          },
+          "runtime_arguments": {
+            "destination": "New York City",
+            "max_price": null,
+            "preferences": []
+          },
+          "status": "SUCCESS",
+          "data": [
+            {
+              "id": "nyc-t1",
+              "destination": "New York City",
+              "name": "Mock Walking Allowance",
+              "price": 0.0,
+              "currency": "USD",
+              "unit": "per_person_day",
+              "tags": [
+                "walking"
+              ]
+            },
+            {
+              "id": "nyc-t2",
+              "destination": "New York City",
+              "name": "Mock Transit Day Allowance",
+              "price": 12.0,
+              "currency": "USD",
+              "unit": "per_person_day",
+              "tags": [
+                "public transit"
+              ]
+            },
+            {
+              "id": "nyc-t3",
+              "destination": "New York City",
+              "name": "Mock Taxi Day Allowance",
+              "price": 50.0,
+              "currency": "USD",
+              "unit": "per_person_day",
+              "tags": [
+                "taxi"
+              ]
+            }
+          ],
+          "source": "mock",
+          "error_code": null
+        },
+        {
+          "tool_name": "calculate_budget",
+          "selected": true,
+          "executed": true,
+          "execution_order": 5,
+          "requested_arguments": null,
+          "runtime_arguments": {
+            "items": [
+              {
+                "category": "attractions",
+                "amount": 25.0
+              },
+              {
+                "category": "food",
+                "amount": 18.0
+              },
+              {
+                "category": "food",
+                "amount": 18.0
+              },
+              {
+                "category": "food",
+                "amount": 18.0
+              },
+              {
+                "category": "transport",
+                "amount": 0.0
+              },
+              {
+                "category": "hotel",
+                "amount": 120.0
+              },
+              {
+                "category": "attractions",
+                "amount": 30.0
+              },
+              {
+                "category": "food",
+                "amount": 22.0
+              },
+              {
+                "category": "food",
+                "amount": 22.0
+              },
+              {
+                "category": "food",
+                "amount": 22.0
+              },
+              {
+                "category": "transport",
+                "amount": 0.0
+              },
+              {
+                "category": "hotel",
+                "amount": 120.0
+              },
+              {
+                "category": "attractions",
+                "amount": 25.0
+              },
+              {
+                "category": "food",
+                "amount": 18.0
+              },
+              {
+                "category": "food",
+                "amount": 18.0
+              },
+              {
+                "category": "food",
+                "amount": 18.0
+              },
+              {
+                "category": "transport",
+                "amount": 0.0
+              }
+            ],
+            "travelers": 1,
+            "limit": 1000.0,
+            "limit_currency": "USD",
+            "budget_scope": "TOTAL_TRIP"
+          },
+          "status": "SUCCESS",
+          "data": {
+            "currency": "USD",
+            "basis": "group",
+            "travelers": 1,
+            "per_traveler_cost": 494.0,
+            "estimated_total_cost": 494.0,
+            "breakdown": {
+              "hotel": 240.0,
+              "food": 174.0,
+              "transport": 0.0,
+              "attractions": 80.0
+            },
+            "provided_limit": 1000.0,
+            "limit_currency": "USD",
+            "budget_scope": "TOTAL_TRIP",
+            "within_budget": true,
+            "comparison_cost": 494.0,
+            "remaining_budget": 506.0,
+            "warnings": []
+          },
+          "source": "deterministic",
+          "error_code": null
+        }
+      ],
+      "validation": {
+        "performed": true,
+        "outcome": "passed",
+        "reason": null
+      }
+    }
+  },
+  "boston": {
+    "status": "success",
+    "requirements": {
+      "destination": "Boston",
+      "origin": null,
+      "start_date": null,
+      "end_date": null,
+      "duration_days": 2,
+      "travelers": 1,
+      "budget_amount": 500.0,
+      "budget_scope": "TOTAL_TRIP",
+      "currency": "USD",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "itinerary": {
+      "destination": "Boston",
+      "days": 2,
+      "currency": "USD",
+      "estimated_total_cost": 223.0,
+      "daily_plan": [
+        {
+          "day_number": 1,
+          "activities": [
+            {
+              "name": "Mock Common Park",
+              "category": "attractions",
+              "estimated_cost": 0.0
+            },
+            {
+              "name": "Mock Garden Cafe (breakfast)",
+              "category": "food",
+              "estimated_cost": 16.0
+            },
+            {
+              "name": "Mock Garden Cafe (lunch)",
+              "category": "food",
+              "estimated_cost": 16.0
+            },
+            {
+              "name": "Mock Garden Cafe (dinner)",
+              "category": "food",
+              "estimated_cost": 16.0
+            },
+            {
+              "name": "Mock Walking Allowance",
+              "category": "transport",
+              "estimated_cost": 0.0
+            },
+            {
+              "name": "Mock Harbor Lodge",
+              "category": "hotel",
+              "estimated_cost": 100.0
+            }
+          ],
+          "estimated_cost": 148.0
+        },
+        {
+          "day_number": 2,
+          "activities": [
+            {
+              "name": "Mock Boston History Museum",
+              "category": "attractions",
+              "estimated_cost": 15.0
+            },
+            {
+              "name": "Mock Common Kitchen (breakfast)",
+              "category": "food",
+              "estimated_cost": 20.0
+            },
+            {
+              "name": "Mock Common Kitchen (lunch)",
+              "category": "food",
+              "estimated_cost": 20.0
+            },
+            {
+              "name": "Mock Common Kitchen (dinner)",
+              "category": "food",
+              "estimated_cost": 20.0
+            },
+            {
+              "name": "Mock Walking Allowance",
+              "category": "transport",
+              "estimated_cost": 0.0
+            }
+          ],
+          "estimated_cost": 75.0
+        }
+      ],
+      "warnings": [
+        "Offline mock estimates only; no live availability, tax, tips or intercity fares.",
+        "Quote convention: three meals/day and days minus one lodging nights; prices per person."
+      ]
+    },
+    "budget": {
+      "currency": "USD",
+      "basis": "group",
+      "travelers": 1,
+      "per_traveler_cost": 223.0,
+      "estimated_total_cost": 223.0,
+      "breakdown": {
+        "hotel": 100.0,
+        "food": 108.0,
+        "transport": 0.0,
+        "attractions": 15.0
+      },
+      "provided_limit": 500.0,
+      "limit_currency": "USD",
+      "budget_scope": "TOTAL_TRIP",
+      "within_budget": true,
+      "comparison_cost": 223.0,
+      "remaining_budget": 277.0,
+      "warnings": []
+    },
+    "missing_fields": [],
+    "clarification_question": null,
+    "warnings": [
+      "Offline mock estimates only; no live availability, tax, tips or intercity fares.",
+      "Quote convention: three meals/day and days minus one lodging nights; prices per person."
+    ],
+    "errors": [],
+    "execution": {
+      "run_id": "03bccdc5dd76415bb0632ae5d06614bf",
+      "mode": "demo",
+      "planner_type": "DeterministicTestPlanner",
+      "planner_invoked": true,
+      "prompt_version": null,
+      "latency_ms": 4.74,
+      "requirement_status": "SUFFICIENT",
+      "planner_outcome": "accepted",
+      "stages": [
+        {
+          "name": "preflight",
+          "sequence": 1,
+          "outcome": "completed"
+        },
+        {
+          "name": "planner",
+          "sequence": 2,
+          "outcome": "completed"
+        },
+        {
+          "name": "tools",
+          "sequence": 3,
+          "outcome": "completed"
+        },
+        {
+          "name": "validation",
+          "sequence": 4,
+          "outcome": "completed"
+        },
+        {
+          "name": "finalization",
+          "sequence": 5,
+          "outcome": "completed"
+        },
+        {
+          "name": "clarification",
+          "sequence": null,
+          "outcome": "not_reached"
+        }
+      ],
+      "tools": [
+        {
+          "tool_name": "search_attractions",
+          "selected": true,
+          "executed": true,
+          "execution_order": 1,
+          "requested_arguments": {
+            "destination": "Boston",
+            "max_price": null,
+            "preferences": []
+          },
+          "runtime_arguments": {
+            "destination": "Boston",
+            "max_price": null,
+            "preferences": []
+          },
+          "status": "SUCCESS",
+          "data": [
+            {
+              "id": "bos-a3",
+              "destination": "Boston",
+              "name": "Mock Common Park",
+              "price": 0.0,
+              "currency": "USD",
+              "unit": "per_person_visit",
+              "tags": [
+                "parks"
+              ]
+            },
+            {
+              "id": "bos-a2",
+              "destination": "Boston",
+              "name": "Mock Boston History Museum",
+              "price": 15.0,
+              "currency": "USD",
+              "unit": "per_person_visit",
+              "tags": [
+                "museums",
+                "history"
+              ]
+            },
+            {
+              "id": "bos-a1",
+              "destination": "Boston",
+              "name": "Mock Harbor Art Museum",
+              "price": 20.0,
+              "currency": "USD",
+              "unit": "per_person_visit",
+              "tags": [
+                "museums",
+                "art"
+              ]
+            }
+          ],
+          "source": "mock",
+          "error_code": null
+        },
+        {
+          "tool_name": "search_hotels",
+          "selected": true,
+          "executed": true,
+          "execution_order": 2,
+          "requested_arguments": {
+            "destination": "Boston",
+            "max_price": null,
+            "preferences": []
+          },
+          "runtime_arguments": {
+            "destination": "Boston",
+            "max_price": null,
+            "preferences": []
+          },
+          "status": "SUCCESS",
+          "data": [
+            {
+              "id": "bos-h1",
+              "destination": "Boston",
+              "name": "Mock Harbor Lodge",
+              "price": 100.0,
+              "currency": "USD",
+              "unit": "per_person_night",
+              "tags": [
+                "central",
+                "budget"
+              ]
+            },
+            {
+              "id": "bos-h2",
+              "destination": "Boston",
+              "name": "Mock Garden House",
+              "price": 130.0,
+              "currency": "USD",
+              "unit": "per_person_night",
+              "tags": [
+                "quiet"
+              ]
+            },
+            {
+              "id": "bos-h3",
+              "destination": "Boston",
+              "name": "Mock Bay Hotel",
+              "price": 220.0,
+              "currency": "USD",
+              "unit": "per_person_night",
+              "tags": [
+                "central",
+                "luxury"
+              ]
+            }
+          ],
+          "source": "mock",
+          "error_code": null
+        },
+        {
+          "tool_name": "search_restaurants",
+          "selected": true,
+          "executed": true,
+          "execution_order": 3,
+          "requested_arguments": {
+            "destination": "Boston",
+            "max_price": null,
+            "preferences": []
+          },
+          "runtime_arguments": {
+            "destination": "Boston",
+            "max_price": null,
+            "preferences": []
+          },
+          "status": "SUCCESS",
+          "data": [
+            {
+              "id": "bos-f1",
+              "destination": "Boston",
+              "name": "Mock Garden Cafe",
+              "price": 16.0,
+              "currency": "USD",
+              "unit": "per_person_meal",
+              "tags": [
+                "vegetarian",
+                "vegan"
+              ]
+            },
+            {
+              "id": "bos-f2",
+              "destination": "Boston",
+              "name": "Mock Common Kitchen",
+              "price": 20.0,
+              "currency": "USD",
+              "unit": "per_person_meal",
+              "tags": [
+                "vegetarian"
+              ]
+            },
+            {
+              "id": "bos-f3",
+              "destination": "Boston",
+              "name": "Mock Wharf Table",
+              "price": 30.0,
+              "currency": "USD",
+              "unit": "per_person_meal",
+              "tags": [
+                "seafood"
+              ]
+            }
+          ],
+          "source": "mock",
+          "error_code": null
+        },
+        {
+          "tool_name": "search_transport",
+          "selected": true,
+          "executed": true,
+          "execution_order": 4,
+          "requested_arguments": {
+            "destination": "Boston",
+            "max_price": null,
+            "preferences": []
+          },
+          "runtime_arguments": {
+            "destination": "Boston",
+            "max_price": null,
+            "preferences": []
+          },
+          "status": "SUCCESS",
+          "data": [
+            {
+              "id": "bos-t1",
+              "destination": "Boston",
+              "name": "Mock Walking Allowance",
+              "price": 0.0,
+              "currency": "USD",
+              "unit": "per_person_day",
+              "tags": [
+                "walking"
+              ]
+            },
+            {
+              "id": "bos-t2",
+              "destination": "Boston",
+              "name": "Mock Transit Day Allowance",
+              "price": 10.0,
+              "currency": "USD",
+              "unit": "per_person_day",
+              "tags": [
+                "public transit"
+              ]
+            },
+            {
+              "id": "bos-t3",
+              "destination": "Boston",
+              "name": "Mock Taxi Day Allowance",
+              "price": 45.0,
+              "currency": "USD",
+              "unit": "per_person_day",
+              "tags": [
+                "taxi"
+              ]
+            }
+          ],
+          "source": "mock",
+          "error_code": null
+        },
+        {
+          "tool_name": "calculate_budget",
+          "selected": true,
+          "executed": true,
+          "execution_order": 5,
+          "requested_arguments": null,
+          "runtime_arguments": {
+            "items": [
+              {
+                "category": "attractions",
+                "amount": 0.0
+              },
+              {
+                "category": "food",
+                "amount": 16.0
+              },
+              {
+                "category": "food",
+                "amount": 16.0
+              },
+              {
+                "category": "food",
+                "amount": 16.0
+              },
+              {
+                "category": "transport",
+                "amount": 0.0
+              },
+              {
+                "category": "hotel",
+                "amount": 100.0
+              },
+              {
+                "category": "attractions",
+                "amount": 15.0
+              },
+              {
+                "category": "food",
+                "amount": 20.0
+              },
+              {
+                "category": "food",
+                "amount": 20.0
+              },
+              {
+                "category": "food",
+                "amount": 20.0
+              },
+              {
+                "category": "transport",
+                "amount": 0.0
+              }
+            ],
+            "travelers": 1,
+            "limit": 500.0,
+            "limit_currency": "USD",
+            "budget_scope": "TOTAL_TRIP"
+          },
+          "status": "SUCCESS",
+          "data": {
+            "currency": "USD",
+            "basis": "group",
+            "travelers": 1,
+            "per_traveler_cost": 223.0,
+            "estimated_total_cost": 223.0,
+            "breakdown": {
+              "hotel": 100.0,
+              "food": 108.0,
+              "transport": 0.0,
+              "attractions": 15.0
+            },
+            "provided_limit": 500.0,
+            "limit_currency": "USD",
+            "budget_scope": "TOTAL_TRIP",
+            "within_budget": true,
+            "comparison_cost": 223.0,
+            "remaining_budget": 277.0,
+            "warnings": []
+          },
+          "source": "deterministic",
+          "error_code": null
+        }
+      ],
+      "validation": {
+        "performed": true,
+        "outcome": "passed",
+        "reason": null
+      }
+    }
+  },
+  "clarification": {
+    "status": "needs_clarification",
+    "requirements": {
+      "destination": null,
+      "origin": null,
+      "start_date": null,
+      "end_date": null,
+      "duration_days": null,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "currency": "USD",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "itinerary": null,
+    "budget": null,
+    "missing_fields": [
+      "destination",
+      "duration"
+    ],
+    "clarification_question": "Where would you like to travel? For how many days, or on which start and end dates?",
+    "warnings": [],
+    "errors": [],
+    "execution": {
+      "run_id": "3afc723bcf3c4db5b451051af78adae7",
+      "mode": "demo",
+      "planner_type": "DeterministicTestPlanner",
+      "planner_invoked": false,
+      "prompt_version": null,
+      "latency_ms": 1.97,
+      "requirement_status": "INSUFFICIENT",
+      "planner_outcome": "not_invoked",
+      "stages": [
+        {
+          "name": "preflight",
+          "sequence": 1,
+          "outcome": "clarification"
+        },
+        {
+          "name": "clarification",
+          "sequence": 2,
+          "outcome": "completed"
+        },
+        {
+          "name": "planner",
+          "sequence": null,
+          "outcome": "not_reached"
+        },
+        {
+          "name": "tools",
+          "sequence": null,
+          "outcome": "not_reached"
+        },
+        {
+          "name": "validation",
+          "sequence": null,
+          "outcome": "not_reached"
+        },
+        {
+          "name": "finalization",
+          "sequence": null,
+          "outcome": "not_reached"
+        }
+      ],
+      "tools": [],
+      "validation": {
+        "performed": false,
+        "outcome": "not_performed",
+        "reason": "not_reached"
+      }
+    }
+  },
+  "tight": {
+    "status": "success",
+    "requirements": {
+      "destination": "Boston",
+      "origin": null,
+      "start_date": null,
+      "end_date": null,
+      "duration_days": 2,
+      "travelers": 2,
+      "budget_amount": 50.0,
+      "budget_scope": "TOTAL_TRIP",
+      "currency": "USD",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "itinerary": {
+      "destination": "Boston",
+      "days": 2,
+      "currency": "USD",
+      "estimated_total_cost": 446.0,
+      "daily_plan": [
+        {
+          "day_number": 1,
+          "activities": [
+            {
+              "name": "Mock Common Park",
+              "category": "attractions",
+              "estimated_cost": 0.0
+            },
+            {
+              "name": "Mock Garden Cafe (breakfast)",
+              "category": "food",
+              "estimated_cost": 32.0
+            },
+            {
+              "name": "Mock Garden Cafe (lunch)",
+              "category": "food",
+              "estimated_cost": 32.0
+            },
+            {
+              "name": "Mock Garden Cafe (dinner)",
+              "category": "food",
+              "estimated_cost": 32.0
+            },
+            {
+              "name": "Mock Walking Allowance",
+              "category": "transport",
+              "estimated_cost": 0.0
+            },
+            {
+              "name": "Mock Harbor Lodge",
+              "category": "hotel",
+              "estimated_cost": 200.0
+            }
+          ],
+          "estimated_cost": 296.0
+        },
+        {
+          "day_number": 2,
+          "activities": [
+            {
+              "name": "Mock Boston History Museum",
+              "category": "attractions",
+              "estimated_cost": 30.0
+            },
+            {
+              "name": "Mock Common Kitchen (breakfast)",
+              "category": "food",
+              "estimated_cost": 40.0
+            },
+            {
+              "name": "Mock Common Kitchen (lunch)",
+              "category": "food",
+              "estimated_cost": 40.0
+            },
+            {
+              "name": "Mock Common Kitchen (dinner)",
+              "category": "food",
+              "estimated_cost": 40.0
+            },
+            {
+              "name": "Mock Walking Allowance",
+              "category": "transport",
+              "estimated_cost": 0.0
+            }
+          ],
+          "estimated_cost": 150.0
+        }
+      ],
+      "warnings": [
+        "Offline mock estimates only; no live availability, tax, tips or intercity fares.",
+        "Quote convention: three meals/day and days minus one lodging nights; prices per person.",
+        "Estimated group cost exceeds the supplied budget."
+      ]
+    },
+    "budget": {
+      "currency": "USD",
+      "basis": "group",
+      "travelers": 2,
+      "per_traveler_cost": 223.0,
+      "estimated_total_cost": 446.0,
+      "breakdown": {
+        "hotel": 200.0,
+        "food": 216.0,
+        "transport": 0.0,
+        "attractions": 30.0
+      },
+      "provided_limit": 50.0,
+      "limit_currency": "USD",
+      "budget_scope": "TOTAL_TRIP",
+      "within_budget": false,
+      "comparison_cost": 446.0,
+      "remaining_budget": -396.0,
+      "warnings": [
+        "Estimated group cost exceeds the supplied budget."
+      ]
+    },
+    "missing_fields": [],
+    "clarification_question": null,
+    "warnings": [
+      "Offline mock estimates only; no live availability, tax, tips or intercity fares.",
+      "Quote convention: three meals/day and days minus one lodging nights; prices per person.",
+      "Estimated group cost exceeds the supplied budget."
+    ],
+    "errors": [],
+    "execution": {
+      "run_id": "83735c76a562481a9efe98d7df1018b0",
+      "mode": "demo",
+      "planner_type": "DeterministicTestPlanner",
+      "planner_invoked": true,
+      "prompt_version": null,
+      "latency_ms": 3.4,
+      "requirement_status": "SUFFICIENT",
+      "planner_outcome": "accepted",
+      "stages": [
+        {
+          "name": "preflight",
+          "sequence": 1,
+          "outcome": "completed"
+        },
+        {
+          "name": "planner",
+          "sequence": 2,
+          "outcome": "completed"
+        },
+        {
+          "name": "tools",
+          "sequence": 3,
+          "outcome": "completed"
+        },
+        {
+          "name": "validation",
+          "sequence": 4,
+          "outcome": "completed"
+        },
+        {
+          "name": "finalization",
+          "sequence": 5,
+          "outcome": "completed"
+        },
+        {
+          "name": "clarification",
+          "sequence": null,
+          "outcome": "not_reached"
+        }
+      ],
+      "tools": [
+        {
+          "tool_name": "search_attractions",
+          "selected": true,
+          "executed": true,
+          "execution_order": 1,
+          "requested_arguments": {
+            "destination": "Boston",
+            "max_price": null,
+            "preferences": []
+          },
+          "runtime_arguments": {
+            "destination": "Boston",
+            "max_price": null,
+            "preferences": []
+          },
+          "status": "SUCCESS",
+          "data": [
+            {
+              "id": "bos-a3",
+              "destination": "Boston",
+              "name": "Mock Common Park",
+              "price": 0.0,
+              "currency": "USD",
+              "unit": "per_person_visit",
+              "tags": [
+                "parks"
+              ]
+            },
+            {
+              "id": "bos-a2",
+              "destination": "Boston",
+              "name": "Mock Boston History Museum",
+              "price": 15.0,
+              "currency": "USD",
+              "unit": "per_person_visit",
+              "tags": [
+                "museums",
+                "history"
+              ]
+            },
+            {
+              "id": "bos-a1",
+              "destination": "Boston",
+              "name": "Mock Harbor Art Museum",
+              "price": 20.0,
+              "currency": "USD",
+              "unit": "per_person_visit",
+              "tags": [
+                "museums",
+                "art"
+              ]
+            }
+          ],
+          "source": "mock",
+          "error_code": null
+        },
+        {
+          "tool_name": "search_hotels",
+          "selected": true,
+          "executed": true,
+          "execution_order": 2,
+          "requested_arguments": {
+            "destination": "Boston",
+            "max_price": null,
+            "preferences": []
+          },
+          "runtime_arguments": {
+            "destination": "Boston",
+            "max_price": null,
+            "preferences": []
+          },
+          "status": "SUCCESS",
+          "data": [
+            {
+              "id": "bos-h1",
+              "destination": "Boston",
+              "name": "Mock Harbor Lodge",
+              "price": 100.0,
+              "currency": "USD",
+              "unit": "per_person_night",
+              "tags": [
+                "central",
+                "budget"
+              ]
+            },
+            {
+              "id": "bos-h2",
+              "destination": "Boston",
+              "name": "Mock Garden House",
+              "price": 130.0,
+              "currency": "USD",
+              "unit": "per_person_night",
+              "tags": [
+                "quiet"
+              ]
+            },
+            {
+              "id": "bos-h3",
+              "destination": "Boston",
+              "name": "Mock Bay Hotel",
+              "price": 220.0,
+              "currency": "USD",
+              "unit": "per_person_night",
+              "tags": [
+                "central",
+                "luxury"
+              ]
+            }
+          ],
+          "source": "mock",
+          "error_code": null
+        },
+        {
+          "tool_name": "search_restaurants",
+          "selected": true,
+          "executed": true,
+          "execution_order": 3,
+          "requested_arguments": {
+            "destination": "Boston",
+            "max_price": null,
+            "preferences": []
+          },
+          "runtime_arguments": {
+            "destination": "Boston",
+            "max_price": null,
+            "preferences": []
+          },
+          "status": "SUCCESS",
+          "data": [
+            {
+              "id": "bos-f1",
+              "destination": "Boston",
+              "name": "Mock Garden Cafe",
+              "price": 16.0,
+              "currency": "USD",
+              "unit": "per_person_meal",
+              "tags": [
+                "vegetarian",
+                "vegan"
+              ]
+            },
+            {
+              "id": "bos-f2",
+              "destination": "Boston",
+              "name": "Mock Common Kitchen",
+              "price": 20.0,
+              "currency": "USD",
+              "unit": "per_person_meal",
+              "tags": [
+                "vegetarian"
+              ]
+            },
+            {
+              "id": "bos-f3",
+              "destination": "Boston",
+              "name": "Mock Wharf Table",
+              "price": 30.0,
+              "currency": "USD",
+              "unit": "per_person_meal",
+              "tags": [
+                "seafood"
+              ]
+            }
+          ],
+          "source": "mock",
+          "error_code": null
+        },
+        {
+          "tool_name": "search_transport",
+          "selected": true,
+          "executed": true,
+          "execution_order": 4,
+          "requested_arguments": {
+            "destination": "Boston",
+            "max_price": null,
+            "preferences": []
+          },
+          "runtime_arguments": {
+            "destination": "Boston",
+            "max_price": null,
+            "preferences": []
+          },
+          "status": "SUCCESS",
+          "data": [
+            {
+              "id": "bos-t1",
+              "destination": "Boston",
+              "name": "Mock Walking Allowance",
+              "price": 0.0,
+              "currency": "USD",
+              "unit": "per_person_day",
+              "tags": [
+                "walking"
+              ]
+            },
+            {
+              "id": "bos-t2",
+              "destination": "Boston",
+              "name": "Mock Transit Day Allowance",
+              "price": 10.0,
+              "currency": "USD",
+              "unit": "per_person_day",
+              "tags": [
+                "public transit"
+              ]
+            },
+            {
+              "id": "bos-t3",
+              "destination": "Boston",
+              "name": "Mock Taxi Day Allowance",
+              "price": 45.0,
+              "currency": "USD",
+              "unit": "per_person_day",
+              "tags": [
+                "taxi"
+              ]
+            }
+          ],
+          "source": "mock",
+          "error_code": null
+        },
+        {
+          "tool_name": "calculate_budget",
+          "selected": true,
+          "executed": true,
+          "execution_order": 5,
+          "requested_arguments": null,
+          "runtime_arguments": {
+            "items": [
+              {
+                "category": "attractions",
+                "amount": 0.0
+              },
+              {
+                "category": "food",
+                "amount": 16.0
+              },
+              {
+                "category": "food",
+                "amount": 16.0
+              },
+              {
+                "category": "food",
+                "amount": 16.0
+              },
+              {
+                "category": "transport",
+                "amount": 0.0
+              },
+              {
+                "category": "hotel",
+                "amount": 100.0
+              },
+              {
+                "category": "attractions",
+                "amount": 15.0
+              },
+              {
+                "category": "food",
+                "amount": 20.0
+              },
+              {
+                "category": "food",
+                "amount": 20.0
+              },
+              {
+                "category": "food",
+                "amount": 20.0
+              },
+              {
+                "category": "transport",
+                "amount": 0.0
+              }
+            ],
+            "travelers": 2,
+            "limit": 50.0,
+            "limit_currency": "USD",
+            "budget_scope": "TOTAL_TRIP"
+          },
+          "status": "SUCCESS",
+          "data": {
+            "currency": "USD",
+            "basis": "group",
+            "travelers": 2,
+            "per_traveler_cost": 223.0,
+            "estimated_total_cost": 446.0,
+            "breakdown": {
+              "hotel": 200.0,
+              "food": 216.0,
+              "transport": 0.0,
+              "attractions": 30.0
+            },
+            "provided_limit": 50.0,
+            "limit_currency": "USD",
+            "budget_scope": "TOTAL_TRIP",
+            "within_budget": false,
+            "comparison_cost": 446.0,
+            "remaining_budget": -396.0,
+            "warnings": [
+              "Estimated group cost exceeds the supplied budget."
+            ]
+          },
+          "source": "deterministic",
+          "error_code": null
+        }
+      ],
+      "validation": {
+        "performed": true,
+        "outcome": "passed",
+        "reason": null
+      }
+    }
+  },
+  "atlantis": {
+    "status": "error",
+    "requirements": {
+      "destination": "Atlantis",
+      "origin": null,
+      "start_date": null,
+      "end_date": null,
+      "duration_days": 2,
+      "travelers": null,
+      "budget_amount": null,
+      "budget_scope": "UNKNOWN",
+      "currency": "USD",
+      "interests": [],
+      "hotel_preferences": [],
+      "food_preferences": [],
+      "transport_preferences": [],
+      "constraints": []
+    },
+    "itinerary": null,
+    "budget": null,
+    "missing_fields": [],
+    "clarification_question": null,
+    "warnings": [],
+    "errors": [
+      "search_attractions: NO_RESULTS",
+      "search_hotels: NO_RESULTS",
+      "search_restaurants: NO_RESULTS",
+      "search_transport: NO_RESULTS"
+    ],
+    "execution": {
+      "run_id": "93b853524d964cc580ea09eaeea08a80",
+      "mode": "demo",
+      "planner_type": "DeterministicTestPlanner",
+      "planner_invoked": true,
+      "prompt_version": null,
+      "latency_ms": 3.02,
+      "requirement_status": "SUFFICIENT",
+      "planner_outcome": "accepted",
+      "stages": [
+        {
+          "name": "preflight",
+          "sequence": 1,
+          "outcome": "completed"
+        },
+        {
+          "name": "planner",
+          "sequence": 2,
+          "outcome": "completed"
+        },
+        {
+          "name": "tools",
+          "sequence": 3,
+          "outcome": "failed"
+        },
+        {
+          "name": "validation",
+          "sequence": 4,
+          "outcome": "skipped"
+        },
+        {
+          "name": "finalization",
+          "sequence": 5,
+          "outcome": "completed"
+        },
+        {
+          "name": "clarification",
+          "sequence": null,
+          "outcome": "not_reached"
+        }
+      ],
+      "tools": [
+        {
+          "tool_name": "search_attractions",
+          "selected": true,
+          "executed": true,
+          "execution_order": 1,
+          "requested_arguments": {
+            "destination": "Atlantis",
+            "max_price": null,
+            "preferences": []
+          },
+          "runtime_arguments": {
+            "destination": "Atlantis",
+            "max_price": null,
+            "preferences": []
+          },
+          "status": "NO_RESULTS",
+          "data": [],
+          "source": "mock",
+          "error_code": null
+        },
+        {
+          "tool_name": "search_hotels",
+          "selected": true,
+          "executed": true,
+          "execution_order": 2,
+          "requested_arguments": {
+            "destination": "Atlantis",
+            "max_price": null,
+            "preferences": []
+          },
+          "runtime_arguments": {
+            "destination": "Atlantis",
+            "max_price": null,
+            "preferences": []
+          },
+          "status": "NO_RESULTS",
+          "data": [],
+          "source": "mock",
+          "error_code": null
+        },
+        {
+          "tool_name": "search_restaurants",
+          "selected": true,
+          "executed": true,
+          "execution_order": 3,
+          "requested_arguments": {
+            "destination": "Atlantis",
+            "max_price": null,
+            "preferences": []
+          },
+          "runtime_arguments": {
+            "destination": "Atlantis",
+            "max_price": null,
+            "preferences": []
+          },
+          "status": "NO_RESULTS",
+          "data": [],
+          "source": "mock",
+          "error_code": null
+        },
+        {
+          "tool_name": "search_transport",
+          "selected": true,
+          "executed": true,
+          "execution_order": 4,
+          "requested_arguments": {
+            "destination": "Atlantis",
+            "max_price": null,
+            "preferences": []
+          },
+          "runtime_arguments": {
+            "destination": "Atlantis",
+            "max_price": null,
+            "preferences": []
+          },
+          "status": "NO_RESULTS",
+          "data": [],
+          "source": "mock",
+          "error_code": null
+        },
+        {
+          "tool_name": "calculate_budget",
+          "selected": true,
+          "executed": false,
+          "execution_order": null,
+          "requested_arguments": null,
+          "runtime_arguments": null,
+          "status": "SKIPPED",
+          "data": null,
+          "source": null,
+          "error_code": null
+        }
+      ],
+      "validation": {
+        "performed": false,
+        "outcome": "not_performed",
+        "reason": "prior_errors"
+      }
+    }
+  }
+}

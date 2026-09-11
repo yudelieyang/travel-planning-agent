@@ -2,7 +2,124 @@
 
 本项目包含本地基础设施、Single-Agent 架构及可选的 OpenAI planner 适配器。
 默认使用离线 `DeterministicTestPlanner`；pytest 和环境检查不调用 OpenAI API。
-真实模型接入尚待用户批准 live smoke，未验证线上兼容性；无 RAG、前端或旅游 API。
+真实模型接入尚待用户批准 live smoke，未验证线上兼容性；无 RAG 或真实旅游 API。
+Phase E 已加入受控演示场景、响应驱动的 Demo takeaway 和澄清恢复入口，保留现有预算、行程及执行可视化。
+
+## Local Demo — Phase E Controlled Scenarios
+
+本轮提供请求输入、五个带演示目的说明的场景、API 集成、需求提取展示、
+后端执行历史、工具输入/结果卡片、planner 与 validation 摘要，以及默认折叠的工程诊断。
+阶段按后端数组顺序展示，selected 与 executed 分开显示；超预算不改变执行成功状态。
+预算展示团体/每人口径、预算上限、剩余或超支、分类成本；行程展示每一天的活动、
+类别、活动金额、日总额和行程总额。所有官方金额直接来自后端，不在前端重新合计。
+response、budget 和 itinerary 的警告在 Estimate limitations 中保留原文并去重。
+没有结果时，根据澄清路径或工具执行记录说明原因；未提供预算不会被显示为零预算。
+
+前端只负责输入与展示，需求提取、planner、工具、验证、预算比较和行程生成均由后端负责。
+当前 Demo 使用 `DeterministicTestPlanner` 和本地 mock 旅游数据，不需要 OpenAI Key。
+首次 `npm install` 需要 npm 包访问；依赖安装完成后，本地 deterministic 运行不需要 OpenAI
+或外部旅游 API。前端不使用 CDN 字体、脚本或其他远程页面资源。
+
+### Start the backend
+
+先完成下方已有 Python/`.venv` 安装步骤，并保留有效的项目 `.env` 配置。
+Settings 仍要求 PostgreSQL 配置字段，但此规划路径不连接 PostgreSQL、Redis 或 Chroma，
+所以演示本身无需启动 Docker 服务。不要覆盖已有 `.env`。
+
+在项目根目录的 PowerShell 中执行：
+
+```powershell
+# 仅设置当前终端/子进程，不修改 .env，也不会调用 OpenAI。
+$env:AGENT_PLANNER = 'deterministic'
+$env:OPENAI_API_KEY = ''
+$env:OPENAI_MODEL = ''
+$env:LANGSMITH_TRACING = 'false'
+$env:LANGCHAIN_TRACING_V2 = 'false'
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --app-dir backend --host 127.0.0.1 --port 8000
+```
+
+后端地址：<http://127.0.0.1:8000>。健康检查：<http://127.0.0.1:8000/health>。
+OpenAPI：<http://127.0.0.1:8000/openapi.json>。
+
+### Start the frontend
+
+使用 Node.js 24 LTS（前端工具与内置 TypeScript 测试要求 Node >=22.18）。
+在另一个从项目根目录打开的终端中执行：
+
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+
+Windows PowerShell 若限制 `npm.ps1`，使用 `npm.cmd install` / `npm.cmd run dev`，
+无需修改系统执行策略。
+
+打开 <http://127.0.0.1:5173/>。Vite 固定使用 5173，端口占用时直接报错。
+`frontend/vite.config.ts` 将相对 `/api` 请求代理到 `http://127.0.0.1:8000`，
+不需要修改 FastAPI CORS。修改后端端口时同步修改此代理配置，并重启 Vite。
+
+前端唯一规划请求为 `POST /api/v1/travel/plan`，JSON body 仅包含 `query`。
+未获得响应时显示 Mode unconfirmed；之后使用后端 execution 元数据确认模式及 planner
+是否被调用。Live 模式没有前端开关，也不是本轮依赖。
+
+### Presets and expected behavior
+
+预设仅填入文本，不自动提交。点击 Plan Trip 后，输入与预设按钮暂时禁用，只显示统一
+Running 状态，不伪造实时阶段进度。修改文本、切换预设或 Reset 会清除旧结果。
+
+| Preset | Expected result |
+|---|---|
+| Boston | success，USD 223；预算 USD 500；剩余 USD 277 |
+| NYC | success，USD 494；预算 USD 1000；剩余 USD 506 |
+| Clarification | needs_clarification，缺 destination/duration；planner 未调用 |
+| Tight Budget | success，USD 446；预算 USD 50；剩余 USD -396；OVER BUDGET |
+| Atlantis | error；四个搜索 NO RESULTS，预算 SKIPPED，验证未执行，finalization 完成 |
+
+Atlantis 预设 `Plan a 2-day trip to Atlantis.` 可验证 HTTP 200 的领域错误；
+`Plan a 0-day trip to Boston.` 可验证 HTTP 422。HTTP 错误与领域错误分别显示。
+网络失败显示连接提示，非 JSON 错误正文不会作为 HTML 或堆栈展示。
+澄清后请编辑并重新提交完整请求，后端不会合并历史对话。
+
+### Frontend verification and contracts
+
+```powershell
+cd frontend
+npm run typecheck
+npm test
+npm run build
+```
+
+`build` 先运行 `vue-tsc --noEmit`，再进行 Vite 构建。测试使用 Node 内置 test runner，
+没有增加 Vitest/Jest 等测试框架。唯一运行时依赖为 Vue；开发依赖为 Vite、官方 Vue
+编译插件、TypeScript 和 vue-tsc。版本固定并提交 `package-lock.json`；后续可用 `npm ci`。
+没有单独配置前端 lint 工具。
+
+Phase E 的 41 项前端测试包含现有 API/请求状态回归，以及使用已安装 Vue server renderer
+和 Vite 编译组件的语义渲染测试。`frontend/tests/fixtures/plans.json` 保存五个预设的本地
+deterministic 响应；测试读取静态样例，不启动后端、不调用模型或外部服务。
+
+额外手工验证场景（无需添加预设）：
+
+* `Plan a 2-day trip to Boston for 2 travelers under $500 per person.`：团体 USD 446，
+  每人比较成本 USD 223，每人剩余 USD 277。
+* `Plan a 2-day trip to Boston.`：每人估算 USD 223，无预算上限。
+* `Plan a 2-day trip to Boston under $500 total.`：人数未知，团体预算比较不可用。
+
+手工 TypeScript 接口位于 `frontend/src/types/travel.ts`，已对照当前 `app.openapi()`。
+OpenAPI 默认字段保留 optional 标记，可空值保留 `| null`；`breakdown` 不假定所有键必定出现。
+未来后端契约变化时同步检查接口和客户端测试。客户端进行基本响应 envelope 检查，
+没有引入完整的运行时 schema 校验库。`execution` 可以为 null。
+
+预算状态仅映射后端 `within_budget` 的 true/false/null；比较成本和剩余金额直接显示后端值。
+日期只显示后端提取值，不在前端计算时长。工具状态、是否执行以及验证状态均来自 execution。
+
+`npm run build` 生成 `frontend/dist/`；本阶段只配置开发代理，构建产物尚未接入生产静态托管。
+不要用 `file://` 打开 dist 并期待 `/api` 自动工作。运行演示请使用上述 Vite 开发服务器。
+结束时分别在两个服务器终端按 Ctrl+C。
+
+工具依据：[Vue TypeScript 文档](https://vuejs.org/guide/typescript/overview)、
+[Vite 启动文档](https://vite.dev/guide/)。
 
 本项目使用标准 CPython 3.11 x64 创建虚拟环境，不使用 Anaconda 作为 base。
 此前 Anaconda 自带的旧 MSVC runtime 导致 Chroma 原生写入崩溃；解决方式是
@@ -302,7 +419,7 @@ budget_constraint。pytest 会实际执行这些案例；不包含 expected_reas
 
 OpenAI adapter 使用已锁定的 `openai` SDK Responses `parse(text_format=PlannerDecision)`，
 不更换依赖。一次 planner 执行最多一次请求，30 秒网络超时，零自动重试，
-输出上限 2000 tokens，`store=False`。固定官方 API 地址，不读取自定义代理/base URL。
+当前输出上限 1024 tokens、reasoning effort=low，`store=False`。固定官方 API 地址，不读取自定义代理/base URL。
 无 LangChain 模型 callback/tracing；传入模型的是结构化 requirements，而非 API Key
 或原始用户消息。未请求、存储或评价完整思维链。
 
@@ -472,7 +589,7 @@ python evals/evaluate_planner_live.py --live --max-cases 3 --approved-model '<ap
 真实模型只从 `OPENAI_MODEL` 读取，`--approved-model` 仅检查一致性、不选择模型。
 `--live` 下缺 Key、缺模型或模型不一致即 fail fast，无 deterministic fallback。
 先跑 A，A 任一 case 未符合 golden 则不创建 B；B 出现未符合 golden 的结果即停止，
-不自动重试。SDK `max_retries=0`、timeout=30 秒、max_output_tokens=2000，每例一次请求。
+不自动重试。SDK `max_retries=0`、timeout=30 秒；Phase 5C 输出上限降至 1024、effort=low，每例一次请求。
 代码 guard 不代替用户批准。旧四例 `scripts/evaluate_planners.py` 保留为 Phase 5 兼容入口；
 受控 A/B 实验统一使用本节的新入口，不混用两个入口计数。
 
@@ -501,3 +618,52 @@ working-tree dirty 标记、代码/fixtures 摘要和 extractor 摘要。未提�
 结果在被忽略的 `evals/results/planner-mock-*.json` 或将来的 `planner-live-*.json`。
 模拟报告同时显示 `Deterministic`、`OpenAI MOCK` 与 **`OpenAI: NOT RUN`**，不能用模拟分数
 推断真实模型效果或价格。当前尚未联网确定模型、可用性或价格。
+
+Phase 5C 首轮限定 LIVE-001/002/003。输出预算通过 `OPENAI_MAX_OUTPUT_TOKENS` 配置，
+reasoning 使用 `OPENAI_REASONING_EFFORT=low`；未修改 `planner_v1` 或冻结的解析/工具层。
+quota、billing、authentication、model access、permission 错误应归为 live infrastructure
+blocked，不作为 planner 能力失败，不切模型、不自动重试。模型只在 `.env` 配置。
+
+# Recruiter Demo Script
+
+当前演示是 single-agent 有界规划系统：规则提取需求、验证工具契约、使用 deterministic
+planner 和 mock 旅游数据，并公开结构化执行记录。它不提供生产预订、实时旅游搜索、
+多智能体协作或会话记忆；现场演示无需 OpenAI。可选模型适配器不代表已验证的 live demo。
+
+## 60–90 seconds
+
+1. **Boston，20 秒**：选择后点击 Plan Trip。依次指出结构化需求、工具编排、验证、
+   USD 223 的预算与两日行程；每次选择只填文本，不自动运行。
+2. **NYC，10 秒**：展示 museums 和 vegetarian 需求及工具输入，说明偏好如何传递。
+3. **Clarification，15 秒**：缺目的地和时长，planner 未调用。点击 Load complete Boston
+   example，再手动提交，展示完整新请求如何恢复成功；系统不记忆前一次请求。
+4. **Tight Budget，15 秒**：执行成功、验证通过，同时明确超预算 USD 396。
+5. **Atlantis，15 秒**：搜索无结果、预算跳过、验证未执行，无虚构行程。
+
+## 30 seconds
+
+Boston（10 秒）→ Clarification（10 秒）→ Atlantis（10 秒）：展示完整成功路径、
+必填输入保护和受控失败。需要继续演示时用 Try another scenario 返回选择器。
+Reset 清除草稿、场景身份、已提交请求、响应、错误和 takeaway。
+
+## Interview talking points
+
+* 单智能体有界图让工具顺序和终止条件可检验，适合明确范围的旅行规划演示。
+* 公开执行记录解释系统实际做了什么，不暴露或伪造隐藏推理。
+* 工具契约验证约束输入与输出结构，前端不复制规划规则。
+* selected 与 executed 分离，能解释批准后未运行的预算工具。
+* 确定性 mock 演示便于重复验证；run ID、延迟变化不影响领域结果。
+* 执行成功与预算满足分开表达，避免掩盖业务约束违规。
+
+## Distinct failure and guardrail states
+
+| State | Meaning |
+|---|---|
+| needs_clarification | 输入不完整；需重新提交完整请求，不是系统故障 |
+| Domain error | HTTP 200 带领域错误，保留真实执行记录，例如 Atlantis |
+| HTTP error | 服务拒绝或无法处理请求，例如 422；无可展示执行记录 |
+| Network error | 无法取得响应；不虚构运行阶段 |
+| Over-budget success | 规划执行成功，但后端预算比较超限，行程仍可返回 |
+
+场景说明仅表达演示目的。实际数值和 Demo takeaway 均由响应决定；自定义请求仍使用
+同一个 POST /api/v1/travel/plan。所有场景都没有额外后端端点或失败注入。

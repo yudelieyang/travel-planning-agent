@@ -57,6 +57,10 @@ def main(argv=None):
         metadata.update(
             dataset_version=dataset.version, prompt_version=settings.planner_prompt_version
         )
+        metadata.update(
+            max_output_tokens=settings.openai_max_output_tokens,
+            reasoning_effort=settings.openai_reasoning_effort,
+        )
     except ValueError as exc:
         parser.error(str(exc))
     if not args.live and not args.simulate:

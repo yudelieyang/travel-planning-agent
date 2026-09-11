@@ -30,6 +30,8 @@ class Settings(BaseSettings):
     chroma_persist_directory: Path = Path("./chroma_data")
     openai_api_key: SecretStr = SecretStr("")
     openai_model: str = ""
+    openai_max_output_tokens: int = Field(default=1024, ge=256, le=2000)
+    openai_reasoning_effort: Literal["low"] = "low"
     agent_planner: Literal["deterministic", "openai"] = "deterministic"
     planner_prompt_version: Literal["planner_v1"] = "planner_v1"
 
