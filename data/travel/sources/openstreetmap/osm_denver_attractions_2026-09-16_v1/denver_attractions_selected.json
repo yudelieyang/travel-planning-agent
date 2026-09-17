@@ -1,0 +1,90 @@
+{
+  "endpoint": "https://overpass.private.coffee/api/interpreter",
+  "acquired_at": "2026-09-16T20:54:14.818687Z",
+  "osm_base_timestamp": "2026-07-15T15:22:01Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/1411339",
+    "name": "Denver",
+    "admin_level": "6"
+  },
+  "query": "[out:json][timeout:180];rel(1411339)->.boundary;area(3601411339)->.searchArea;(rel.boundary;nwr(area.searchArea)[\"name\"][\"tourism\"~\"^(museum|aquarium)$\"];nwr(area.searchArea)[\"name\"][\"leisure\"=\"park\"];);out center tags qt;",
+  "raw_response_sha256": "5e597b760b11fb3060ad5a8c33a18268894a350e815304a11ab34f9c94237be0",
+  "raw_response_bytes": 94102,
+  "returned_element_count": 338,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "node",
+      "id": 366396461,
+      "lat": 39.7446273,
+      "lon": -104.9879622,
+      "tags": {
+        "addr:city": "Denver",
+        "addr:housenumber": "1727",
+        "addr:postcode": "80202",
+        "addr:state": "CO",
+        "addr:street": "Tremont Place",
+        "ele": "1595",
+        "gnis:feature_id": "2112979",
+        "name": "American Museum of Western Art",
+        "phone": "+1-303-293-2000",
+        "tourism": "museum",
+        "website": "https://www.anschutzcollection.org/",
+        "wikidata": "Q4770539",
+        "wikipedia": "en:American Museum of Western Art – The Anschutz Collection"
+      }
+    },
+    {
+      "type": "node",
+      "id": 366396449,
+      "lat": 39.7486538,
+      "lon": -105.017044,
+      "tags": {
+        "addr:city": "Denver",
+        "addr:housenumber": "2121",
+        "addr:postcode": "80211",
+        "addr:state": "CO",
+        "addr:street": "Children's Museum Drive",
+        "contact:website": "https://www.mychildsmuseum.org/",
+        "ele": "1585",
+        "gnis:feature_id": "2113070",
+        "museum": "children",
+        "name": "Children’s Museum of Denver at Marsico Campus",
+        "opening_hours": "Mo-Su 09:00-16:00",
+        "tourism": "museum",
+        "wikidata": "Q5098167"
+      }
+    },
+    {
+      "type": "way",
+      "id": 315709021,
+      "center": {
+        "lat": 39.7362967,
+        "lon": -104.9898418
+      },
+      "tags": {
+        "addr:city": "Denver",
+        "addr:housenumber": "1250",
+        "addr:postcode": "80204",
+        "addr:state": "CO",
+        "addr:street": "Bannock Street",
+        "building": "public",
+        "building:colour": "dark_grey",
+        "building:levels": "3",
+        "check_date": "2024-06-19",
+        "check_date:opening_hours": "2023-06-14",
+        "fee": "yes",
+        "fee:conditional": "no @ (age < 18)",
+        "height": "12",
+        "name": "Clyfford Still Museum",
+        "opening_hours": "Tu-Su 10:00-17:00",
+        "roof:colour": "#f5deb3",
+        "tourism": "museum",
+        "website": "https://clyffordstillmuseum.org/",
+        "wikidata": "Q95984747"
+      }
+    }
+  ]
+}

@@ -32,7 +32,7 @@ def test_success_graph_stores_structured_results_and_budget():
     assert state["tool_requests"][-1].arguments is not None
     assert state["budget_summary"].estimated_total_cost <= 1000
     assert state["budget_summary"].travelers is None
-    assert not validate_itinerary(state["itinerary"], state["budget_summary"])
+    assert validate_itinerary(state["itinerary"], state["budget_summary"]).is_valid
 
 
 def test_insufficient_never_calls_planner_or_tools():

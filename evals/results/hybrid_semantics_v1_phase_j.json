@@ -1,0 +1,3630 @@
+{
+  "dataset_version": "hybrid_semantics_v1",
+  "mode": "offline",
+  "model": null,
+  "prompt_version": null,
+  "case_count": 50,
+  "records": [
+    {
+      "case_id": "HYBRID-001",
+      "category": "simple_deterministic",
+      "input": "Plan a 2-day trip to Boston under $800.",
+      "passed": false,
+      "failure_categories": [
+        "PARSER_MISS"
+      ],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 800.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-002",
+      "category": "simple_deterministic",
+      "input": "Three days in Columbus, budget $900 total.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Columbus",
+        "duration_days": 3,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "Columbus",
+        "duration_days": 3,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "Columbus",
+        "duration_days": 3,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-003",
+      "category": "simple_deterministic",
+      "input": "Plan 3 days in Boston for 2 travelers.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": 3,
+        "travelers": 2,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": 3,
+        "travelers": 2,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "Boston",
+        "duration_days": 3,
+        "travelers": 2,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-004",
+      "category": "simple_deterministic",
+      "input": "I want to visit zoos in Columbus.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Columbus",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          }
+        ],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "Columbus",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "Columbus",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-005",
+      "category": "multi_scope_deterministic",
+      "input": "Plan a 3-day trip to Columbus for 1 traveler under $900 total. I like zoos and fried chicken. Hotel spending must not exceed $400.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Columbus",
+        "duration_days": 3,
+        "travelers": 1,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 400.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          },
+          {
+            "category": "FOOD",
+            "value": "fried chicken"
+          }
+        ],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "Columbus",
+        "duration_days": 3,
+        "travelers": 1,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 400.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          },
+          {
+            "category": "FOOD",
+            "value": "fried chicken"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "Columbus",
+        "duration_days": 3,
+        "travelers": 1,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 400.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          },
+          {
+            "category": "FOOD",
+            "value": "fried chicken"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-006",
+      "category": "multi_scope_deterministic",
+      "input": "My total budget is $1200 and the hotel can cost at most $500 total.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1200.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1200.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1200.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-007",
+      "category": "multi_scope_deterministic",
+      "input": "Keep the entire trip under $900. Hotel spending must stay below $400.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": false,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 400.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 400.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 400.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-008",
+      "category": "same_scope_correction",
+      "input": "My budget is $1000. Actually, keep the entire trip under $700.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 700.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 700.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 700.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-009",
+      "category": "same_scope_correction",
+      "input": "Keep it below $1200. Sorry, I meant no more than $950.",
+      "passed": false,
+      "failure_categories": [
+        "PARSER_MISS"
+      ],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 950.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-010",
+      "category": "correction_multiple_scopes",
+      "input": "Total budget is $1200. Hotel max $500. Actually make the total budget $1000.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1000.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1000.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 3,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1000.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-011",
+      "category": "hard_soft",
+      "input": "Hotel must stay below $400 total.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 400.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 400.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 400.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-012",
+      "category": "hard_soft",
+      "input": "I'd prefer the hotel to be around $400 total.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "around usd 400"
+          }
+        ],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "be",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "around usd 400"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "be",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "around usd 400"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-013",
+      "category": "hard_soft",
+      "input": "Try to keep lodging around $400 if possible.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "around usd 400"
+          }
+        ],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "keep lodging",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "around usd 400"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "keep lodging",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "around usd 400"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-014",
+      "category": "hard_soft",
+      "input": "I really can't go above $400 for the hotel.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "evidence": [
+          "I really can't go above $400  for the hotel",
+          "Unresolved hard hotel scope"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "requires_clarification": true
+      }
+    },
+    {
+      "case_id": "HYBRID-015",
+      "category": "ambiguous_scope",
+      "input": "I want a $200 hotel.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "evidence": [
+          "I want a $200  hotel"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "requires_clarification": true
+      }
+    },
+    {
+      "case_id": "HYBRID-016",
+      "category": "ambiguous_scope",
+      "input": "Keep the hotel around $250.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "around usd 250"
+          }
+        ],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "around usd 250"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "around usd 250"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-017",
+      "category": "ambiguous_scope",
+      "input": "My hotel budget is $300.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "evidence": [
+          "My hotel budget is $300"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "requires_clarification": true
+      }
+    },
+    {
+      "case_id": "HYBRID-018",
+      "category": "unsupported_hard",
+      "input": "Spend no more than $250 on food.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ]
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNSUPPORTED_HARD_REQUIREMENT"
+        ],
+        "evidence": [
+          "Spend no more than $250  on food"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ],
+        "requires_clarification": true
+      }
+    },
+    {
+      "case_id": "HYBRID-019",
+      "category": "unsupported_hard",
+      "input": "Keep transportation below $100.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [
+          "TRANSPORT_TOTAL"
+        ]
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "TRANSPORT_TOTAL"
+        ],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNSUPPORTED_HARD_REQUIREMENT"
+        ],
+        "evidence": [
+          "Keep transportation below $100",
+          "Unresolved hard monetary scope"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "TRANSPORT_TOTAL"
+        ],
+        "requires_clarification": true
+      }
+    },
+    {
+      "case_id": "HYBRID-020",
+      "category": "unsupported_hard",
+      "input": "Activities must stay under $150.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [
+          "ACTIVITIES_TOTAL"
+        ]
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "ACTIVITIES_TOTAL"
+        ],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNSUPPORTED_HARD_REQUIREMENT"
+        ],
+        "evidence": [
+          "Activities must stay under $150",
+          "Unresolved hard monetary scope"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "ACTIVITIES_TOTAL"
+        ],
+        "requires_clarification": true
+      }
+    },
+    {
+      "case_id": "HYBRID-021",
+      "category": "complex_conjunction",
+      "input": "I want three days in Boston under $1000 total, hotels under $450, seafood if possible, and I'd rather stay near downtown.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": 3,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1000.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 450.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": 3,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1000.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 450.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "Boston",
+        "duration_days": 3,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1000.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 450.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-022",
+      "category": "tradeoff",
+      "input": "I'd rather pay a little more for a better hotel but still keep the whole trip below $1000.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1000.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1000.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "TRADEOFF_LANGUAGE"
+        ],
+        "evidence": [
+          "Trade-off language with multiple monetary statements"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1000.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-023",
+      "category": "tradeoff",
+      "input": "Save money on food so we can spend more on activities.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-024",
+      "category": "tradeoff",
+      "input": "Prioritize hotel quality over restaurant quality.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-025",
+      "category": "negation",
+      "input": "I don't care about nightlife.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-026",
+      "category": "negation",
+      "input": "No expensive restaurants.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-027",
+      "category": "negation",
+      "input": "I don't need a luxury hotel.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-028",
+      "category": "negation",
+      "input": "Do not include zoos.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-029",
+      "category": "false_money",
+      "input": "3 days in Boston for 2 travelers. Visit 2 museums.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": 3,
+        "travelers": 2,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": 3,
+        "travelers": 2,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "Boston",
+        "duration_days": 3,
+        "travelers": 2,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-030",
+      "category": "false_money",
+      "input": "I want a hotel rated at least 4 stars. Leave around 9 AM. Take Route 66.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-031",
+      "category": "currency_variants",
+      "input": "Plan 2 days in Boston under 900 dollars.",
+      "passed": false,
+      "failure_categories": [
+        "PARSER_MISS"
+      ],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-032",
+      "category": "currency_variants",
+      "input": "Plan 2 days in Boston. My budget is USD 900.",
+      "passed": false,
+      "failure_categories": [
+        "PARSER_MISS"
+      ],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-033",
+      "category": "currency_variants",
+      "input": "Plan 2 days in Boston. My budget is €900.",
+      "passed": false,
+      "failure_categories": [
+        "PARSER_MISS"
+      ],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-034",
+      "category": "paraphrase",
+      "input": "Don't let the total go over $900.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-035",
+      "category": "paraphrase",
+      "input": "Cap the whole trip at $900.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-036",
+      "category": "paraphrase",
+      "input": "I'd like to stay near $900 total.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-037",
+      "category": "typo",
+      "input": "hotel money should not more then 400",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-038",
+      "category": "typo",
+      "input": "trip all cost less 900",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-039",
+      "category": "multiple_preferences",
+      "input": "I like zoos, fried chicken, art museums, and parks.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          },
+          {
+            "category": "FOOD",
+            "value": "fried chicken"
+          },
+          {
+            "category": "ACTIVITY",
+            "value": "art museums"
+          }
+        ],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          },
+          {
+            "category": "FOOD",
+            "value": "fried chicken"
+          },
+          {
+            "category": "ACTIVITY",
+            "value": "art museums"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          },
+          {
+            "category": "FOOD",
+            "value": "fried chicken"
+          },
+          {
+            "category": "ACTIVITY",
+            "value": "art museums"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-040",
+      "category": "mock_augmentation",
+      "input": "Plan 3 days in Boston. Spend no more than $300 on food. Include art museums.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": 3,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "art museums"
+          }
+        ],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [
+          "ADDED_FROM_LLM"
+        ],
+        "requires_clarification": true,
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ]
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": 3,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNSUPPORTED_HARD_REQUIREMENT"
+        ],
+        "evidence": [
+          "Spend no more than $300  on food"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "art museums",
+            "source_text": "Include art museums"
+          }
+        ],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "merge": {
+        "decisions": [
+          "ADDED_FROM_LLM"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": "Boston",
+        "duration_days": 3,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "art museums"
+          }
+        ],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ],
+        "requires_clarification": true
+      }
+    },
+    {
+      "case_id": "HYBRID-041",
+      "category": "mock_hallucination",
+      "input": "Plan 2 days in Boston. Spend no more than $300 on food. I like museums.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [
+          "LLM_REJECTED_UNGROUNDED"
+        ],
+        "requires_clarification": true,
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ]
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNSUPPORTED_HARD_REQUIREMENT"
+        ],
+        "evidence": [
+          "Spend no more than $300  on food"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "skiing",
+            "source_text": "skiing"
+          }
+        ],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "merge": {
+        "decisions": [
+          "LLM_REJECTED_UNGROUNDED"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ],
+        "requires_clarification": true
+      }
+    },
+    {
+      "case_id": "HYBRID-042",
+      "category": "mock_unsupported",
+      "input": "Plan 2 days in Boston. My total budget is $1500. Spend no more than $300 on food.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [
+          "UNSUPPORTED_RETAINED"
+        ],
+        "requires_clarification": true,
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ]
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNSUPPORTED_HARD_REQUIREMENT"
+        ],
+        "evidence": [
+          "Spend no more than $300  on food"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "FOOD_TOTAL",
+            "operator": "LTE",
+            "value": 300.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "Spend no more than $300 on food.",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "merge": {
+        "decisions": [
+          "UNSUPPORTED_RETAINED",
+          "CLARIFICATION_REQUIRED"
+        ],
+        "conflicts": [],
+        "requires_clarification": true
+      },
+      "final": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING",
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ],
+        "requires_clarification": true
+      }
+    },
+    {
+      "case_id": "HYBRID-043",
+      "category": "mock_duplicate",
+      "input": "Plan 2 days in Boston under $900 total. Hotel spending must not exceed $400.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 400.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [
+          "DUPLICATE_CONFIRMED"
+        ],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 400.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "HOTEL_TOTAL",
+            "operator": "LTE",
+            "value": 400.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "Hotel spending must not exceed $400.",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "merge": {
+        "decisions": [
+          "DUPLICATE_CONFIRMED"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 400.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-044",
+      "category": "mock_conflict",
+      "input": "Plan 2 days in Boston under $900 total. Spend no more than $300 on food.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [
+          "CLARIFICATION_REQUIRED"
+        ],
+        "requires_clarification": true,
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ]
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNSUPPORTED_HARD_REQUIREMENT"
+        ],
+        "evidence": [
+          "Spend no more than $300  on food"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "TOTAL_TRIP",
+            "operator": "LTE",
+            "value": 950.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "Plan 2 days in Boston under $900 total. Spend no more than $300 on food.",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "merge": {
+        "decisions": [
+          "DETERMINISTIC_PRESERVED",
+          "CLARIFICATION_REQUIRED"
+        ],
+        "conflicts": [
+          "EXPLICIT_CONSTRAINT_CONFLICT"
+        ],
+        "requires_clarification": true
+      },
+      "final": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ],
+        "requires_clarification": true
+      }
+    },
+    {
+      "case_id": "HYBRID-045",
+      "category": "ambiguous_hotel_control",
+      "input": "I want a $200 hotel.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING",
+          "ASSUMABLE"
+        ],
+        "merge_decisions": [
+          "UNSUPPORTED_RETAINED"
+        ],
+        "requires_clarification": true,
+        "unsupported_scopes": [
+          "HOTEL_PER_NIGHT"
+        ]
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "evidence": [
+          "I want a $200  hotel"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "HOTEL_PER_NIGHT",
+            "operator": "LTE",
+            "value": 200.0,
+            "currency": "USD",
+            "strength": "SOFT",
+            "source_text": "I want a $200 hotel.",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "merge": {
+        "decisions": [
+          "UNSUPPORTED_RETAINED"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING",
+          "ASSUMABLE"
+        ],
+        "unsupported_scopes": [
+          "HOTEL_PER_NIGHT"
+        ],
+        "requires_clarification": true
+      }
+    },
+    {
+      "case_id": "HYBRID-046",
+      "category": "false_money",
+      "input": "Plan 4 days in Columbus for 3 people and visit 2 museums.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Columbus",
+        "duration_days": 4,
+        "travelers": 3,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "Columbus",
+        "duration_days": 4,
+        "travelers": 3,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "Columbus",
+        "duration_days": 4,
+        "travelers": 3,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-047",
+      "category": "simple_deterministic",
+      "input": "Boston for 2 days, just me, under $600 total.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": 1,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 600.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": 1,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 600.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": 1,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 600.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-048",
+      "category": "multiple_preferences",
+      "input": "Plan 2 days in Boston. I enjoy vegetarian food and walking.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "vegetarian"
+          }
+        ],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "vegetarian"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "Boston",
+        "duration_days": 2,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "vegetarian"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HYBRID-049",
+      "category": "contradiction",
+      "input": "Keep the whole trip below $700. The hotel alone must cost at least $900.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 700.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 700.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "evidence": [
+          "The hotel alone must cost at least $900"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 700.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "requires_clarification": true
+      }
+    },
+    {
+      "case_id": "HYBRID-050",
+      "category": "tradeoff",
+      "input": "Keep the trip cheap, but I'm willing to spend more on the hotel if it means being close to the main attractions.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "spend more",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "spend more",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    }
+  ],
+  "metrics": {
+    "coverage_gate": {
+      "TP": 13,
+      "TN": 37,
+      "FP": 0,
+      "FN": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_positive_rate": 0.0
+    },
+    "semantic_field_accuracy": {
+      "destination": 1.0,
+      "duration_days": 1.0,
+      "travelers": 1.0,
+      "constraints": 0.9,
+      "preferences": 1.0,
+      "ambiguity_levels": 0.98
+    },
+    "deferred_hybrid_cases": 0,
+    "hard_constraint_safety": {
+      "silent_hard_constraint_corruption": 0,
+      "hard_constraint_false_rejection": 0,
+      "hard_constraint_false_acceptance": 0,
+      "unsupported_hard_constraints_silently_dropped": 0
+    },
+    "merge": {
+      "attempted": 6,
+      "accepted_augmentations": 1,
+      "hallucination_rejections": 1,
+      "conflict_detections": 1,
+      "accepted_augmentation_precision": 1.0
+    },
+    "failure_counts": {
+      "PARSER_MISS": 5
+    },
+    "case_pass_rate": 0.9
+  }
+}

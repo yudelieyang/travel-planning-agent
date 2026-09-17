@@ -1,0 +1,97 @@
+{
+  "endpoint": "https://overpass.private.coffee/api/interpreter",
+  "acquired_at": "2026-09-16T21:38:35.928700Z",
+  "osm_base_timestamp": "2026-07-24T11:04:51Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/170117",
+    "name": "Las Vegas",
+    "admin_level": "8"
+  },
+  "query": "[out:json][timeout:180];rel(170117)->.boundary;area(3600170117)->.searchArea;(rel.boundary;nwr(area.searchArea)[\"name\"][\"tourism\"~\"^(museum|aquarium)$\"];nwr(area.searchArea)[\"name\"][\"leisure\"=\"park\"];);out center tags qt;",
+  "raw_response_sha256": "990333e90d960f44b90848e37682a986a6839e97525f39d1dbe539ad39169507",
+  "raw_response_bytes": 52259,
+  "returned_element_count": 159,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 182464620,
+      "center": {
+        "lat": 36.1687157,
+        "lon": -115.1525751
+      },
+      "tags": {
+        "addr:city": "Las Vegas",
+        "addr:housenumber": "360",
+        "addr:postcode": "89106",
+        "addr:state": "NV",
+        "addr:street": "Promenade Place",
+        "building": "yes",
+        "fee": "yes",
+        "name": "Discovery Children's Museum",
+        "opening_hours": "url=https://www.discoverykidslv.org/",
+        "phone": "+1-702-382-3445",
+        "tourism": "museum",
+        "website": "https://www.discoverykidslv.org/",
+        "wheelchair": "yes",
+        "wikidata": "Q6544071"
+      }
+    },
+    {
+      "type": "way",
+      "id": 925732138,
+      "center": {
+        "lat": 36.1799391,
+        "lon": -115.1338241
+      },
+      "tags": {
+        "addr:city": "Las Vegas",
+        "addr:housenumber": "900",
+        "addr:postcode": "89101",
+        "addr:state": "NV",
+        "addr:street": "Las Vegas Boulevard North",
+        "building": "yes",
+        "check_date:opening_hours": "2023-06-08",
+        "contact:facebook": "LasVegasNaturalHistoryMuseum",
+        "contact:instagram": "lvnhmuseum",
+        "contact:twitter": "LVNHMuseum",
+        "ele": "593",
+        "fee": "yes",
+        "fee:conditional": "no @ (age < 3)",
+        "gnis:feature_id": "2473128",
+        "museum": "history",
+        "name": "Las Vegas Natural History Museum",
+        "opening_hours": "Mo-Su 09:00-16:00; easter 11:00-16:00; Jan 01 12:00-16:00; Dec 24 10:00-15:00; Nov Th[4] off; Dec 25 off",
+        "phone": "+1-702-384-3466",
+        "tourism": "museum",
+        "website": "https://www.lvnhm.org",
+        "wikidata": "Q6492605"
+      }
+    },
+    {
+      "type": "way",
+      "id": 266824889,
+      "center": {
+        "lat": 36.1766859,
+        "lon": -115.1352127
+      },
+      "tags": {
+        "addr:city": "Las Vegas",
+        "addr:housenumber": "770",
+        "addr:postcode": "89101",
+        "addr:state": "NV",
+        "addr:street": "North Las Vegas Boulevard",
+        "alt_name": "Neon Boneyard",
+        "fee": "yes",
+        "landuse": "commercial",
+        "name": "Neon Museum",
+        "not:building": "museum",
+        "tourism": "museum",
+        "website": "https://www.neonmuseum.org/",
+        "wikidata": "Q6993430"
+      }
+    }
+  ]
+}

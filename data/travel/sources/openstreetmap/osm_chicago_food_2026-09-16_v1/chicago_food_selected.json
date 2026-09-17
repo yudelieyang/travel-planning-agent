@@ -1,0 +1,91 @@
+{
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "acquired_at": "2026-09-16T20:39:57.005646Z",
+  "osm_base_timestamp": "2026-09-16T20:37:42Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/122604",
+    "name": "Chicago",
+    "admin_level": "8"
+  },
+  "query": "[out:json][timeout:180];rel(122604)->.boundary;area(3600122604)->.searchArea;(rel.boundary;nwr(area.searchArea)[\"name\"][\"amenity\"=\"restaurant\"][\"addr:housenumber\"][\"addr:street\"];);out center tags qt;",
+  "raw_response_sha256": "19661e06721f7fc4ff2591effb8cad021f9f7bfed63576e37b7f33826a8fa617",
+  "raw_response_bytes": 1038763,
+  "returned_element_count": 2085,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "node",
+      "id": 3502294529,
+      "lat": 41.9134372,
+      "lon": -87.648199,
+      "tags": {
+        "addr:city": "Chicago",
+        "addr:housenumber": "1723",
+        "addr:postcode": "60614",
+        "addr:state": "IL",
+        "addr:street": "North Halsted Street",
+        "amenity": "restaurant",
+        "cuisine": "fine_dining",
+        "name": "Alinea",
+        "phone": "+1-312-867-0110",
+        "website": "https://www.alinearestaurant.com/",
+        "wikidata": "Q4726773",
+        "wikipedia": "en:Alinea (restaurant)"
+      }
+    },
+    {
+      "type": "way",
+      "id": 211352838,
+      "center": {
+        "lat": 41.722641,
+        "lon": -87.5440215
+      },
+      "tags": {
+        "addr:city": "Chicago",
+        "addr:housenumber": "3259",
+        "addr:postcode": "60617",
+        "addr:state": "IL",
+        "addr:street": "East 95th Street",
+        "addr:street:name": "95th",
+        "addr:street:prefix": "East",
+        "addr:street:type": "Street",
+        "amenity": "restaurant",
+        "building": "retail",
+        "chicago:building_id": "697117",
+        "cuisine": "seafood",
+        "name": "Calumet Fisheries",
+        "phone": "+1-773-933-9855",
+        "website": "https://calumetfisheries.com/",
+        "wikidata": "Q28401770",
+        "wikipedia": "en:Calumet Fisheries"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3575225597,
+      "lat": 41.8905369,
+      "lon": -87.6309213,
+      "tags": {
+        "addr:city": "Chicago",
+        "addr:housenumber": "445",
+        "addr:postcode": "60654",
+        "addr:state": "IL",
+        "addr:street": "North Clark Street",
+        "amenity": "restaurant",
+        "check_date": "2025-12-12",
+        "cuisine": "mexican",
+        "name": "Frontera Grill",
+        "opening_hours": "Tu-Fr 11:30-14:30; Tu-Th 17:00-22:00; Fr 17:00-23:00; Sa 10:30-14:00, 17:00-23:00",
+        "payment:cash": "yes",
+        "payment:credit_cards": "yes",
+        "payment:debit_cards": "yes",
+        "phone": "+1-312-661-1434",
+        "website": "https://www.rickbayless.com/restaurants/frontera-grill/",
+        "wheelchair": "yes",
+        "wikidata": "Q5505941"
+      }
+    }
+  ]
+}

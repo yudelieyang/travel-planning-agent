@@ -1,0 +1,62 @@
+{
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "acquired_at": "2026-09-16T14:55:27.4559314Z",
+  "osm_base_timestamp": "2026-09-16T14:53:01Z",
+  "query": "[out:json][timeout:60];area[\"boundary\"=\"administrative\"][\"name\"=\"Texas\"][\"admin_level\"=\"4\"]->.state;rel(area.state)[\"boundary\"=\"administrative\"][\"name\"=\"Austin\"][\"admin_level\"=\"8\"];map_to_area -> .searchArea;nwr[\"name\"][\"amenity\"=\"restaurant\"](area.searchArea);out center tags;",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "returned_element_count": 1101,
+  "raw_response_sha256": "7ee36ab99d70d9b584085f6082944bbf895f77a33ace635641c740ca49c358df",
+  "selection": "Three distinct amenity=restaurant objects with complete observed addresses, useful cuisine or diet metadata, valid coordinates, and stable identities were retained.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 802335915,
+      "center": {"lat": 30.2630626, "lon": -97.7137458},
+      "tags": {
+        "addr:city": "Austin",
+        "addr:housenumber": "2505",
+        "addr:postcode": "78702",
+        "addr:state": "TX",
+        "addr:street": "Webberville Road",
+        "amenity": "restaurant",
+        "cuisine": "mexican",
+        "name": "Veracruz All Natural",
+        "website": "https://www.veracruzallnatural.com/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 382491308,
+      "center": {"lat": 30.2464901, "lon": -97.7568002},
+      "tags": {
+        "addr:city": "Austin",
+        "addr:housenumber": "1900",
+        "addr:postcode": "78704",
+        "addr:state": "TX",
+        "addr:street": "South 1st Street",
+        "amenity": "restaurant",
+        "diet:vegan": "yes",
+        "diet:vegetarian": "only",
+        "name": "Bouldin Creek Cafe",
+        "website": "https://www.bouldincreekcafe.com/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 382368408,
+      "center": {"lat": 30.2701634, "lon": -97.7312704},
+      "tags": {
+        "addr:city": "Austin",
+        "addr:housenumber": "900",
+        "addr:postcode": "78702",
+        "addr:state": "TX",
+        "addr:street": "East 11th Street",
+        "amenity": "restaurant",
+        "cuisine": "barbecue",
+        "name": "Franklin Barbecue",
+        "website": "http://franklinbarbecue.com/",
+        "wikidata": "Q19879898"
+      }
+    }
+  ]
+}

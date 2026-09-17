@@ -1,0 +1,99 @@
+{
+  "endpoint": "https://lz4.overpass-api.de/api/interpreter",
+  "acquired_at": "2026-09-16T20:44:10.974804Z",
+  "osm_base_timestamp": "2026-09-16T20:41:48Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/162069",
+    "name": "District of Columbia",
+    "admin_level": "4"
+  },
+  "query": "[out:json][timeout:180];rel(162069)->.boundary;area(3600162069)->.searchArea;(rel.boundary;nwr(area.searchArea)[\"name\"][\"amenity\"=\"restaurant\"][\"addr:housenumber\"][\"addr:street\"];);out center tags qt;",
+  "raw_response_sha256": "03357c4324f0fcf8cec6d6055d1801c7189cfe9d7ff85407f84f33d12158c917",
+  "raw_response_bytes": 582428,
+  "returned_element_count": 995,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "node",
+      "id": 3261823930,
+      "lat": 38.9137931,
+      "lon": -77.046129,
+      "tags": {
+        "addr:city": "Washington",
+        "addr:housenumber": "1738",
+        "addr:postcode": "20009-1103",
+        "addr:state": "DC",
+        "addr:street": "Connecticut Avenue Northwest",
+        "air_conditioning": "yes",
+        "amenity": "restaurant",
+        "bar": "yes",
+        "check_date": "2025-08-23",
+        "contact:facebook": "https://www.facebook.com/BistrotducoinWashingtonDC",
+        "contact:instagram": "https://www.instagram.com/bistrotducoin",
+        "contact:twitter": "https://twitter.com/BistrotducoinDC",
+        "cuisine": "french",
+        "delivery": "yes",
+        "email": "inquiries@bistrotducoin.com",
+        "highchair": "yes",
+        "name": "Bistrot du Coin",
+        "opening_hours": "Tu-Fr 11:30-15:00,16:00-23:00; Sa-Su 11:00-15:00,16:00-23:00",
+        "payment:american_express": "yes",
+        "payment:cash": "yes",
+        "payment:discover_card": "yes",
+        "payment:mastercard": "yes",
+        "payment:visa": "yes",
+        "phone": "+1 202-234-6969",
+        "reservation": "yes",
+        "takeaway": "yes",
+        "website": "https://www.bistrotducoin.com/",
+        "wheelchair": "yes",
+        "wikidata": "Q59321455"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3832550822,
+      "lat": 38.9055325,
+      "lon": -77.0511634,
+      "tags": {
+        "addr:city": "Washington",
+        "addr:housenumber": "1201",
+        "addr:postcode": "20037",
+        "addr:state": "DC",
+        "addr:street": "24th Street Northwest",
+        "amenity": "restaurant",
+        "cuisine": "american",
+        "name": "Blue Duck Tavern",
+        "phone": "+1 202-419-6755",
+        "website": "https://www.blueducktavern.com/",
+        "wikidata": "Q59618691"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6299710951,
+      "lat": 38.9157574,
+      "lon": -77.0321871,
+      "tags": {
+        "addr:city": "Washington",
+        "addr:housenumber": "1906",
+        "addr:postcode": "20009",
+        "addr:state": "DC",
+        "addr:street": "14th Street Northwest",
+        "amenity": "restaurant",
+        "brand": "Bresca",
+        "contact:facebook": "https://www.facebook.com/241613576354321",
+        "cuisine": "french",
+        "name": "Bresca",
+        "opening_hours": "Mo off; Tu off; We-Th 05:30-21:30; Fr 05:00-22:00; Sa 04:00-22:00; Su 04:00-21:30",
+        "outdoor_seating": "no",
+        "phone": "+1 202-518-7926",
+        "source": "SparkGeo-confidence-conflation, meta via overturetoosm",
+        "website": "https://www.brescadc.com/",
+        "wikidata": "Q59618693"
+      }
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "endpoint": "https://overpass.private.coffee/api/interpreter",
+  "acquired_at": "2026-09-16T20:53:44.854681Z",
+  "osm_base_timestamp": "2026-05-06T03:25:00Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/1216769",
+    "name": "Miami",
+    "admin_level": "8"
+  },
+  "query": "[out:json][timeout:180];rel(1216769)->.boundary;area(3601216769)->.searchArea;(rel.boundary;nwr(area.searchArea)[\"name\"][\"amenity\"=\"restaurant\"][\"addr:housenumber\"][\"addr:street\"];);out center tags qt;",
+  "raw_response_sha256": "f62797aacb2c1b6b30c08b9f5d51483a7caa915137758a59f1f1b6a9c6d48469",
+  "raw_response_bytes": 100669,
+  "returned_element_count": 209,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "node",
+      "id": 1576341770,
+      "lat": 25.7649886,
+      "lon": -80.2527677,
+      "tags": {
+        "addr:city": "Miami",
+        "addr:housenumber": "3555",
+        "addr:postcode": "33135",
+        "addr:state": "FL",
+        "addr:street": "Southwest 8th Street",
+        "amenity": "restaurant",
+        "bar": "no",
+        "check_date": "2024-02-21",
+        "contact:facebook": "VersaillesMiami",
+        "cuisine": "cuban;latin_american;sandwich",
+        "internet_access": "wlan",
+        "name": "Versailles Restaurant",
+        "name:es": "Restaurante Versailles",
+        "outdoor_seating": "yes",
+        "payment:cash": "yes",
+        "payment:credit_cards": "yes",
+        "payment:debit_cards": "yes",
+        "phone": "+1-305-444-0240",
+        "reservation": "no",
+        "takeaway": "yes",
+        "toilets": "yes",
+        "toilets:wheelchair": "yes",
+        "website": "https://www.versaillesrestaurant.com/location",
+        "wheelchair": "yes",
+        "wikidata": "Q7922622",
+        "wikipedia": "en:Versailles (restaurant)"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8713382843,
+      "lat": 25.7999652,
+      "lon": -80.1981994,
+      "tags": {
+        "addr:city": "Miami",
+        "addr:housenumber": "151",
+        "addr:postcode": "33127",
+        "addr:state": "FL",
+        "addr:street": "Northwest 24th Street",
+        "amenity": "restaurant",
+        "cuisine": "pizza",
+        "name": "305 Pizza",
+        "payment:bitcoincash": "yes",
+        "website": "https://www.order305pizza.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13461562301,
+      "lat": 25.7660427,
+      "lon": -80.1911693,
+      "tags": {
+        "addr:city": "Miami",
+        "addr:housenumber": "800",
+        "addr:postcode": "33131",
+        "addr:state": "FL",
+        "addr:street": "Brickell Avenue",
+        "amenity": "restaurant",
+        "cuisine": "international",
+        "name": "Amazonico",
+        "opening_hours": "Mo-Su 17:00-03:00",
+        "phone": "+1-645-222-2000",
+        "website": "https://amazonicorestaurant.com/"
+      }
+    }
+  ]
+}

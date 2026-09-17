@@ -1,0 +1,219 @@
+{
+  "version": "hybrid_semantics_200_live_subset_m3",
+  "sources": ["hybrid_semantics_200_v1.json"],
+  "model": "gpt-5.6-luna",
+  "prompt_version": "semantic_extractor_v1",
+  "case_count": 25,
+  "selection_note": "Nearest balanced gate-positive mix. M2 marks every retained unsupported-hard scope deterministic-complete, so sending FOOD_TOTAL, TRANSPORT_TOTAL, ATTRACTIONS_TOTAL, or HOTEL_PER_NIGHT live would violate the M3 needs_llm=true rule. Those four scopes are audited as zero-call shadow controls instead.",
+  "live_category_mix": {
+    "ambiguous_monetary_scope": 7,
+    "unsupported_hard_scope": 0,
+    "tradeoff_compositional": 4,
+    "negation_exclusion": 3,
+    "correction_unresolved": 3,
+    "noisy_imperfect_english": 4,
+    "complex_preference_requirement": 4
+  },
+  "case_ids": [
+    "SEM200-116", "SEM200-117", "SEM200-118", "SEM200-119", "SEM200-122", "SEM200-125", "SEM200-130",
+    "SEM200-166", "SEM200-169", "SEM200-172", "SEM200-175",
+    "SEM200-156", "SEM200-158", "SEM200-163",
+    "SEM200-081", "SEM200-093", "SEM200-095",
+    "SEM200-186", "SEM200-189", "SEM200-192", "SEM200-194",
+    "SEM200-149", "SEM200-150", "SEM200-154", "SEM200-199"
+  ],
+  "cases": [
+    {
+      "case_id": "SEM200-116", "selection_category": "ambiguous_monetary_scope", "source_category": "H_ambiguous_scope",
+      "input": "I want a $240 hotel in Boston.",
+      "why_llm_required": "The amount is hotel-related but has no total-versus-per-night scope; the model must preserve uncertainty rather than promote a hard budget.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE"], "functional_coverage_reason": "AMBIGUOUS_SCOPE",
+      "gold_target": {"constraints": [], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": ["AMBIGUOUS_MONETARY_SCOPE"]}
+    },
+    {
+      "case_id": "SEM200-117", "selection_category": "ambiguous_monetary_scope", "source_category": "H_ambiguous_scope",
+      "input": "My hotel budget is $375 for Chicago.",
+      "why_llm_required": "Hotel scope is underspecified; semantic augmentation should retain a blocking ambiguity without inventing a total budget.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE"], "functional_coverage_reason": "AMBIGUOUS_SCOPE",
+      "gold_target": {"constraints": [], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": ["AMBIGUOUS_MONETARY_SCOPE"]}
+    },
+    {
+      "case_id": "SEM200-118", "selection_category": "ambiguous_monetary_scope", "source_category": "H_ambiguous_scope",
+      "input": "$480 for lodging in Miami.",
+      "why_llm_required": "The bare lodging amount lacks both strength and temporal scope and needs conservative semantic handling.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE"], "functional_coverage_reason": "AMBIGUOUS_SCOPE",
+      "gold_target": {"constraints": [], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": ["AMBIGUOUS_MONETARY_SCOPE"]}
+    },
+    {
+      "case_id": "SEM200-119", "selection_category": "ambiguous_monetary_scope", "source_category": "H_ambiguous_scope",
+      "input": "I can spend $550 on the hotel in Seattle.",
+      "why_llm_required": "The sentence expresses a hotel amount but not whether it applies per night or to the stay.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE"], "functional_coverage_reason": "AMBIGUOUS_SCOPE",
+      "gold_target": {"constraints": [], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": ["AMBIGUOUS_MONETARY_SCOPE"]}
+    },
+    {
+      "case_id": "SEM200-122", "selection_category": "ambiguous_monetary_scope", "source_category": "H_ambiguous_scope",
+      "input": "A $700 place to stay in New York City is okay.",
+      "why_llm_required": "The amount may be a soft price preference and has no explicit hotel time scope.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE"], "functional_coverage_reason": "AMBIGUOUS_SCOPE",
+      "gold_target": {"constraints": [], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": ["AMBIGUOUS_MONETARY_SCOPE"]}
+    },
+    {
+      "case_id": "SEM200-125", "selection_category": "ambiguous_monetary_scope", "source_category": "H_ambiguous_scope",
+      "input": "I need a $820 hotel in San Francisco.",
+      "why_llm_required": "The high hotel amount is still missing total-versus-night scope and must not become an executable constraint.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE"], "functional_coverage_reason": "AMBIGUOUS_SCOPE",
+      "gold_target": {"constraints": [], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": ["AMBIGUOUS_MONETARY_SCOPE"]}
+    },
+    {
+      "case_id": "SEM200-130", "selection_category": "ambiguous_monetary_scope", "source_category": "H_ambiguous_scope",
+      "input": "For Denver I can do a $350 hotel.",
+      "why_llm_required": "Colloquial phrasing leaves both strength and hotel time scope unresolved.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE"], "functional_coverage_reason": "AMBIGUOUS_SCOPE",
+      "gold_target": {"constraints": [], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": ["AMBIGUOUS_MONETARY_SCOPE"]}
+    },
+    {
+      "case_id": "SEM200-166", "selection_category": "tradeoff_compositional", "source_category": "L_tradeoff_objective",
+      "input": "Spend more on the Boston hotel if it is downtown, but keep the whole trip below $1,300.",
+      "why_llm_required": "A conditional hotel tradeoff is composed with an explicit hard whole-trip cap.",
+      "functional_coverage_reasons": ["TRADEOFF_LANGUAGE"], "functional_coverage_reason": "TRADEOFF_LANGUAGE",
+      "gold_target": {"constraints": [{"scope": "TOTAL_TRIP", "value": 1300.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": ["TRADEOFF"]}
+    },
+    {
+      "case_id": "SEM200-169", "selection_category": "tradeoff_compositional", "source_category": "L_tradeoff_objective",
+      "input": "I would pay more for a better Seattle location, while keeping total trip under $1,800.",
+      "why_llm_required": "The model must distinguish a relative location tradeoff from the hard total-trip ceiling.",
+      "functional_coverage_reasons": ["TRADEOFF_LANGUAGE"], "functional_coverage_reason": "TRADEOFF_LANGUAGE",
+      "gold_target": {"constraints": [{"scope": "TOTAL_TRIP", "value": 1800.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": ["TRADEOFF"]}
+    },
+    {
+      "case_id": "SEM200-172", "selection_category": "tradeoff_compositional", "source_category": "L_tradeoff_objective",
+      "input": "I value location over room size in New York City, up to a total of $2,100.",
+      "why_llm_required": "A ranked qualitative objective is paired with a hard total amount.",
+      "functional_coverage_reasons": ["TRADEOFF_LANGUAGE"], "functional_coverage_reason": "TRADEOFF_LANGUAGE",
+      "gold_target": {"constraints": [{"scope": "TOTAL_TRIP", "value": 2100.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": ["TRADEOFF"]}
+    },
+    {
+      "case_id": "SEM200-175", "selection_category": "tradeoff_compositional", "source_category": "L_tradeoff_objective",
+      "input": "For San Francisco, prioritize seafood over attractions if choices conflict.",
+      "why_llm_required": "The cross-category priority cannot be represented by the deterministic preference parser.",
+      "functional_coverage_reasons": ["TRADEOFF_LANGUAGE"], "functional_coverage_reason": "TRADEOFF_LANGUAGE",
+      "gold_target": {"constraints": [], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": ["TRADEOFF"]}
+    },
+    {
+      "case_id": "SEM200-156", "selection_category": "negation_exclusion", "source_category": "K_negation_exclusion",
+      "input": "Boston is fine, but do not include zoos.",
+      "why_llm_required": "The exclusion must not be inverted into a positive activity preference.",
+      "functional_coverage_reasons": ["UNREPRESENTED_NEGATION"], "functional_coverage_reason": "UNREPRESENTED_NEGATION",
+      "gold_target": {"constraints": [], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": ["EXCLUSION"]}
+    },
+    {
+      "case_id": "SEM200-158", "selection_category": "negation_exclusion", "source_category": "K_negation_exclusion",
+      "input": "No luxury hotels in Miami.",
+      "why_llm_required": "Negative hotel semantics are not representable as the existing positive preference type.",
+      "functional_coverage_reasons": ["UNREPRESENTED_NEGATION"], "functional_coverage_reason": "UNREPRESENTED_NEGATION",
+      "gold_target": {"constraints": [], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": ["EXCLUSION"]}
+    },
+    {
+      "case_id": "SEM200-163", "selection_category": "negation_exclusion", "source_category": "K_negation_exclusion",
+      "input": "Don't schedule a casino in Las Vegas.",
+      "why_llm_required": "The negated activity must remain an exclusion and cannot safely become a positive preference.",
+      "functional_coverage_reasons": ["UNREPRESENTED_NEGATION"], "functional_coverage_reason": "UNREPRESENTED_NEGATION",
+      "gold_target": {"constraints": [], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": ["EXCLUSION"]}
+    },
+    {
+      "case_id": "SEM200-081", "selection_category": "correction_unresolved", "source_category": "E_same_scope_correction",
+      "input": "Hotel spending cannot exceed $580 total. Actually, $530.",
+      "why_llm_required": "The fragmentary correction must replace the earlier amount while preserving hotel-total scope.",
+      "functional_coverage_reasons": ["CORRECTION_TARGET_UNRESOLVED"], "functional_coverage_reason": "CORRECTION_TARGET_UNRESOLVED",
+      "gold_target": {"constraints": [{"scope": "HOTEL_TOTAL", "value": 530.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "SEM200-093", "selection_category": "correction_unresolved", "source_category": "F_mixed_scope_correction",
+      "input": "Trip ceiling $1,800 and lodging ceiling $750 total; sorry, make the trip $1,600.",
+      "why_llm_required": "The correction target must update only TOTAL_TRIP while retaining HOTEL_TOTAL.",
+      "functional_coverage_reasons": ["CORRECTION_TARGET_UNRESOLVED"], "functional_coverage_reason": "CORRECTION_TARGET_UNRESOLVED",
+      "gold_target": {"constraints": [{"scope": "TOTAL_TRIP", "value": 1600.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}, {"scope": "HOTEL_TOTAL", "value": 750.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "SEM200-095", "selection_category": "correction_unresolved", "source_category": "F_mixed_scope_correction",
+      "input": "The total is capped at $1,350. Hotel total is capped at $500. Change total to $1,200 only.",
+      "why_llm_required": "The final correction must bind to the trip total and leave the hotel cap unchanged.",
+      "functional_coverage_reasons": ["CORRECTION_TARGET_UNRESOLVED"], "functional_coverage_reason": "CORRECTION_TARGET_UNRESOLVED",
+      "gold_target": {"constraints": [{"scope": "TOTAL_TRIP", "value": 1200.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}, {"scope": "HOTEL_TOTAL", "value": 500.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "SEM200-186", "selection_category": "noisy_imperfect_english", "source_category": "N_noisy_english",
+      "input": "hotel money should not more then 470 total in Boston",
+      "why_llm_required": "Misspelled comparative language prevents deterministic recovery of a hard hotel-total ceiling.",
+      "functional_coverage_reasons": ["MONETARY_SEMANTIC_GAP"], "functional_coverage_reason": "MONETARY_SEMANTIC_GAP",
+      "gold_target": {"constraints": [{"scope": "HOTEL_TOTAL", "value": 470.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "SEM200-189", "selection_category": "noisy_imperfect_english", "source_category": "N_noisy_english",
+      "input": "seattle trip budgt under 1500 and hotel 600 total",
+      "why_llm_required": "Noisy multi-money phrasing requires separating trip-total and hotel-total scopes.",
+      "functional_coverage_reasons": ["MONETARY_SEMANTIC_GAP"], "functional_coverage_reason": "MONETARY_SEMANTIC_GAP",
+      "gold_target": {"constraints": [{"scope": "TOTAL_TRIP", "value": 1500.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}, {"scope": "HOTEL_TOTAL", "value": 600.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "SEM200-192", "selection_category": "noisy_imperfect_english", "source_category": "N_noisy_english",
+      "input": "nyc hotel money cant above 780 total and trip 1900 max",
+      "why_llm_required": "Malformed negation and two amounts require correct hotel/trip scope alignment.",
+      "functional_coverage_reasons": ["MONETARY_SEMANTIC_GAP"], "functional_coverage_reason": "MONETARY_SEMANTIC_GAP",
+      "gold_target": {"constraints": [{"scope": "TOTAL_TRIP", "value": 1900.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}, {"scope": "HOTEL_TOTAL", "value": 780.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "SEM200-194", "selection_category": "noisy_imperfect_english", "source_category": "N_noisy_english",
+      "input": "wash dc accomodation total under 620, all trip under 1350",
+      "why_llm_required": "Misspelled lodging language and paired amounts require grounded multi-scope extraction.",
+      "functional_coverage_reasons": ["MONETARY_SEMANTIC_GAP"], "functional_coverage_reason": "MONETARY_SEMANTIC_GAP",
+      "gold_target": {"constraints": [{"scope": "TOTAL_TRIP", "value": 1350.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}, {"scope": "HOTEL_TOTAL", "value": 620.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "SEM200-149", "selection_category": "complex_preference_requirement", "source_category": "J_preferences",
+      "input": "In Seattle I want seafood, coffee shops, and art museums.",
+      "why_llm_required": "The compositional request spans two food preferences and an activity preference.",
+      "functional_coverage_reasons": ["UNRESOLVED_REQUIREMENT_CLAUSE"], "functional_coverage_reason": "UNRESOLVED_REQUIREMENT_CLAUSE",
+      "gold_target": {"constraints": [], "preferences": [{"category": "FOOD", "value": "seafood"}, {"category": "FOOD", "value": "coffee shops"}, {"category": "ACTIVITY", "value": "art museums"}], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "SEM200-150", "selection_category": "complex_preference_requirement", "source_category": "J_preferences",
+      "input": "Denver: downtown hotel, public transit, and museums.",
+      "why_llm_required": "The fragment spans hotel, transport, and activity preference categories.",
+      "functional_coverage_reasons": ["UNRESOLVED_REQUIREMENT_CLAUSE"], "functional_coverage_reason": "UNRESOLVED_REQUIREMENT_CLAUSE",
+      "gold_target": {"constraints": [], "preferences": [{"category": "HOTEL", "value": "downtown hotel"}, {"category": "TRANSPORT", "value": "public transit"}, {"category": "ACTIVITY", "value": "museums"}], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "SEM200-154", "selection_category": "complex_preference_requirement", "source_category": "J_preferences",
+      "input": "Washington DC, please include museums, seafood, and a downtown hotel.",
+      "why_llm_required": "The request composes activity, food, and hotel preferences in one clause.",
+      "functional_coverage_reasons": ["UNRESOLVED_REQUIREMENT_CLAUSE"], "functional_coverage_reason": "UNRESOLVED_REQUIREMENT_CLAUSE",
+      "gold_target": {"constraints": [], "preferences": [{"category": "ACTIVITY", "value": "museums"}, {"category": "FOOD", "value": "seafood"}, {"category": "HOTEL", "value": "downtown hotel"}], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "SEM200-199", "selection_category": "complex_preference_requirement", "source_category": "O_adversarial_boundary",
+      "input": "Seattle hotel around $600 total, but the whole trip cannot exceed $1,500.",
+      "why_llm_required": "This is the high-risk mixed soft hotel amount plus hard total-trip cap boundary.",
+      "functional_coverage_reasons": ["UNRESOLVED_REQUIREMENT_CLAUSE"], "functional_coverage_reason": "UNRESOLVED_REQUIREMENT_CLAUSE",
+      "gold_target": {"constraints": [{"scope": "TOTAL_TRIP", "value": 1500.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [{"category": "HOTEL", "value": "around usd 600"}], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": ["HARD_SOFT_BOUNDARY"]}
+    }
+  ],
+  "local_control_groups": [
+    {
+      "source": "hybrid_semantics_v1.json",
+      "case_ids": ["HYBRID-005"],
+      "purpose": "Columbus trip-budget plus hotel-budget deterministic control"
+    },
+    {
+      "source": "hybrid_semantics_200_v1.json",
+      "case_ids": ["SEM200-021", "SEM200-041", "SEM200-082"],
+      "purpose": "Simple total, simple hotel-total, and already-resolved correction controls"
+    },
+    {
+      "source": "hybrid_semantics_200_v1.json",
+      "case_ids": ["SEM200-131", "SEM200-132", "SEM200-133", "SEM200-134"],
+      "purpose": "Zero-call unsupported-hard shadow controls for FOOD_TOTAL, TRANSPORT_TOTAL, ATTRACTIONS_TOTAL, and HOTEL_PER_NIGHT"
+    }
+  ]
+}

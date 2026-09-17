@@ -14,6 +14,7 @@ const searchInputs = computed(() => {
 })
 const budgetInput = computed(() => props.tool.executed && props.tool.runtime_arguments && 'items' in props.tool.runtime_arguments ? props.tool.runtime_arguments : null)
 const budgetResult = computed(() => props.tool.data && !Array.isArray(props.tool.data) ? props.tool.data : null)
+const hasUnsetPriceCeiling = computed(() => searchInputs.value.some(input => input.value.max_price == null))
 </script>
 <template>
   <article :class="['tool-card', `tool-${tool.status.toLowerCase()}`]" :aria-label="toolNames[tool.tool_name]">
@@ -25,10 +26,11 @@ const budgetResult = computed(() => props.tool.data && !Array.isArray(props.tool
         <h5>{{ input.label }}</h5>
         <dl>
           <div><dt>Destination</dt><dd>{{ input.value.destination }}</dd></div>
-          <div><dt>Max price</dt><dd>{{ formatMoney(input.value.max_price) }}</dd></div>
+          <div><dt>Search price ceiling</dt><dd>{{ input.value.max_price == null ? 'Not set' : formatMoney(input.value.max_price) }}</dd></div>
           <div><dt>Preferences</dt><dd>{{ input.value.preferences?.length ? input.value.preferences.join(', ') : 'None supplied' }}</dd></div>
         </dl>
       </section>
+      <p v-if="hasUnsetPriceCeiling" class="muted">Overall trip budget is enforced during itinerary budgeting and validation. Candidate prices are still compared during planning.</p>
       <p v-if="!searchInputs.length" class="muted">No input details reported.</p>
       <p v-if="!tool.executed" class="muted">Not executed — no runtime inputs.</p>
       <p v-else-if="!tool.runtime_arguments" class="muted">No runtime inputs reported.</p>

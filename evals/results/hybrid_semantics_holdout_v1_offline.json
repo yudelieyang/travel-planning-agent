@@ -1,0 +1,1122 @@
+{
+  "dataset_version": "hybrid_semantics_holdout_v1",
+  "mode": "offline",
+  "model": null,
+  "prompt_version": null,
+  "case_count": 16,
+  "records": [
+    {
+      "case_id": "HOLDOUT-001",
+      "category": "hard_total",
+      "input": "Keep the whole trip below $850.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 850.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 850.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 850.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HOLDOUT-002",
+      "category": "hard_total",
+      "input": "My budget is $1,100 for the entire trip.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1100.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1100.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1100.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HOLDOUT-003",
+      "category": "soft_total",
+      "input": "Roughly $900 total is fine.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HOLDOUT-004",
+      "category": "hotel_total",
+      "input": "No more than $420 total for lodging.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 420.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 420.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 420.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HOLDOUT-005",
+      "category": "ambiguous_hotel",
+      "input": "Lodging budget is $350.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "evidence": [
+          "Lodging budget is $350"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "requires_clarification": true
+      }
+    },
+    {
+      "case_id": "HOLDOUT-006",
+      "category": "correction",
+      "input": "My total budget is $1400. Sorry, make that no more than $1100.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1100.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1100.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1100.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HOLDOUT-007",
+      "category": "multi_scope",
+      "input": "The trip must stay below $1200, and the hotel must stay below $500 total.",
+      "passed": false,
+      "failure_categories": [
+        "PARSER_MISS"
+      ],
+      "expected": {
+        "needs_llm": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1200.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HOLDOUT-008",
+      "category": "unsupported_scope",
+      "input": "Flight spending must stay below $180.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNSUPPORTED_HARD_REQUIREMENT"
+        ],
+        "evidence": [
+          "Flight spending must stay below $180"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "requires_clarification": true
+      }
+    },
+    {
+      "case_id": "HOLDOUT-009",
+      "category": "unsupported_scope",
+      "input": "Restaurant costs should stay under $240.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": true,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ]
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNSUPPORTED_HARD_REQUIREMENT"
+        ],
+        "evidence": [
+          "Restaurant costs should stay under $240",
+          "Unresolved hard monetary scope"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ],
+        "requires_clarification": true
+      }
+    },
+    {
+      "case_id": "HOLDOUT-010",
+      "category": "false_money",
+      "input": "Find a 4-star hotel and visit 3 museums at 9 AM.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HOLDOUT-011",
+      "category": "preferences",
+      "input": "I want to visit parks and eat seafood in Boston.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "destination": "Boston",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "parks"
+          }
+        ],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "parks"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": "Boston",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "parks"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HOLDOUT-012",
+      "category": "noisy_hard_hotel",
+      "input": "hotel budget should not be more then $450 total",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 450.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 450.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 450.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HOLDOUT-013",
+      "category": "soft_hotel",
+      "input": "I'd like lodging around $300 if possible.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "around usd 300"
+          }
+        ],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "around usd 300"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "around usd 300"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HOLDOUT-014",
+      "category": "hard_total",
+      "input": "Cap the trip at $950.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 950.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 950.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 950.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    },
+    {
+      "case_id": "HOLDOUT-015",
+      "category": "correction_scopes",
+      "input": "Hotel maximum is $600 total. Actually, make it $450.",
+      "passed": false,
+      "failure_categories": [
+        "COVERAGE_FALSE_POSITIVE",
+        "PARSER_MISS",
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 450.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 600.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "evidence": [
+          "Actually, make it $450"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 600.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "requires_clarification": true
+      }
+    },
+    {
+      "case_id": "HOLDOUT-016",
+      "category": "hybrid_tradeoff",
+      "input": "I can stretch the hotel budget if the location is excellent, but the trip should stay under $1000.",
+      "passed": false,
+      "failure_categories": [
+        "PARSER_MISS"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1000.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": []
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "TRADEOFF_LANGUAGE"
+        ],
+        "evidence": [
+          "Trade-off language with multiple monetary statements"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "requires_clarification": false
+      }
+    }
+  ],
+  "metrics": {
+    "coverage_gate": {
+      "TP": 4,
+      "TN": 11,
+      "FP": 1,
+      "FN": 0,
+      "precision": 0.8,
+      "recall": 1.0,
+      "f1": 0.8888888888888888,
+      "false_positive_rate": 0.08333333333333333
+    },
+    "semantic_field_accuracy": {
+      "destination": 1.0,
+      "duration_days": 1.0,
+      "travelers": 1.0,
+      "constraints": 0.8125,
+      "preferences": 1.0,
+      "ambiguity_levels": 0.9375
+    },
+    "hard_constraint_safety": {
+      "silent_hard_constraint_corruption": 0,
+      "hard_constraint_false_rejection": 0,
+      "hard_constraint_false_acceptance": 0,
+      "unsupported_hard_constraints_silently_dropped": 0
+    },
+    "merge": {
+      "attempted": 0,
+      "accepted_augmentations": 0,
+      "hallucination_rejections": 0,
+      "conflict_detections": 0,
+      "accepted_augmentation_precision": 1.0
+    },
+    "failure_counts": {
+      "PARSER_MISS": 3,
+      "COVERAGE_FALSE_POSITIVE": 1,
+      "AMBIGUITY_ERROR": 1
+    },
+    "case_pass_rate": 0.8125
+  }
+}

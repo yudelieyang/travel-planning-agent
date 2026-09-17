@@ -1,0 +1,13 @@
+{
+  "version": "semantic_coverage_v1",
+  "cases": [
+    {"id": "simple", "query": "Plan a 2-day trip to Boston under $800.", "deterministic_complete": true, "needs_llm": false, "reasons": [], "expected_extractor_behavior": "not_invoked"},
+    {"id": "multi_scope", "query": "Plan a 3-day trip to Columbus for 1 traveler under $900 total. I like zoos and fried chicken. Hotel spending must not exceed $400.", "deterministic_complete": true, "needs_llm": false, "reasons": [], "expected_extractor_behavior": "not_invoked"},
+    {"id": "correction", "query": "My budget is $1000. Actually, keep the entire trip under $700.", "deterministic_complete": true, "needs_llm": false, "reasons": [], "expected_extractor_behavior": "not_invoked"},
+    {"id": "ambiguous_hotel", "query": "I want a $200 hotel.", "deterministic_complete": false, "needs_llm": true, "reasons": ["AMBIGUOUS_SCOPE"], "expected_extractor_behavior": "requested"},
+    {"id": "unsupported_food", "query": "My total budget is $1500. Spend no more than $300 on food.", "deterministic_complete": true, "needs_llm": false, "reasons": [], "expected_extractor_behavior": "not_invoked"},
+    {"id": "approximate", "query": "Plan a 2-day trip to Boston. I can spend about $800 total.", "deterministic_complete": true, "needs_llm": false, "reasons": [], "expected_extractor_behavior": "not_invoked"},
+    {"id": "tradeoff", "query": "Keep the whole trip reasonably cheap, but I'm okay spending more on the hotel if it's near downtown. Try not to go much over $900 overall, and I'd rather spend less than about $400 on lodging.", "deterministic_complete": false, "needs_llm": true, "reasons": ["TRADEOFF_LANGUAGE"], "expected_extractor_behavior": "requested"},
+    {"id": "conjunction_mixed", "query": "Plan 3 days in Columbus. Budget under $900 total. Hotel under $400 total. I like zoos and fried chicken.", "deterministic_complete": true, "needs_llm": false, "reasons": [], "expected_extractor_behavior": "not_invoked"}
+  ]
+}

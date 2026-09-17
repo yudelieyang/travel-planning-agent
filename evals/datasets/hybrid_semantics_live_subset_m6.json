@@ -1,0 +1,91 @@
+{
+  "version": "hybrid_semantics_live_subset_m6",
+  "model": "gpt-5.6-luna",
+  "prompt_version": "semantic_extractor_v3",
+  "selection_note": "Frozen before execution: 6 clear corrections, 2 genuine ambiguities, 1 hard-to-soft correction, 1 soft-to-hard correction, 1 noisy clear correction, and 1 multi-scope correction; no normalized overlap with M5 or earlier datasets.",
+  "live_category_mix": {"clear_correction": 6, "ambiguous_correction": 2, "hard_to_soft": 1, "soft_to_hard": 1, "noisy_clear_correction": 1, "multi_scope_correction": 1},
+  "sources": ["hybrid_semantics_m6_correction_holdout_v1.json"],
+  "case_ids": ["M6-001", "M6-002", "M6-003", "M6-004", "M6-005", "M6-006", "M6-007", "M6-008", "M6-009", "M6-010", "M6-011", "M6-012"],
+  "cases": [
+    {
+      "case_id": "M6-001", "selection_category": "clear_correction", "source_category": "clear_correction",
+      "input": "Hotel spending for the whole trip must stay under $575. Sorry, revise lodging to $525.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE", "CORRECTION_TARGET_UNRESOLVED"],
+      "correction_target": ["HOTEL_TOTAL", 525.0, "HARD"],
+      "gold_target": {"constraints": [{"scope": "HOTEL_TOTAL", "value": 525.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M6-002", "selection_category": "clear_correction", "source_category": "clear_correction",
+      "input": "Keep the entire trip under $1,850. Actually, the trip cap should be $1,700.",
+      "functional_coverage_reasons": ["MONETARY_SEMANTIC_GAP", "CORRECTION_TARGET_UNRESOLVED"],
+      "correction_target": ["TOTAL_TRIP", 1700.0, "HARD"],
+      "gold_target": {"constraints": [{"scope": "TOTAL_TRIP", "value": 1700.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M6-003", "selection_category": "clear_correction", "source_category": "clear_correction",
+      "input": "Hotel total must not exceed $680. Please change it to $620.",
+      "functional_coverage_reasons": ["CORRECTION_TARGET_UNRESOLVED"],
+      "correction_target": ["HOTEL_TOTAL", 620.0, "HARD"],
+      "gold_target": {"constraints": [{"scope": "HOTEL_TOTAL", "value": 620.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M6-004", "selection_category": "clear_correction", "source_category": "clear_correction",
+      "input": "Trip maximum is $1,500. On second thought, no, use $1,380.",
+      "functional_coverage_reasons": ["CORRECTION_TARGET_UNRESOLVED"],
+      "correction_target": ["TOTAL_TRIP", 1380.0, "HARD"],
+      "gold_target": {"constraints": [{"scope": "TOTAL_TRIP", "value": 1380.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M6-005", "selection_category": "clear_correction", "source_category": "clear_correction",
+      "input": "All lodging combined must stay below $760. Correction: sorry, I meant $710 for the hotel total.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE", "CORRECTION_TARGET_UNRESOLVED"],
+      "correction_target": ["HOTEL_TOTAL", 710.0, "HARD"],
+      "gold_target": {"constraints": [{"scope": "HOTEL_TOTAL", "value": 710.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M6-006", "selection_category": "clear_correction", "source_category": "clear_correction",
+      "input": "The whole trip ceiling is $2,100. For the revision, make the total $1,950.",
+      "functional_coverage_reasons": ["CORRECTION_TARGET_UNRESOLVED"],
+      "correction_target": ["TOTAL_TRIP", 1950.0, "HARD"],
+      "gold_target": {"constraints": [{"scope": "TOTAL_TRIP", "value": 1950.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M6-007", "selection_category": "ambiguous_correction", "source_category": "ambiguous_correction",
+      "input": "Trip max $1,400. Hotel total max $600. After those, actually set it at $950.",
+      "functional_coverage_reasons": ["CORRECTION_TARGET_UNRESOLVED"],
+      "gold_target": {"constraints": [], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M6-008", "selection_category": "ambiguous_correction", "source_category": "ambiguous_correction",
+      "input": "Hotel total must stay below $500. Actually use either $440 or $460 depending on rooms.",
+      "functional_coverage_reasons": ["CORRECTION_TARGET_UNRESOLVED"],
+      "gold_target": {"constraints": [], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M6-009", "selection_category": "hard_to_soft", "source_category": "hard_to_soft",
+      "input": "Hotel total must stay under $640. Actually, around $560 would be nice.",
+      "functional_coverage_reasons": ["CORRECTION_TARGET_UNRESOLVED"],
+      "gold_target": {"constraints": [], "preferences": [{"category": "HOTEL", "value": "around usd 560"}], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M6-010", "selection_category": "soft_to_hard", "source_category": "soft_to_hard",
+      "input": "I'd prefer hotel around $520. Actually it must stay below $450 total for lodging.",
+      "functional_coverage_reasons": ["CORRECTION_TARGET_UNRESOLVED"],
+      "gold_target": {"constraints": [{"scope": "HOTEL_TOTAL", "value": 450.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M6-011", "selection_category": "noisy_clear_correction", "source_category": "noisy_clear_correction",
+      "input": "lodging all-trip max usd 830... sry actually make teh hotel total usd 780",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE", "CORRECTION_TARGET_UNRESOLVED"],
+      "correction_target": ["HOTEL_TOTAL", 780.0, "HARD"],
+      "gold_target": {"constraints": [{"scope": "HOTEL_TOTAL", "value": 780.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M6-012", "selection_category": "multi_scope_correction", "source_category": "multi_scope_correction",
+      "input": "Whole trip must stay under $1,600; hotel total under $620. For the hotel revision, make hotel total $570.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE", "CORRECTION_TARGET_UNRESOLVED"],
+      "correction_target": ["HOTEL_TOTAL", 570.0, "HARD"],
+      "gold_target": {"constraints": [{"scope": "TOTAL_TRIP", "value": 1600.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}, {"scope": "HOTEL_TOTAL", "value": 570.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    }
+  ]
+}

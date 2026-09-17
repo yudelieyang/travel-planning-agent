@@ -1,0 +1,95 @@
+{
+  "endpoint": "https://overpass.kumi.systems/api/interpreter",
+  "acquired_at": "2026-09-16T20:49:27.691559Z",
+  "osm_base_timestamp": "2026-07-24T11:04:51Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/1216769",
+    "name": "Miami",
+    "admin_level": "8"
+  },
+  "query": "[out:json][timeout:180];rel(1216769)->.boundary;area(3601216769)->.searchArea;(rel.boundary;nwr(area.searchArea)[\"name\"][\"tourism\"=\"hotel\"][\"addr:housenumber\"][\"addr:street\"];);out center tags qt;",
+  "raw_response_sha256": "d6dad17da5cfda01d93f5f5f8f91d1a5e9af7c3d68d0437f7b97d77c19872508",
+  "raw_response_bytes": 43128,
+  "returned_element_count": 68,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 468023519,
+      "center": {
+        "lat": 25.7915535,
+        "lon": -80.1862338
+      },
+      "tags": {
+        "addr:city": "Miami",
+        "addr:housenumber": "1717",
+        "addr:postcode": "33132-1180",
+        "addr:state": "FL",
+        "addr:street": "North Bayshore Drive",
+        "branch": "Grand Hotel Biscayne Bay",
+        "brand": "DoubleTree",
+        "brand:wikidata": "Q2504643",
+        "building:part": "yes",
+        "name": "Doubletree by Hilton Grand Hotel Biscayne Bay",
+        "official_name": "DoubleTree by Hilton",
+        "ref": "MIABSDT",
+        "source": "Bing",
+        "tourism": "hotel",
+        "website": "https://www.hilton.com/en/hotels/miabsdt-doubletree-grand-hotel-biscayne-bay/",
+        "wikidata": "Q3987343"
+      }
+    },
+    {
+      "type": "way",
+      "id": 467892170,
+      "center": {
+        "lat": 25.7736361,
+        "lon": -80.1914075
+      },
+      "tags": {
+        "addr:city": "Miami",
+        "addr:housenumber": "121",
+        "addr:postcode": "33131",
+        "addr:state": "FL",
+        "addr:street": "Southeast 1st Street",
+        "brand": "Eurostars",
+        "building": "yes",
+        "email": "reservations@eurostarslangford.com",
+        "name": "Eurostars Langford",
+        "not:brand:wikidata": "Q8846494",
+        "phone": "+1 305-420-2200",
+        "ref:miaaddr": "70157",
+        "tourism": "hotel",
+        "website": "https://www.eurostarshotels.com/eurostars-langford.html",
+        "wikidata": "Q5123322"
+      }
+    },
+    {
+      "type": "way",
+      "id": 300241285,
+      "center": {
+        "lat": 25.7589918,
+        "lon": -80.1920516
+      },
+      "tags": {
+        "addr:city": "Miami",
+        "addr:housenumber": "1435",
+        "addr:postcode": "33131",
+        "addr:state": "FL",
+        "addr:street": "Brickell Avenue",
+        "brand": "Four Seasons",
+        "brand:wikidata": "Q1424786",
+        "building:part": "yes",
+        "height": "57",
+        "name": "Four Seasons Hotel Miami",
+        "phone": "+13053583535",
+        "tourism": "hotel",
+        "website": "https://www.fourseasons.com/miami/",
+        "wikidata": "Q1440000",
+        "wikipedia": "en:Four Seasons Hotel Miami"
+      }
+    }
+  ]
+}

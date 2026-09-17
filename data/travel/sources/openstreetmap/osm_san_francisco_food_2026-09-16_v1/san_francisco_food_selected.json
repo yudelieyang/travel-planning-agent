@@ -1,0 +1,93 @@
+{
+  "endpoint": "https://overpass.private.coffee/api/interpreter",
+  "acquired_at": "2026-09-16T21:29:14.446788Z",
+  "osm_base_timestamp": "2026-06-01T08:52:28Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/111968",
+    "name": "San Francisco",
+    "admin_level": "6"
+  },
+  "query": "[out:json][timeout:180];rel(111968)->.boundary;area(3600111968)->.searchArea;(rel.boundary;node(area.searchArea)[\"name\"][\"amenity\"=\"restaurant\"][\"addr:city\"=\"San Francisco\"][\"addr:housenumber\"][\"addr:street\"];way(area.searchArea)[\"name\"][\"amenity\"=\"restaurant\"][\"addr:city\"=\"San Francisco\"][\"addr:housenumber\"][\"addr:street\"];);out center tags qt;",
+  "raw_response_sha256": "a61ebf170a135b47fbf9fc53ad06211e0e3bfccc621dfb9739fdaffd04c2a996",
+  "raw_response_bytes": 541742,
+  "returned_element_count": 985,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "node",
+      "id": 3380825006,
+      "lat": 37.7999597,
+      "lon": -122.442104,
+      "tags": {
+        "addr:city": "San Francisco",
+        "addr:housenumber": "2355",
+        "addr:postcode": "94123",
+        "addr:state": "CA",
+        "addr:street": "Chestnut Street",
+        "amenity": "restaurant",
+        "cuisine": "italian",
+        "name": "A16",
+        "opening_hours": "Mo-Th 17:00-21:00; Sa 12:00-21:30; Su 12:00-21:00",
+        "phone": "+1 415-771-2216",
+        "website": "https://www.a16pizza.com/",
+        "wikidata": "Q19863966"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2653235898,
+      "lat": 37.806886,
+      "lon": -122.4322073,
+      "tags": {
+        "addr:city": "San Francisco",
+        "addr:housenumber": "2",
+        "addr:postcode": "94123",
+        "addr:state": "CA",
+        "addr:street": "Marina Boulevard",
+        "addr:unit": "Building A",
+        "amenity": "restaurant",
+        "contact:facebook": "greensrestaurant",
+        "contact:instagram": "greensrestaurant",
+        "contact:twitter": "greens_sf",
+        "diet:vegan": "yes",
+        "diet:vegetarian": "only",
+        "drink:beer": "yes",
+        "drink:wine": "yes",
+        "email": "info@greensrestaurant.com",
+        "indoor_seating": "yes",
+        "name": "Greens Restaurant",
+        "opening_hours": "Tu-Th 11:30-14:30, 17:00-21:00; Fr 11:30-14:30, 17:00-21:00; Sa, Su 10:30-14:30, 17:00-21:00; Mo off",
+        "opening_hours:url": "https://greensrestaurant.com/",
+        "outdoor_seating": "yes",
+        "phone": "+1 415 7716222",
+        "reservation": "yes",
+        "website": "https://greensrestaurant.com/",
+        "website:menu": "https://greensrestaurant.com/menus/",
+        "wikidata": "Q5364825",
+        "wikipedia": "en:Greens Restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 317081652,
+      "lat": 37.7854639,
+      "lon": -122.4071525,
+      "tags": {
+        "addr:city": "San Francisco",
+        "addr:housenumber": "63",
+        "addr:postcode": "94102",
+        "addr:state": "CA",
+        "addr:street": "Ellis Street",
+        "amenity": "restaurant",
+        "cuisine": "steak;seafood",
+        "name": "John's Grill Live Jazz",
+        "outdoor_seating": "yes",
+        "phone": "+1 415-986-0069",
+        "website": "https://www.johnsgrill.com/",
+        "wikidata": "Q6217290"
+      }
+    }
+  ]
+}

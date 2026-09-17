@@ -21,7 +21,7 @@ for (const scenario of ['nyc', 'boston', 'tight']) {
   test(`${scenario}: real completed history, accepted planner and successful tools`, async () => {
     const html = await render('ResultsShell', { response: plans[scenario] })
     assert.equal((html.match(/class="stage completed"/g) ?? []).length, 5)
-    assert.equal((html.match(/class="stage not_reached"/g) ?? []).length, 1)
+    assert.equal((html.match(/class="stage /g) ?? []).length, 5)
     assert.equal((html.match(/tool-card tool-success/g) ?? []).length, 5)
     assert.match(html, /ACCEPTED/)
     assert.match(html, /PASSED/)
@@ -32,7 +32,7 @@ for (const scenario of ['nyc', 'boston', 'tight']) {
 }
 test('clarification retains unreached stages and no tool cards', async () => {
   const html = await render('ResultsShell', { response: plans.clarification })
-  assert.equal((html.match(/class="stage not_reached"/g) ?? []).length, 4)
+  assert.equal((html.match(/class="stage not_reached"/g) ?? []).length, 2)
   assert.equal((html.match(/MISSING — required/g) ?? []).length, 2)
   assert.match(html, /NOT INVOKED/)
   assert.match(html, /execution stopped at clarification/)
@@ -44,7 +44,7 @@ test('Atlantis preserves failed tools, skipped budget and completed finalization
   const html = await render('ResultsShell', { response: plans.atlantis })
   assert.equal((html.match(/tool-card tool-no_results/g) ?? []).length, 4)
   assert.match(html, /class="stage failed"/)
-  assert.match(text(html), /Step 5 Finalization COMPLETED/)
+  assert.match(text(html), /Stage 5 Repair \/ final result FAILED/)
   assert.match(html, /Prior execution errors/)
   const budget = await render('ToolCallCard', { tool: plans.atlantis.execution.tools.find(t => t.tool_name === 'calculate_budget') })
   assert.match(text(budget), /Selected: Yes · Executed: No/)
@@ -62,10 +62,10 @@ test('requirements distinguish null, empty arrays, missing fields, zero and cons
   const html = await render('RequirementsPanel', { requirements: { destination: null, origin: null, budget_amount: 0, currency: 'USD', interests: [], constraints: ['wheelchair access'] }, missingFields: ['destination', 'duration'] })
   assert.equal((html.match(/MISSING — required/g) ?? []).length, 2)
   assert.match(html, /Not supplied/)
-  assert.match(html, /None supplied/)
+  assert.match(html, /None extracted/)
   assert.match(html, /USD 0.00/)
   assert.match(html, /wheelchair access/)
-  assert.match(html, /not all are enforced/)
+  assert.match(html, /Legacy notes/)
   assert.equal(requirementState('duration_days', null, ['duration']), 'missing')
   assert.equal(requirementState('interests', [], []), 'empty')
   assert.equal(requirementState('budget_amount', 0, []), 'present')
@@ -82,10 +82,160 @@ test('search inputs are deduplicated only when equivalent and include result quo
   assert.doesNotMatch(different, /Approved requested \/ runtime inputs/)
   assert.equal(sameSearchInputs({ destination: 'Boston' }, { preferences: [], max_price: null, destination: 'Boston' }), true)
 })
+test('requirements show canonical hard constraints separately from legacy notes', async () => {
+  const html = await render('RequirementsPanel', {
+    requirements: {
+      requirements_v2: { constraints: [
+        { kind: 'BUDGET', scope: 'TOTAL_TRIP', operator: 'LTE', value: 900, currency: 'USD', strength: 'HARD' },
+        { kind: 'BUDGET', scope: 'HOTEL_TOTAL', operator: 'LTE', value: 400, currency: 'USD', strength: 'HARD' },
+      ] },
+    },
+    missingFields: [],
+  })
+  assert.match(html, /Hard constraints/)
+  assert.match(html, /TOTAL TRIP ≤ USD 900\.00/)
+  assert.match(html, /HOTEL TOTAL ≤ USD 400\.00/)
+})
+test('requirements expose semantic mode, preferences and ambiguity quarantine', async () => {
+  const html = await render('RequirementsPanel', {
+    requirements: {
+      destination: 'Boston', duration_days: 3,
+      requirements_v2: {
+        constraints: [],
+        preferences: [{ category: 'HOTEL', value: 'downtown' }],
+        objectives: ['maximize_budget_utilization'],
+        ambiguities: [{ level: 'BLOCKING', source_text: '$240 hotel', reason: 'Hotel amount has ambiguous scope.' }],
+      },
+    },
+    missingFields: [],
+    execution: { semantic: { mode: 'hybrid', coverage_triggered: true, coverage_reasons: ['AMBIGUOUS_SCOPE'], llm_invoked: true, extraction_status: 'proposed', final_source: 'hybrid', requires_clarification: true, extractor_model: 'test-model', extractor_prompt_version: 'semantic_extractor_v3' } },
+  })
+  for (const value of ['HYBRID', 'Coverage gate:', 'AMBIGUOUS SCOPE', 'downtown', 'MAXIMIZE BUDGET UTILIZATION', 'BLOCKING', 'clarification required', 'semantic_extractor_v3']) assert.ok(text(html).includes(value), value)
+})
+test('tool price semantics distinguish an unset search ceiling from the trip budget', async () => {
+  const tool = structuredClone(plans.boston.execution.tools[0])
+  const html = await render('ToolCallCard', { tool })
+  assert.match(text(html), /Search price ceiling Not set/)
+  assert.match(html, /Overall trip budget is enforced during itinerary budgeting and validation/)
+  assert.match(html, /Candidate prices are still compared during planning/)
+  assert.doesNotMatch(text(html), /Max price Not supplied/)
+  assert.ok(html.includes(formatMoney(tool.data[0].price, tool.data[0].currency)))
+
+  tool.requested_arguments.max_price = 50
+  tool.runtime_arguments.max_price = 50
+  assert.match(text(await render('ToolCallCard', { tool })), /Search price ceiling 50\.00/)
+})
+test('tool section shows a known overall budget without inventing one', async () => {
+  const known = await render('ToolCallsPanel', { tools: plans.boston.execution.tools, requirements: plans.boston.requirements })
+  assert.match(text(known), /Overall trip budget: USD 500\.00 total/)
+  const absent = await render('ToolCallsPanel', { tools: plans.boston.execution.tools, requirements: { ...plans.boston.requirements, budget_amount: null } })
+  assert.doesNotMatch(absent, /Overall trip budget:/)
+})
 test('tool ERROR remains distinct and public error code is readable', async () => {
   const html = await render('ToolCallCard', { tool: { ...plans.boston.execution.tools[0], status: 'ERROR', data: null, error_code: 'tool_execution_failed' } })
   assert.match(html, /tool-card tool-error/)
   assert.match(html, /TOOL EXECUTION FAILED/)
+})
+test('Candidate Explorer distinguishes selected options and preserved alternatives', async () => {
+  const base = {
+    destination: 'Columbus', city: 'Columbus', state: 'OH', category: 'food',
+    price: 14, currency: 'USD', unit: 'per_person_meal', tags: ['fried chicken'],
+    source: 'controlled_mock_fixture', preference_matches: ['fried chicken'], image_url: null,
+  }
+  const groups = [{
+    category: 'food',
+    selected: [{ ...base, id: 'cmh-f1', name: 'Mock Buckeye Fried Chicken', rating: 4.7, review_count: 860 }],
+    alternatives: [{ ...base, id: 'cmh-f2', name: 'Mock North Market Chicken', rating: null, review_count: null }],
+  }]
+  const html = await render('CandidateExplorer', { groups })
+  assert.match(html, /Candidate retrieval and selection/)
+  assert.match(html, /Selected/)
+  assert.match(html, /Alternative/)
+  assert.match(html, /4\.7 · 860 demo reviews/)
+  assert.doesNotMatch(html, /Rating not supplied|0\.0 rating|0 reviews/)
+  assert.match(html, /Selected with explicit preference match: fried chicken/)
+  assert.match(html, /Controlled mock fixture/)
+  assert.doesNotMatch(html, /<img/)
+  assert.match(text(html), /1 selected · 1 alternatives/)
+  assert.match(text(html), /source total before filtering is not exposed/i)
+})
+
+test('Candidate Explorer labels real POIs and synthetic transport at section level', async () => {
+  const snapshot = { category: 'attractions', selected: [{ id: 'bos-a1', destination: 'Boston', category: 'attractions', name: 'Boston Public Garden', price: 12, currency: 'USD', unit: 'per_person_visit', tags: ['parks'], source: 'real_snapshot', provider: 'openstreetmap' }], alternatives: [] }
+  const transport = { category: 'transport', selected: [{ id: 'bos-t1', destination: 'Boston', category: 'transport', name: 'Walking', price: 0, currency: 'USD', unit: 'per_person_day', tags: ['walking'], source: 'controlled_mock_fixture' }], alternatives: [] }
+  const visible = text(await render('CandidateExplorer', { groups: [snapshot, transport] }))
+  assert.match(visible, /Real-world OpenStreetMap snapshot · frozen, not live/)
+  assert.match(visible, /Synthetic planning allowance/)
+})
+
+test('Candidate Explorer separates OSM place facts from planner estimates', async () => {
+  const option = {
+    id: 'bos-a1', destination: 'Boston', city: 'Boston', state: 'MA', category: 'attractions',
+    name: 'Isabella Stewart Gardner Museum', address: '25 Evans Way, Boston, MA 02115',
+    latitude: 42.3382381, longitude: -71.0990448, price: 20, currency: 'USD',
+    unit: 'per_person_visit', tags: ['museums'], source: 'real_snapshot',
+    provider: 'openstreetmap', provider_place_id: 'way/29650851',
+    provider_category_ids: ['tourism=museum'], provider_category_labels: ['Museum'],
+    snapshot_version: 'osm_boston_attractions_2026-09-16_v1',
+    snapshot_fetched_at: '2026-09-16T05:36:07.2890118Z',
+    cost_origin: 'planner_estimate', cost_method: 'legacy_demo_cost_preserved_for_phase_o_migration',
+    cost_version: 'phase_o_v1', rating: null, review_count: null, preference_matches: [],
+  }
+  const html = await render('CandidateExplorer', { groups: [{ category: 'attractions', selected: [option], alternatives: [] }] })
+  const visible = text(html)
+  for (const value of ['Isabella Stewart Gardner Museum', '25 Evans Way, Boston, MA 02115', 'Planner estimate:', 'USD 20.00', 'per traveler / visit', 'OpenStreetMap snapshot', '© OpenStreetMap contributors', 'ODbL']) assert.ok(visible.includes(value), value)
+  assert.doesNotMatch(visible, /Rating not supplied|0\.0 rating|0 reviews|way\/29650851/)
+})
+
+test('Candidate Explorer labels OSM hotel costs per traveler and omits fake reputation data', async () => {
+  const option = {
+    id: 'bos-h1', destination: 'Boston', city: 'Boston', state: 'MA', category: 'hotel',
+    name: 'Boston Harbor Hotel', address: '70 Rowes Wharf, Boston, MA 02110',
+    latitude: 42.3566602, longitude: -71.0503163, price: 100, currency: 'USD',
+    unit: 'per_person_night', tags: ['central', 'budget'], source: 'real_snapshot',
+    provider: 'openstreetmap', provider_place_id: 'node/1325873780',
+    provider_category_ids: ['tourism=hotel'], provider_category_labels: ['Hotel'],
+    snapshot_version: 'osm_boston_hotels_2026-09-16_v1',
+    snapshot_fetched_at: '2026-09-16T06:26:35.9245460Z',
+    cost_origin: 'planner_estimate', cost_method: 'legacy_demo_cost_preserved_for_phase_o_migration',
+    cost_version: 'phase_o_v1', rating: null, review_count: null, preference_matches: [],
+  }
+  const html = await render('CandidateExplorer', { groups: [{ category: 'hotel', selected: [option], alternatives: [] }] })
+  const visible = text(html)
+  for (const value of ['Boston Harbor Hotel', '70 Rowes Wharf, Boston, MA 02110', 'Planner estimate:', 'USD 100.00', 'per traveler / night', 'OpenStreetMap snapshot', '© OpenStreetMap contributors']) assert.ok(visible.includes(value), value)
+  assert.doesNotMatch(visible, /Rating not supplied|0\.0 rating|0 reviews|node\/1325873780|actual room rate/i)
+})
+test('Candidate Explorer separates OSM cuisine from planner food tags and estimates', async () => {
+  const option = {
+    id: 'bos-f1', destination: 'Boston', city: 'Boston', state: 'MA', category: 'food',
+    name: 'Aceituna Grill', address: '267 Newbury Street, Boston, MA 02116',
+    latitude: 42.3495341, longitude: -71.0834556, price: 16, currency: 'USD',
+    unit: 'per_person_meal', tags: ['vegetarian', 'vegan'], source: 'real_snapshot',
+    provider: 'openstreetmap', provider_place_id: 'node/12663666560',
+    provider_category_ids: ['amenity=restaurant', 'cuisine=mediterranean', 'diet:vegetarian=yes', 'diet:vegan=yes'],
+    provider_category_labels: ['Restaurant', 'Cuisine: Mediterranean', 'Vegetarian options', 'Vegan options'],
+    snapshot_version: 'osm_boston_food_2026-09-16_v1',
+    snapshot_fetched_at: '2026-09-16T12:07:21.440541Z',
+    cost_origin: 'planner_estimate', cost_method: 'legacy_demo_cost_preserved_for_phase_o_migration',
+    cost_version: 'phase_o_v1', rating: null, review_count: null, preference_matches: ['vegetarian'],
+  }
+  const html = await render('CandidateExplorer', { groups: [{ category: 'food', selected: [option], alternatives: [] }] })
+  const visible = text(html)
+  for (const value of ['Aceituna Grill', '267 Newbury Street, Boston, MA 02116', 'Cuisine: mediterranean', 'Planner estimate:', 'USD 16.00', 'per traveler / meal', 'Planner preference tags:', 'vegetarian', 'vegan', 'OpenStreetMap snapshot', '© OpenStreetMap contributors']) assert.ok(visible.includes(value), value)
+  assert.doesNotMatch(visible, /Rating not supplied|0\.0 rating|0 reviews|node\/12663666560|actual meal price/i)
+})
+
+test('top-level status and result disclosure distinguish snapshot, estimates and mock data', async () => {
+  const snapshot = structuredClone(plans.boston)
+  for (const tool of snapshot.execution.tools.slice(0, 3)) tool.source = 'snapshot'
+  const header = text(await render('DemoHeader', { execution: snapshot.execution }))
+  for (const value of ['REAL-WORLD SNAPSHOT POIs', 'Frozen OpenStreetMap POIs', 'Planner-estimated costs', 'Synthetic transport']) assert.ok(header.includes(value), value)
+  assert.doesNotMatch(header, /LIVE DATA/)
+  assert.match(text(await render('DemoHeader', { execution: plans.boston.execution })), /CONTROLLED MOCK CANDIDATES/)
+  assert.match(text(await render('DemoHeader', { execution: plans.clarification.execution })), /CANDIDATE DATA NOT USED/)
+  assert.match(text(await render('DemoHeader', { execution: null })), /candidate data mode will be confirmed/i)
+  assert.match(text(await render('ResultsShell', { response: snapshot })), /POIs come from frozen OpenStreetMap snapshots; costs are planner estimates, and transport is a synthetic allowance/)
+  assert.match(text(await render('ResultsShell', { response: plans.boston })), /Controlled candidate data and costs are deterministic demo estimates/)
 })
 test('validation covers every public reason and failed outcome', async () => {
   for (const [reason, label] of [['prior_errors', 'Prior execution errors'], ['not_reached', 'Validation was not reached'], ['missing_artifacts', 'Required artifacts were missing']]) {
@@ -95,11 +245,28 @@ test('validation covers every public reason and failed outcome', async () => {
   }
   assert.match(await render('ValidationPanel', { validation: { performed: true, outcome: 'failed' } }), /FAILED/)
 })
-test('pipeline preserves backend order, sequence and all outcomes', async () => {
+test('validation renders typed violation and bounded repair evidence', async () => {
+  const repair = {
+    attempt: 1, maximum_attempts: 1,
+    trigger: [{ code: 'HARD_BUDGET_EXCEEDED', category: 'budget', expected: 350, actual: 394, excess: 44, message: 'Hard budget exceeded' }],
+    initial_total: 394, final_total: 317, savings: 77, final_outcome: 'passed',
+    changes: [{ category: 'food', before: ['Higher-cost choice'], after: ['Lower-cost choice'] }],
+  }
+  const html = text(await render('ValidationPanel', { validation: { performed: true, outcome: 'passed' }, repair }))
+  for (const value of ['Repair attempt 1 of 1', 'HARD BUDGET EXCEEDED', 'USD 394.00', 'USD 317.00', 'USD 77.00 saved', 'Higher-cost choice → Lower-cost choice', 'no infinite loop']) assert.ok(html.includes(value), value)
+})
+test('repaired final validation is successful in the five-stage summary', async () => {
+  const execution = { ...plans.boston.execution, repair: { final_outcome: 'passed' }, validation: { performed: true, outcome: 'passed' }, stages: [...plans.boston.execution.stages, { name: 'validation', sequence: 6, outcome: 'failed' }] }
+  const html = text(await render('ExecutionPipeline', { execution, status: 'success' }))
+  assert.match(html, /Stage 4 Validation COMPLETED Initial validation failed; repair revalidated successfully/)
+})
+test('pipeline condenses backend history into the five recruiter stages', async () => {
   const stages = [{ name: 'preflight', sequence: 1, outcome: 'clarification' }, { name: 'clarification', sequence: 2, outcome: 'completed' }, { name: 'tools', sequence: 3, outcome: 'failed' }, { name: 'validation', sequence: 4, outcome: 'skipped' }, { name: 'planner', sequence: null, outcome: 'not_reached' }]
-  const html = await render('ExecutionPipeline', { stages })
-  assert.ok(html.indexOf('Step 4') < html.indexOf('>Unreached</span>'))
-  for (const outcome of ['CLARIFICATION', 'COMPLETED', 'FAILED', 'SKIPPED', 'NOT REACHED']) assert.ok(html.includes(outcome))
+  const execution = { ...plans.boston.execution, stages, requirement_status: 'INSUFFICIENT', validation: { performed: false, outcome: 'not_performed' } }
+  const html = await render('ExecutionPipeline', { execution, status: 'needs_clarification' })
+  assert.equal((html.match(/class="stage /g) ?? []).length, 5)
+  for (const label of ['User request', 'Requirements understanding', 'Candidate retrieval / selection', 'Validation', 'Repair / final result']) assert.ok(html.includes(label))
+  for (const outcome of ['CLARIFICATION', 'COMPLETED', 'FAILED', 'SKIPPED']) assert.ok(html.includes(outcome))
 })
 test('diagnostics start collapsed and render only approved public fields', async () => {
   const html = await render('DiagnosticsDrawer', { execution: { ...plans.boston.execution, secret: 'NEVER_RENDER', messages: ['NEVER_RENDER'] } })
@@ -203,7 +370,7 @@ import { presets, findScenario } from '../src/presets.ts'
 import { demoTakeaway } from '../src/utils/demo.ts'
 
 test('Phase E exact scenario identity and selector semantics', async () => {
-  assert.equal(presets.length, 5)
+  assert.equal(presets.length, 6)
   for (const preset of presets) {
     assert.equal(findScenario(preset.query)?.id, preset.id)
     assert.equal(findScenario(preset.query + ' '), null)
@@ -215,6 +382,36 @@ test('Phase E exact scenario identity and selector semantics', async () => {
   const custom = await render('TravelRequestPanel', { modelValue: 'Custom destination', submitting: false })
   assert.match(custom, /Custom Request/)
   assert.doesNotMatch(custom, /aria-pressed="true"/)
+})
+test('demo shortcuts use capability-first labels and preserve scenario requests', async () => {
+  const html = await render('TravelRequestPanel', { modelValue: '', submitting: false })
+  for (const value of ['Try a demo scenario', 'optional shortcuts', 'specific agent behaviors', 'Real Snapshot Trip', 'Preference Matching', 'Ambiguity Boundary', 'Correction Safety', 'Tradeoff Boundary', 'Bounded Budget Repair', 'Custom Request']) {
+    if (value === 'Custom Request') continue
+    assert.ok(text(html).includes(value), value)
+  }
+  assert.match(html, /aria-label="Demo scenario shortcuts"/)
+  assert.match(presets.find(preset => preset.id === 'snapshot')?.query ?? '', /Boston/)
+  assert.match(presets.find(preset => preset.id === 'deterministic')?.query ?? '', /Columbus/)
+  assert.match(presets.find(preset => preset.id === 'ambiguity')?.query ?? '', /\$240 hotel/)
+  assert.match(presets.find(preset => preset.id === 'correction')?.query ?? '', /revise lodging to \$525/)
+  assert.match(presets.find(preset => preset.id === 'tradeoff')?.query ?? '', /if it is downtown/)
+  assert.match(presets.find(preset => preset.id === 'repair')?.query ?? '', /budget is \$350/)
+  assert.equal(presets.some(preset => preset.query.includes('Atlantis')), false)
+})
+test('travel request guidance gives concise fields, example and budget wording', async () => {
+  const html = await render('TravelRequestPanel', { modelValue: '', submitting: false })
+  for (const value of [
+    'Tips for a better request',
+    'destination, duration or dates, travelers, total budget',
+    'use Real Snapshot Trip, then Bounded Budget Repair or Preference Matching',
+    'total budget of $1300',
+    'around $1300',
+    'Optional details can be omitted',
+    'Plan Trip',
+    'Reset',
+  ]) assert.ok(html.includes(value), value)
+  assert.match(html, /aria-describedby="request-guidance query-help"/)
+  assert.equal((html.match(/aria-pressed="false"/g) ?? []).length, presets.length)
 })
 test('Phase E takeaway uses actual success, clarification and budget evidence', () => {
   assert.match(demoTakeaway(plans.boston).join(' '), /Every recorded tool executed successfully/)

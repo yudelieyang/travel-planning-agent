@@ -1,0 +1,65 @@
+{
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "acquired_at": "2026-09-16T12:07:21.4405410Z",
+  "osm_base_timestamp": "2026-09-16T12:04:06Z",
+  "query": "[out:json][timeout:60];\narea[\"boundary\"=\"administrative\"][\"name\"=\"Massachusetts\"][\"admin_level\"=\"4\"]->.state;\nrel(area.state)[\"boundary\"=\"administrative\"][\"name\"=\"Boston\"][\"admin_level\"=\"8\"];\nmap_to_area -> .searchArea;\nnwr[\"name\"][\"amenity\"=\"restaurant\"](area.searchArea);\nout center tags;",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "returned_element_count": 868,
+  "selection": "Three conventional amenity=restaurant nodes with complete observed addresses, useful cuisine metadata, valid coordinates, and no colocated duplicate representation were retained.",
+  "elements": [
+    {
+      "type": "node",
+      "id": 12663666560,
+      "lat": 42.3495341,
+      "lon": -71.0834556,
+      "tags": {
+        "addr:city": "Boston",
+        "addr:housenumber": "267",
+        "addr:postcode": "02116",
+        "addr:state": "MA",
+        "addr:street": "Newbury Street",
+        "amenity": "restaurant",
+        "cuisine": "mediterranean",
+        "diet:vegan": "yes",
+        "diet:vegetarian": "yes",
+        "name": "Aceituna Grill"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7775144117,
+      "lat": 42.3485475,
+      "lon": -71.0942315,
+      "tags": {
+        "addr:city": "Boston",
+        "addr:housenumber": "484",
+        "addr:postcode": "02215",
+        "addr:state": "MA",
+        "addr:street": "Commonwealth Avenue",
+        "amenity": "restaurant",
+        "cuisine": "indian",
+        "diet:vegan": "yes",
+        "diet:vegetarian": "yes",
+        "name": "India Quality",
+        "website": "https://indiaquality.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4418932490,
+      "lat": 42.3492931,
+      "lon": -71.0811812,
+      "tags": {
+        "addr:city": "Boston",
+        "addr:housenumber": "761",
+        "addr:postcode": "02116",
+        "addr:state": "MA",
+        "addr:street": "Boylston Street",
+        "amenity": "restaurant",
+        "cuisine": "seafood",
+        "name": "Atlantic Fish",
+        "website": "https://www.atlanticfish.com/"
+      }
+    }
+  ]
+}

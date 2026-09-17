@@ -40,11 +40,14 @@
         "travelers": 1,
         "budget_amount": null,
         "budget_scope": "UNKNOWN",
+        "budget_constraint_strength": "UNSPECIFIED",
+        "objective": null,
         "currency": "USD",
         "interests": [],
         "hotel_preferences": [],
         "food_preferences": [],
         "transport_preferences": [],
+        "specific_preferences": [],
         "constraints": []
       }
     },
@@ -87,11 +90,14 @@
         "travelers": 1,
         "budget_amount": null,
         "budget_scope": "UNKNOWN",
+        "budget_constraint_strength": "UNSPECIFIED",
+        "objective": null,
         "currency": "USD",
         "interests": [],
         "hotel_preferences": [],
         "food_preferences": [],
         "transport_preferences": [],
+        "specific_preferences": [],
         "constraints": []
       }
     },
@@ -136,6 +142,8 @@
         "travelers": 1,
         "budget_amount": null,
         "budget_scope": "UNKNOWN",
+        "budget_constraint_strength": "UNSPECIFIED",
+        "objective": null,
         "currency": "USD",
         "interests": [
           "museums"
@@ -143,6 +151,7 @@
         "hotel_preferences": [],
         "food_preferences": [],
         "transport_preferences": [],
+        "specific_preferences": [],
         "constraints": []
       }
     },
@@ -189,6 +198,8 @@
         "travelers": 1,
         "budget_amount": null,
         "budget_scope": "UNKNOWN",
+        "budget_constraint_strength": "UNSPECIFIED",
+        "objective": null,
         "currency": "USD",
         "interests": [
           "food"
@@ -198,6 +209,7 @@
           "vegetarian"
         ],
         "transport_preferences": [],
+        "specific_preferences": [],
         "constraints": []
       }
     },
@@ -205,7 +217,7 @@
       "case_id": "LIVE-005",
       "label": "total-trip low budget",
       "query": "Plan a 3-day trip to NYC for 1 traveler under $50 total.",
-      "expected_status": "success",
+      "expected_status": "error",
       "required_tools": [
         "search_attractions",
         "search_hotels",
@@ -240,11 +252,14 @@
         "travelers": 1,
         "budget_amount": 50.0,
         "budget_scope": "TOTAL_TRIP",
+        "budget_constraint_strength": "HARD",
+        "objective": null,
         "currency": "USD",
         "interests": [],
         "hotel_preferences": [],
         "food_preferences": [],
         "transport_preferences": [],
+        "specific_preferences": [],
         "constraints": []
       }
     },
@@ -287,11 +302,14 @@
         "travelers": 2,
         "budget_amount": 400.0,
         "budget_scope": "PER_PERSON",
+        "budget_constraint_strength": "HARD",
+        "objective": null,
         "currency": "USD",
         "interests": [],
         "hotel_preferences": [],
         "food_preferences": [],
         "transport_preferences": [],
+        "specific_preferences": [],
         "constraints": []
       }
     },
@@ -337,6 +355,8 @@
         "travelers": 1,
         "budget_amount": null,
         "budget_scope": "UNKNOWN",
+        "budget_constraint_strength": "UNSPECIFIED",
+        "objective": null,
         "currency": "USD",
         "interests": [
           "museums",
@@ -345,26 +365,27 @@
         "hotel_preferences": [],
         "food_preferences": [],
         "transport_preferences": [],
+        "specific_preferences": [],
         "constraints": []
       }
     },
     {
       "case_id": "LIVE-008",
-      "label": "no matching hotel",
+      "label": "soft hotel preference fallback",
       "query": "Plan a 2-day trip to Boston for 1 traveler. Quiet luxury hotels.",
-      "expected_status": "error",
+      "expected_status": "success",
       "required_tools": [
         "search_attractions",
         "search_hotels",
         "search_restaurants",
-        "search_transport"
+        "search_transport",
+        "calculate_budget"
       ],
       "optional_tools": [],
       "forbidden_tools": [
         "book_flight",
         "google_search",
-        "weather_search",
-        "calculate_budget"
+        "weather_search"
       ],
       "expected_destination": "Boston",
       "budget_constraint": {
@@ -390,6 +411,8 @@
         "travelers": 1,
         "budget_amount": null,
         "budget_scope": "UNKNOWN",
+        "budget_constraint_strength": "UNSPECIFIED",
+        "objective": null,
         "currency": "USD",
         "interests": [],
         "hotel_preferences": [
@@ -398,6 +421,7 @@
         ],
         "food_preferences": [],
         "transport_preferences": [],
+        "specific_preferences": [],
         "constraints": []
       }
     }

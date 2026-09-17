@@ -1,5 +1,6 @@
 """Opt-in provider adapter. Construction does not make a network request."""
 
+import json
 from contextvars import ContextVar
 from time import perf_counter
 
@@ -14,7 +15,7 @@ from openai import (
 )
 from pydantic import ValidationError
 
-from app.agent.planner import DeterministicTestPlanner, PlannerDecision, PlannerError
+from app.agent.planner import DeterministicTestPlanner, PlannerDecision, PlannerError, ReplanContext
 from app.agent.prompts import PROMPTS
 from app.agent.requirements import TravelRequirements
 from app.core.config import Settings
@@ -22,6 +23,16 @@ from app.core.config import Settings
 
 class PlannerConfigurationError(ValueError):
     pass
+
+
+def create_openai_client(settings: Settings):
+    return OpenAI(
+        api_key=settings.openai_api_key.get_secret_value(),
+        base_url="https://api.openai.com/v1",
+        timeout=30.0,
+        max_retries=0,
+        http_client=httpx.Client(timeout=30.0, trust_env=False),
+    )
 
 
 def infrastructure_error(exc, fallback):
@@ -57,16 +68,12 @@ class OpenAIPlanner:
         self.client = (
             client
             if client is not None
-            else OpenAI(
-                api_key=settings.openai_api_key.get_secret_value(),
-                base_url="https://api.openai.com/v1",
-                timeout=30.0,
-                max_retries=0,
-                http_client=httpx.Client(timeout=30.0, trust_env=False),
-            )
+            else create_openai_client(settings)
         )
 
-    def plan(self, requirements: TravelRequirements) -> PlannerDecision:
+    def plan(
+        self, requirements: TravelRequirements, feedback: ReplanContext | None = None
+    ) -> PlannerDecision:
         metadata = {
             "model": self.model,
             "input_tokens": None,
@@ -78,10 +85,25 @@ class OpenAIPlanner:
         diagnostics = {"invalid_tool": None, "invalid_arguments": None, "duplicate_tool": None}
         started = perf_counter()
         try:
+            instructions = PROMPTS[self.prompt_version]
+            if feedback is not None:
+                instructions += (
+                    "\nThe input includes a typed hard-budget failure and previous itinerary. "
+                    "Return a materially lower-cost matching plan and set budget_repair to true."
+                )
             response = self.client.responses.parse(
                 model=self.model,
-                instructions=PROMPTS[self.prompt_version],
-                input=requirements.model_dump_json(),
+                instructions=instructions,
+                input=(
+                    requirements.model_dump_json()
+                    if feedback is None
+                    else json.dumps(
+                        {
+                            "requirements": requirements.model_dump(mode="json"),
+                            "replan_context": feedback.model_dump(mode="json"),
+                        }
+                    )
+                ),
                 text_format=PlannerDecision,
                 max_output_tokens=self.max_output_tokens,
                 reasoning={"effort": self.reasoning_effort},

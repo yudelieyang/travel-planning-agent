@@ -1,0 +1,107 @@
+{
+  "endpoint": "https://overpass.private.coffee/api/interpreter",
+  "acquired_at": "2026-09-16T20:41:30.641736Z",
+  "osm_base_timestamp": "2026-05-06T03:25:00Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/162069",
+    "name": "District of Columbia",
+    "admin_level": "4"
+  },
+  "query": "[out:json][timeout:180];rel(162069)->.boundary;area(3600162069)->.searchArea;(rel.boundary;nwr(area.searchArea)[\"name\"][\"tourism\"~\"^(museum|aquarium)$\"];nwr(area.searchArea)[\"name\"][\"leisure\"=\"park\"];);out center tags qt;",
+  "raw_response_sha256": "395cd917b43db88dfdda1831545095c7d3ffa68d8005266fb03e76515047f915",
+  "raw_response_bytes": 158159,
+  "returned_element_count": 413,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "node",
+      "id": 3688609913,
+      "lat": 38.8632003,
+      "lon": -76.9918493,
+      "tags": {
+        "addr:city": "Washington",
+        "addr:country": "US",
+        "addr:housenumber": "2315",
+        "addr:postcode": "20020",
+        "addr:source": "dcgis",
+        "addr:state": "DC",
+        "addr:street": "Martin Luther King Junior Avenue Southeast",
+        "description": "Monday - Closed; Tuesday - Saturday 11-5pm, Sunday 12-5pm",
+        "name": "America's Islamic Heritage Museum",
+        "opening_hours": "11:00-17:00",
+        "phone": "+1 202-610-0586",
+        "tourism": "museum",
+        "website": "https://aihmuseum.org/",
+        "wikidata": "Q16148433"
+      }
+    },
+    {
+      "type": "way",
+      "id": 42341486,
+      "center": {
+        "lat": 38.8881834,
+        "lon": -77.0244785
+      },
+      "tags": {
+        "addr:city": "Washington",
+        "addr:housenumber": "900",
+        "addr:postcode": "20560",
+        "addr:state": "DC",
+        "addr:street": "Jefferson Drive Southwest",
+        "building": "yes",
+        "dcgis:address": "900 Jefferson Dr, SW",
+        "dcgis:aid": "0",
+        "dcgis:area": "9176.3848395",
+        "dcgis:gis": "HSE_0407",
+        "dcgis:label": "Arts and Industries Building, Smithsonian Institution",
+        "dcgis:length": "482.971393665",
+        "dcgis:list_info": "Reg",
+        "dcgis:nr_eligibl": "0",
+        "dcgis:objectid": "263",
+        "dcgis:update_date": "Mon Mar 21 00:00:00 UTC 2005",
+        "fee": "no",
+        "height": "6 m",
+        "material": "brick",
+        "museum": "art",
+        "name": "Arts and Industries Building",
+        "name:en": "Arts and Industries Building",
+        "name:pt": "Edifício das Artes e Indústrias",
+        "name:uk": "Будинок мистецтв і індустрій",
+        "opening_hours": "off",
+        "operator": "Smithsonian Institution",
+        "phone": "+1 202-633-1000",
+        "start_date": "1881",
+        "tourism": "museum",
+        "website": "https://aib.si.edu/",
+        "wheelchair": "yes",
+        "wikidata": "Q713932"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4806102794,
+      "lat": 38.8939474,
+      "lon": -77.0399678,
+      "tags": {
+        "addr:city": "Washington",
+        "addr:housenumber": "1776",
+        "addr:postcode": "20006",
+        "addr:state": "DC",
+        "addr:street": "D Street Northwest",
+        "check_date": "2025-04-11",
+        "description": "Guided tours of the period rooms are available and start on the hour. This is the only way to see the period rooms.",
+        "fee": "no",
+        "name": "DAR Museum",
+        "opening_hours": "Mo-Fr 08:30-16:00; Sa 09:00-17:00; PH off",
+        "operator:type": "private",
+        "tourism": "museum",
+        "website": "https://www.dar.org/museum/",
+        "wheelchair": "yes",
+        "wikidata": "Q3798323",
+        "wikipedia": "en:DAR Museum"
+      }
+    }
+  ]
+}

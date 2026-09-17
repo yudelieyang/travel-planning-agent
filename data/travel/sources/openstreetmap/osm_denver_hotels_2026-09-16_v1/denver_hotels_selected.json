@@ -1,0 +1,106 @@
+{
+  "endpoint": "https://overpass.private.coffee/api/interpreter",
+  "acquired_at": "2026-09-16T21:01:20.038615Z",
+  "osm_base_timestamp": "2026-07-15T15:22:01Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/1411339",
+    "name": "Denver",
+    "admin_level": "6"
+  },
+  "query": "[out:json][timeout:180];rel(1411339)->.boundary;area(3601411339)->.searchArea;(rel.boundary;node(area.searchArea)[\"name\"][\"tourism\"=\"hotel\"][\"addr:city\"=\"Denver\"];way(area.searchArea)[\"name\"][\"tourism\"=\"hotel\"][\"addr:city\"=\"Denver\"];);out center tags qt;",
+  "raw_response_sha256": "c5cd7d333a8cb299bd395f7da560502c90bbfce71a05c2c69c4d7d126bc3ecc0",
+  "raw_response_bytes": 70952,
+  "returned_element_count": 105,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 114312226,
+      "center": {
+        "lat": 39.7441238,
+        "lon": -104.9947666
+      },
+      "tags": {
+        "addr:city": "Denver",
+        "addr:housenumber": "1420",
+        "addr:postcode": "80202",
+        "addr:state": "CO",
+        "addr:street": "Stout Street",
+        "branch": "Denver Downtown Convention Center",
+        "brand": "Embassy Suites",
+        "brand:wikidata": "Q5369524",
+        "building": "yes",
+        "building:colour": "#F5DEB3",
+        "building:levels": "13",
+        "fax": "+1 303-592-1001",
+        "height": "67",
+        "name": "Embassy Suites by Hilton Denver Downtown Convention Center",
+        "official_name": "Embassy Suites by Hilton",
+        "phone": "+1 303-592-1000",
+        "ref": "DENESES",
+        "roof:colour": "#f5deb3",
+        "tourism": "hotel",
+        "website": "https://www.hilton.com/en/hotels/deneses-embassy-suites-denver-downtown-convention-center/",
+        "wikidata": "Q111392738"
+      }
+    },
+    {
+      "type": "way",
+      "id": 53085855,
+      "center": {
+        "lat": 39.7471695,
+        "lon": -104.9904675
+      },
+      "tags": {
+        "addr:city": "Denver",
+        "addr:housenumber": "1701",
+        "addr:postcode": "80202",
+        "addr:state": "CO",
+        "addr:street": "California Street",
+        "brand": "Hilton",
+        "brand:wikidata": "Q598884",
+        "building": "yes",
+        "building:colour": "#8B4513",
+        "building:levels": "20",
+        "building:material": "glass",
+        "check_date": "2025-06-16",
+        "email": "dency_gm@hilton.com",
+        "height": "159",
+        "name": "Hilton Denver City Center",
+        "phone": "+1 303-297-1300",
+        "roof:colour": "brown",
+        "tourism": "hotel",
+        "website": "https://www.hilton.com/en/hotels/dencyhh-hilton-denver-city-center/",
+        "wikidata": "Q111392741"
+      }
+    },
+    {
+      "type": "way",
+      "id": 558417129,
+      "center": {
+        "lat": 39.6303737,
+        "lon": -104.8989435
+      },
+      "tags": {
+        "addr:city": "Denver",
+        "addr:housenumber": "7800",
+        "addr:postcode": "80237",
+        "addr:state": "CO",
+        "addr:street": "East Tufts Avenue",
+        "branch": "Denver Tech Center",
+        "brand": "Hyatt Regency",
+        "brand:wikidata": "Q1425063",
+        "building:levels": "1",
+        "building:part": "yes",
+        "name": "Hyatt Regency Denver Tech Center",
+        "phone": "+1 303-779-1234",
+        "source": "Bing",
+        "tourism": "hotel",
+        "website": "https://www.hyatt.com/en-us/hotel/colorado/hyatt-regency-denver-tech-center/denve",
+        "wikidata": "Q111392751"
+      }
+    }
+  ]
+}

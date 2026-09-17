@@ -110,6 +110,17 @@ def test_qualitative_budget_never_becomes_a_dollar_amount(phrase):
     assert RuleBasedRequirementsExtractor().extract(phrase).budget_amount is None
 
 
+def test_malformed_budget_is_rejected_at_the_api_boundary():
+    with TestClient(app) as client:
+        response = client.post(
+            "/api/v1/travel/plan",
+            json={"query": "Plan a 3-day trip to Boston with budget abc."},
+        )
+
+    assert response.status_code == 422
+    assert response.json() == {"detail": "Invalid or inconsistent travel requirements"}
+
+
 @pytest.mark.parametrize(
     "query,status",
     [

@@ -1,0 +1,120 @@
+{
+  "endpoint": "https://overpass.private.coffee/api/interpreter",
+  "acquired_at": "2026-09-16T21:20:21.079984Z",
+  "osm_base_timestamp": "2026-07-24T11:04:51Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/237385",
+    "name": "Seattle",
+    "admin_level": "8"
+  },
+  "query": "[out:json][timeout:180];rel(237385)->.boundary;area(3600237385)->.searchArea;(rel.boundary;node(area.searchArea)[\"name\"][\"tourism\"=\"hotel\"][\"addr:city\"=\"Seattle\"];way(area.searchArea)[\"name\"][\"tourism\"=\"hotel\"][\"addr:city\"=\"Seattle\"];);out center tags qt;",
+  "raw_response_sha256": "2b4e702c7812ff727d35a2684892f95ba42d59a58a639c270bb3300acdc38399",
+  "raw_response_bytes": 63405,
+  "returned_element_count": 90,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 396824069,
+      "center": {
+        "lat": 47.6080905,
+        "lon": -122.3321214
+      },
+      "tags": {
+        "addr:city": "Seattle",
+        "addr:housenumber": "1113",
+        "addr:postcode": "98101",
+        "addr:state": "WA",
+        "addr:street": "6th Avenue",
+        "brand": "Crowne Plaza",
+        "brand:wikidata": "Q2746220",
+        "building": "yes",
+        "name": "Crowne Plaza Seattle Downtown",
+        "phone": "+1-206-464-1980",
+        "smoking": "no",
+        "source": "King County GIS;data.seattle.gov",
+        "start_date": "1980",
+        "tourism": "hotel",
+        "website": "http://www.cphotelseattle.com/",
+        "wheelchair": "yes",
+        "wikidata": "Q111393657",
+        "wikipedia": "en:Crowne Plaza Seattle-Downtown"
+      }
+    },
+    {
+      "type": "way",
+      "id": 35824976,
+      "center": {
+        "lat": 47.6080973,
+        "lon": -122.3339606
+      },
+      "tags": {
+        "addr:city": "Seattle",
+        "addr:housenumber": "411",
+        "addr:postcode": "98101",
+        "addr:state": "WA",
+        "addr:street": "University Street",
+        "brand": "Fairmont",
+        "brand:wikidata": "Q1393345",
+        "building": "hotel",
+        "building:levels": "12",
+        "building:material": "stone",
+        "check_date": "2025-06-07",
+        "ele": "50",
+        "email": "olympic@fairmont.com",
+        "fax": "+1-206-682-9633",
+        "gnis:feature_id": "1531852",
+        "internet_access": "wlan",
+        "name": "Fairmont Olympic Hotel",
+        "opening_hours": "24/7",
+        "payment:cash": "yes",
+        "payment:credit_cards": "yes",
+        "payment:debit_cards": "yes",
+        "phone": "+1-206-621-1700",
+        "rooms": "450",
+        "source": "King County GIS;data.seattle.gov;survey",
+        "start_date": "1924",
+        "tourism": "hotel",
+        "website": "https://www.fairmont.com/seattle",
+        "wheelchair": "yes",
+        "wikidata": "Q5430600",
+        "wikipedia": "en:Fairmont Olympic Hotel"
+      }
+    },
+    {
+      "type": "way",
+      "id": 357283830,
+      "center": {
+        "lat": 47.6073807,
+        "lon": -122.3391648
+      },
+      "tags": {
+        "addr:city": "Seattle",
+        "addr:housenumber": "99",
+        "addr:postcode": "98101",
+        "addr:state": "WA",
+        "addr:street": "Union Street",
+        "air_conditioning": "yes",
+        "bar": "yes",
+        "brand": "Four Seasons",
+        "brand:wikidata": "Q1424786",
+        "building": "yes",
+        "check_date": "2024-02-24",
+        "internet_access": "wlan",
+        "internet_access:fee": "customers",
+        "name": "Four Seasons Seattle",
+        "phone": "+1-206-749-7000",
+        "reservation": "required",
+        "smoking": "no",
+        "source": "King County GIS;data.seattle.gov;https://press.fourseasons.com/seattle/hotel-facts/",
+        "start_date": "2008",
+        "tourism": "hotel",
+        "website": "https://www.fourseasons.com/seattle/",
+        "wheelchair": "yes",
+        "wikidata": "Q102318397"
+      }
+    }
+  ]
+}

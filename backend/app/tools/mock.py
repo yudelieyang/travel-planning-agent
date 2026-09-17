@@ -1,75 +1,95 @@
 """Stable local fixtures, no provider SDKs, model calls or network access."""
 
-import json
 from decimal import Decimal
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from app.core.budget import BudgetScope
+from app.tools.candidate_data import candidates_for
 from app.tools.contracts import (
     BudgetInput,
     BudgetRequest,
     BudgetSummary,
+    Category,
     SearchInput,
     ToolRequest,
     ToolResult,
     ToolStatus,
-    TravelOption,
 )
 
-MOCK_ROOT = Path(__file__).resolve().parents[3] / "data" / "mock"
+if TYPE_CHECKING:
+    from app.tools.candidate_providers import CandidateProvider
 
 
 def money(value: Decimal) -> float:
     return float(value.quantize(Decimal("0.01")))
 
 
-def _search(tool_name: str, filename: str, arguments: SearchInput) -> ToolResult:
+def _search(
+    tool_name: str,
+    category: Category,
+    arguments: SearchInput,
+    provider: "CandidateProvider | None" = None,
+) -> ToolResult:
+    source = provider.source_for(arguments.destination, category) if provider is not None else "mock"
     try:
-        raw = json.loads((MOCK_ROOT / filename).read_text(encoding="utf-8"))
-        rows = [TravelOption.model_validate(row) for row in raw]
-        aliases = {"nyc": "new york city", "new york": "new york city"}
-        destination = aliases.get(
-            arguments.destination.casefold(), arguments.destination.casefold()
+        selected = candidates_for(
+            arguments.destination,
+            category,
+            max_price=arguments.max_price,
+            preferences=arguments.preferences,
+            provider=provider,
         )
-        preferences = {p.strip().casefold() for p in arguments.preferences}
-        selected = [
-            row
-            for row in rows
-            if row.destination.casefold() == destination
-            and (arguments.max_price is None or row.price <= arguments.max_price)
-            and (not preferences or preferences.issubset(set(row.tags)))
-        ]
-        selected.sort(key=lambda row: (row.price, row.id))
+        if selected is None:
+            return ToolResult(
+                tool_name=tool_name,
+                status=ToolStatus.NO_RESULTS,
+                data=[],
+                source=source,
+                error="UNSUPPORTED_CITY_DATA",
+                metadata={"count": 0, "currency": "USD"},
+            )
         return ToolResult(
             tool_name=tool_name,
             status=ToolStatus.SUCCESS if selected else ToolStatus.NO_RESULTS,
             data=selected,
-            source="mock",
+            source=source,
             metadata={"count": len(selected), "currency": "USD"},
         )
     except (OSError, ValueError, TypeError):
         return ToolResult(
             tool_name=tool_name,
             status=ToolStatus.ERROR,
-            source="mock",
-            error="Mock fixture unavailable or invalid",
+            source=source,
+            error=(
+                "Mock fixture unavailable or invalid"
+                if source == "mock"
+                else "Candidate snapshot unavailable or invalid"
+            ),
         )
 
 
-def search_attractions(arguments: SearchInput) -> ToolResult:
-    return _search("search_attractions", "attractions.json", arguments)
+def search_attractions(
+    arguments: SearchInput, provider: "CandidateProvider | None" = None
+) -> ToolResult:
+    return _search("search_attractions", "attractions", arguments, provider)
 
 
-def search_hotels(arguments: SearchInput) -> ToolResult:
-    return _search("search_hotels", "hotels.json", arguments)
+def search_hotels(
+    arguments: SearchInput, provider: "CandidateProvider | None" = None
+) -> ToolResult:
+    return _search("search_hotels", "hotel", arguments, provider)
 
 
-def search_restaurants(arguments: SearchInput) -> ToolResult:
-    return _search("search_restaurants", "restaurants.json", arguments)
+def search_restaurants(
+    arguments: SearchInput, provider: "CandidateProvider | None" = None
+) -> ToolResult:
+    return _search("search_restaurants", "food", arguments, provider)
 
 
-def search_transport(arguments: SearchInput) -> ToolResult:
-    return _search("search_transport", "transport.json", arguments)
+def search_transport(
+    arguments: SearchInput, provider: "CandidateProvider | None" = None
+) -> ToolResult:
+    return _search("search_transport", "transport", arguments, provider)
 
 
 def calculate_budget(arguments: BudgetInput) -> ToolResult:
@@ -132,7 +152,9 @@ def calculate_budget(arguments: BudgetInput) -> ToolResult:
     )
 
 
-def run_tool(request: ToolRequest) -> ToolResult:
+def run_tool(
+    request: ToolRequest, *, provider: "CandidateProvider | None" = None
+) -> ToolResult:
     if isinstance(request, BudgetRequest):
         if request.arguments is None:
             return ToolResult(
@@ -148,4 +170,4 @@ def run_tool(request: ToolRequest) -> ToolResult:
         "search_restaurants": search_restaurants,
         "search_transport": search_transport,
     }
-    return functions[request.tool_name](request.arguments)
+    return functions[request.tool_name](request.arguments, provider)

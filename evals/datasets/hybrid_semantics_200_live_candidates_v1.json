@@ -1,0 +1,31 @@
+{
+  "version": "hybrid_semantics_200_live_candidates_v1",
+  "source": "hybrid_semantics_200_v1.json",
+  "candidates": [
+    {"case_id":"SEM200-116","priority":"high","reason":"hard hotel-scope ambiguity"},
+    {"case_id":"SEM200-117","priority":"high","reason":"bare hotel-budget ambiguity"},
+    {"case_id":"SEM200-118","priority":"high","reason":"lodging scope ambiguity"},
+    {"case_id":"SEM200-119","priority":"high","reason":"hotel amount scope ambiguity"},
+    {"case_id":"SEM200-125","priority":"high","reason":"forbidden executable hotel-total promotion"},
+    {"case_id":"SEM200-130","priority":"high","reason":"ambiguous hotel price wording"},
+    {"case_id":"SEM200-131","priority":"high","reason":"unsupported food hard ceiling"},
+    {"case_id":"SEM200-132","priority":"high","reason":"unsupported transport hard ceiling"},
+    {"case_id":"SEM200-133","priority":"high","reason":"unsupported attractions hard ceiling"},
+    {"case_id":"SEM200-134","priority":"high","reason":"unsupported hotel-per-night ceiling"},
+    {"case_id":"SEM200-138","priority":"high","reason":"per-night accommodation boundary"},
+    {"case_id":"SEM200-144","priority":"high","reason":"combined transport wording"},
+    {"case_id":"SEM200-156","priority":"high","reason":"explicit exclusion preservation"},
+    {"case_id":"SEM200-158","priority":"high","reason":"hotel exclusion preservation"},
+    {"case_id":"SEM200-166","priority":"high","reason":"budget-location tradeoff"},
+    {"case_id":"SEM200-169","priority":"high","reason":"bounded budget tradeoff"},
+    {"case_id":"SEM200-172","priority":"high","reason":"location-quality objective"},
+    {"case_id":"SEM200-175","priority":"high","reason":"preference conflict objective"},
+    {"case_id":"SEM200-186","priority":"medium","reason":"noisy hotel-total ceiling"},
+    {"case_id":"SEM200-189","priority":"medium","reason":"noisy two-scope request"},
+    {"case_id":"SEM200-190","priority":"medium","reason":"noisy preference composition"},
+    {"case_id":"SEM200-193","priority":"medium","reason":"noisy duration and multi-scope request"},
+    {"case_id":"SEM200-196","priority":"high","reason":"rating next to total budget"},
+    {"case_id":"SEM200-199","priority":"high","reason":"hard-and-soft budget boundary"},
+    {"case_id":"SEM200-200","priority":"high","reason":"non-monetary correction boundary"}
+  ]
+}

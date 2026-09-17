@@ -14,6 +14,9 @@ defineProps<{ execution: PublicExecutionSummary }>()
       <div><dt>Latency</dt><dd>{{ execution.latency_ms }} ms</dd></div>
       <div><dt>Requirement status</dt><dd>{{ formatEnumLabel(execution.requirement_status) }}</dd></div>
       <div><dt>Planner outcome</dt><dd>{{ formatEnumLabel(execution.planner_outcome) }}</dd></div>
+      <div><dt>Semantic mode</dt><dd>{{ formatEnumLabel(execution.semantic?.mode ?? 'deterministic') }}</dd></div>
+      <div><dt>Semantic extraction</dt><dd>{{ formatEnumLabel(execution.semantic?.extraction_status ?? 'not_requested') }}</dd></div>
+      <div><dt>Bounded repair attempts</dt><dd>{{ execution.replan_attempts ?? 0 }} / 1 maximum</dd></div>
     </dl>
   </details>
 </template>

@@ -1,0 +1,118 @@
+{
+  "endpoint": "https://overpass.private.coffee/api/interpreter",
+  "acquired_at": "2026-09-16T21:34:48.409659Z",
+  "osm_base_timestamp": "2026-07-24T11:04:51Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/207359",
+    "name": "Los Angeles",
+    "admin_level": "8"
+  },
+  "query": "[out:json][timeout:180];rel(207359)->.boundary;(rel.boundary;nwr(33.659541,-118.6681798,34.337306,-118.1552983)[\"name\"][\"tourism\"~\"^(museum|aquarium)$\"][\"addr:city\"=\"Los Angeles\"][\"addr:housenumber\"][\"addr:street\"];nwr(33.659541,-118.6681798,34.337306,-118.1552983)[\"name\"][\"leisure\"=\"park\"][\"addr:city\"=\"Los Angeles\"][\"addr:housenumber\"][\"addr:street\"];);out center tags qt;",
+  "raw_response_sha256": "73f6b07369029b8913a375e25fd1e32ec423a2c3e994e0beb6ebcce58f0f43d1",
+  "raw_response_bytes": 47052,
+  "returned_element_count": 73,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 913293590,
+      "center": {
+        "lat": 34.0636022,
+        "lon": -118.3608216
+      },
+      "tags": {
+        "addr:city": "Los Angeles",
+        "addr:housenumber": "6067",
+        "addr:postcode": "90036",
+        "addr:state": "CA",
+        "addr:street": "Wilshire Boulevard",
+        "check_date": "2026-06-12",
+        "contact:facebook": "https://www.facebook.com/theacademymuseum",
+        "contact:instagram": "https://www.instagram.com/academymuseum/",
+        "contact:twitter": "https://twitter.com/AcademyMuseum",
+        "contact:youtube": "https://www.youtube.com/channel/UCgXYV8asjAC9iLPnpe43-GQ",
+        "email": "academymuseum@oscars.org",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/8/8e/The_May_Company_Building_2021.jpg",
+        "museum": "art",
+        "name": "Academy Museum of Motion Pictures",
+        "opening_hours": "Mo,We-Su 10:00-18:00; Tu off",
+        "operator": "Academy of Motion Picture Arts and Sciences",
+        "operator:type": "private",
+        "operator:wikidata": "Q212329",
+        "phone": "+1-323-930-3000",
+        "short_name": "Academy Museum",
+        "start_date": "2021-09-30",
+        "subject:wikidata": "Q590870",
+        "tourism": "museum",
+        "website": "https://www.academymuseum.org/",
+        "wikidata": "Q6941059",
+        "wikipedia": "en:Academy Museum of Motion Pictures"
+      }
+    },
+    {
+      "type": "node",
+      "id": 368174050,
+      "lat": 34.1483813,
+      "lon": -118.2817076,
+      "tags": {
+        "addr:city": "Los Angeles",
+        "addr:housenumber": "4700",
+        "addr:postcode": "90027",
+        "addr:state": "CA",
+        "addr:street": "Western Heritage Way",
+        "ele": "136",
+        "gnis:feature_id": "1732301",
+        "name": "Autry Museum of the American West",
+        "opening_hours": "Tu-Fr 10:00-16:00, Sa-Su 10:00-17:00",
+        "operator": "Autry Museum of the American West",
+        "operator:type": "non_profit",
+        "source": "USGS Geonames",
+        "tourism": "museum",
+        "website": "https://theautry.org/",
+        "wikidata": "Q4827110"
+      }
+    },
+    {
+      "type": "way",
+      "id": 407373715,
+      "center": {
+        "lat": 34.0159714,
+        "lon": -118.2864729
+      },
+      "tags": {
+        "addr:city": "Los Angeles",
+        "addr:country": "US",
+        "addr:housenumber": "700",
+        "addr:postcode": "90037",
+        "addr:state": "CA",
+        "addr:street": "Exposition Park Drive",
+        "building": "museum",
+        "check_date": "2025-07-22",
+        "contact:facebook": "https://www.facebook.com/CaliforniaScienceCenter/",
+        "contact:instagram": "https://www.instagram.com/californiasciencecenter/",
+        "contact:twitter": "https://x.com/casciencecenter",
+        "ele": "82.3",
+        "fee": "no",
+        "fee:conditional": "yes @ (temporary_exhibition)",
+        "height": "26.1",
+        "lacounty:ain": "5037028905",
+        "lacounty:bld_id": "474745828331",
+        "museum": "science",
+        "name": "California Science Center",
+        "opening_hours": "10:00-17:00",
+        "opening_hours:url": "https://californiasciencecenter.org/visit",
+        "payment:credit_cards": "yes",
+        "payment:debit_cards": "yes",
+        "phone": "+1-323-724-3623; +1-213-744-2019",
+        "toilets": "yes",
+        "toilets:access": "public",
+        "tourism": "museum",
+        "website": "https://californiasciencecenter.org/",
+        "wheelchair": "yes",
+        "wikidata": "Q1067376"
+      }
+    }
+  ]
+}

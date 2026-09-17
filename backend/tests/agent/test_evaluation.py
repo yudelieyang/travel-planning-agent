@@ -18,7 +18,7 @@ def test_comparison_records_and_three_call_limit():
     assert [record["final_status"] for record in records] == [
         "success",
         "needs_clarification",
-        "success",
+        "error",
         "success",
     ]
     assert records[1]["tool_validation"] == "not_reached"

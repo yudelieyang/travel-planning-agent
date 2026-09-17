@@ -1,0 +1,56 @@
+{
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "acquired_at": "2026-09-16T14:53:48.0538709Z",
+  "osm_base_timestamp": "2026-09-16T14:51:00Z",
+  "query": "[out:json][timeout:60];area[\"boundary\"=\"administrative\"][\"name\"=\"Texas\"][\"admin_level\"=\"4\"]->.state;rel(area.state)[\"boundary\"=\"administrative\"][\"name\"=\"Austin\"][\"admin_level\"=\"8\"];map_to_area -> .searchArea;(nwr[\"name\"][\"tourism\"~\"^(museum|attraction|zoo|aquarium)$\"](area.searchArea);nwr[\"name\"][\"leisure\"=\"park\"](area.searchArea);nwr[\"name\"][\"historic\"](area.searchArea););out center tags;",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "returned_element_count": 910,
+  "raw_response_sha256": "b6a77e92724647a4e5691b3bd5084d9179bfdcaca51b744e9068988ec5b0177b",
+  "selection": "Three distinct recognizable visitor POIs with stable identities, useful observed addresses, valid coordinates, and category diversity were retained.",
+  "elements": [
+    {
+      "type": "relation",
+      "id": 20972967,
+      "center": {"lat": 30.2809842, "lon": -97.7374171},
+      "tags": {
+        "addr:city": "Austin",
+        "addr:housenumber": "200",
+        "addr:postcode": "78705",
+        "addr:state": "TX",
+        "addr:street": "East Martin Luther King Jr Boulevard",
+        "name": "Blanton Museum of Art",
+        "tourism": "museum",
+        "website": "https://blantonmuseum.org/",
+        "wikidata": "Q2906140"
+      }
+    },
+    {
+      "type": "way",
+      "id": 379207889,
+      "center": {"lat": 30.2694425, "lon": -97.7306205},
+      "tags": {
+        "addr:housenumber": "1011",
+        "addr:state": "TX",
+        "addr:street": "San Marcos Street",
+        "name": "Texas Music Museum",
+        "tourism": "museum",
+        "website": "https://www.texasmusicmuseum.org/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 946120954,
+      "center": {"lat": 30.2676819, "lon": -97.7666085},
+      "tags": {
+        "addr:city": "AUSTIN",
+        "addr:postcode": "78746",
+        "addr:state": "TX",
+        "addr:street": "Barton Springs Road",
+        "leisure": "park",
+        "name": "Zilker Park",
+        "operator": "Austin Parks and Recreation Department",
+        "wikidata": "Q8071899"
+      }
+    }
+  ]
+}

@@ -40,7 +40,14 @@ def evaluate_case(
     validation = "valid" if selected else "not_reached"
     if state["errors"]:
         validation = "valid" if selected else "rejected_or_unavailable"
-    budget = state["budget_summary"]
+    budget = state["budget_summary"] or next(
+        (
+            result.data
+            for result in state["tool_results"]
+            if result.tool_name == "calculate_budget" and result.status == ToolStatus.SUCCESS
+        ),
+        None,
+    )
     return {
         "case_id": case["id"],
         "planner": planner_name,

@@ -78,7 +78,7 @@
       "budget_scope": "TOTAL_TRIP"
     },
     "expected_status": "SUFFICIENT",
-    "expected_api_status": "success",
+    "expected_api_status": "error",
     "required_tools": [
       "search_attractions",
       "search_hotels",
@@ -316,16 +316,15 @@
       ]
     },
     "expected_status": "SUFFICIENT",
-    "expected_api_status": "error",
+    "expected_api_status": "success",
     "required_tools": [
       "search_attractions",
       "search_hotels",
       "search_restaurants",
-      "search_transport"
-    ],
-    "forbidden_tools": [
+      "search_transport",
       "calculate_budget"
     ],
+    "forbidden_tools": [],
     "budget_constraint": null,
     "expected_warning": []
   },
@@ -364,7 +363,7 @@
       "budget_scope": "TOTAL_TRIP"
     },
     "expected_status": "SUFFICIENT",
-    "expected_api_status": "success",
+    "expected_api_status": "error",
     "required_tools": [
       "search_attractions",
       "search_hotels",
@@ -416,16 +415,15 @@
       ]
     },
     "expected_status": "SUFFICIENT",
-    "expected_api_status": "error",
+    "expected_api_status": "success",
     "required_tools": [
       "search_attractions",
       "search_hotels",
       "search_restaurants",
-      "search_transport"
-    ],
-    "forbidden_tools": [
+      "search_transport",
       "calculate_budget"
     ],
+    "forbidden_tools": [],
     "budget_constraint": null,
     "expected_warning": []
   }

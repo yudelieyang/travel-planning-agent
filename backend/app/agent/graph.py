@@ -5,13 +5,14 @@ from collections.abc import Callable
 from langchain_core.messages import AIMessage
 from langgraph.graph import END, START, StateGraph
 
-from app.agent.execution import ExecutionStage, ValidationSummary
+from app.agent.execution import ExecutionStage, ValidationSummary, is_replan_eligible
 from app.agent.itinerary import Itinerary, compose_draft, validate_itinerary
 from app.agent.planner import (
     DeterministicTestPlanner,
     PlannerDecision,
     PlannerError,
     PlannerProtocol,
+    ReplanContext,
 )
 from app.agent.requirements import RequirementStatus, assess_requirements
 from app.agent.state import TravelState
@@ -19,6 +20,7 @@ from app.tools.contracts import BudgetRequest, BudgetSummary, ToolRequest, ToolR
 from app.tools.mock import calculate_budget, run_tool
 
 ToolRunner = Callable[[ToolRequest], ToolResult]
+MAX_REPLAN_ATTEMPTS = 1
 
 
 def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner = run_tool):
@@ -39,6 +41,10 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
             "validation_status": "not_reached",
             "approved_tool_requests": [],
             "public_validation": ValidationSummary(),
+            "replan_attempts": 0,
+            "replan_context": None,
+            "budget_repair": False,
+            "selected_candidate_ids": {},
         }
 
     def clarification(state: TravelState) -> dict:
@@ -54,12 +60,15 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
             # An untrusted implementation receives a private copy, never graph-owned state.
             snapshot = state["requirements"].model_dump(mode="json")
             supplied = state["requirements"].model_copy(deep=True)
-            decision = planner.plan(supplied)
+            feedback = state["replan_context"]
+            decision = planner.plan(supplied) if feedback is None else planner.plan(supplied, feedback)
             if supplied.model_dump(mode="json") != snapshot:
                 return {"errors": ["planner_modified_requirements"]}
             decision = PlannerDecision.model_validate_json(decision.model_dump_json(), strict=True)
             if not decision.can_proceed:
                 return {"errors": ["planner_cannot_proceed"], "warnings": decision.warnings}
+            if feedback is not None and not decision.budget_repair:
+                return {"errors": ["planner_did_not_apply_budget_repair"]}
             for request in decision.tool_requests:
                 if not isinstance(request, BudgetRequest) and (
                     request.arguments.destination.casefold()
@@ -81,6 +90,7 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
                 "tool_requests": decision.tool_requests,
                 "approved_tool_requests": [r.model_copy(deep=True) for r in decision.tool_requests],
                 "warnings": decision.warnings,
+                "budget_repair": decision.budget_repair,
             }
         except PlannerError as exc:
             suffix = " (retryable; no automatic retry)" if exc.retryable else ""
@@ -125,21 +135,32 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
         searches = [r for r in requests if not isinstance(r, BudgetRequest)]
         for request in searches:
             results.append(invoke(request))
-        errors = [
-            f"{r.tool_name}: {r.status.value}" for r in results if r.status != ToolStatus.SUCCESS
-        ]
+        errors = (
+            ["UNSUPPORTED_CITY_DATA"]
+            if any(result.error == "UNSUPPORTED_CITY_DATA" for result in results)
+            else [
+                f"{result.tool_name}: {result.status.value}"
+                for result in results
+                if result.status != ToolStatus.SUCCESS
+            ]
+        )
         if errors:
             return {"tool_results": results, "errors": errors}
         if any(not isinstance(result.data, list) for result in results):
             return {"tool_results": results, "errors": ["Search tools must return option lists"]}
-        daily, budget_input, warnings = compose_draft(
+        daily, budget_input, warnings, selected_candidate_ids = compose_draft(
             state["requirements"],
             {r.tool_name: r.data for r in results},
+            use_low_cost_options=state["budget_repair"],
         )
         budget_request = BudgetRequest(arguments=budget_input)
         budget_result = invoke(budget_request)
         results.append(budget_result)
-        update = {"tool_requests": searches + [budget_request], "tool_results": results}
+        update = {
+            "tool_requests": searches + [budget_request],
+            "tool_results": results,
+            "selected_candidate_ids": selected_candidate_ids,
+        }
         if budget_result.status != ToolStatus.SUCCESS or not isinstance(
             budget_result.data, BudgetSummary
         ):
@@ -167,12 +188,32 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
                 "validation_status": "failed",
                 "public_validation": ValidationSummary(reason="missing_artifacts"),
             }
-        errors = validate_itinerary(state["itinerary"], state["budget_summary"])
-        outcome = "failed" if errors else "passed"
+        result = validate_itinerary(
+            state["itinerary"], state["budget_summary"], state["requirements"]
+        )
+        outcome = "passed" if result.is_valid else "failed"
         return {
-            "errors": errors,
+            "errors": result.errors,
             "validation_status": outcome,
-            "public_validation": ValidationSummary(performed=True, outcome=outcome, reason=None),
+            "public_validation": ValidationSummary(
+                performed=True,
+                outcome=outcome,
+                reason=None,
+                violations=result.violations,
+            ),
+        }
+
+    def replan(state: TravelState) -> dict:
+        attempt = state["replan_attempts"] + 1
+        return {
+            "errors": [],
+            "replan_attempts": attempt,
+            "replan_context": ReplanContext(
+                violations=[violation.model_copy(deep=True) for violation in state["public_validation"].violations],
+                previous_itinerary=state["itinerary"].model_copy(deep=True),
+                attempt=attempt,
+            ),
+            "budget_repair": False,
         }
 
     def finalize(state: TravelState) -> dict:
@@ -223,6 +264,7 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
         ("planner", plan),
         ("tools", tools),
         ("validate", validate),
+        ("replan", replan),
         ("finalize", finalize),
     ]:
         public_name = {"validate": "validation", "finalize": "finalization"}.get(name, name)
@@ -236,6 +278,16 @@ def build_graph(planner: PlannerProtocol | None = None, tool_runner: ToolRunner 
     graph.add_edge("clarification", END)
     graph.add_edge("planner", "tools")
     graph.add_edge("tools", "validate")
-    graph.add_edge("validate", "finalize")
+    graph.add_conditional_edges(
+        "validate",
+        lambda state: (
+            "replan"
+            if state["replan_attempts"] < MAX_REPLAN_ATTEMPTS
+            and is_replan_eligible(state["public_validation"], state["errors"])
+            else "finalize"
+        ),
+        {"replan": "replan", "finalize": "finalize"},
+    )
+    graph.add_edge("replan", "planner")
     graph.add_edge("finalize", END)
     return graph.compile()

@@ -15,6 +15,7 @@ from app.agent.graph import build_graph
 from app.agent.itinerary import validate_itinerary
 from app.agent.planner import TOOL_ALLOWLIST, DeterministicTestPlanner, PlannerError
 from app.agent.requirements import TravelRequirements, assess_requirements
+from app.agent.semantic_coverage import SemanticCoverageAnalyzer
 from app.agent.trace import make_trace
 from app.tools.contracts import BudgetRequest, BudgetSummary, ToolStatus
 from app.tools.mock import calculate_budget, money
@@ -54,7 +55,11 @@ def prepare_cases(path: Path, max_cases: int) -> tuple[LiveDataset, list[GoldenC
     extractor = RuleBasedRequirementsExtractor()
     for case in selected:
         actual = extractor.extract(case.query)
-        if actual != case.frozen_requirements or assess_requirements(actual).status != "SUFFICIENT":
+        if (
+            actual.model_dump(exclude={"requirements_v2"})
+            != case.frozen_requirements.model_dump(exclude={"requirements_v2"})
+            or assess_requirements(actual).status != "SUFFICIENT"
+        ):
             raise ValueError("Frozen requirements changed or preflight is insufficient")
         if actual.destination != case.expected_destination:
             raise ValueError("Golden destination disagrees with frozen requirements")
@@ -90,7 +95,9 @@ def provenance(root: Path, dataset_path: Path) -> dict:
         text=True,
         timeout=10,
     ).stdout.strip()
-    files = list((root / "backend/app").rglob("*.py")) + list((root / "data/mock").glob("*.json"))
+    files = list((root / "backend/app").rglob("*.py")) + list(
+        (root / "data/travel/us").glob("*.json")
+    )
     files += [
         root / "requirements.txt",
         root / "pyproject.toml",
@@ -146,7 +153,7 @@ def factual_provenance(state) -> bool | None:
         or itinerary.destination != req.destination
         or itinerary.days != req.trip_days
         or itinerary.currency != "USD"
-        or validate_itinerary(itinerary, budget)
+        or not validate_itinerary(itinerary, budget, req).is_valid
     ):
         return False
     categories = {
@@ -184,7 +191,14 @@ def factual_provenance(state) -> bool | None:
 
 
 def budget_integrity(state) -> bool | None:
-    budget = state["budget_summary"]
+    budget = state["budget_summary"] or next(
+        (
+            result.data
+            for result in state["tool_results"]
+            if result.tool_name == "calculate_budget" and result.status == ToolStatus.SUCCESS
+        ),
+        None,
+    )
     if budget is None:
         return False if state["itinerary"] is not None else None
     requests = [r for r in state["tool_requests"] if isinstance(r, BudgetRequest)]
@@ -219,6 +233,9 @@ def run_case(
         planner_type=planner_name,
         prompt_version=prompt_version,
         latency_ms=(perf_counter() - started) * 1000,
+        semantic_coverage=SemanticCoverageAnalyzer().analyze(
+            case.query, case.frozen_requirements
+        ),
     )
     observation = recorder.observation
     diagnostics = dict.fromkeys(
@@ -253,7 +270,14 @@ def run_case(
     )
     budget_ok = budget_integrity(state)
     facts_ok = factual_provenance(state)
-    budget = state["budget_summary"]
+    budget = state["budget_summary"] or next(
+        (
+            result.data
+            for result in state["tool_results"]
+            if result.tool_name == "calculate_budget" and result.status == ToolStatus.SUCCESS
+        ),
+        None,
+    )
     budget_golden = (budget.within_budget if budget else None) == case.budget_constraint[
         "within_budget"
     ]

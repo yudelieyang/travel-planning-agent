@@ -1,0 +1,39 @@
+{
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "acquired_at": "2026-09-16T15:22:28.3875787Z",
+  "osm_base_timestamp": "2026-09-16T15:18:20Z",
+  "query": "[out:json][timeout:180];area[\"ISO3166-2\"=\"US-OH\"][\"admin_level\"=\"4\"]->.ohio;rel(area.ohio)[\"boundary\"=\"administrative\"][\"admin_level\"=\"8\"][\"name\"=\"Columbus\"];map_to_area->.searchArea;nwr(area.searchArea)[\"name\"][\"tourism\"=\"hotel\"];out center tags;",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "returned_element_count": 140,
+  "raw_response_sha256": "0c9a08b44109c5ba1906713fa55deb2e80150e81118cd6eba4251a2058d6fb78",
+  "acquisition_note": "The first successful response and an overlapping retry produced byte-identical content with the same OSM base timestamp. This artifact records the final raw-file write; the retry was caused by delayed tool output, not by data selection.",
+  "selection": "Four distinct tourism=hotel objects with complete observed addresses, valid coordinates, and stable identities were retained.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 717324868,
+      "center": {"lat": 39.9998016, "lon": -82.9857381},
+      "tags": {"addr:city": "Columbus", "addr:housenumber": "1700", "addr:postcode": "43211", "addr:state": "OH", "addr:street": "Clara Avenue", "brand": "Days Inn", "name": "Days Inn by Wyndham Columbus Fairgrounds", "tourism": "hotel", "website": "https://www.wyndhamhotels.com/days-inn/columbus-ohio/days-inn-columbus-fairgrounds/overview"}
+    },
+    {
+      "type": "way",
+      "id": 474605329,
+      "center": {"lat": 39.9488541, "lon": -82.9973137},
+      "tags": {"addr:city": "Columbus", "addr:housenumber": "650", "addr:postcode": "43215", "addr:state": "OH", "addr:street": "South High Street", "brand": "Holiday Inn Express", "name": "Holiday Inn Express", "tourism": "hotel", "website": "https://www.ihg.com/holidayinnexpress/hotels/us/en/columbus/cmhhg/hoteldetail"}
+    },
+    {
+      "type": "node",
+      "id": 4685223268,
+      "lat": 39.9724764,
+      "lon": -83.002876,
+      "tags": {"addr:city": "Columbus", "addr:housenumber": "501", "addr:postcode": "43215", "addr:state": "OH", "addr:street": "North High Street", "brand": "Hampton Inn & Suites", "name": "Hampton Inn & Suites Columbus Downtown", "tourism": "hotel", "website": "https://www.hilton.com/en/hotels/cmhhshx-hampton-suites-columbus-downtown/"}
+    },
+    {
+      "type": "node",
+      "id": 1376126720,
+      "lat": 39.9558079,
+      "lon": -82.999124,
+      "tags": {"addr:city": "Columbus", "addr:housenumber": "310", "addr:postcode": "43215", "addr:state": "OH", "addr:street": "South High Street", "brand": "Westin", "name": "The Westin Great Southern Columbus", "tourism": "hotel", "website": "http://www.westincolumbus.com"}
+    }
+  ]
+}

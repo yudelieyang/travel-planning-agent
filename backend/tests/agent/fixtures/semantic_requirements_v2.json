@@ -1,0 +1,44 @@
+[
+  {
+    "id": "coexisting_total_and_hotel_limits",
+    "query": "Plan a 3-day Columbus trip for 1 traveler under $900 total. I like zoos and fried chicken. Hotel spending must not exceed $400.",
+    "constraints": [["TOTAL_TRIP", 900], ["HOTEL_TOTAL", 400]],
+    "legacy_budget": 900,
+    "preferences": [["ACTIVITY", "zoo"], ["FOOD", "fried chicken"]]
+  },
+  {
+    "id": "same_scope_correction",
+    "query": "My budget is $1000. Actually, keep the entire trip under $700.",
+    "constraints": [["TOTAL_TRIP", 700]],
+    "legacy_budget": 700,
+    "preferences": []
+  },
+  {
+    "id": "hotel_then_total_order",
+    "query": "3 days. 2 travelers. Hotel max $300. Whole trip max $1000.",
+    "constraints": [["HOTEL_TOTAL", 300], ["TOTAL_TRIP", 1000]],
+    "legacy_budget": 1000,
+    "preferences": []
+  },
+  {
+    "id": "soft_hotel_target",
+    "query": "Keep the trip under $1200, but I'd prefer the hotel to stay around $450.",
+    "constraints": [["TOTAL_TRIP", 1200]],
+    "legacy_budget": 1200,
+    "preferences": [["HOTEL", "around usd 450"]]
+  },
+  {
+    "id": "soft_total_and_nightly_hotel_target",
+    "query": "I can spend about $1000 total and would like hotels around $200 per night.",
+    "constraints": [],
+    "legacy_budget": 1000,
+    "preferences": [["HOTEL", "around usd 200 per night"]]
+  },
+  {
+    "id": "mixed_hard_and_soft_money",
+    "query": "Keep everything under $1200. Hotel no more than $500, food around $250.",
+    "constraints": [["TOTAL_TRIP", 1200], ["HOTEL_TOTAL", 500]],
+    "legacy_budget": 1200,
+    "preferences": [["FOOD", "around usd 250"]]
+  }
+]

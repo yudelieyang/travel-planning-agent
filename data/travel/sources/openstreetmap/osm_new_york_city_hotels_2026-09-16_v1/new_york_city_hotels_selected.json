@@ -1,0 +1,108 @@
+{
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "acquired_at": "2026-09-16T15:51:37.765105Z",
+  "osm_base_timestamp": "2026-09-16T15:48:58Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/175905",
+    "name": "New York",
+    "admin_level": "5"
+  },
+  "query": "[out:json][timeout:180];area[\"ISO3166-2\"=\"US-NY\"][\"admin_level\"=\"4\"]->.region;rel(area.region)[\"boundary\"=\"administrative\"][\"name\"=\"New York\"][\"admin_level\"=\"5\"]->.boundary;rel.boundary;map_to_area->.searchArea;(rel.boundary;nwr(area.searchArea)[\"name\"][\"tourism\"=\"hotel\"][\"addr:housenumber\"][\"addr:street\"];);out center tags qt;",
+  "raw_response_sha256": "ba917897a46b734541d2a4ee84ca417dbf67276cd946228ea5428fa586264577",
+  "raw_response_bytes": 372000,
+  "returned_element_count": 593,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 320487241,
+      "center": {
+        "lat": 40.7244314,
+        "lon": -74.0082488
+      },
+      "tags": {
+        "addr:city": "New York",
+        "addr:housenumber": "231",
+        "addr:postcode": "10013",
+        "addr:state": "NY",
+        "addr:street": "Hudson Street",
+        "brand": "Arlo Hotels",
+        "brand:wikidata": "Q104529562",
+        "building": "yes",
+        "building:levels": "10",
+        "name": "Arlo Soho",
+        "tourism": "hotel",
+        "website": "https://www.arlohotels.com/arlo-soho/",
+        "wikidata": "Q104529528"
+      }
+    },
+    {
+      "type": "way",
+      "id": 280122409,
+      "center": {
+        "lat": 40.7216247,
+        "lon": -73.9588729
+      },
+      "tags": {
+        "addr:city": "Brooklyn",
+        "addr:housenumber": "96",
+        "addr:postcode": "11249",
+        "addr:state": "NY",
+        "addr:street": "Wythe Avenue",
+        "air_conditioning": "yes",
+        "alt_name": "The Williamsburg Hotel",
+        "bar": "yes",
+        "branch": "Williamsburg",
+        "brand": "Arlo Hotels",
+        "building": "hotel",
+        "building:levels": "8",
+        "building:material": "brick",
+        "check_date": "2026-09-13",
+        "email": "hellowilliamsburg@arlohotels.com",
+        "height": "28.8",
+        "name": "Arlo Williamsburg",
+        "nycdoitt:bin": "3425311",
+        "opening_hours": "24/7",
+        "phone": "+1-718-362-8100",
+        "toilets:wheelchair": "yes",
+        "tourism": "hotel",
+        "website": "https://arlohotels.com/williamsburg/",
+        "wheelchair": "yes",
+        "wikidata": "Q104529562"
+      }
+    },
+    {
+      "type": "way",
+      "id": 575449026,
+      "center": {
+        "lat": 40.6876437,
+        "lon": -73.9818254
+      },
+      "tags": {
+        "addr:city": "Brooklyn",
+        "addr:housenumber": "46",
+        "addr:postcode": "11217",
+        "addr:state": "NY",
+        "addr:street": "Nevins Street",
+        "air_conditioning": "yes",
+        "brand": "EVEN Hotels",
+        "brand:wikidata": "Q5416522",
+        "building": "hotel",
+        "building:levels": "13",
+        "email": "evenbrooklyn-reservations@ihg.com",
+        "internet_access": "wlan",
+        "internet_access:fee": "no",
+        "name": "EVEN Hotel",
+        "nycdoitt:bin": "3413739",
+        "phone": "+1 718-552-3800",
+        "rooms": "202",
+        "smoking": "no",
+        "tourism": "hotel",
+        "website": "https://www.ihg.com/evenhotels/hotels/us/en/brooklyn/bxyev/hoteldetail",
+        "wikidata": "Q111395091"
+      }
+    }
+  ]
+}

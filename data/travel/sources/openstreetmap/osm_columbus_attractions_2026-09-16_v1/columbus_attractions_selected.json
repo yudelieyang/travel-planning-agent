@@ -1,0 +1,42 @@
+{
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "acquired_at": "2026-09-16T15:20:11.5140859Z",
+  "osm_base_timestamp": "2026-09-16T15:17:18Z",
+  "query": "[out:json][timeout:180];area[\"ISO3166-2\"=\"US-OH\"][\"admin_level\"=\"4\"]->.ohio;rel(area.ohio)[\"boundary\"=\"administrative\"][\"admin_level\"=\"8\"][\"name\"=\"Columbus\"];map_to_area->.searchArea;(nwr(area.searchArea)[\"name\"][\"tourism\"~\"^(museum|attraction|zoo|aquarium)$\"];nwr(area.searchArea)[\"name\"][\"leisure\"=\"park\"];nwr(area.searchArea)[\"name\"][\"historic\"]);out center tags;",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "returned_element_count": 482,
+  "raw_response_sha256": "7c4ab4122242b654fbf50315aa5f738cc789bb15270595a8bc62a3903bbee23b",
+  "selection": "Five distinct Columbus visitor POIs with observed names, addresses, valid coordinates, and stable identities were retained. No tourism=zoo object was returned inside the Columbus administrative boundary; no zoo provider fact was invented.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 32873150,
+      "center": {"lat": 39.959665, "lon": -83.006595},
+      "tags": {"addr:city": "Columbus", "addr:housenumber": "333", "addr:postcode": "43215", "addr:state": "OH", "addr:street": "West Broad Street", "name": "COSI", "tourism": "museum", "website": "https://www.cosi.org/", "wikidata": "Q5013508"}
+    },
+    {
+      "type": "way",
+      "id": 293476179,
+      "center": {"lat": 39.9644285, "lon": -82.987752},
+      "tags": {"addr:city": "Columbus", "addr:housenumber": "480", "addr:postcode": "43215", "addr:state": "OH", "addr:street": "East Broad Street", "name": "Columbus Museum of Art", "tourism": "museum", "website": "https://www.columbusmuseum.org/", "wikidata": "Q5935366"}
+    },
+    {
+      "type": "way",
+      "id": 835107792,
+      "center": {"lat": 40.0050452, "lon": -82.9876307},
+      "tags": {"addr:city": "Columbus", "addr:housenumber": "800", "addr:postcode": "43211", "addr:state": "OH", "addr:street": "E. 17th Avenue", "name": "Ohio History Center", "tourism": "museum", "website": "https://www.ohiohistory.org/visit/ohio-history-center/", "wikidata": "Q57420561"}
+    },
+    {
+      "type": "way",
+      "id": 570391114,
+      "center": {"lat": 39.9619805, "lon": -83.0080526},
+      "tags": {"addr:city": "Columbus", "addr:housenumber": "300", "addr:postcode": "43215", "addr:state": "OH", "addr:street": "West Broad Street", "name": "National Veterans Memorial and Museum", "tourism": "museum", "website": "https://nationalvmm.org/", "wikidata": "Q72839254"}
+    },
+    {
+      "type": "way",
+      "id": 224492486,
+      "center": {"lat": 39.9470771, "lon": -83.0065835},
+      "tags": {"addr:city": "Columbus", "addr:housenumber": "400", "addr:state": "OH", "addr:street": "Whittier Street", "leisure": "park", "name": "Scioto Audubon Metro Park", "wikidata": "Q89729255"}
+    }
+  ]
+}

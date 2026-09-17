@@ -1,0 +1,62 @@
+{
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "acquired_at": "2026-09-16T06:26:35.9245460Z",
+  "osm_base_timestamp": "2026-09-16T06:23:21Z",
+  "query": "[out:json][timeout:60];\narea[\"boundary\"=\"administrative\"][\"name\"=\"Massachusetts\"][\"admin_level\"=\"4\"]->.state;\nrel(area.state)[\"boundary\"=\"administrative\"][\"name\"=\"Boston\"][\"admin_level\"=\"8\"];\nmap_to_area -> .searchArea;\nnwr[\"name\"][\"tourism\"=\"hotel\"](area.searchArea);\nout center tags;",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "returned_element_count": 112,
+  "selection": "Three conventional tourism=hotel entities with complete observed addresses, valid coordinates, and no same-name or nearby duplicate hotel representation were retained.",
+  "elements": [
+    {
+      "type": "node",
+      "id": 1325873780,
+      "lat": 42.3566602,
+      "lon": -71.0503163,
+      "tags": {
+        "addr:city": "Boston",
+        "addr:housenumber": "70",
+        "addr:postcode": "02110",
+        "addr:state": "MA",
+        "addr:street": "Rowes Wharf",
+        "name": "Boston Harbor Hotel",
+        "rooms": "232",
+        "tourism": "hotel",
+        "website": "https://www.bostonharborhotel.com/",
+        "wikidata": "Q4947928"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2350330785,
+      "lat": 42.3486873,
+      "lon": -71.0887471,
+      "tags": {
+        "addr:city": "Boston",
+        "addr:housenumber": "370",
+        "addr:postcode": "02115",
+        "addr:state": "MA",
+        "addr:street": "Commonwealth Avenue",
+        "name": "The Eliot Hotel",
+        "rooms": "95",
+        "tourism": "hotel",
+        "website": "https://www.eliothotel.com/"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 63916,
+      "center": {"lat": 42.3520527, "lon": -71.0683352},
+      "tags": {
+        "addr:city": "Boston",
+        "addr:housenumber": "200",
+        "addr:postcode": "02116",
+        "addr:state": "MA",
+        "addr:street": "Boylston Street",
+        "building": "hotel",
+        "name": "Four Seasons Hotel Boston",
+        "tourism": "hotel",
+        "website": "https://www.fourseasons.com/boston/"
+      }
+    }
+  ]
+}

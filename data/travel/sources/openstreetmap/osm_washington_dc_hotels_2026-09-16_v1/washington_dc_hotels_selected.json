@@ -1,0 +1,116 @@
+{
+  "endpoint": "https://lz4.overpass-api.de/api/interpreter",
+  "acquired_at": "2026-09-16T20:43:55.938690Z",
+  "osm_base_timestamp": "2026-09-16T20:40:45Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/162069",
+    "name": "District of Columbia",
+    "admin_level": "4"
+  },
+  "query": "[out:json][timeout:180];rel(162069)->.boundary;area(3600162069)->.searchArea;(rel.boundary;nwr(area.searchArea)[\"name\"][\"tourism\"=\"hotel\"][\"addr:housenumber\"][\"addr:street\"];);out center tags qt;",
+  "raw_response_sha256": "3aa64ab615d13b4757357fcdf7fda33d8d2684843a216da57e026fd586413235",
+  "raw_response_bytes": 110937,
+  "returned_element_count": 172,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 740826352,
+      "center": {
+        "lat": 38.9012767,
+        "lon": -77.0253663
+      },
+      "tags": {
+        "addr:city": "Washington",
+        "addr:housenumber": "950",
+        "addr:postcode": "20001",
+        "addr:state": "DC",
+        "addr:street": "New York Avenue Northwest",
+        "brand": "Conrad",
+        "brand:wikidata": "Q855525",
+        "building": "hotel",
+        "building:facade:material": "glass",
+        "building:levels": "1",
+        "building:part": "yes",
+        "name": "Conrad Hotel Washington DC",
+        "phone": "+1 202-844-5900",
+        "roof:shape": "flat",
+        "tourism": "hotel",
+        "website": "https://www.hilton.com/en/hotels/wascici-conrad-washington-dc/",
+        "wikidata": "Q111394688"
+      }
+    },
+    {
+      "type": "way",
+      "id": 55327039,
+      "center": {
+        "lat": 38.9074198,
+        "lon": -77.0397084
+      },
+      "tags": {
+        "addr:city": "Washington",
+        "addr:country": "US",
+        "addr:housenumber": "1733",
+        "addr:postcode": "20036",
+        "addr:state": "DC",
+        "addr:street": "N Street Northwest",
+        "branch": "Washington Dupont Circle",
+        "brand": "Courtyard",
+        "brand:wikidata": "Q1053170",
+        "building": "yes",
+        "dataset": "ABRA locations",
+        "dcgis:captureyear": "19990331",
+        "dcgis:dataset": "buildings",
+        "dcgis:featurecode": "2000",
+        "fax": "+1 202-968-7299",
+        "name": "Courtyard Washington, DC Dupont Circle",
+        "official_name": "Courtyard by Marriott",
+        "phone": "+1 202-968-7300",
+        "ref": "WASNC",
+        "source": "dcgis",
+        "tourism": "hotel",
+        "website": "https://www.marriott.com/hotels/travel/wasnc-courtyard-washington-dc-dupont-circle/",
+        "wheelchair": "yes",
+        "wikidata": "Q7824765"
+      }
+    },
+    {
+      "type": "way",
+      "id": 48041504,
+      "center": {
+        "lat": 38.8993407,
+        "lon": -77.0264883
+      },
+      "tags": {
+        "addr:city": "Washington",
+        "addr:housenumber": "1000",
+        "addr:postcode": "20001",
+        "addr:state": "DC",
+        "addr:street": "H Street Northwest",
+        "branch": "Washington",
+        "brand": "Grand Hyatt",
+        "brand:wikidata": "Q115794899",
+        "building": "hotel",
+        "building:levels": "13",
+        "dataset": "Hotels",
+        "dcgis:captureyear": "19990331",
+        "dcgis:dataset": "buildings",
+        "dcgis:featurecode": "2000",
+        "dcgis:gis_id": "Htl_49",
+        "internet_access": "wlan",
+        "mappingdc:gid": "12685",
+        "name": "Grand Hyatt Washington",
+        "operator": "Hyatt Hotels Corporation",
+        "phone": "+1 202-582-1234",
+        "rooms": "888",
+        "source": "dcgis",
+        "tourism": "hotel",
+        "website": "https://washingtondc.grand.hyatt.com/",
+        "wheelchair": "yes",
+        "wikidata": "Q5594664"
+      }
+    }
+  ]
+}

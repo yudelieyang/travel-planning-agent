@@ -16,8 +16,8 @@ This is a synchronous snapshot, not streaming or live stage progress.
 
 `stages` lists reached nodes in execution order, followed by unvisited nodes.
 `sequence` is one-based node-entry order; null identifies `not_reached` nodes.
-All six semantic stages are represented: preflight, clarification, planner, tools,
-validation, finalization. `skipped` with a sequence means the node was reached but
+All seven semantic stages are represented: preflight, clarification, planner, tools,
+validation, replan, finalization. `skipped` with a sequence means the node was reached but
 its work was bypassed because of prior errors. It is distinct from `not_reached`.
 
 - Success: preflight, planner, tools, validation, finalization complete;
@@ -28,6 +28,9 @@ its work was bypassed because of prior errors. It is distinct from `not_reached`
   finalization completes. No rejected raw decision or tool arguments are exposed.
 - Search failure: tools fails; selected budget calculation is skipped; validation
   is skipped; finalization completes even though the domain response is an error.
+- A typed hard-budget failure can enter one `replan` stage, then planner, tools,
+  and validation run once more. It either passes with the repaired itinerary or
+  terminates after the second validation.
 
 `planner_outcome` is `not_invoked`, `accepted`, or `failed`. The last includes blocked,
 rejected, and exceptional planner outcomes. Existing response errors retain their
@@ -59,6 +62,9 @@ Existing domain fields (including validated warnings) remain unchanged.
 `validation.performed` means `validate_itinerary` actually ran. Its outcome is
 passed, failed, or not_performed. A non-performed check has reason not_reached,
 prior_errors, or missing_artifacts. Performed checks have reason null.
+`violations` is an additive structured list. A deterministic hard-budget failure
+uses `HARD_BUDGET_EXCEEDED` with its budget limit, comparison cost, and excess;
+soft budgets and optimization objectives do not fail validation.
 
 The old internal `ExecutionTrace.validation_status` remains unchanged: it records
 failed for earlier execution errors. The public summary makes the additional
@@ -90,7 +96,11 @@ two-decimal money convention, without changing totals, warnings, or within_budge
 | Unknown scope, missing limit, incompatible currency, or TOTAL_TRIP without travelers | null | null |
 
 In the final row within_budget remains null. Negative remaining_budget is valid.
-An over-budget itinerary can still have status=success and passed validation.
+When the parsed budget strength is HARD and the comparison is deterministically
+over budget, validation fails with `HARD_BUDGET_EXCEEDED`. The graph may make one
+bounded repair using least-cost matching fixture options, then validates again;
+an unspecified or SOFT strength remains compatible with the existing non-failing
+behavior. `execution.replan_attempts` records zero or one attempts.
 
 ## Verified presets
 
@@ -98,7 +108,8 @@ An over-budget itinerary can still have status=success and passed validation.
   comparison 223, remaining 277, within_budget true.
 - `Plan a trip for me.` — needs_clarification; no planner or tool execution.
 - `Plan a 2-day trip to Atlantis.` — error; four NO_RESULTS searches, calculator skipped.
-- `Plan a 2-day trip to Boston for 2 travelers under $50 total.` — success,
-  comparison 446, remaining -396, within_budget false.
+- `Plan a 2-day trip to Boston for 2 travelers under $50 total.` — error,
+  one repair attempt produces comparison 392, then validation remains
+  `HARD_BUDGET_EXCEEDED`.
 
 No frontend, planner selector, new endpoint, storage, or external call is added.

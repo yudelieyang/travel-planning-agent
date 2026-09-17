@@ -1,0 +1,63 @@
+{
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "acquired_at": "2026-09-16T05:36:07.2890118Z",
+  "osm_base_timestamp": "2026-09-16T05:34:00Z",
+  "query": "[out:json][timeout:60];\narea[\"boundary\"=\"administrative\"][\"name\"=\"Massachusetts\"][\"admin_level\"=\"4\"]->.state;\nrel(area.state)[\"boundary\"=\"administrative\"][\"name\"=\"Boston\"][\"admin_level\"=\"8\"];\nmap_to_area -> .searchArea;\n(\n  nwr[\"name\"][\"tourism\"~\"^(museum|attraction|zoo|aquarium)$\"](area.searchArea);\n  nwr[\"name\"][\"leisure\"=\"park\"](area.searchArea);\n  nwr[\"name\"][\"historic\"~\"^(monument|memorial|building|fort|ship)$\"](area.searchArea);\n);\nout center tags;",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "selection": "Three non-duplicate Boston visitor attractions with names, center coordinates, complete observed addresses, and category diversity were retained from 713 returned elements.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 29650851,
+      "center": {"lat": 42.3382381, "lon": -71.0990448},
+      "tags": {
+        "addr:city": "Boston",
+        "addr:housenumber": "25",
+        "addr:postcode": "02115",
+        "addr:state": "MA",
+        "addr:street": "Evans Way",
+        "building": "civic",
+        "fee": "yes",
+        "name": "Isabella Stewart Gardner Museum",
+        "tourism": "museum",
+        "website": "https://www.gardnermuseum.org/",
+        "wikidata": "Q49135"
+      }
+    },
+    {
+      "type": "way",
+      "id": 29660091,
+      "center": {"lat": 42.3591988, "lon": -71.0493558},
+      "tags": {
+        "addr:city": "Boston",
+        "addr:housenumber": "1",
+        "addr:postcode": "02110",
+        "addr:state": "MA",
+        "addr:street": "Central Wharf",
+        "check_date": "2026-07-08",
+        "fee": "yes",
+        "name": "New England Aquarium",
+        "tourism": "aquarium",
+        "website": "https://www.neaq.org/",
+        "wikidata": "Q2859185"
+      }
+    },
+    {
+      "type": "way",
+      "id": 23787885,
+      "center": {"lat": 42.3540568, "lon": -71.069998},
+      "tags": {
+        "addr:city": "Boston",
+        "addr:housenumber": "4",
+        "addr:postcode": "02116",
+        "addr:state": "MA",
+        "addr:street": "Charles Street",
+        "leisure": "park",
+        "name": "Boston Public Garden",
+        "opening_hours": "24/7",
+        "website": "https://friendsofthepublicgarden.org/our-parks/the-garden/",
+        "wikidata": "Q894579"
+      }
+    }
+  ]
+}

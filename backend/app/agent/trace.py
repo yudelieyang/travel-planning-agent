@@ -5,6 +5,9 @@ from uuid import uuid4
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from app.agent.semantic_coverage import SemanticCoverageResult
+from app.agent.semantic_extractor import SemanticExtractionResult
+from app.agent.semantic_merge import MergeConflict, MergeDecision
 from app.agent.state import TravelState
 
 
@@ -25,6 +28,16 @@ class ExecutionTrace(BaseModel):
     total_tokens: int | None = Field(default=None, ge=0)
     api_latency_ms: float | None = Field(default=None, ge=0)
     api_error_type: str | None = None
+    semantic_coverage: SemanticCoverageResult
+    llm_invoked: bool = False
+    llm_extraction_status: Literal["not_requested", "proposed", "unavailable", "failed"] = "not_requested"
+    llm_semantic_proposal: SemanticExtractionResult | None = None
+    llm_error_code: str | None = None
+    semantic_merge_attempted: bool = False
+    semantic_merge_decisions: list[MergeDecision] = Field(default_factory=list)
+    semantic_merge_conflicts: list[MergeConflict] = Field(default_factory=list)
+    final_requirements_source: Literal["deterministic", "hybrid"] = "deterministic"
+    requires_clarification: bool = False
 
 
 def final_status(state: TravelState) -> str:
@@ -36,7 +49,21 @@ def final_status(state: TravelState) -> str:
 
 
 def make_trace(
-    state: TravelState, *, planner_type: str, prompt_version: str | None, latency_ms: float
+    state: TravelState,
+    *,
+    planner_type: str,
+    prompt_version: str | None,
+    latency_ms: float,
+    semantic_coverage: SemanticCoverageResult,
+    llm_invoked: bool = False,
+    llm_extraction_status: Literal["not_requested", "proposed", "unavailable", "failed"] = "not_requested",
+    llm_semantic_proposal: SemanticExtractionResult | None = None,
+    llm_error_code: str | None = None,
+    semantic_merge_attempted: bool = False,
+    semantic_merge_decisions: list[MergeDecision] | None = None,
+    semantic_merge_conflicts: list[MergeConflict] | None = None,
+    final_requirements_source: Literal["deterministic", "hybrid"] = "deterministic",
+    requires_clarification: bool = False,
 ) -> ExecutionTrace:
     status = final_status(state)
     return ExecutionTrace(
@@ -50,4 +77,14 @@ def make_trace(
         validation_status=state.get("validation_status", "not_reached"),
         final_status=status,
         latency_ms=round(latency_ms, 2),
+        semantic_coverage=semantic_coverage,
+        llm_invoked=llm_invoked,
+        llm_extraction_status=llm_extraction_status,
+        llm_semantic_proposal=llm_semantic_proposal,
+        llm_error_code=llm_error_code,
+        semantic_merge_attempted=semantic_merge_attempted,
+        semantic_merge_decisions=semantic_merge_decisions or [],
+        semantic_merge_conflicts=semantic_merge_conflicts or [],
+        final_requirements_source=final_requirements_source,
+        requires_clarification=requires_clarification,
     )

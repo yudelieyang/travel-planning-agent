@@ -1,0 +1,3616 @@
+{
+  "version": "phase_m2_functional_coverage_delta_v1",
+  "source_results": [
+    "hybrid_semantics_200_v1_phase_m1.json",
+    "hybrid_semantics_200_v1_phase_m2.json"
+  ],
+  "functional_definition": "LLM needed iff deterministic semantics are incomplete or carry an unresolved supported ambiguity; retained unsupported hard scopes are complete.",
+  "excluded_gold_error_ids": [
+    "SEM200-193",
+    "SEM200-197",
+    "SEM200-198",
+    "SEM200-200"
+  ],
+  "starting_functional_coverage": {
+    "TP": 20,
+    "TN": 105,
+    "FP": 16,
+    "FN": 59,
+    "precision": 0.5555555555555556,
+    "recall": 0.25316455696202533,
+    "f1": 0.3478260869565218
+  },
+  "final_functional_coverage": {
+    "TP": 75,
+    "TN": 121,
+    "FP": 0,
+    "FN": 4,
+    "precision": 1.0,
+    "recall": 0.9493670886075949,
+    "f1": 0.974025974025974
+  },
+  "starting_raw_coverage": {
+    "TP": 31,
+    "TN": 130,
+    "FP": 5,
+    "FN": 34,
+    "precision": 0.8611111111111112,
+    "recall": 0.47692307692307695,
+    "f1": 0.6138613861386139,
+    "false_positive_rate": 0.037037037037037035
+  },
+  "final_raw_coverage": {
+    "TP": 44,
+    "TN": 104,
+    "FP": 31,
+    "FN": 21,
+    "precision": 0.5866666666666667,
+    "recall": 0.676923076923077,
+    "f1": 0.6285714285714286,
+    "false_positive_rate": 0.22962962962962963
+  },
+  "starting_case_pass_rate": 0.455,
+  "final_case_pass_rate": 0.38,
+  "m1_hard_safety_after": {
+    "silent_hard_constraint_corruption": 0,
+    "wrong_hard_scope": 0,
+    "wrong_hard_amount": 0,
+    "soft_to_hard_unsafe_promotion": 0,
+    "hard_to_soft_unsafe_downgrade": 0,
+    "unsupported_hard_constraints_silently_dropped": 0
+  },
+  "remaining_functional_fns": [
+    "SEM200-151",
+    "SEM200-153",
+    "SEM200-190",
+    "SEM200-196"
+  ],
+  "starting_fn_inventory": [
+    {
+      "case_id": "SEM200-008",
+      "category": "A_simple_deterministic",
+      "cluster": "P3 preference gap",
+      "input": "Find me zoos in Columbus.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "Find me zoos"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-009",
+      "category": "A_simple_deterministic",
+      "cluster": "P3 preference gap",
+      "input": "Three days in San Francisco; I enjoy seafood.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "seafood"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "I enjoy"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-013",
+      "category": "A_simple_deterministic",
+      "cluster": "P3 preference gap",
+      "input": "I like fried chicken in Chicago.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "fried chicken"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "fried chicken in chicago"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "I like"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-014",
+      "category": "A_simple_deterministic",
+      "cluster": "P3 preference gap",
+      "input": "Boston for 3 days. I enjoy walking.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "TRANSPORT",
+            "value": "walking"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "I enjoy"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-016",
+      "category": "A_simple_deterministic",
+      "cluster": "P3 preference gap",
+      "input": "I want coffee shops in Seattle.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "coffee shops"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "I want "
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-018",
+      "category": "A_simple_deterministic",
+      "cluster": "P3 preference gap",
+      "input": "Denver for one day; public transit is preferred.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "TRANSPORT",
+            "value": "public transit"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "public transit is preferred"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-058",
+      "category": "D_multi_scope",
+      "cluster": "P3 preference gap",
+      "input": "Miami, 3 days: total max $1,120. I like parks. Lodging total max $430.",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1120.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 430.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "parks"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1120.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 430.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "I like"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-059",
+      "category": "D_multi_scope",
+      "cluster": "P1 hard-money gap",
+      "input": "Keep the entire Seattle trip within $1,700, and keep accommodation within $760 total.",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1700.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 760.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 760.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "hard constraint amount/scope",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "MONETARY_SEMANTIC_GAP"
+        ],
+        "evidence": [
+          "Keep the entire Seattle trip within $1,700, and keep accommodation within $760 total"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "No represented-vs-source hard-money sufficiency check.",
+      "risk": "A hard cap can disappear or retain the wrong amount/scope.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-065",
+      "category": "D_multi_scope",
+      "cluster": "P3 preference gap",
+      "input": "I enjoy seafood. San Francisco trip maximum is $2,200; accommodation maximum is $1,020 total.",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 2200.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 1020.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "seafood"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 2200.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 1020.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "I enjoy"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-069",
+      "category": "D_multi_scope",
+      "cluster": "P3 preference gap",
+      "input": "Seattle: hotel under $725 total; total trip under $1,880. Museums please.",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1880.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 725.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "museums"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 725.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1880.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "Museums please"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-072",
+      "category": "D_multi_scope",
+      "cluster": "P3 preference gap",
+      "input": "New York City: whole trip under $2,350. Quiet hotel, under $990 total.",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 2350.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 990.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "quiet hotel"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 2350.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 990.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "Quiet hotel"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-074",
+      "category": "D_multi_scope",
+      "cluster": "P3 preference gap",
+      "input": "Washington DC trip must stay under $1,360, hotel total must stay under $540, and I like parks.",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1360.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 540.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "parks"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1360.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 540.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "I like"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-081",
+      "category": "E_same_scope_correction",
+      "cluster": "P2 correction or ambiguity gap",
+      "input": "Hotel spending cannot exceed $580 total. Actually, $530.",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 530.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 580.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "hard constraint amount/scope",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "CORRECTION_TARGET_UNRESOLVED"
+        ],
+        "evidence": [
+          "Actually, $530"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not inspect unresolved correction targets or unrepresented hotel money.",
+      "risk": "A superseded or ambiguous amount can be treated as final.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-086",
+      "category": "E_same_scope_correction",
+      "cluster": "P3 preference gap",
+      "input": "The full trip must stay below $1,090. Actually, I prefer museums.",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1090.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "museums"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1090.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "I prefer"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-089",
+      "category": "E_same_scope_correction",
+      "cluster": "P3 preference gap",
+      "input": "Lodging must stay below $450 total. I'd rather stay downtown.",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 450.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "downtown"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 450.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "I'd rather stay"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-090",
+      "category": "E_same_scope_correction",
+      "cluster": "P3 preference gap",
+      "input": "The trip maximum is $1,300. Actually, I want seafood.",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1300.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "seafood"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1300.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "I want "
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-093",
+      "category": "F_mixed_scope_correction",
+      "cluster": "P2 correction or ambiguity gap",
+      "input": "Trip ceiling $1,800 and lodging ceiling $750 total; sorry, make the trip $1,600.",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1600.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 750.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 1600.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "hard constraint amount/scope",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 3,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "CORRECTION_TARGET_UNRESOLVED"
+        ],
+        "evidence": [
+          "sorry, make the trip $1,600"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not inspect unresolved correction targets or unrepresented hotel money.",
+      "risk": "A superseded or ambiguous amount can be treated as final.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-095",
+      "category": "F_mixed_scope_correction",
+      "cluster": "P2 correction or ambiguity gap",
+      "input": "The total is capped at $1,350. Hotel total is capped at $500. Change total to $1,200 only.",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1200.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 500.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1350.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "hard constraint amount/scope",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 3,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "CORRECTION_TARGET_UNRESOLVED"
+        ],
+        "evidence": [
+          "Change total to $1,200 only"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not inspect unresolved correction targets or unrepresented hotel money.",
+      "risk": "A superseded or ambiguous amount can be treated as final.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-105",
+      "category": "G_soft_approximate",
+      "cluster": "P1 hard-money gap",
+      "input": "About $1,100 total is my target for Denver, not a strict cap.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1100.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "hard constraint amount/scope",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "MONETARY_SEMANTIC_GAP"
+        ],
+        "evidence": [
+          "not a strict cap"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "No represented-vs-source hard-money sufficiency check.",
+      "risk": "A hard cap can disappear or retain the wrong amount/scope.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-122",
+      "category": "H_ambiguous_scope",
+      "cluster": "P2 correction or ambiguity gap",
+      "input": "A $700 place to stay in New York City is okay.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "AMBIGUOUS_MONETARY_SCOPE"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported ambiguous_monetary_scope, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "evidence": [
+          "$700 place to stay"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not inspect unresolved correction targets or unrepresented hotel money.",
+      "risk": "A superseded or ambiguous amount can be treated as final.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-146",
+      "category": "J_preferences",
+      "cluster": "P3 preference gap",
+      "input": "Boston: zoos, parks, and seafood please.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          },
+          {
+            "category": "ACTIVITY",
+            "value": "parks"
+          },
+          {
+            "category": "FOOD",
+            "value": "seafood"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "zoos, parks, and seafood please"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-147",
+      "category": "J_preferences",
+      "cluster": "P3 preference gap",
+      "input": "I like fried chicken, art museums, and coffee shops in Chicago.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "fried chicken"
+          },
+          {
+            "category": "ACTIVITY",
+            "value": "art museums"
+          },
+          {
+            "category": "FOOD",
+            "value": "coffee shops"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "fried chicken"
+          },
+          {
+            "category": "ACTIVITY",
+            "value": "art museums"
+          },
+          {
+            "category": "FOOD",
+            "value": "coffee shops in chicago"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "I like"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-148",
+      "category": "J_preferences",
+      "cluster": "P3 preference gap",
+      "input": "Miami should have a quiet hotel and nearby parks.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "quiet hotel"
+          },
+          {
+            "category": "ACTIVITY",
+            "value": "parks"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "quiet hotel"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-149",
+      "category": "J_preferences",
+      "cluster": "P3 preference gap",
+      "input": "In Seattle I want seafood, coffee shops, and art museums.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "seafood"
+          },
+          {
+            "category": "FOOD",
+            "value": "coffee shops"
+          },
+          {
+            "category": "ACTIVITY",
+            "value": "art museums"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "I want "
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-150",
+      "category": "J_preferences",
+      "cluster": "P3 preference gap",
+      "input": "Denver: downtown hotel, public transit, and museums.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "downtown hotel"
+          },
+          {
+            "category": "TRANSPORT",
+            "value": "public transit"
+          },
+          {
+            "category": "ACTIVITY",
+            "value": "museums"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "downtown hotel"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-151",
+      "category": "J_preferences",
+      "cluster": "P3 preference gap",
+      "input": "For Austin, I enjoy parks, fried chicken, and walking.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "parks"
+          },
+          {
+            "category": "FOOD",
+            "value": "fried chicken"
+          },
+          {
+            "category": "TRANSPORT",
+            "value": "walking"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "fried chicken"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-152",
+      "category": "J_preferences",
+      "cluster": "P3 preference gap",
+      "input": "New York City needs a quiet hotel, seafood, and zoos.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "quiet hotel"
+          },
+          {
+            "category": "FOOD",
+            "value": "seafood"
+          },
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "quiet hotel"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-153",
+      "category": "J_preferences",
+      "cluster": "P3 preference gap",
+      "input": "Las Vegas: parks, coffee shops, and public transit are important.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "parks"
+          },
+          {
+            "category": "FOOD",
+            "value": "coffee shops"
+          },
+          {
+            "category": "TRANSPORT",
+            "value": "public transit"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-154",
+      "category": "J_preferences",
+      "cluster": "P3 preference gap",
+      "input": "Washington DC, please include museums, seafood, and a downtown hotel.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "museums"
+          },
+          {
+            "category": "FOOD",
+            "value": "seafood"
+          },
+          {
+            "category": "HOTEL",
+            "value": "downtown hotel"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "downtown hotel"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-155",
+      "category": "J_preferences",
+      "cluster": "P3 preference gap",
+      "input": "San Francisco with zoos, fried chicken, and a quiet hotel.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          },
+          {
+            "category": "FOOD",
+            "value": "fried chicken"
+          },
+          {
+            "category": "HOTEL",
+            "value": "quiet hotel"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "quiet hotel"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-156",
+      "category": "K_negation_exclusion",
+      "cluster": "P1 exclusion gap",
+      "input": "Boston is fine, but do not include zoos.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "EXCLUSION"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported exclusion, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNREPRESENTED_NEGATION"
+        ],
+        "evidence": [
+          "Boston is fine, but do not include zoos"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Negative travel requirements had no coverage signal.",
+      "risk": "An excluded item can be silently included.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-157",
+      "category": "K_negation_exclusion",
+      "cluster": "P1 exclusion gap",
+      "input": "I do not care about nightlife in Chicago.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "EXCLUSION"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported exclusion, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNREPRESENTED_NEGATION"
+        ],
+        "evidence": [
+          "I do not care about nightlife in Chicago"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Negative travel requirements had no coverage signal.",
+      "risk": "An excluded item can be silently included.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-158",
+      "category": "K_negation_exclusion",
+      "cluster": "P1 exclusion gap",
+      "input": "No luxury hotels in Miami.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "EXCLUSION"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported exclusion, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNREPRESENTED_NEGATION"
+        ],
+        "evidence": [
+          "No luxury hotels in Miami"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Negative travel requirements had no coverage signal.",
+      "risk": "An excluded item can be silently included.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-159",
+      "category": "K_negation_exclusion",
+      "cluster": "P1 exclusion gap",
+      "input": "Avoid expensive restaurants in Seattle.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "EXCLUSION"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported exclusion, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNREPRESENTED_NEGATION"
+        ],
+        "evidence": [
+          "Avoid expensive restaurants in Seattle"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Negative travel requirements had no coverage signal.",
+      "risk": "An excluded item can be silently included.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-160",
+      "category": "K_negation_exclusion",
+      "cluster": "P1 exclusion gap",
+      "input": "I don't need museums in Denver.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "EXCLUSION"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported exclusion, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNREPRESENTED_NEGATION"
+        ],
+        "evidence": [
+          "I don't need museums in Denver"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Negative travel requirements had no coverage signal.",
+      "risk": "An excluded item can be silently included.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-161",
+      "category": "K_negation_exclusion",
+      "cluster": "P1 exclusion gap",
+      "input": "Please exclude parks from the Austin plan.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "EXCLUSION"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported exclusion, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNREPRESENTED_NEGATION"
+        ],
+        "evidence": [
+          "Please exclude parks from the Austin plan"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Negative travel requirements had no coverage signal.",
+      "risk": "An excluded item can be silently included.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-162",
+      "category": "K_negation_exclusion",
+      "cluster": "P1 exclusion gap",
+      "input": "No seafood for New York City.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "EXCLUSION"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported exclusion, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNREPRESENTED_NEGATION"
+        ],
+        "evidence": [
+          "No seafood for New York City"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Negative travel requirements had no coverage signal.",
+      "risk": "An excluded item can be silently included.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-163",
+      "category": "K_negation_exclusion",
+      "cluster": "P1 exclusion gap",
+      "input": "Don't schedule a casino in Las Vegas.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "EXCLUSION"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported exclusion, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNREPRESENTED_NEGATION"
+        ],
+        "evidence": [
+          "Don't schedule a casino in Las Vegas"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Negative travel requirements had no coverage signal.",
+      "risk": "An excluded item can be silently included.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-164",
+      "category": "K_negation_exclusion",
+      "cluster": "P1 exclusion gap",
+      "input": "Washington DC, no crowded hotel areas.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "EXCLUSION"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported exclusion, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNREPRESENTED_NEGATION"
+        ],
+        "evidence": [
+          "Washington DC, no crowded hotel areas"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Negative travel requirements had no coverage signal.",
+      "risk": "An excluded item can be silently included.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-165",
+      "category": "K_negation_exclusion",
+      "cluster": "P1 exclusion gap",
+      "input": "San Francisco without tourist-trap restaurants.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "EXCLUSION"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported exclusion, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNREPRESENTED_NEGATION"
+        ],
+        "evidence": [
+          "San Francisco without tourist-trap restaurants"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Negative travel requirements had no coverage signal.",
+      "risk": "An excluded item can be silently included.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-167",
+      "category": "L_tradeoff_objective",
+      "cluster": "P3 tradeoff gap",
+      "input": "Save on food in Chicago so we can spend more on activities.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "TRADEOFF"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported tradeoff, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "TRADEOFF_LANGUAGE"
+        ],
+        "evidence": [
+          "Save on food in Chicago so"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Tradeoff detection required narrow wording and usually a monetary symbol.",
+      "risk": "The plan can ignore the requested allocation tradeoff.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-168",
+      "category": "L_tradeoff_objective",
+      "cluster": "P3 tradeoff gap",
+      "input": "Prioritize hotel quality over restaurants for Miami.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "TRADEOFF"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported tradeoff, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "TRADEOFF_LANGUAGE"
+        ],
+        "evidence": [
+          "Prioritize hotel quality over"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Tradeoff detection required narrow wording and usually a monetary symbol.",
+      "risk": "The plan can ignore the requested allocation tradeoff.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-169",
+      "category": "L_tradeoff_objective",
+      "cluster": "P3 tradeoff gap",
+      "input": "I would pay more for a better Seattle location, while keeping total trip under $1,800.",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1800.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "TRADEOFF"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1800.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported tradeoff, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "TRADEOFF_LANGUAGE"
+        ],
+        "evidence": [
+          "pay more for a better Seattle location, while"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Tradeoff detection required narrow wording and usually a monetary symbol.",
+      "risk": "The plan can ignore the requested allocation tradeoff.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-170",
+      "category": "L_tradeoff_objective",
+      "cluster": "P3 tradeoff gap",
+      "input": "For Denver, choose a cheaper hotel only if museums remain easy to reach.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "TRADEOFF"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported tradeoff, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "TRADEOFF_LANGUAGE"
+        ],
+        "evidence": [
+          "cheaper hotel only if"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Tradeoff detection required narrow wording and usually a monetary symbol.",
+      "risk": "The plan can ignore the requested allocation tradeoff.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-171",
+      "category": "L_tradeoff_objective",
+      "cluster": "P3 tradeoff gap",
+      "input": "Austin food can be simpler if the hotel is closer to downtown.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "TRADEOFF"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported tradeoff, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "TRADEOFF_LANGUAGE"
+        ],
+        "evidence": [
+          "simpler if"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Tradeoff detection required narrow wording and usually a monetary symbol.",
+      "risk": "The plan can ignore the requested allocation tradeoff.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-172",
+      "category": "L_tradeoff_objective",
+      "cluster": "P3 tradeoff gap",
+      "input": "I value location over room size in New York City, up to a total of $2,100.",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 2100.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "TRADEOFF"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 2100.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported tradeoff, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "TRADEOFF_LANGUAGE"
+        ],
+        "evidence": [
+          "value location over"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Tradeoff detection required narrow wording and usually a monetary symbol.",
+      "risk": "The plan can ignore the requested allocation tradeoff.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-173",
+      "category": "L_tradeoff_objective",
+      "cluster": "P3 tradeoff gap",
+      "input": "Spend less on shows in Las Vegas so the hotel can be nicer.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "TRADEOFF"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported tradeoff, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "TRADEOFF_LANGUAGE"
+        ],
+        "evidence": [
+          "Spend less on shows in Las Vegas so"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Tradeoff detection required narrow wording and usually a monetary symbol.",
+      "risk": "The plan can ignore the requested allocation tradeoff.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-174",
+      "category": "L_tradeoff_objective",
+      "cluster": "P3 tradeoff gap",
+      "input": "Pay extra for a quiet Washington DC hotel if it cuts commute time.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "TRADEOFF"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported tradeoff, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "TRADEOFF_LANGUAGE"
+        ],
+        "evidence": [
+          "Pay extra for a quiet Washington DC hotel if"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Tradeoff detection required narrow wording and usually a monetary symbol.",
+      "risk": "The plan can ignore the requested allocation tradeoff.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-175",
+      "category": "L_tradeoff_objective",
+      "cluster": "P3 tradeoff gap",
+      "input": "For San Francisco, prioritize seafood over attractions if choices conflict.",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "TRADEOFF"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported tradeoff, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "TRADEOFF_LANGUAGE"
+        ],
+        "evidence": [
+          "prioritize seafood over"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Tradeoff detection required narrow wording and usually a monetary symbol.",
+      "risk": "The plan can ignore the requested allocation tradeoff.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-186",
+      "category": "N_noisy_english",
+      "cluster": "P1 hard-money gap",
+      "input": "hotel money should not more then 470 total in Boston",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 470.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "hard constraint amount/scope",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "MONETARY_SEMANTIC_GAP"
+        ],
+        "evidence": [
+          "hotel money should not more then 470 total in Boston"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "No represented-vs-source hard-money sufficiency check.",
+      "risk": "A hard cap can disappear or retain the wrong amount/scope.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-187",
+      "category": "N_noisy_english",
+      "cluster": "P1 hard-money gap",
+      "input": "whole Chicago trip cost less 1180 pls",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1180.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "hard constraint amount/scope",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "MONETARY_SEMANTIC_GAP"
+        ],
+        "evidence": [
+          "whole Chicago trip cost less 1180 pls"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "No represented-vs-source hard-money sufficiency check.",
+      "risk": "A hard cap can disappear or retain the wrong amount/scope.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-188",
+      "category": "N_noisy_english",
+      "cluster": "P1 hard-money gap",
+      "input": "miami hotel 390 not 490 make it max total",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 390.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "hard constraint amount/scope",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "MONETARY_SEMANTIC_GAP"
+        ],
+        "evidence": [
+          "miami hotel 390 not 490 make it max total"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "No represented-vs-source hard-money sufficiency check.",
+      "risk": "A hard cap can disappear or retain the wrong amount/scope.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-189",
+      "category": "N_noisy_english",
+      "cluster": "P1 hard-money gap",
+      "input": "seattle trip budgt under 1500 and hotel 600 total",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1500.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 600.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "hard constraint amount/scope",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "MONETARY_SEMANTIC_GAP"
+        ],
+        "evidence": [
+          "seattle trip budgt under 1500 and hotel 600 total"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "No represented-vs-source hard-money sufficiency check.",
+      "risk": "A hard cap can disappear or retain the wrong amount/scope.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-190",
+      "category": "N_noisy_english",
+      "cluster": "P3 preference gap",
+      "input": "denver 3 days i like zoo and fried chiken",
+      "expected_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          },
+          {
+            "category": "FOOD",
+            "value": "fried chicken"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          },
+          {
+            "category": "FOOD",
+            "value": "fried chiken"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "preference",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "The gate did not detect explicit preference clauses left without a canonical preference.",
+      "risk": "The plan can omit a requested experience or accommodation preference.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-191",
+      "category": "N_noisy_english",
+      "cluster": "P1 hard-money gap",
+      "input": "austin all trip no more 1100; lodge total no more 430",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1100.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 430.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "hard constraint amount/scope",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "MONETARY_SEMANTIC_GAP"
+        ],
+        "evidence": [
+          "austin all trip no more 1100",
+          "lodge total no more 430"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "No represented-vs-source hard-money sufficiency check.",
+      "risk": "A hard cap can disappear or retain the wrong amount/scope.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-192",
+      "category": "N_noisy_english",
+      "cluster": "P1 hard-money gap",
+      "input": "nyc hotel money cant above 780 total and trip 1900 max",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1900.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 780.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "hard constraint amount/scope",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "MONETARY_SEMANTIC_GAP"
+        ],
+        "evidence": [
+          "nyc hotel money cant above 780 total and trip 1900 max"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "No represented-vs-source hard-money sufficiency check.",
+      "risk": "A hard cap can disappear or retain the wrong amount/scope.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-194",
+      "category": "N_noisy_english",
+      "cluster": "P1 hard-money gap",
+      "input": "wash dc accomodation total under 620, all trip under 1350",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1350.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 620.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1350.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "hard constraint amount/scope",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "MONETARY_SEMANTIC_GAP"
+        ],
+        "evidence": [
+          "wash dc accomodation total under 620, all trip under 1350"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "No represented-vs-source hard-money sufficiency check.",
+      "risk": "A hard cap can disappear or retain the wrong amount/scope.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-195",
+      "category": "N_noisy_english",
+      "cluster": "P1 hard-money gap",
+      "input": "san fran hotel shud be 800 total max; trip 2050 max",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 2050.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 800.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "deterministic_semantics": {
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "hard constraint amount/scope",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "MONETARY_SEMANTIC_GAP"
+        ],
+        "evidence": [
+          "san fran hotel shud be 800 total max",
+          "trip 2050 max"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "No represented-vs-source hard-money sufficiency check.",
+      "risk": "A hard cap can disappear or retain the wrong amount/scope.",
+      "hard_safety_changed": false
+    },
+    {
+      "case_id": "SEM200-196",
+      "category": "O_adversarial_boundary",
+      "cluster": "P3 rating enrichment",
+      "input": "Boston trip max $1,200. Hotel rating at least 4 stars.",
+      "expected_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1200.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [
+          "HOTEL_RATING"
+        ]
+      },
+      "deterministic_semantics": {
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1200.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": []
+      },
+      "missing_semantic": "unsupported hotel_rating, blocking ambiguity",
+      "old_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "new_coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "why_gate_failed": "Hotel-rating requirements are outside the bounded M2 signals.",
+      "risk": "The hotel star-rating request can be omitted.",
+      "hard_safety_changed": false
+    }
+  ]
+}

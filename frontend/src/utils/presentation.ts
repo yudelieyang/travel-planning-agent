@@ -18,7 +18,7 @@ export const toolNames = {
 }
 export const stageNames = {
   preflight: 'Preflight', clarification: 'Clarification', planner: 'Planner',
-  tools: 'Tools', validation: 'Validation', finalization: 'Finalization',
+  tools: 'Tools', validation: 'Validation', replan: 'Budget repair', finalization: 'Finalization',
 }
 export const validationReasons = {
   prior_errors: 'Prior execution errors', not_reached: 'Validation was not reached', missing_artifacts: 'Required artifacts were missing',

@@ -1,0 +1,18 @@
+{
+  "version": "hybrid_semantics_live_subset_k1",
+  "sources": ["hybrid_semantics_v1.json", "hybrid_semantics_holdout_v1.json"],
+  "case_ids": [
+    "HYBRID-014",
+    "HYBRID-015",
+    "HYBRID-017",
+    "HYBRID-018",
+    "HYBRID-019",
+    "HYBRID-020",
+    "HYBRID-022",
+    "HYBRID-049",
+    "HOLDOUT-005",
+    "HOLDOUT-008",
+    "HOLDOUT-009",
+    "HOLDOUT-016"
+  ]
+}

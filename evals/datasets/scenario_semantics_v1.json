@@ -1,0 +1,33 @@
+{
+  "version": "scenario_semantics_v1",
+  "cases": [
+    {
+      "id": "SCN-HAPPY-001",
+      "query": "Plan a 3-day trip to Boston for 1 traveler under $1200 total. I like museums and seafood.",
+      "expected": {
+        "destination": "Boston",
+        "duration_days": 3,
+        "travelers": 1,
+        "budget_amount": 1200,
+        "budget_scope": "TOTAL_TRIP",
+        "interests": ["museums"],
+        "food_preferences": ["seafood"],
+        "status": "success"
+      }
+    },
+    {
+      "id": "SCN-GOLDEN-001",
+      "query": "Plan a 3-day trip to New York City for 1 traveler under $1000 total. I enjoy city walking and fried chicken. Spend as much of the budget as reasonably possible.",
+      "expected": {
+        "destination": "New York City",
+        "duration_days": 3,
+        "travelers": 1,
+        "budget_amount": 1000,
+        "budget_scope": "TOTAL_TRIP",
+        "interests": ["city walking"],
+        "food_preferences": ["fried chicken"],
+        "objective": "maximize_budget_utilization"
+      }
+    }
+  ]
+}

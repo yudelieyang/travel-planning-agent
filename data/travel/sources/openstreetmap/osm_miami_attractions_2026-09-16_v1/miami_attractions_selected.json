@@ -1,0 +1,95 @@
+{
+  "endpoint": "https://lz4.overpass-api.de/api/interpreter",
+  "acquired_at": "2026-09-16T20:48:26.525766Z",
+  "osm_base_timestamp": "2026-09-16T20:45:51Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/1216769",
+    "name": "Miami",
+    "admin_level": "8"
+  },
+  "query": "[out:json][timeout:180];rel(1216769)->.boundary;area(3601216769)->.searchArea;(rel.boundary;nwr(area.searchArea)[\"name\"][\"tourism\"~\"^(museum|aquarium)$\"];nwr(area.searchArea)[\"name\"][\"leisure\"=\"park\"];);out center tags qt;",
+  "raw_response_sha256": "3cb52e01f7934659efde77892a64daf2f45a1287fda15b53bb59c249260acdd4",
+  "raw_response_bytes": 48207,
+  "returned_element_count": 128,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 648249520,
+      "center": {
+        "lat": 25.7745642,
+        "lon": -80.1965921
+      },
+      "tags": {
+        "addr:city": "Miami",
+        "addr:housenumber": "101",
+        "addr:postcode": "33130",
+        "addr:state": "FL",
+        "addr:street": "West Flagler Street",
+        "building": "yes",
+        "name": "HistoryMiami Museum",
+        "phone": "+1 305-375-1492",
+        "tourism": "museum",
+        "website": "https://historymiami.org/",
+        "wikidata": "Q9275937",
+        "wikipedia": "en:HistoryMiami"
+      }
+    },
+    {
+      "type": "way",
+      "id": 319426548,
+      "center": {
+        "lat": 25.785299,
+        "lon": -80.1877391
+      },
+      "tags": {
+        "addr:city": "Miami",
+        "addr:housenumber": "1101",
+        "addr:postcode": "33132",
+        "addr:state": "FL",
+        "addr:street": "Biscayne Boulevard",
+        "check_date": "2025-09-20",
+        "contact:facebook": "https://www.facebook.com/FrostScience/",
+        "contact:phone": "+1-305-434-9600",
+        "contact:twitter": "https://twitter.com/frostscience",
+        "contact:website": "https://www.frostscience.org/",
+        "description": "The Phillip and Patricia Frost Museum of Science is a science museum.",
+        "museum": "science",
+        "name": "Patricia and Phillip Frost Museum of Science",
+        "opening_hours": "Mo-Su 10:00-18:00",
+        "operator:type": "university",
+        "tourism": "museum",
+        "wikidata": "Q3307880"
+      }
+    },
+    {
+      "type": "way",
+      "id": 484587327,
+      "center": {
+        "lat": 25.7860342,
+        "lon": -80.1863239
+      },
+      "tags": {
+        "addr:city": "Miami",
+        "addr:housenumber": "1103",
+        "addr:postcode": "33132",
+        "addr:state": "FL",
+        "addr:street": "Biscayne Boulevard",
+        "building:levels": "4",
+        "building:min_level": "1",
+        "building:part": "yes",
+        "check_date": "2025-04-23",
+        "museum": "art",
+        "name": "Pérez Art Museum Miami",
+        "opening_hours": "Mo,Fr-Su 11:00-18:00; Tu-We off; Th 11:00-21:00",
+        "short_name": "PAMM",
+        "tourism": "museum",
+        "website": "https://www.pamm.org/",
+        "wikidata": "Q3026874",
+        "wikipedia": "en:Pérez Art Museum Miami"
+      }
+    }
+  ]
+}

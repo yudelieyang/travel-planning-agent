@@ -1,0 +1,97 @@
+{
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "acquired_at": "2026-09-16T15:53:05.592174Z",
+  "osm_base_timestamp": "2026-09-16T15:49:59Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/175905",
+    "name": "New York",
+    "admin_level": "5"
+  },
+  "query": "[out:json][timeout:180];area[\"ISO3166-2\"=\"US-NY\"][\"admin_level\"=\"4\"]->.region;rel(area.region)[\"boundary\"=\"administrative\"][\"name\"=\"New York\"][\"admin_level\"=\"5\"]->.boundary;rel.boundary;map_to_area->.searchArea;(rel.boundary;nwr(area.searchArea)[\"name\"][\"amenity\"=\"restaurant\"][\"addr:housenumber\"][\"addr:street\"];);out center tags qt;",
+  "raw_response_sha256": "bc56423699f374acad038cd4678ba042f1778bbb8b2b4d54e2b1447e435f97a6",
+  "raw_response_bytes": 2692579,
+  "returned_element_count": 5573,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "node",
+      "id": 11088424818,
+      "lat": 40.7462748,
+      "lon": -73.9975223,
+      "tags": {
+        "addr:city": "New York",
+        "addr:housenumber": "290",
+        "addr:postcode": "10001",
+        "addr:state": "NY",
+        "addr:street": "8th Avenue",
+        "amenity": "restaurant",
+        "cuisine": "mediterranean",
+        "delivery": "yes",
+        "diet:kosher": "yes",
+        "diet:vegan": "only",
+        "diet:vegetarian": "yes",
+        "name": "Anixi Mediterranean Vegan Restaurant",
+        "opening_hours": "Mo-Th 16:30-22:00; Fr 16:30-22:30; Sa 11:30-22:30; Su 11:30-22:00",
+        "phone": "+1-646-410-0946",
+        "takeaway": "yes",
+        "website": "https://www.anixinyc.com/",
+        "website:menu": "https://www.anixinyc.com/menu/",
+        "wikidata": "Q136351042"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3213784371,
+      "lat": 40.7607818,
+      "lon": -73.9721848,
+      "tags": {
+        "addr:city": "New York",
+        "addr:housenumber": "65",
+        "addr:postcode": "10022",
+        "addr:state": "NY",
+        "addr:street": "East 55th Street",
+        "amenity": "restaurant",
+        "cuisine": "scandinavian",
+        "email": "info@aquavit.org",
+        "name": "Aquavit",
+        "opening_hours": "Mo-Fr 11:45-14:30, 17:30-22:00;Sa 17:30-22:00;Su off",
+        "phone": "+1-212-307-7311",
+        "reservation": "only",
+        "stars": "2",
+        "website": "http://www.aquavit.org",
+        "wikidata": "Q7316081",
+        "wikipedia": "en:Restaurant Aquavit"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2744875804,
+      "lat": 40.7720849,
+      "lon": -73.9813978,
+      "tags": {
+        "addr:city": "New York",
+        "addr:housenumber": "49",
+        "addr:postcode": "10023",
+        "addr:state": "NY",
+        "addr:street": "West 64th Street",
+        "air_conditioning": "yes",
+        "amenity": "restaurant",
+        "bar": "yes",
+        "cuisine": "seafood",
+        "level": "0",
+        "name": "Atlantic Grill",
+        "opening_hours": "Su 11:00-22:00; Mo 11:30-22:00; Tu-Fr 11:30-23:00; Sa 11:00-23:00",
+        "operator": "BR Guest",
+        "outdoor_seating": "no",
+        "phone": "+1 212-787-4663",
+        "reservation": "yes",
+        "smoking": "no",
+        "website": "https://www.atlanticgrill.com/",
+        "wikidata": "Q4816444",
+        "wikipedia": "en:Atlantic Grill"
+      }
+    }
+  ]
+}

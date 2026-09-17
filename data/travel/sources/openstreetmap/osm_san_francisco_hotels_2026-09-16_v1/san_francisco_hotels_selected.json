@@ -1,0 +1,104 @@
+{
+  "endpoint": "https://overpass.private.coffee/api/interpreter",
+  "acquired_at": "2026-09-16T21:26:59.707796Z",
+  "osm_base_timestamp": "2026-07-28T02:16:18Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/111968",
+    "name": "San Francisco",
+    "admin_level": "6"
+  },
+  "query": "[out:json][timeout:180];rel(111968)->.boundary;area(3600111968)->.searchArea;(rel.boundary;node(area.searchArea)[\"name\"][\"tourism\"=\"hotel\"][\"addr:city\"=\"San Francisco\"];way(area.searchArea)[\"name\"][\"tourism\"=\"hotel\"][\"addr:city\"=\"San Francisco\"];);out center tags qt;",
+  "raw_response_sha256": "543c2b80d0735935c890e525da0d3cea4acab17d95103eb1a7f6d0f45295454c",
+  "raw_response_bytes": 84356,
+  "returned_element_count": 144,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 149332498,
+      "center": {
+        "lat": 37.7862212,
+        "lon": -122.4042473
+      },
+      "tags": {
+        "addr:city": "San Francisco",
+        "addr:housenumber": "757",
+        "addr:postcode": "94103",
+        "addr:state": "CA",
+        "addr:street": "Market Street",
+        "brand": "Four Seasons",
+        "brand:wikidata": "Q1424786",
+        "building": "yes",
+        "check_date": "2024-10-24",
+        "height": "29",
+        "name": "Four Seasons",
+        "operator": "Four Seasons",
+        "phone": "+1-415-633-3000",
+        "smoking": "no",
+        "source": "Bing",
+        "tourism": "hotel",
+        "website": "https://www.fourseasons.com/sanfrancisco/",
+        "wikidata": "Q5475490"
+      }
+    },
+    {
+      "type": "way",
+      "id": 32863494,
+      "center": {
+        "lat": 37.7891243,
+        "lon": -122.4072404
+      },
+      "tags": {
+        "addr:city": "San Francisco",
+        "addr:housenumber": "345",
+        "addr:postcode": "94108",
+        "addr:state": "CA",
+        "addr:street": "Stockton Street",
+        "branch": "San Francisco",
+        "brand": "Grand Hyatt",
+        "brand:wikidata": "Q115794899",
+        "building": "hotel",
+        "building:levels": "36",
+        "height": "94",
+        "name": "Grand Hyatt San Francisco",
+        "operator": "Hyatt",
+        "phone": "+1 415-398-1234",
+        "tourism": "hotel",
+        "website": "https://sanfrancisco.grand.hyatt.com/en/hotel/home.html",
+        "wikidata": "Q5594662"
+      }
+    },
+    {
+      "type": "way",
+      "id": 260922316,
+      "center": {
+        "lat": 37.7951542,
+        "lon": -122.404292
+      },
+      "tags": {
+        "addr:city": "San Francisco",
+        "addr:country": "US",
+        "addr:housenumber": "750",
+        "addr:postcode": "94108",
+        "addr:state": "CA",
+        "addr:street": "Kearny Street",
+        "brand": "Hilton",
+        "brand:wikidata": "Q598884",
+        "building": "hotel",
+        "building:levels": "32",
+        "fax": "+1-415-765-7855",
+        "height": "111",
+        "name": "Hilton San Francisco Financial District",
+        "operator": "Hilton",
+        "phone": "+1-415-433-6600",
+        "rooms": "544",
+        "tourism": "hotel",
+        "website": "https://www3.hilton.com/en/hotels/california/hilton-san-francisco-financial-district-SFOFDHF/index.html",
+        "wikidata": "Q14682267",
+        "wikipedia": "en:Hilton San Francisco Financial District"
+      }
+    }
+  ]
+}

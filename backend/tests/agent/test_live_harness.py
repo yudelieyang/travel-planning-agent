@@ -104,7 +104,7 @@ def test_full_mock_pipeline_serializes_and_ignores_search_order(tmp_path):
     assert report["comparison"]["OpenAI"] == "NOT RUN"
     assert report["comparison"]["OpenAI MOCK"]["case_success_rate"]["value"] == 1
     assert report["comparison"]["OpenAI MOCK"]["required_tool_recall"]["value"] == 1
-    assert report["comparison"]["OpenAI MOCK"]["budget_integrity_rate"]["denominator"] == 7
+    assert report["comparison"]["OpenAI MOCK"]["budget_integrity_rate"]["denominator"] == 8
     a, b = report["records"][:8], report["records"][8:]
     for first, second in zip(a, b, strict=True):
         assert first["requirements_sha256"] == second["requirements_sha256"]

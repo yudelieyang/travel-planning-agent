@@ -1,0 +1,97 @@
+{
+  "version": "hybrid_semantics_live_subset_m5",
+  "model": "gpt-5.6-luna",
+  "prompt_version": "semantic_extractor_v2",
+  "selection_note": "Frozen before execution: 5 correction cases, 2 ambiguous monetary cases, 1 multi-scope correction, 1 noisy correction, and 1 negative correction guard; no input overlaps prior datasets.",
+  "live_category_mix": {
+    "correction": 5,
+    "ambiguous_monetary": 2,
+    "multi_scope_correction": 1,
+    "noisy_correction": 1,
+    "negative_correction_guard": 1
+  },
+  "sources": ["hybrid_semantics_m5_correction_holdout_v1.json"],
+  "case_ids": ["M5-001", "M5-002", "M5-003", "M5-004", "M5-005", "M5-006", "M5-007", "M5-008", "M5-009", "M5-010"],
+  "cases": [
+    {
+      "case_id": "M5-001",
+      "selection_category": "correction",
+      "source_category": "correction",
+      "input": "Hotel spending for the entire stay must stay under $610. Sorry, revised lodging limit: $560.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE", "CORRECTION_TARGET_UNRESOLVED"],
+      "gold_target": {"constraints": [{"scope": "HOTEL_TOTAL", "value": 560.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M5-002",
+      "selection_category": "correction",
+      "source_category": "correction",
+      "input": "Keep the whole trip under $1,740. Sorry, change the trip cap to $1,520.",
+      "functional_coverage_reasons": ["MONETARY_SEMANTIC_GAP", "CORRECTION_TARGET_UNRESOLVED"],
+      "gold_target": {"constraints": [{"scope": "TOTAL_TRIP", "value": 1520.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M5-003",
+      "selection_category": "correction",
+      "source_category": "correction",
+      "input": "All lodging for the trip cannot exceed $690. Actually, revise the lodging limit to $640.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE", "CORRECTION_TARGET_UNRESOLVED"],
+      "gold_target": {"constraints": [{"scope": "HOTEL_TOTAL", "value": 640.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M5-004",
+      "selection_category": "correction",
+      "source_category": "correction",
+      "input": "The total trip must stay below $2,050. Sorry, lower the trip cap to $1,850.",
+      "functional_coverage_reasons": ["MONETARY_SEMANTIC_GAP", "CORRECTION_TARGET_UNRESOLVED"],
+      "gold_target": {"constraints": [{"scope": "TOTAL_TRIP", "value": 1850.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M5-005",
+      "selection_category": "correction",
+      "source_category": "correction",
+      "input": "Hotel total ceiling is $720. Adjust the hotel total to $660.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE"],
+      "gold_target": {"constraints": [{"scope": "HOTEL_TOTAL", "value": 660.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M5-006",
+      "selection_category": "ambiguous_monetary",
+      "source_category": "ambiguous_monetary",
+      "input": "Set aside $475 for the hotel.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE"],
+      "gold_target": {"constraints": [], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M5-007",
+      "selection_category": "ambiguous_monetary",
+      "source_category": "ambiguous_monetary",
+      "input": "I can do $215 for lodging.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE"],
+      "gold_target": {"constraints": [], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M5-008",
+      "selection_category": "multi_scope_correction",
+      "source_category": "multi_scope_correction",
+      "input": "Keep the entire trip under $1,300 and hotel total under $520. Actually make hotel total $470.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE", "CORRECTION_TARGET_UNRESOLVED"],
+      "gold_target": {"constraints": [{"scope": "TOTAL_TRIP", "value": 1300.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}, {"scope": "HOTEL_TOTAL", "value": 470.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M5-009",
+      "selection_category": "noisy_correction",
+      "source_category": "noisy_correction",
+      "input": "hotel all nites max usd 640... wait actually pls make teh hotel total usd 590",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE", "CORRECTION_TARGET_UNRESOLVED"],
+      "gold_target": {"constraints": [{"scope": "HOTEL_TOTAL", "value": 590.0, "strength": "HARD", "operator": "LTE", "supported_for_execution": true}], "preferences": [], "ambiguity_levels": [], "requires_clarification": false, "unsupported_scopes": [], "unsupported_semantics": []}
+    },
+    {
+      "case_id": "M5-010",
+      "selection_category": "negative_correction_guard",
+      "source_category": "negative_correction_guard",
+      "input": "Do not make the hotel total $650; I have not set a hotel cap.",
+      "functional_coverage_reasons": ["AMBIGUOUS_SCOPE", "CORRECTION_TARGET_UNRESOLVED"],
+      "gold_target": {"constraints": [], "preferences": [], "ambiguity_levels": ["BLOCKING"], "requires_clarification": true, "unsupported_scopes": [], "unsupported_semantics": []}
+    }
+  ]
+}

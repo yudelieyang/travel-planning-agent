@@ -1,0 +1,95 @@
+{
+  "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+  "acquired_at": "2026-09-16T21:47:28.378883Z",
+  "osm_base_timestamp": "2026-09-16T21:44:44Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/170117",
+    "name": "Las Vegas",
+    "admin_level": "8"
+  },
+  "query": "[out:json][timeout:180];rel(170117)->.boundary;(rel.boundary;node(36.129554,-115.406575,36.401481,-115.062066)[\"name\"][\"amenity\"=\"restaurant\"][\"addr:city\"=\"Las Vegas\"][\"addr:housenumber\"][\"addr:street\"];way(36.129554,-115.406575,36.401481,-115.062066)[\"name\"][\"amenity\"=\"restaurant\"][\"addr:city\"=\"Las Vegas\"][\"addr:housenumber\"][\"addr:street\"];);out center tags qt;",
+  "raw_response_sha256": "796507eaaac9a137cd5ca049e458b68f7f294de2c13344344dfac1e232a93deb",
+  "raw_response_bytes": 117603,
+  "returned_element_count": 215,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 1380168243,
+      "center": {
+        "lat": 36.1678978,
+        "lon": -115.1406066
+      },
+      "tags": {
+        "addr:city": "Las Vegas",
+        "addr:housenumber": "124",
+        "addr:postcode": "89101",
+        "addr:state": "NV",
+        "addr:street": "South 6th Street",
+        "addr:unit": "100",
+        "amenity": "restaurant",
+        "cuisine": "tapas;american",
+        "indoor": "yes",
+        "name": "Carson Kitchen",
+        "opening_hours": "Mo-Th 12:00-21:00; Fr-Sa 12:00-22:00; Su 11:00-21:00",
+        "phone": "+1 702-473-9523",
+        "takeaway": "yes",
+        "website": "https://carsonkitchen.com/",
+        "wheelchair": "yes",
+        "wikidata": "Q61982078"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1380168245,
+      "center": {
+        "lat": 36.1695171,
+        "lon": -115.1407926
+      },
+      "tags": {
+        "addr:city": "Las Vegas",
+        "addr:housenumber": "450",
+        "addr:postcode": "89101",
+        "addr:state": "NV",
+        "addr:street": "Fremont Street",
+        "amenity": "restaurant",
+        "cuisine": "american",
+        "fee:conditional": "no @ (weight >= 25 st)",
+        "indoor": "yes",
+        "name": "Heart Attack Grill",
+        "website": "https://www.heartattackgrill.com/",
+        "wikidata": "Q2068768",
+        "wikipedia": "en:Heart Attack Grill"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7140749328,
+      "lat": 36.1440589,
+      "lon": -115.1933253,
+      "tags": {
+        "addr:city": "Las Vegas",
+        "addr:country": "US",
+        "addr:county": "Clark",
+        "addr:housenumber": "3839",
+        "addr:postcode": "89102-0540",
+        "addr:state": "NV",
+        "addr:street": "West Sahara Avenue",
+        "addr:unit": "9",
+        "amenity": "restaurant",
+        "branch": "Sahara",
+        "brand": "Weera Thai",
+        "cuisine": "thai",
+        "happy_hours": "16:00-22:00",
+        "name": "Weera Thai",
+        "opening_hours": "11:00-22:00",
+        "phone": "+1 702-873-8749",
+        "takeaway": "yes",
+        "website": "https://www.weerathai.com",
+        "wikidata": "Q64149051"
+      }
+    }
+  ]
+}

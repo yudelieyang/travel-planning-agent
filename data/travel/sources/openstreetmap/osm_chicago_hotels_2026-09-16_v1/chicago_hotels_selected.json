@@ -1,0 +1,126 @@
+{
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "acquired_at": "2026-09-16T20:37:50.069047Z",
+  "osm_base_timestamp": "2026-09-16T20:35:40Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/122604",
+    "name": "Chicago",
+    "admin_level": "8"
+  },
+  "query": "[out:json][timeout:180];rel(122604)->.boundary;area(3600122604)->.searchArea;(rel.boundary;nwr(area.searchArea)[\"name\"][\"tourism\"=\"hotel\"][\"addr:housenumber\"][\"addr:street\"];);out center tags qt;",
+  "raw_response_sha256": "10b7f976ad8fa13dfc1a8068eee72b6718e1e27a7108bcfe1b034adc89a78682",
+  "raw_response_bytes": 124826,
+  "returned_element_count": 181,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 401244510,
+      "center": {
+        "lat": 41.8935944,
+        "lon": -87.6232845
+      },
+      "tags": {
+        "addr:city": "Chicago",
+        "addr:housenumber": "150",
+        "addr:postcode": "60611",
+        "addr:state": "IL",
+        "addr:street": "East Ontario Street",
+        "air_conditioning": "yes",
+        "bar": "yes",
+        "brand": "RIU",
+        "brand:wikidata": "Q2005557",
+        "building": "hotel",
+        "check_date": "2024-05-18",
+        "contact:facebook": "https://www.facebook.com/riuplazachicago",
+        "email": "hotel.plazachicago@riu.com",
+        "internet_access": "no",
+        "name": "Hotel Riu Plaza Chicago",
+        "opening_date": "2024-06-01",
+        "opening_hours": "24/7",
+        "operator": "RIU Hotels & Resorts",
+        "payment:cash": "yes",
+        "payment:credit_cards": "yes",
+        "payment:debit_cards": "yes",
+        "payment:maestro": "yes",
+        "payment:mastercard": "yes",
+        "payment:visa": "yes",
+        "payment:visa_debit": "yes",
+        "payment:visa_electron": "yes",
+        "phone": "+1 312-363-3480",
+        "reservation": "yes",
+        "rooms": "390",
+        "smoking": "no",
+        "source": "https://www.riu.com/en/hotel/usa/chicago/hotel-riu-plaza-chicago/",
+        "tourism": "hotel",
+        "website": "https://www.riu.com/en/hotel/usa/chicago/hotel-riu-plaza-chicago/",
+        "wheelchair": "yes",
+        "wikidata": "Q136366697"
+      }
+    },
+    {
+      "type": "way",
+      "id": 235920251,
+      "center": {
+        "lat": 41.8874924,
+        "lon": -87.6222342
+      },
+      "tags": {
+        "addr:city": "Chicago",
+        "addr:housenumber": "151",
+        "addr:postcode": "60601",
+        "addr:state": "IL",
+        "addr:street": "East Wacker Drive",
+        "addr:street:name": "Wacker",
+        "addr:street:prefix": "East",
+        "addr:street:type": "Drive",
+        "branch": "Chicago",
+        "brand": "Hyatt Regency",
+        "brand:wikidata": "Q115794868",
+        "building": "hotel",
+        "building:levels": "33",
+        "chicago:building_id": "352202",
+        "name": "Hyatt Regency Chicago",
+        "operator": "Hyatt",
+        "phone": "+1 312-565-1234",
+        "tourism": "hotel",
+        "website": "https://chicago.regency.hyatt.com/",
+        "wikidata": "Q5952876",
+        "wikipedia": "en:Hyatt Regency Chicago"
+      }
+    },
+    {
+      "type": "way",
+      "id": 330535225,
+      "center": {
+        "lat": 41.8877548,
+        "lon": -87.625305
+      },
+      "tags": {
+        "addr:city": "Chicago",
+        "addr:country": "US",
+        "addr:housenumber": "85",
+        "addr:postcode": "60601",
+        "addr:state": "IL",
+        "addr:street": "East Wacker Drive",
+        "alt_name": "London House",
+        "brand": "London House Chicago",
+        "building": "hotel",
+        "building:levels": "21",
+        "email": "sales@londonhouse.com",
+        "facebook": "https://www.facebook.com/londonhousechicago",
+        "height": "97.5",
+        "name": "London House Chicago",
+        "opening_hours": "24/7",
+        "phone": "+1-312-357-1200",
+        "tourism": "hotel",
+        "twitter": "https://twitter.com/lhchicago",
+        "website": "https://londonhousechicago.com",
+        "wikidata": "Q7748047",
+        "wikipedia": "en:London House (Chicago)"
+      }
+    }
+  ]
+}

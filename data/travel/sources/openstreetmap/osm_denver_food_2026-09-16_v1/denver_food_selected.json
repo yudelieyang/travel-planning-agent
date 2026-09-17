@@ -1,0 +1,81 @@
+{
+  "endpoint": "https://overpass.private.coffee/api/interpreter",
+  "acquired_at": "2026-09-16T21:15:33.645616Z",
+  "osm_base_timestamp": "2026-07-15T15:22:01Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/1411339",
+    "name": "Denver",
+    "admin_level": "6"
+  },
+  "query": "[out:json][timeout:180];rel(1411339)->.boundary;(rel.boundary;node(39.6143008,-105.1098845,39.9142087,-104.5996997)[\"name\"][\"amenity\"=\"restaurant\"][\"addr:city\"=\"Denver\"][\"addr:housenumber\"][\"addr:street\"];way(39.6143008,-105.1098845,39.9142087,-104.5996997)[\"name\"][\"amenity\"=\"restaurant\"][\"addr:city\"=\"Denver\"][\"addr:housenumber\"][\"addr:street\"];);out center tags qt;",
+  "raw_response_sha256": "317ac34aab72671355381a7075718ec36691d2310532b47ba6215297bd71a64a",
+  "raw_response_bytes": 395738,
+  "returned_element_count": 846,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "node",
+      "id": 519549594,
+      "lat": 39.7322529,
+      "lon": -105.0051124,
+      "tags": {
+        "addr:city": "Denver",
+        "addr:housenumber": "1000",
+        "addr:postcode": "80204",
+        "addr:state": "CO",
+        "addr:street": "Osage Street",
+        "amenity": "restaurant",
+        "cuisine": "steak_house",
+        "name": "Buckhorn Exchange",
+        "phone": "+1-303-534-9505",
+        "website": "https://www.buckhorn.com/",
+        "wikidata": "Q60761501",
+        "wikipedia": "en:Buckhorn Exchange"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11916986269,
+      "lat": 39.7554154,
+      "lon": -104.989695,
+      "tags": {
+        "addr:city": "Denver",
+        "addr:housenumber": "2233",
+        "addr:postcode": "80205",
+        "addr:state": "CO",
+        "addr:street": "Larimer Street",
+        "amenity": "restaurant",
+        "cuisine": "mexican",
+        "name": "La Diabla Pozole Y Mezcal",
+        "opening_hours": "Mo 15:00-21:00; Tu 15:00-22:00; We-Th 11:00-22:00; Fr-Sa 11:00-23:00; Su 11:00-21:00",
+        "phone": "+1 720-827-4158",
+        "website": "https://www.pangea-concepts.com/pages/la-diabla",
+        "wikidata": "Q122942025",
+        "wikipedia": "en:La Diabla Pozole y Mezcal"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3039100985,
+      "lat": 39.768623,
+      "lon": -104.97988,
+      "tags": {
+        "addr:city": "Denver",
+        "addr:housenumber": "3350",
+        "addr:postcode": "80216",
+        "addr:state": "CO",
+        "addr:street": "Brighton Boulevard",
+        "amenity": "restaurant",
+        "cuisine": "american",
+        "diet:vegan": "no",
+        "diet:vegetarian": "limited",
+        "email": "events@denveracorn.com",
+        "name": "Acorn",
+        "phone": "+1-720-542-3721",
+        "website": "https://www.denveracorn.com/"
+      }
+    }
+  ]
+}

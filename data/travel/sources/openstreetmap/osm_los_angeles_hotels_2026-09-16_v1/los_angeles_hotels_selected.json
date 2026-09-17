@@ -1,0 +1,106 @@
+{
+  "endpoint": "https://overpass.private.coffee/api/interpreter",
+  "acquired_at": "2026-09-16T21:35:56.264551Z",
+  "osm_base_timestamp": "2026-07-28T02:16:18Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/207359",
+    "name": "Los Angeles",
+    "admin_level": "8"
+  },
+  "query": "[out:json][timeout:180];rel(207359)->.boundary;(rel.boundary;node(33.659541,-118.6681798,34.337306,-118.1552983)[\"name\"][\"tourism\"=\"hotel\"][\"addr:city\"=\"Los Angeles\"];way(33.659541,-118.6681798,34.337306,-118.1552983)[\"name\"][\"tourism\"=\"hotel\"][\"addr:city\"=\"Los Angeles\"];);out center tags qt;",
+  "raw_response_sha256": "57da2500e3895ca8ca9f387f8c388fdf49224a0f18b3dd10ebcbce81ed392ad0",
+  "raw_response_bytes": 78596,
+  "returned_element_count": 120,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 427817639,
+      "center": {
+        "lat": 34.0505303,
+        "lon": -118.2426654
+      },
+      "tags": {
+        "addr:city": "Los Angeles",
+        "addr:housenumber": "120",
+        "addr:postcode": "90012",
+        "addr:state": "CA",
+        "addr:street": "South Los Angeles Street",
+        "branch": "Hotel Los Angeles Downtown",
+        "brand": "DoubleTree",
+        "brand:wikidata": "Q2504643",
+        "building": "yes",
+        "building:levels": "21",
+        "ele": "152.1",
+        "height": "69.1",
+        "historic:name": "New Otani Hotel",
+        "lacounty:ain": "5161016021;5161016020;5161016019;5161016024;5161016021;5161016019;5161016019;5161016024",
+        "lacounty:bld_id": "488293840963;488231841001;488177840920;488278840893;488280840918;488273840914;488173840749;488184840757",
+        "name": "DoubleTree by Hilton Hotel Los Angeles Downtown",
+        "name:en": "DoubleTree by Hilton Hotel Los Angeles Downtown",
+        "name:ja": "ダブルツリー バイ ヒルトン ホテル ロサンゼルス ダウンタウン",
+        "official_name": "DoubleTree by Hilton",
+        "ref": "LAXDTDT",
+        "short_name": "DoubleTree",
+        "start_date": "1977",
+        "tourism": "hotel",
+        "website": "https://www.hilton.com/en/hotels/laxdtdt-doubletree-los-angeles-downtown/",
+        "wikidata": "Q5299633"
+      }
+    },
+    {
+      "type": "way",
+      "id": 43342001,
+      "center": {
+        "lat": 34.0575083,
+        "lon": -118.4157229
+      },
+      "tags": {
+        "addr:city": "Los Angeles",
+        "addr:housename": "Century Plaza Hotel",
+        "addr:housenumber": "2025",
+        "addr:postcode": "90067",
+        "addr:state": "CA",
+        "addr:street": "Avenue of the Stars",
+        "brand": "Fairmont",
+        "brand:wikidata": "Q1393345",
+        "building": "hotel",
+        "building:levels": "17",
+        "ele": "147.0",
+        "height": "54.0",
+        "lacounty:ain": "4319004109",
+        "lacounty:bld_id": "435695843594",
+        "name": "Fairmont Century Plaza",
+        "old_name": "Hyatt Regency Century Plaza",
+        "operator": "Fairmont Hotels & Resorts",
+        "start_date": "1965",
+        "tourism": "hotel",
+        "website": "https://www.fairmontcenturyplaza.com/",
+        "wikidata": "Q2795889"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9774638782,
+      "lat": 33.946053,
+      "lon": -118.392718,
+      "tags": {
+        "addr:city": "Los Angeles",
+        "addr:housenumber": "6151",
+        "addr:postcode": "90045",
+        "addr:state": "CA",
+        "addr:street": "West Century Boulevard",
+        "brand": "Curio Collection",
+        "brand:wikidata": "Q19903229",
+        "email": "laxca.hotel@hilton.com",
+        "name": "H Hotel Los Angeles, Curio Collection by Hilton",
+        "phone": "+1-310-215-3000",
+        "tourism": "hotel",
+        "website": "https://www.hilton.com/en/hotels/laxcaqq",
+        "wikidata": "Q111393709"
+      }
+    }
+  ]
+}

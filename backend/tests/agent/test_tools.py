@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 
-from app.tools import mock
+from app.tools import candidate_data, mock
 from app.tools.contracts import BudgetInput, CostItem, SearchInput, ToolResult, ToolStatus
 
 
@@ -32,8 +32,10 @@ def test_search_filters_and_validation():
 
 
 def test_fixture_failure_returns_error(monkeypatch, tmp_path):
-    monkeypatch.setattr(mock, "MOCK_ROOT", tmp_path)
+    monkeypatch.setattr(candidate_data, "CANDIDATE_DATA_PATH", tmp_path / "missing.json")
+    candidate_data.load_candidate_dataset.cache_clear()
     result = mock.search_hotels(SearchInput(destination="Boston"))
+    candidate_data.load_candidate_dataset.cache_clear()
     assert result.status == ToolStatus.ERROR
     assert result.error
     assert result.data is None

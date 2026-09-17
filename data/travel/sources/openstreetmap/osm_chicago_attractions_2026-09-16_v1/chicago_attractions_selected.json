@@ -1,0 +1,98 @@
+{
+  "endpoint": "https://overpass.kumi.systems/api/interpreter",
+  "acquired_at": "2026-09-16T15:53:51.367411Z",
+  "osm_base_timestamp": "2026-07-15T15:22:01Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/122604",
+    "name": "Chicago",
+    "admin_level": "8"
+  },
+  "query": "[out:json][timeout:180];area[\"ISO3166-2\"=\"US-IL\"][\"admin_level\"=\"4\"]->.region;rel(area.region)[\"boundary\"=\"administrative\"][\"name\"=\"Chicago\"][\"admin_level\"=\"8\"]->.boundary;rel.boundary;map_to_area->.searchArea;(rel.boundary;nwr(area.searchArea)[\"name\"][\"tourism\"~\"^(museum|aquarium)$\"];nwr(area.searchArea)[\"name\"][\"leisure\"=\"park\"];);out center tags qt;",
+  "raw_response_sha256": "9fe314784b468cfcab74fd60dedfb76b5258cc6e62ac2f11c246d641aa0fbcd1",
+  "raw_response_bytes": 496132,
+  "returned_element_count": 799,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "node",
+      "id": 5169949885,
+      "lat": 41.8855608,
+      "lon": -87.6249909,
+      "tags": {
+        "addr:city": "Chicago",
+        "addr:housenumber": "180",
+        "addr:postcode": "60601",
+        "addr:state": "IL",
+        "addr:street": "North Michigan Avenue",
+        "name": "American Writers Museum",
+        "phone": "+1 312-374-8790",
+        "tourism": "museum",
+        "tourism_1": "attraction",
+        "website": "https://americanwritersmuseum.org/",
+        "wikidata": "Q19864096"
+      }
+    },
+    {
+      "type": "way",
+      "id": 210698577,
+      "center": {
+        "lat": 41.7053741,
+        "lon": -87.6030693
+      },
+      "tags": {
+        "addr:city": "Chicago",
+        "addr:housenumber": "10406",
+        "addr:postcode": "60628",
+        "addr:state": "IL",
+        "addr:street": "South Maryland Avenue",
+        "addr:street:name": "Maryland",
+        "addr:street:prefix": "South",
+        "addr:street:type": "Avenue",
+        "building": "house",
+        "building:levels": "3",
+        "chicago:building_id": "824263",
+        "museum": "history",
+        "name": "A. Philip Randolph Pullman Porter Museum",
+        "name:etymology:wikidata": "Q720153",
+        "name:etymology:wikipedia": "A. Philip Randolph",
+        "subject:wikidata": "Q720153",
+        "subject:wikipedia": "en:A. Philip Randolph",
+        "tourism": "museum",
+        "website": "http://www.aphiliprandolphmuseum.org/",
+        "wikidata": "Q102283031"
+      }
+    },
+    {
+      "type": "way",
+      "id": 163573566,
+      "center": {
+        "lat": 41.7746301,
+        "lon": -87.7229824
+      },
+      "tags": {
+        "addr:city": "Chicago",
+        "addr:housenumber": "6500",
+        "addr:postcode": "60629",
+        "addr:state": "IL",
+        "addr:street": "South Pulaski Road",
+        "addr:street:name": "Pulaski",
+        "addr:street:prefix": "South",
+        "addr:street:type": "Road",
+        "building": "commercial",
+        "building:levels": "2",
+        "check_date:opening_hours": "2023-03-10",
+        "chicago:building_id": "551016",
+        "fee": "yes",
+        "museum": "history",
+        "name": "Balzekas Museum of Lithuanian Culture",
+        "opening_hours": "Mo-Sa 10:00-16:00; Su 12:00-16:00; Dec 24-25 off; Jan 01 off; easter Su off",
+        "tourism": "museum",
+        "website": "https://balzekasmuseum.org/",
+        "wikidata": "Q4853170",
+        "wikipedia": "en:Balzekas Museum of Lithuanian Culture"
+      }
+    }
+  ]
+}

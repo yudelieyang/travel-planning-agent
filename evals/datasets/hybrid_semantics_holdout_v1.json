@@ -1,0 +1,21 @@
+{
+  "version": "hybrid_semantics_holdout_v1",
+  "cases": [
+    {"id":"HOLDOUT-001","category":"hard_total","input":"Keep the whole trip below $850.","expected":{"needs_llm":false,"constraints":[{"scope":"TOTAL_TRIP","value":850}]}},
+    {"id":"HOLDOUT-002","category":"hard_total","input":"My budget is $1,100 for the entire trip.","expected":{"needs_llm":false,"constraints":[{"scope":"TOTAL_TRIP","value":1100}]}},
+    {"id":"HOLDOUT-003","category":"soft_total","input":"Roughly $900 total is fine.","expected":{"needs_llm":false}},
+    {"id":"HOLDOUT-004","category":"hotel_total","input":"No more than $420 total for lodging.","expected":{"needs_llm":false,"constraints":[{"scope":"HOTEL_TOTAL","value":420}]}},
+    {"id":"HOLDOUT-005","category":"ambiguous_hotel","input":"Lodging budget is $350.","expected":{"needs_llm":true,"ambiguity_levels":["BLOCKING"],"requires_clarification":true}},
+    {"id":"HOLDOUT-006","category":"correction","input":"My total budget is $1400. Sorry, make that no more than $1100.","expected":{"needs_llm":false,"constraints":[{"scope":"TOTAL_TRIP","value":1100}]}},
+    {"id":"HOLDOUT-007","category":"multi_scope","input":"The trip must stay below $1200, and the hotel must stay below $500 total.","expected":{"needs_llm":false,"constraints":[{"scope":"TOTAL_TRIP","value":1200},{"scope":"HOTEL_TOTAL","value":500}]}},
+    {"id":"HOLDOUT-008","category":"unsupported_scope","input":"Flight spending must stay below $180.","expected":{"needs_llm":true,"ambiguity_levels":["BLOCKING"],"requires_clarification":true}},
+    {"id":"HOLDOUT-009","category":"unsupported_scope","input":"Restaurant costs should stay under $240.","expected":{"needs_llm":true,"ambiguity_levels":["BLOCKING"],"unsupported_scopes":["FOOD_TOTAL"],"requires_clarification":true}},
+    {"id":"HOLDOUT-010","category":"false_money","input":"Find a 4-star hotel and visit 3 museums at 9 AM.","expected":{"needs_llm":false}},
+    {"id":"HOLDOUT-011","category":"preferences","input":"I want to visit parks and eat seafood in Boston.","expected":{"needs_llm":false,"destination":"Boston","preferences":[{"category":"ACTIVITY","value":"parks"}]}},
+    {"id":"HOLDOUT-012","category":"noisy_hard_hotel","input":"hotel budget should not be more then $450 total","expected":{"needs_llm":false,"constraints":[{"scope":"HOTEL_TOTAL","value":450}]}},
+    {"id":"HOLDOUT-013","category":"soft_hotel","input":"I'd like lodging around $300 if possible.","expected":{"needs_llm":false,"preferences":[{"category":"HOTEL","value":"around usd 300"}]}},
+    {"id":"HOLDOUT-014","category":"hard_total","input":"Cap the trip at $950.","expected":{"needs_llm":false,"constraints":[{"scope":"TOTAL_TRIP","value":950}]}},
+    {"id":"HOLDOUT-015","category":"correction_scopes","input":"Hotel maximum is $600 total. Actually, make it $450.","expected":{"needs_llm":false,"constraints":[{"scope":"HOTEL_TOTAL","value":450}]}},
+    {"id":"HOLDOUT-016","category":"hybrid_tradeoff","input":"I can stretch the hotel budget if the location is excellent, but the trip should stay under $1000.","expected":{"needs_llm":true,"allow_hybrid_gap":true,"constraints":[{"scope":"TOTAL_TRIP","value":1000}]}}
+  ]
+}

@@ -78,13 +78,18 @@ def test_evaluation_seed(case):
     assert response.json()["status"] == case["expected_api_status"]
     constraint = case["budget_constraint"]
     if constraint:
-        cost = state["budget_summary"].estimated_total_cost
+        budget = state["budget_summary"] or next(
+            result.data
+            for result in state["tool_results"]
+            if result.tool_name == "calculate_budget"
+        )
+        cost = budget.estimated_total_cost
         if "max_total" in constraint:
-            assert cost <= constraint["max_total"] or state["budget_summary"].warnings
+            assert cost <= constraint["max_total"] or budget.warnings
         if "within_budget" in constraint:
-            assert state["budget_summary"].within_budget == constraint["within_budget"]
+            assert budget.within_budget == constraint["within_budget"]
         if "scope" in constraint:
-            assert state["budget_summary"].budget_scope == constraint["scope"]
+            assert budget.budget_scope == constraint["scope"]
         if constraint.get("must_exceed"):
             assert cost > constraint["max_total"]
-            assert state["budget_summary"].within_budget is False
+            assert budget.within_budget is False

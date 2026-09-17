@@ -1,0 +1,114 @@
+{
+  "endpoint": "https://overpass.private.coffee/api/interpreter",
+  "acquired_at": "2026-09-16T21:18:32.564134Z",
+  "osm_base_timestamp": "2026-07-28T02:16:18Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/237385",
+    "name": "Seattle",
+    "admin_level": "8"
+  },
+  "query": "[out:json][timeout:180];rel(237385)->.boundary;area(3600237385)->.searchArea;(rel.boundary;nwr(area.searchArea)[\"name\"][\"tourism\"~\"^(museum|aquarium)$\"];nwr(area.searchArea)[\"name\"][\"leisure\"=\"park\"];);out center tags qt;",
+  "raw_response_sha256": "b7fa7bf0d4200823684243debc31eef6bcd79f3e70505dd9fa995b3e68732a00",
+  "raw_response_bytes": 197016,
+  "returned_element_count": 536,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 160545994,
+      "center": {
+        "lat": 47.6604219,
+        "lon": -122.3115327
+      },
+      "tags": {
+        "addr:city": "Seattle",
+        "addr:housenumber": "4303",
+        "addr:postcode": "98105",
+        "addr:state": "WA",
+        "addr:street": "Memorial Way Northeast",
+        "building": "university",
+        "building:levels": "4",
+        "ele": "68",
+        "fee": "yes",
+        "gnis:feature_id": "2461329",
+        "loc_name": "The Burke",
+        "name": "Burke Museum of Natural History and Culture",
+        "name:en": "Burke Museum of Natural History and Culture",
+        "official_name": "Burke Memorial-Washington State Museum",
+        "opening_hours": "Tu-Su 10:00-17:00; Mo off",
+        "operator": "University of Washington",
+        "operator:abbr": "UW",
+        "operator:type": "public",
+        "operator:wikidata": "Q219563",
+        "operator:wikipedia": "en:University of Washington",
+        "phone": "+1-206-221-7083",
+        "ref": "BRK",
+        "short_name": "Burke Museum",
+        "source": "King County GIS;data.seattle.gov",
+        "source:addr:id": "14109",
+        "start_date": "2019",
+        "tourism": "museum",
+        "website": "https://www.burkemuseum.org/",
+        "wikidata": "Q388376",
+        "wikimedia_commons": "Category:Burke Museum of Natural History and Culture",
+        "wikipedia": "en:Burke Museum of Natural History and Culture"
+      }
+    },
+    {
+      "type": "way",
+      "id": 49747361,
+      "center": {
+        "lat": 47.6271962,
+        "lon": -122.3359006
+      },
+      "tags": {
+        "addr:city": "Seattle",
+        "addr:housenumber": "1010",
+        "addr:postcode": "98109",
+        "addr:state": "WA",
+        "addr:street": "Valley Street",
+        "building": "yes",
+        "check_date": "2023-06-16",
+        "email": "info@cwb.org",
+        "fee": "no",
+        "layer": "1",
+        "name": "Center for Wooden Boats",
+        "opening_hours": "Mo-Fr 12:30-20:00; Sa-Su 10:00-20:00",
+        "phone": "+1-206-382-2628",
+        "source": "King County GIS;data.seattle.gov",
+        "tourism": "museum",
+        "website": "https://www.cwb.org/locations/south-lake-union/",
+        "wheelchair": "limited",
+        "wikidata": "Q5059922",
+        "wikipedia": "en:Center for Wooden Boats"
+      }
+    },
+    {
+      "type": "way",
+      "id": 161587729,
+      "center": {
+        "lat": 47.6205353,
+        "lon": -122.3501816
+      },
+      "tags": {
+        "addr:city": "Seattle",
+        "addr:housenumber": "305",
+        "addr:postcode": "98109",
+        "addr:state": "WA",
+        "addr:street": "Harrison Street",
+        "fee": "yes",
+        "name": "Chihuly Garden and Glass",
+        "name:en": "Chihuly Garden and Glass",
+        "name:zh": "奇胡利玻璃艺术园",
+        "opening_hours": "Mo-Su 11:00-18:00; Fr,Sa 11:00-19:00",
+        "phone": "+1-206-753-4940",
+        "tourism": "museum",
+        "website": "https://www.chihulygardenandglass.com/",
+        "wikidata": "Q5097315",
+        "wikipedia": "en:Chihuly Garden and Glass"
+      }
+    }
+  ]
+}

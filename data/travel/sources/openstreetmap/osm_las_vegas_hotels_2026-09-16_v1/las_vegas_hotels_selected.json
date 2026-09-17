@@ -1,0 +1,92 @@
+{
+  "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+  "acquired_at": "2026-09-16T21:46:59.617302Z",
+  "osm_base_timestamp": "2026-09-16T21:43:50Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/170117",
+    "name": "Las Vegas",
+    "admin_level": "8"
+  },
+  "query": "[out:json][timeout:180];rel(170117)->.boundary;(rel.boundary;node(36.129554,-115.406575,36.401481,-115.062066)[\"name\"][\"tourism\"=\"hotel\"][\"addr:city\"=\"Las Vegas\"];way(36.129554,-115.406575,36.401481,-115.062066)[\"name\"][\"tourism\"=\"hotel\"][\"addr:city\"=\"Las Vegas\"];);out center tags qt;",
+  "raw_response_sha256": "124a663673fbb6e27d45449b7560c7b1e1f40ea7f5420f45d733bba8f93a325b",
+  "raw_response_bytes": 33697,
+  "returned_element_count": 53,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 461103845,
+      "center": {
+        "lat": 36.1455019,
+        "lon": -115.303275
+      },
+      "tags": {
+        "addr:city": "Las Vegas",
+        "addr:housenumber": "9570",
+        "addr:postcode": "89117",
+        "addr:state": "NV",
+        "addr:street": "West Sahara Avenue",
+        "branch": "Las Vegas Red Rock",
+        "brand": "La Quinta Inn & Suites",
+        "brand:wikidata": "Q6464734",
+        "building": "yes",
+        "name": "La Quinta Inn & Suites",
+        "official_name": "La Quinta Inn & Suites by Wyndham",
+        "phone": "+1 702-243-0356",
+        "ref": "52964",
+        "tourism": "hotel",
+        "website": "https://www.wyndhamhotels.com/laquinta/las-vegas-nevada/la-quinta-las-vegas-redrock-summerlin/overview",
+        "wikidata": "Q61848934"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13770197469,
+      "lat": 36.1695277,
+      "lon": -115.1533783,
+      "tags": {
+        "addr:city": "Las Vegas",
+        "addr:housenumber": "330",
+        "addr:postcode": "89106",
+        "addr:state": "NV",
+        "addr:street": "South Grand Central Parkway",
+        "air_conditioning": "yes",
+        "brand": "AC Hotel",
+        "brand:wikidata": "Q5653536",
+        "internet_access": "yes",
+        "internet_access:fee": "no",
+        "name": "AC Hotel by Marriott Las Vegas Symphony Park",
+        "phone": "+1 702 530 5990",
+        "rooms": "322",
+        "tourism": "hotel",
+        "website": "https://www.marriott.com/en-us/hotels/laspa-ac-hotel-las-vegas-symphony-park/overview/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 463007736,
+      "center": {
+        "lat": 36.1425967,
+        "lon": -115.2807125
+      },
+      "tags": {
+        "addr:city": "Las Vegas",
+        "addr:housenumber": "8669",
+        "addr:postcode": "89117",
+        "addr:state": "NV",
+        "addr:street": "West Sahara Avenue",
+        "branch": "Las Vegas West",
+        "brand": "Best Western Plus",
+        "brand:wikidata": "Q830334",
+        "building": "yes",
+        "name": "Best Western Plus Las Vegas West",
+        "phone": "+1 702-256-3766",
+        "ref": "29084",
+        "tourism": "hotel",
+        "website": "https://www.bestwestern.com/en_US/book/hotels-in-las-vegas/best-western-plus-las-vegas-west/propertyCode.29084.html"
+      }
+    }
+  ]
+}

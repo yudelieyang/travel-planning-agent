@@ -1,0 +1,94 @@
+{
+  "endpoint": "https://overpass.private.coffee/api/interpreter",
+  "acquired_at": "2026-09-16T21:20:47.095649Z",
+  "osm_base_timestamp": "2026-05-31T22:37:44Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/237385",
+    "name": "Seattle",
+    "admin_level": "8"
+  },
+  "query": "[out:json][timeout:180];rel(237385)->.boundary;area(3600237385)->.searchArea;(rel.boundary;node(area.searchArea)[\"name\"][\"amenity\"=\"restaurant\"][\"addr:city\"=\"Seattle\"][\"addr:housenumber\"][\"addr:street\"];way(area.searchArea)[\"name\"][\"amenity\"=\"restaurant\"][\"addr:city\"=\"Seattle\"][\"addr:housenumber\"][\"addr:street\"];);out center tags qt;",
+  "raw_response_sha256": "17df094904a36e45b1d2f48f888109968624bce741cb931dc01bad80170f779f",
+  "raw_response_bytes": 667623,
+  "returned_element_count": 1223,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 233293290,
+      "center": {
+        "lat": 47.5785227,
+        "lon": -122.4111061
+      },
+      "tags": {
+        "addr:city": "Seattle",
+        "addr:housenumber": "2717",
+        "addr:postcode": "98116",
+        "addr:state": "WA",
+        "addr:street": "61st Avenue Southwest",
+        "amenity": "restaurant",
+        "building": "yes",
+        "cuisine": "italian",
+        "historic": "building",
+        "name": "Alki Homestead",
+        "old_name": "Fir Lodge",
+        "source": "King County GIS;data.seattle.gov",
+        "start_date": "1904",
+        "website": "https://ilnidoseattle.com",
+        "wikidata": "Q105038388"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2077272324,
+      "lat": 47.6185701,
+      "lon": -122.321079,
+      "tags": {
+        "addr:city": "Seattle",
+        "addr:country": "US",
+        "addr:housenumber": "1831",
+        "addr:postcode": "98122",
+        "addr:state": "WA",
+        "addr:street": "Broadway",
+        "amenity": "restaurant",
+        "check_date": "2025-12-26",
+        "check_date:opening_hours": "2025-12-26",
+        "cuisine": "indian",
+        "level": "-1",
+        "name": "Annapurna Cafe",
+        "opening_hours": "Tu-Su 16:00-21:00; Mo off",
+        "phone": "+1-206-320-7770",
+        "website": "https://annapurnacafe.com/",
+        "wikidata": "Q115494594"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2397485860,
+      "lat": 47.6097117,
+      "lon": -122.3415286,
+      "tags": {
+        "addr:city": "Seattle",
+        "addr:housenumber": "1600",
+        "addr:postcode": "98101",
+        "addr:state": "WA",
+        "addr:street": "Post Alley",
+        "amenity": "restaurant",
+        "check_date": "2024-02-24",
+        "contact:facebook": "cafecampagne",
+        "contact:instagram": "cafecampagne",
+        "cuisine": "french",
+        "internet_access": "wlan",
+        "name": "Café Campagne",
+        "opening_hours": "We-Fr 09:00-21:00; Sa 08:00-21:00; Su 08:00-20:00",
+        "outdoor_seating": "no",
+        "phone": "+1-206-728-2233",
+        "source": "King County GIS;data.seattle.gov",
+        "website": "https://cafecampagne.com/",
+        "wikidata": "Q115547475"
+      }
+    }
+  ]
+}

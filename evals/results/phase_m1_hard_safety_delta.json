@@ -1,0 +1,562 @@
+{
+  "version": "phase_m1_hard_safety_delta_v1",
+  "dataset": "hybrid_semantics_200_v1.json",
+  "source_result": "hybrid_semantics_200_v1_phase_m1.json",
+  "p0_case_ids": [
+    "SEM200-024",
+    "SEM200-026",
+    "SEM200-027",
+    "SEM200-028",
+    "SEM200-030",
+    "SEM200-032",
+    "SEM200-057",
+    "SEM200-061",
+    "SEM200-064",
+    "SEM200-066",
+    "SEM200-068",
+    "SEM200-075",
+    "SEM200-080",
+    "SEM200-082",
+    "SEM200-085",
+    "SEM200-091",
+    "SEM200-097",
+    "SEM200-099",
+    "SEM200-115",
+    "SEM200-120",
+    "SEM200-134",
+    "SEM200-135",
+    "SEM200-136",
+    "SEM200-138",
+    "SEM200-141",
+    "SEM200-142"
+  ],
+  "before": {
+    "silent_hard_constraint_corruption": 8,
+    "wrong_hard_scope": 1,
+    "wrong_hard_amount": 5,
+    "soft_to_hard_unsafe_promotion": 1,
+    "hard_to_soft_unsafe_downgrade": 0,
+    "unsupported_hard_constraints_silently_dropped": 6
+  },
+  "after": {
+    "silent_hard_constraint_corruption": 0,
+    "wrong_hard_scope": 0,
+    "wrong_hard_amount": 0,
+    "soft_to_hard_unsafe_promotion": 0,
+    "hard_to_soft_unsafe_downgrade": 0,
+    "unsupported_hard_constraints_silently_dropped": 0
+  },
+  "remaining_p0_cases": [],
+  "records": [
+    {
+      "case_id": "SEM200-024",
+      "gold_constraints": [
+        [
+          "TOTAL_TRIP",
+          1480
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "TOTAL_TRIP",
+          1480.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [
+        "PARSER_MISS"
+      ],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-026",
+      "gold_constraints": [
+        [
+          "TOTAL_TRIP",
+          990
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "TOTAL_TRIP",
+          990.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-027",
+      "gold_constraints": [
+        [
+          "TOTAL_TRIP",
+          1600
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "TOTAL_TRIP",
+          1600.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [
+        "PARSER_MISS"
+      ],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-028",
+      "gold_constraints": [
+        [
+          "TOTAL_TRIP",
+          2000
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "TOTAL_TRIP",
+          2000.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [
+        "PARSER_MISS"
+      ],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-030",
+      "gold_constraints": [
+        [
+          "TOTAL_TRIP",
+          845
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "TOTAL_TRIP",
+          845.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-032",
+      "gold_constraints": [
+        [
+          "TOTAL_TRIP",
+          720
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "TOTAL_TRIP",
+          720.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-057",
+      "gold_constraints": [
+        [
+          "HOTEL_TOTAL",
+          640
+        ],
+        [
+          "TOTAL_TRIP",
+          1550
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "HOTEL_TOTAL",
+          640.0
+        ],
+        [
+          "TOTAL_TRIP",
+          1550.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [
+        "PARSER_MISS"
+      ],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-061",
+      "gold_constraints": [
+        [
+          "HOTEL_TOTAL",
+          390
+        ],
+        [
+          "TOTAL_TRIP",
+          980
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "HOTEL_TOTAL",
+          390.0
+        ],
+        [
+          "TOTAL_TRIP",
+          980.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [
+        "PARSER_MISS"
+      ],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-064",
+      "gold_constraints": [
+        [
+          "HOTEL_TOTAL",
+          610
+        ],
+        [
+          "TOTAL_TRIP",
+          1420
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "HOTEL_TOTAL",
+          610.0
+        ],
+        [
+          "TOTAL_TRIP",
+          1420.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-066",
+      "gold_constraints": [
+        [
+          "HOTEL_TOTAL",
+          600
+        ],
+        [
+          "TOTAL_TRIP",
+          1450
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "HOTEL_TOTAL",
+          600.0
+        ],
+        [
+          "TOTAL_TRIP",
+          1450.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-068",
+      "gold_constraints": [
+        [
+          "HOTEL_TOTAL",
+          470
+        ],
+        [
+          "TOTAL_TRIP",
+          1050
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "HOTEL_TOTAL",
+          470.0
+        ],
+        [
+          "TOTAL_TRIP",
+          1050.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-075",
+      "gold_constraints": [
+        [
+          "HOTEL_TOTAL",
+          880
+        ],
+        [
+          "TOTAL_TRIP",
+          2050
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "HOTEL_TOTAL",
+          880.0
+        ],
+        [
+          "TOTAL_TRIP",
+          2050.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-080",
+      "gold_constraints": [
+        [
+          "TOTAL_TRIP",
+          1450
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "TOTAL_TRIP",
+          1450.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-082",
+      "gold_constraints": [
+        [
+          "TOTAL_TRIP",
+          840
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "TOTAL_TRIP",
+          840.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-085",
+      "gold_constraints": [
+        [
+          "HOTEL_TOTAL",
+          700
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "HOTEL_TOTAL",
+          700.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-091",
+      "gold_constraints": [
+        [
+          "HOTEL_TOTAL",
+          620
+        ],
+        [
+          "TOTAL_TRIP",
+          1280
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "HOTEL_TOTAL",
+          620.0
+        ],
+        [
+          "TOTAL_TRIP",
+          1280.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-097",
+      "gold_constraints": [
+        [
+          "HOTEL_TOTAL",
+          850
+        ],
+        [
+          "TOTAL_TRIP",
+          1750
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "HOTEL_TOTAL",
+          850.0
+        ],
+        [
+          "TOTAL_TRIP",
+          1750.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-099",
+      "gold_constraints": [
+        [
+          "HOTEL_TOTAL",
+          600
+        ],
+        [
+          "TOTAL_TRIP",
+          1300
+        ]
+      ],
+      "actual_constraints": [
+        [
+          "HOTEL_TOTAL",
+          600.0
+        ],
+        [
+          "TOTAL_TRIP",
+          1300.0
+        ]
+      ],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-115",
+      "gold_constraints": [],
+      "actual_constraints": [],
+      "blocking": false,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-120",
+      "gold_constraints": [],
+      "actual_constraints": [],
+      "blocking": true,
+      "unsupported_scopes": [],
+      "generic_evaluator_failures": [
+        "AMBIGUITY_ERROR"
+      ],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-134",
+      "gold_constraints": [],
+      "actual_constraints": [],
+      "blocking": true,
+      "unsupported_scopes": [
+        "HOTEL_PER_NIGHT"
+      ],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-135",
+      "gold_constraints": [],
+      "actual_constraints": [],
+      "blocking": true,
+      "unsupported_scopes": [
+        "FOOD_TOTAL"
+      ],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-136",
+      "gold_constraints": [],
+      "actual_constraints": [],
+      "blocking": true,
+      "unsupported_scopes": [
+        "TRANSPORT_TOTAL"
+      ],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-138",
+      "gold_constraints": [],
+      "actual_constraints": [],
+      "blocking": true,
+      "unsupported_scopes": [
+        "HOTEL_PER_NIGHT"
+      ],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-141",
+      "gold_constraints": [],
+      "actual_constraints": [],
+      "blocking": true,
+      "unsupported_scopes": [
+        "ATTRACTIONS_TOTAL"
+      ],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    },
+    {
+      "case_id": "SEM200-142",
+      "gold_constraints": [],
+      "actual_constraints": [],
+      "blocking": true,
+      "unsupported_scopes": [
+        "HOTEL_PER_NIGHT"
+      ],
+      "generic_evaluator_failures": [],
+      "p0_safe": true
+    }
+  ]
+}

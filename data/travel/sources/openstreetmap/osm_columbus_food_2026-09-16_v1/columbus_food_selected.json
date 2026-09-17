@@ -1,0 +1,53 @@
+{
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "acquired_at": "2026-09-16T15:22:39.1339803Z",
+  "osm_base_timestamp": "2026-09-16T15:19:21Z",
+  "query": "[out:json][timeout:180];area[\"ISO3166-2\"=\"US-OH\"][\"admin_level\"=\"4\"]->.ohio;rel(area.ohio)[\"boundary\"=\"administrative\"][\"admin_level\"=\"8\"][\"name\"=\"Columbus\"];map_to_area->.searchArea;nwr(area.searchArea)[\"name\"][\"amenity\"=\"restaurant\"];out center tags;",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "returned_element_count": 797,
+  "raw_response_sha256": "cfc1bd1da517f5cffd6831efb457ff8da2523743cfc8097ad9f5cb6f04a4e6ca",
+  "selection": "Six distinct amenity=restaurant objects with observed addresses, valid coordinates, cuisine metadata, and stable identities were retained. Cuisine values are copied and normalized from OSM; legacy fried chicken planner tags remain separate.",
+  "elements": [
+    {
+      "type": "node",
+      "id": 8343623182,
+      "lat": 39.9878053,
+      "lon": -83.0058345,
+      "tags": {"addr:city": "Columbus", "addr:housenumber": "1247", "addr:postcode": "43201", "addr:state": "OH", "addr:street": "North High Street", "amenity": "restaurant", "cuisine": "jamaican;caribbean;african;american;pasta;chicken;fried_chicken;curry;jerk;jerk_chicken;curry_goat", "name": "Jerky's Jamaican Grill", "website": "https://jerkyscolumbus.com"}
+    },
+    {
+      "type": "node",
+      "id": 8481484417,
+      "lat": 39.957716,
+      "lon": -82.9711763,
+      "tags": {"addr:city": "Columbus", "addr:housenumber": "1053", "addr:postcode": "43205", "addr:state": "OH", "addr:street": "East Main Street", "amenity": "restaurant", "cuisine": "sandwich;burger;chicken;american;fish_and_chips;drinks;coffee_shop;fries", "name": "Feed Me! Sandwich Kings!", "website": "www.feedmesandwichkings.com"}
+    },
+    {
+      "type": "node",
+      "id": 8561182617,
+      "lat": 39.9932641,
+      "lon": -83.0421042,
+      "tags": {"addr:housenumber": "1717", "addr:street": "Northwest Boulevard", "amenity": "restaurant", "cuisine": "chicken;american", "name": "The Crispy Coop", "website": "https://thecrispycoop.com/"}
+    },
+    {
+      "type": "node",
+      "id": 9993723530,
+      "lat": 40.0535621,
+      "lon": -83.0506175,
+      "tags": {"addr:city": "Columbus", "addr:housenumber": "1132", "addr:postcode": "43220", "addr:state": "OH", "addr:street": "West Henderson Road", "amenity": "restaurant", "cuisine": "korean;chicken", "name": "CM Chicken", "website": "https://cmchickenusa.com"}
+    },
+    {
+      "type": "node",
+      "id": 14093010165,
+      "lat": 40.1162563,
+      "lon": -83.090071,
+      "tags": {"addr:city": "Columbus", "addr:housenumber": "7370P", "addr:postcode": "43235", "addr:state": "OH", "addr:street": "Sawmill Road", "amenity": "restaurant", "cuisine": "chicken", "name": "OX-B's", "website": "https://oxbs.com/order/sawmillrd"}
+    },
+    {
+      "type": "way",
+      "id": 512159964,
+      "center": {"lat": 40.0226892, "lon": -83.0141229},
+      "tags": {"addr:city": "Columbus", "addr:housenumber": "2973", "addr:postcode": "43202", "addr:state": "OH", "addr:street": "North High Street", "amenity": "restaurant", "cuisine": "burger;chicken", "name": "BonChon Chicken", "website": "https://www.prestonsburgers.com/"}
+    }
+  ]
+}

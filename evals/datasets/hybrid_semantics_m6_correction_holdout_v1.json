@@ -1,0 +1,87 @@
+{
+  "version": "hybrid_semantics_m6_correction_holdout_v1",
+  "cases": [
+    {
+      "id": "M6-001",
+      "category": "clear_correction",
+      "input": "Hotel spending for the whole trip must stay under $575. Sorry, revise lodging to $525.",
+      "expected": {"needs_llm": true, "expected_runtime_llm_need": true, "constraints": [{"scope": "HOTEL_TOTAL", "value": 525}]}
+    },
+    {
+      "id": "M6-002",
+      "category": "clear_correction",
+      "input": "Keep the entire trip under $1,850. Actually, the trip cap should be $1,700.",
+      "expected": {"needs_llm": true, "expected_runtime_llm_need": true, "constraints": [{"scope": "TOTAL_TRIP", "value": 1700}]}
+    },
+    {
+      "id": "M6-003",
+      "category": "clear_correction",
+      "input": "Hotel total must not exceed $680. Please change it to $620.",
+      "expected": {"needs_llm": true, "expected_runtime_llm_need": true, "constraints": [{"scope": "HOTEL_TOTAL", "value": 620}]}
+    },
+    {
+      "id": "M6-004",
+      "category": "clear_correction",
+      "input": "Trip maximum is $1,500. On second thought, no, use $1,380.",
+      "expected": {"needs_llm": true, "expected_runtime_llm_need": true, "constraints": [{"scope": "TOTAL_TRIP", "value": 1380}]}
+    },
+    {
+      "id": "M6-005",
+      "category": "clear_correction",
+      "input": "All lodging combined must stay below $760. Correction: sorry, I meant $710 for the hotel total.",
+      "expected": {"needs_llm": true, "expected_runtime_llm_need": true, "constraints": [{"scope": "HOTEL_TOTAL", "value": 710}]}
+    },
+    {
+      "id": "M6-006",
+      "category": "clear_correction",
+      "input": "The whole trip ceiling is $2,100. For the revision, make the total $1,950.",
+      "expected": {"needs_llm": true, "expected_runtime_llm_need": true, "constraints": [{"scope": "TOTAL_TRIP", "value": 1950}]}
+    },
+    {
+      "id": "M6-007",
+      "category": "ambiguous_correction",
+      "input": "Trip max $1,400. Hotel total max $600. After those, actually set it at $950.",
+      "expected": {"needs_llm": true, "expected_runtime_llm_need": true, "ambiguity_levels": ["BLOCKING"], "requires_clarification": true}
+    },
+    {
+      "id": "M6-008",
+      "category": "ambiguous_correction",
+      "input": "Hotel total must stay below $500. Actually use either $440 or $460 depending on rooms.",
+      "expected": {"needs_llm": true, "expected_runtime_llm_need": true, "ambiguity_levels": ["BLOCKING"], "requires_clarification": true}
+    },
+    {
+      "id": "M6-009",
+      "category": "hard_to_soft",
+      "input": "Hotel total must stay under $640. Actually, around $560 would be nice.",
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "preferences": [{"category": "HOTEL", "value": "around usd 560"}],
+        "ambiguity_levels": ["BLOCKING"],
+        "requires_clarification": true
+      }
+    },
+    {
+      "id": "M6-010",
+      "category": "soft_to_hard",
+      "input": "I'd prefer hotel around $520. Actually it must stay below $450 total for lodging.",
+      "expected": {"needs_llm": true, "expected_runtime_llm_need": true, "constraints": [{"scope": "HOTEL_TOTAL", "value": 450}]}
+    },
+    {
+      "id": "M6-011",
+      "category": "noisy_clear_correction",
+      "input": "lodging all-trip max usd 830... sry actually make teh hotel total usd 780",
+      "expected": {"needs_llm": true, "expected_runtime_llm_need": true, "constraints": [{"scope": "HOTEL_TOTAL", "value": 780}]}
+    },
+    {
+      "id": "M6-012",
+      "category": "multi_scope_correction",
+      "input": "Whole trip must stay under $1,600; hotel total under $620. For the hotel revision, make hotel total $570.",
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "constraints": [{"scope": "TOTAL_TRIP", "value": 1600}, {"scope": "HOTEL_TOTAL", "value": 570}]
+      }
+    }
+  ]
+}

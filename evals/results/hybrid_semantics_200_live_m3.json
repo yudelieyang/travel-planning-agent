@@ -1,0 +1,5802 @@
+{
+  "dataset_version": "hybrid_semantics_200_live_subset_m3",
+  "generated_at": "2026-09-14T23:53:52.539521+00:00",
+  "mode": "live",
+  "model": "gpt-5.6-luna",
+  "prompt_version": "semantic_extractor_v1",
+  "case_count": 25,
+  "records": [
+    {
+      "case_id": "SEM200-116",
+      "category": "H_ambiguous_scope",
+      "input": "I want a $240 hotel in Boston.",
+      "passed": false,
+      "failure_categories": [
+        "MERGE_FALSE_REJECT",
+        "PREFERENCE_ERROR",
+        "WRONG_SCOPE",
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [
+          "AMBIGUOUS_MONETARY_SCOPE"
+        ],
+        "forbidden_constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 240.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "evidence": [
+          "I want a $240  hotel in Boston"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "HOTEL_TOTAL",
+            "operator": "LTE",
+            "value": 240.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "$240 hotel",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "Boston",
+            "source_text": "hotel in Boston"
+          }
+        ],
+        "objectives": [],
+        "ambiguities": [
+          {
+            "level": "ASSUMABLE",
+            "source_text": "$240 hotel",
+            "reason": "The time basis is unspecified; interpreted as a total hotel budget rather than a nightly rate."
+          }
+        ]
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 633,
+        "output_tokens": 120,
+        "total_tokens": 753,
+        "latency_ms": 4622.14,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": "Boston",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 240.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "Boston"
+          }
+        ],
+        "ambiguity_levels": [
+          "BLOCKING",
+          "ASSUMABLE"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 3,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": true,
+        "actual": true,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [
+          "AMBIGUOUS_MONETARY_SCOPE"
+        ],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": true,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "AMBIGUITY_OVERRESOLUTION",
+        "AMBIGUITY_UNDERDETECTION",
+        "MERGE_FALSE_ACCEPT"
+      ],
+      "failure_class": "AMBIGUITY_OVERRESOLUTION",
+      "selection_category": "ambiguous_monetary_scope",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [
+          [
+            "HOTEL_TOTAL",
+            240.0,
+            "HARD"
+          ]
+        ],
+        "missing_preferences": [],
+        "extra_preferences": [
+          [
+            "HOTEL",
+            "boston"
+          ]
+        ],
+        "expected_ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "proposed_ambiguity_levels": [
+          "ASSUMABLE"
+        ]
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "extractor",
+        "merge"
+      ]
+    },
+    {
+      "case_id": "SEM200-117",
+      "category": "H_ambiguous_scope",
+      "input": "My hotel budget is $375 for Chicago.",
+      "passed": false,
+      "failure_categories": [
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [
+          "AMBIGUOUS_MONETARY_SCOPE"
+        ],
+        "forbidden_constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 375.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "evidence": [
+          "My hotel budget is $375  for Chicago"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "HOTEL_TOTAL",
+            "operator": "LTE",
+            "value": 375.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "My hotel budget is $375 for Chicago.",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 633,
+        "output_tokens": 73,
+        "total_tokens": 706,
+        "latency_ms": 3680.43,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "DETERMINISTIC_PRESERVED",
+          "CLARIFICATION_REQUIRED"
+        ],
+        "conflicts": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "requires_clarification": true
+      },
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 1,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": true,
+        "actual": true,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [
+          "AMBIGUOUS_MONETARY_SCOPE"
+        ],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": true,
+      "failure_classes": [
+        "AMBIGUITY_OVERRESOLUTION",
+        "AMBIGUITY_UNDERDETECTION"
+      ],
+      "failure_class": "AMBIGUITY_OVERRESOLUTION",
+      "selection_category": "ambiguous_monetary_scope",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [
+          [
+            "HOTEL_TOTAL",
+            375.0,
+            "HARD"
+          ]
+        ],
+        "missing_preferences": [],
+        "extra_preferences": [],
+        "expected_ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "extractor"
+      ]
+    },
+    {
+      "case_id": "SEM200-118",
+      "category": "H_ambiguous_scope",
+      "input": "$480 for lodging in Miami.",
+      "passed": false,
+      "failure_categories": [
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [
+          "AMBIGUOUS_MONETARY_SCOPE"
+        ],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Miami",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "evidence": [
+          "$480  for lodging in Miami"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "HOTEL_TOTAL",
+            "operator": "LTE",
+            "value": 480.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "$480 for lodging in Miami.",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 631,
+        "output_tokens": 71,
+        "total_tokens": 702,
+        "latency_ms": 2488.9,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "DETERMINISTIC_PRESERVED",
+          "CLARIFICATION_REQUIRED"
+        ],
+        "conflicts": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "requires_clarification": true
+      },
+      "final": {
+        "destination": "Miami",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 1,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": true,
+        "actual": true,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [
+          "AMBIGUOUS_MONETARY_SCOPE"
+        ],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": true,
+      "failure_classes": [
+        "AMBIGUITY_OVERRESOLUTION",
+        "AMBIGUITY_UNDERDETECTION"
+      ],
+      "failure_class": "AMBIGUITY_OVERRESOLUTION",
+      "selection_category": "ambiguous_monetary_scope",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [
+          [
+            "HOTEL_TOTAL",
+            480.0,
+            "HARD"
+          ]
+        ],
+        "missing_preferences": [],
+        "extra_preferences": [],
+        "expected_ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "extractor"
+      ]
+    },
+    {
+      "case_id": "SEM200-119",
+      "category": "H_ambiguous_scope",
+      "input": "I can spend $550 on the hotel in Seattle.",
+      "passed": false,
+      "failure_categories": [
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [
+          "AMBIGUOUS_MONETARY_SCOPE"
+        ],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Seattle",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "evidence": [
+          "I can spend $550  on the hotel in Seattle"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "HOTEL_TOTAL",
+            "operator": "LTE",
+            "value": 550.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "I can spend $550 on the hotel in Seattle.",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 635,
+        "output_tokens": 75,
+        "total_tokens": 710,
+        "latency_ms": 1713.68,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "DETERMINISTIC_PRESERVED",
+          "CLARIFICATION_REQUIRED"
+        ],
+        "conflicts": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "requires_clarification": true
+      },
+      "final": {
+        "destination": "Seattle",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 1,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": true,
+        "actual": true,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [
+          "AMBIGUOUS_MONETARY_SCOPE"
+        ],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": true,
+      "failure_classes": [
+        "AMBIGUITY_OVERRESOLUTION",
+        "AMBIGUITY_UNDERDETECTION"
+      ],
+      "failure_class": "AMBIGUITY_OVERRESOLUTION",
+      "selection_category": "ambiguous_monetary_scope",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [
+          [
+            "HOTEL_TOTAL",
+            550.0,
+            "HARD"
+          ]
+        ],
+        "missing_preferences": [],
+        "extra_preferences": [],
+        "expected_ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "extractor"
+      ]
+    },
+    {
+      "case_id": "SEM200-122",
+      "category": "H_ambiguous_scope",
+      "input": "A $700 place to stay in New York City is okay.",
+      "passed": false,
+      "failure_categories": [
+        "MERGE_FALSE_REJECT",
+        "PREFERENCE_ERROR",
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [
+          "AMBIGUOUS_MONETARY_SCOPE"
+        ],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "New York City is okay",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "evidence": [
+          "$700 place to stay"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "HOTEL_TOTAL",
+            "operator": "LTE",
+            "value": 700.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "A $700 place to stay in New York City is okay.",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "place to stay in New York City",
+            "source_text": "A $700 place to stay in New York City is okay."
+          }
+        ],
+        "objectives": [],
+        "ambiguities": [
+          {
+            "level": "BLOCKING",
+            "source_text": "A $700 place to stay in New York City is okay.",
+            "reason": "The timeframe and whether $700 is a total stay budget or a per-night budget are unspecified."
+          }
+        ]
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 637,
+        "output_tokens": 154,
+        "total_tokens": 791,
+        "latency_ms": 1943.85,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM"
+        ],
+        "conflicts": [],
+        "requires_clarification": true
+      },
+      "final": {
+        "destination": "New York City is okay",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 700.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "place to stay in New York City"
+          }
+        ],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 3,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": true,
+        "actual": true,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [
+          "AMBIGUOUS_MONETARY_SCOPE"
+        ],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": true,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "AMBIGUITY_OVERRESOLUTION",
+        "MERGE_FALSE_ACCEPT"
+      ],
+      "failure_class": "AMBIGUITY_OVERRESOLUTION",
+      "selection_category": "ambiguous_monetary_scope",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [
+          [
+            "HOTEL_TOTAL",
+            700.0,
+            "HARD"
+          ]
+        ],
+        "missing_preferences": [],
+        "extra_preferences": [
+          [
+            "HOTEL",
+            "place to stay in new york city"
+          ]
+        ],
+        "expected_ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "proposed_ambiguity_levels": [
+          "BLOCKING"
+        ]
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "extractor",
+        "merge"
+      ]
+    },
+    {
+      "case_id": "SEM200-125",
+      "category": "H_ambiguous_scope",
+      "input": "I need a $820 hotel in San Francisco.",
+      "passed": false,
+      "failure_categories": [
+        "MERGE_FALSE_REJECT",
+        "PREFERENCE_ERROR",
+        "WRONG_SCOPE",
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [
+          "AMBIGUOUS_MONETARY_SCOPE"
+        ],
+        "forbidden_constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 820.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "San Francisco",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "evidence": [
+          "I need a $820  hotel in San Francisco"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "HOTEL_TOTAL",
+            "operator": "LTE",
+            "value": 820.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "$820 hotel",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "San Francisco",
+            "source_text": "hotel in San Francisco"
+          }
+        ],
+        "objectives": [],
+        "ambiguities": [
+          {
+            "level": "ASSUMABLE",
+            "source_text": "$820 hotel",
+            "reason": "The time period or number of nights is unspecified, so the budget is interpreted as a hotel-total budget rather than a per-night budget."
+          }
+        ]
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 634,
+        "output_tokens": 131,
+        "total_tokens": 765,
+        "latency_ms": 2784.91,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": "San Francisco",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 820.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "San Francisco"
+          }
+        ],
+        "ambiguity_levels": [
+          "BLOCKING",
+          "ASSUMABLE"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 3,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": true,
+        "actual": true,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [
+          "AMBIGUOUS_MONETARY_SCOPE"
+        ],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": true,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "AMBIGUITY_OVERRESOLUTION",
+        "AMBIGUITY_UNDERDETECTION",
+        "MERGE_FALSE_ACCEPT"
+      ],
+      "failure_class": "AMBIGUITY_OVERRESOLUTION",
+      "selection_category": "ambiguous_monetary_scope",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [
+          [
+            "HOTEL_TOTAL",
+            820.0,
+            "HARD"
+          ]
+        ],
+        "missing_preferences": [],
+        "extra_preferences": [
+          [
+            "HOTEL",
+            "san francisco"
+          ]
+        ],
+        "expected_ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "proposed_ambiguity_levels": [
+          "ASSUMABLE"
+        ]
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "extractor",
+        "merge"
+      ]
+    },
+    {
+      "case_id": "SEM200-130",
+      "category": "H_ambiguous_scope",
+      "input": "For Denver I can do a $350 hotel.",
+      "passed": false,
+      "failure_categories": [
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [
+          "AMBIGUOUS_MONETARY_SCOPE"
+        ],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "AMBIGUOUS_SCOPE"
+        ],
+        "evidence": [
+          "For Denver I can do a $350  hotel"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "UNSPECIFIED",
+            "operator": "LTE",
+            "value": 350.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "I can do a $350 hotel.",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [],
+        "objectives": [],
+        "ambiguities": [
+          {
+            "level": "BLOCKING",
+            "source_text": "$350 hotel",
+            "reason": "It is unclear whether the $350 limit applies to the total hotel stay or the nightly hotel rate."
+          }
+        ]
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 634,
+        "output_tokens": 206,
+        "total_tokens": 840,
+        "latency_ms": 2631.91,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "UNSUPPORTED_RETAINED",
+          "CLARIFICATION_REQUIRED",
+          "ADDED_FROM_LLM"
+        ],
+        "conflicts": [],
+        "requires_clarification": true
+      },
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING",
+          "BLOCKING",
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 2,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": true,
+        "actual": true,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [
+          "AMBIGUOUS_MONETARY_SCOPE"
+        ],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": true,
+      "failure_classes": [
+        "AMBIGUITY_OVERRESOLUTION"
+      ],
+      "failure_class": "AMBIGUITY_OVERRESOLUTION",
+      "selection_category": "ambiguous_monetary_scope",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [
+          [
+            "UNSPECIFIED",
+            350.0,
+            "HARD"
+          ]
+        ],
+        "missing_preferences": [],
+        "extra_preferences": [],
+        "expected_ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "proposed_ambiguity_levels": [
+          "BLOCKING"
+        ]
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "extractor"
+      ]
+    },
+    {
+      "case_id": "SEM200-166",
+      "category": "L_tradeoff_objective",
+      "input": "Spend more on the Boston hotel if it is downtown, but keep the whole trip below $1,300.",
+      "passed": false,
+      "failure_categories": [
+        "PREFERENCE_ERROR",
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1300.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [
+          "TRADEOFF"
+        ],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1300.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "TRADEOFF_LANGUAGE"
+        ],
+        "evidence": [
+          "Spend more on the Boston hotel if"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "TOTAL_TRIP",
+            "operator": "LTE",
+            "value": 1300.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "keep the whole trip below $1,300",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "downtown Boston",
+            "source_text": "if it is downtown"
+          }
+        ],
+        "objectives": [
+          "maximize_budget_utilization"
+        ],
+        "ambiguities": [
+          {
+            "level": "ASSUMABLE",
+            "source_text": "Spend more on the Boston hotel if it is downtown",
+            "reason": "The additional amount or hotel budget is unspecified; this is interpreted as a preference for a downtown hotel with willingness to allocate more toward it, subject to the total-trip budget."
+          }
+        ]
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 646,
+        "output_tokens": 349,
+        "total_tokens": 995,
+        "latency_ms": 5336.03,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "DUPLICATE_CONFIRMED",
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM",
+          "LLM_REJECTED_UNGROUNDED"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1300.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "downtown Boston"
+          }
+        ],
+        "ambiguity_levels": [
+          "ASSUMABLE"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 3,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": true
+      },
+      "clarification": {
+        "expected": true,
+        "actual": false,
+        "correct": false
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [
+          "TRADEOFF"
+        ],
+        "semantic_safety_retained": false
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "AMBIGUITY_UNDERDETECTION",
+        "MERGE_FALSE_ACCEPT"
+      ],
+      "failure_class": "AMBIGUITY_UNDERDETECTION",
+      "selection_category": "tradeoff_compositional",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [
+          [
+            "HOTEL",
+            "downtown boston"
+          ]
+        ],
+        "expected_ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "proposed_ambiguity_levels": [
+          "ASSUMABLE"
+        ]
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "extractor",
+        "merge"
+      ]
+    },
+    {
+      "case_id": "SEM200-169",
+      "category": "L_tradeoff_objective",
+      "input": "I would pay more for a better Seattle location, while keeping total trip under $1,800.",
+      "passed": false,
+      "failure_categories": [
+        "PREFERENCE_ERROR",
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1800.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [
+          "TRADEOFF"
+        ],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1800.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "TRADEOFF_LANGUAGE"
+        ],
+        "evidence": [
+          "pay more for a better Seattle location, while"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "TOTAL_TRIP",
+            "operator": "LTE",
+            "value": 1800.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "keeping total trip under $1,800",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "better Seattle location",
+            "source_text": "a better Seattle location"
+          }
+        ],
+        "objectives": [
+          "maximize_budget_utilization"
+        ],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 644,
+        "output_tokens": 99,
+        "total_tokens": 743,
+        "latency_ms": 2142.85,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "DUPLICATE_CONFIRMED",
+          "ADDED_FROM_LLM",
+          "LLM_REJECTED_UNGROUNDED"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1800.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "better Seattle location"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 2,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": true
+      },
+      "clarification": {
+        "expected": true,
+        "actual": false,
+        "correct": false
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [
+          "TRADEOFF"
+        ],
+        "semantic_safety_retained": false
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "AMBIGUITY_UNDERDETECTION",
+        "MERGE_FALSE_ACCEPT"
+      ],
+      "failure_class": "AMBIGUITY_UNDERDETECTION",
+      "selection_category": "tradeoff_compositional",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [
+          [
+            "HOTEL",
+            "better seattle location"
+          ]
+        ],
+        "expected_ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "extractor",
+        "merge"
+      ]
+    },
+    {
+      "case_id": "SEM200-172",
+      "category": "L_tradeoff_objective",
+      "input": "I value location over room size in New York City, up to a total of $2,100.",
+      "passed": false,
+      "failure_categories": [
+        "PREFERENCE_ERROR",
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 2100.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [
+          "TRADEOFF"
+        ],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "New York City",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 2100.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "TRADEOFF_LANGUAGE"
+        ],
+        "evidence": [
+          "value location over"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "TOTAL_TRIP",
+            "operator": "LTE",
+            "value": 2100.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "up to a total of $2,100",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "location over room size in New York City",
+            "source_text": "I value location over room size in New York City"
+          }
+        ],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 645,
+        "output_tokens": 106,
+        "total_tokens": 751,
+        "latency_ms": 2043.72,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "DUPLICATE_CONFIRMED",
+          "ADDED_FROM_LLM"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": "New York City",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 2100.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "location over room size in New York City"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 2,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": true,
+        "actual": false,
+        "correct": false
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [
+          "TRADEOFF"
+        ],
+        "semantic_safety_retained": false
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "AMBIGUITY_UNDERDETECTION",
+        "MERGE_FALSE_ACCEPT"
+      ],
+      "failure_class": "AMBIGUITY_UNDERDETECTION",
+      "selection_category": "tradeoff_compositional",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [
+          [
+            "HOTEL",
+            "location over room size in new york city"
+          ]
+        ],
+        "expected_ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "extractor",
+        "merge"
+      ]
+    },
+    {
+      "case_id": "SEM200-175",
+      "category": "L_tradeoff_objective",
+      "input": "For San Francisco, prioritize seafood over attractions if choices conflict.",
+      "passed": false,
+      "failure_categories": [
+        "PREFERENCE_ERROR",
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [
+          "TRADEOFF"
+        ],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "TRADEOFF_LANGUAGE"
+        ],
+        "evidence": [
+          "prioritize seafood over"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "seafood",
+            "source_text": "prioritize seafood over attractions if choices conflict"
+          }
+        ],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 636,
+        "output_tokens": 47,
+        "total_tokens": 683,
+        "latency_ms": 1750.06,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "ADDED_FROM_LLM"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "seafood"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 1,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": true,
+        "actual": false,
+        "correct": false
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [
+          "TRADEOFF"
+        ],
+        "semantic_safety_retained": false
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "AMBIGUITY_UNDERDETECTION",
+        "MERGE_FALSE_ACCEPT"
+      ],
+      "failure_class": "AMBIGUITY_UNDERDETECTION",
+      "selection_category": "tradeoff_compositional",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [
+          [
+            "FOOD",
+            "seafood"
+          ]
+        ],
+        "expected_ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "extractor",
+        "merge"
+      ]
+    },
+    {
+      "case_id": "SEM200-156",
+      "category": "K_negation_exclusion",
+      "input": "Boston is fine, but do not include zoos.",
+      "passed": false,
+      "failure_categories": [
+        "PREFERENCE_ERROR",
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [
+          "EXCLUSION"
+        ],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNREPRESENTED_NEGATION"
+        ],
+        "evidence": [
+          "Boston is fine, but do not include zoos"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "exclude zoos",
+            "source_text": "do not include zoos"
+          }
+        ],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 635,
+        "output_tokens": 45,
+        "total_tokens": 680,
+        "latency_ms": 1327.66,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "ADDED_FROM_LLM"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": "Boston",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "exclude zoos"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 1,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": true,
+        "actual": false,
+        "correct": false
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [
+          "EXCLUSION"
+        ],
+        "semantic_safety_retained": false
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "AMBIGUITY_UNDERDETECTION",
+        "MERGE_FALSE_ACCEPT"
+      ],
+      "failure_class": "AMBIGUITY_UNDERDETECTION",
+      "selection_category": "negation_exclusion",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [
+          [
+            "ACTIVITY",
+            "exclude zoos"
+          ]
+        ],
+        "expected_ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "extractor",
+        "merge"
+      ]
+    },
+    {
+      "case_id": "SEM200-158",
+      "category": "K_negation_exclusion",
+      "input": "No luxury hotels in Miami.",
+      "passed": false,
+      "failure_categories": [
+        "PREFERENCE_ERROR",
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [
+          "EXCLUSION"
+        ],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Miami",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNREPRESENTED_NEGATION"
+        ],
+        "evidence": [
+          "No luxury hotels in Miami"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "No luxury hotels in Miami.",
+            "source_text": "No luxury hotels in Miami."
+          }
+        ],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 630,
+        "output_tokens": 151,
+        "total_tokens": 781,
+        "latency_ms": 2846.41,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "ADDED_FROM_LLM"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": "Miami",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "No luxury hotels in Miami."
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 1,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": true,
+        "actual": false,
+        "correct": false
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [
+          "EXCLUSION"
+        ],
+        "semantic_safety_retained": false
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "AMBIGUITY_UNDERDETECTION",
+        "MERGE_FALSE_ACCEPT"
+      ],
+      "failure_class": "AMBIGUITY_UNDERDETECTION",
+      "selection_category": "negation_exclusion",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [
+          [
+            "HOTEL",
+            "no luxury hotels in miami."
+          ]
+        ],
+        "expected_ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "extractor",
+        "merge"
+      ]
+    },
+    {
+      "case_id": "SEM200-163",
+      "category": "K_negation_exclusion",
+      "input": "Don't schedule a casino in Las Vegas.",
+      "passed": false,
+      "failure_categories": [
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [
+          "EXCLUSION"
+        ],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Las Vegas",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNREPRESENTED_NEGATION"
+        ],
+        "evidence": [
+          "Don't schedule a casino in Las Vegas"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [],
+        "preferences": [],
+        "objectives": [],
+        "ambiguities": [
+          {
+            "level": "RESOLVED",
+            "source_text": "Don't schedule a casino in Las Vegas.",
+            "reason": "Explicit exclusion of casino-related activities in Las Vegas."
+          }
+        ]
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 632,
+        "output_tokens": 55,
+        "total_tokens": 687,
+        "latency_ms": 2126.79,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "ADDED_FROM_LLM"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": "Las Vegas",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "RESOLVED"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 1,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": true,
+        "actual": false,
+        "correct": false
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [
+          "EXCLUSION"
+        ],
+        "semantic_safety_retained": false
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "AMBIGUITY_UNDERDETECTION"
+      ],
+      "failure_class": "AMBIGUITY_UNDERDETECTION",
+      "selection_category": "negation_exclusion",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [],
+        "expected_ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "proposed_ambiguity_levels": [
+          "RESOLVED"
+        ]
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "extractor"
+      ]
+    },
+    {
+      "case_id": "SEM200-081",
+      "category": "E_same_scope_correction",
+      "input": "Hotel spending cannot exceed $580 total. Actually, $530.",
+      "passed": false,
+      "failure_categories": [
+        "COVERAGE_FALSE_POSITIVE",
+        "CORRECTION_ERROR"
+      ],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": false,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 530.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 580.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "CORRECTION_TARGET_UNRESOLVED"
+        ],
+        "evidence": [
+          "Actually, $530"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "HOTEL_TOTAL",
+            "operator": "LTE",
+            "value": 530.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "Actually, $530.",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 637,
+        "output_tokens": 129,
+        "total_tokens": 766,
+        "latency_ms": 2321.74,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "DETERMINISTIC_PRESERVED",
+          "CLARIFICATION_REQUIRED"
+        ],
+        "conflicts": [
+          "EXPLICIT_CONSTRAINT_CONFLICT"
+        ],
+        "requires_clarification": true
+      },
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 580.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 1,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": false,
+        "actual": false,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": true,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": true,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "MERGE_FALSE_REJECT",
+        "MERGE_FALSE_ACCEPT"
+      ],
+      "failure_class": "MERGE_FALSE_REJECT",
+      "selection_category": "correction_unresolved",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [],
+        "expected_ambiguity_levels": [],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": true,
+      "failure_origin": [
+        "evaluator",
+        "merge"
+      ]
+    },
+    {
+      "case_id": "SEM200-093",
+      "category": "F_mixed_scope_correction",
+      "input": "Trip ceiling $1,800 and lodging ceiling $750 total; sorry, make the trip $1,600.",
+      "passed": false,
+      "failure_categories": [
+        "COVERAGE_FALSE_POSITIVE",
+        "CORRECTION_ERROR"
+      ],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": false,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1600.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 750.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 1600.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "CORRECTION_TARGET_UNRESOLVED"
+        ],
+        "evidence": [
+          "sorry, make the trip $1,600"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "TOTAL_TRIP",
+            "operator": "LTE",
+            "value": 1600.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "sorry, make the trip $1,600.",
+            "extractor_source": "llm"
+          },
+          {
+            "kind": "BUDGET",
+            "scope": "HOTEL_TOTAL",
+            "operator": "LTE",
+            "value": 750.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "lodging ceiling $750 total",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 647,
+        "output_tokens": 121,
+        "total_tokens": 768,
+        "latency_ms": 2288.75,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "ADDED_FROM_LLM",
+          "DETERMINISTIC_PRESERVED",
+          "CLARIFICATION_REQUIRED"
+        ],
+        "conflicts": [
+          "EXPLICIT_CONSTRAINT_CONFLICT"
+        ],
+        "requires_clarification": true
+      },
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 1600.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1600.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 2,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": false,
+        "actual": false,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": true,
+        "wrong_hard_scope_accepted": true,
+        "wrong_hard_amount_accepted": true,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "MERGE_FALSE_REJECT",
+        "MERGE_FALSE_ACCEPT"
+      ],
+      "failure_class": "MERGE_FALSE_REJECT",
+      "selection_category": "correction_unresolved",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [],
+        "expected_ambiguity_levels": [],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": true,
+      "failure_origin": [
+        "evaluator",
+        "merge"
+      ]
+    },
+    {
+      "case_id": "SEM200-095",
+      "category": "F_mixed_scope_correction",
+      "input": "The total is capped at $1,350. Hotel total is capped at $500. Change total to $1,200 only.",
+      "passed": false,
+      "failure_categories": [
+        "COVERAGE_FALSE_POSITIVE",
+        "CORRECTION_ERROR"
+      ],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": false,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1200.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 500.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1350.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "CORRECTION_TARGET_UNRESOLVED"
+        ],
+        "evidence": [
+          "Change total to $1,200 only"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "TOTAL_TRIP",
+            "operator": "LTE",
+            "value": 1200.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "Change total to $1,200 only.",
+            "extractor_source": "llm"
+          },
+          {
+            "kind": "BUDGET",
+            "scope": "HOTEL_TOTAL",
+            "operator": "LTE",
+            "value": 500.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "Hotel total is capped at $500.",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 651,
+        "output_tokens": 190,
+        "total_tokens": 841,
+        "latency_ms": 2175.11,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "DETERMINISTIC_PRESERVED",
+          "CLARIFICATION_REQUIRED",
+          "DUPLICATE_CONFIRMED"
+        ],
+        "conflicts": [
+          "EXPLICIT_CONSTRAINT_CONFLICT"
+        ],
+        "requires_clarification": true
+      },
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1350.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 2,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": false,
+        "actual": false,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": true,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": true,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "MERGE_FALSE_REJECT",
+        "MERGE_FALSE_ACCEPT"
+      ],
+      "failure_class": "MERGE_FALSE_REJECT",
+      "selection_category": "correction_unresolved",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [],
+        "expected_ambiguity_levels": [],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": true,
+      "failure_origin": [
+        "evaluator",
+        "merge"
+      ]
+    },
+    {
+      "case_id": "SEM200-186",
+      "category": "N_noisy_english",
+      "input": "hotel money should not more then 470 total in Boston",
+      "passed": false,
+      "failure_categories": [
+        "PREFERENCE_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 470.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "MONETARY_SEMANTIC_GAP"
+        ],
+        "evidence": [
+          "hotel money should not more then 470 total in Boston"
+        ],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "HOTEL_TOTAL",
+            "operator": "LTE",
+            "value": 470.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "hotel money should not more then 470 total in Boston",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "Boston",
+            "source_text": "in Boston"
+          }
+        ],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 635,
+        "output_tokens": 92,
+        "total_tokens": 727,
+        "latency_ms": 1707.21,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": "Boston",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 470.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "Boston"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 2,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": false,
+        "actual": false,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "MERGE_FALSE_ACCEPT"
+      ],
+      "failure_class": "MERGE_FALSE_ACCEPT",
+      "selection_category": "noisy_imperfect_english",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [
+          [
+            "HOTEL",
+            "boston"
+          ]
+        ],
+        "expected_ambiguity_levels": [],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "merge"
+      ]
+    },
+    {
+      "case_id": "SEM200-189",
+      "category": "N_noisy_english",
+      "input": "seattle trip budgt under 1500 and hotel 600 total",
+      "passed": false,
+      "failure_categories": [
+        "PREFERENCE_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": "Seattle",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1500.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 600.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Seattle",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "MONETARY_SEMANTIC_GAP"
+        ],
+        "evidence": [
+          "seattle trip budgt under 1500 and hotel 600 total"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "TOTAL_TRIP",
+            "operator": "LTE",
+            "value": 1500.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "budgt under 1500",
+            "extractor_source": "llm"
+          },
+          {
+            "kind": "BUDGET",
+            "scope": "HOTEL_TOTAL",
+            "operator": "LTE",
+            "value": 600.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "hotel 600 total",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "UNSPECIFIED",
+            "value": "Seattle trip",
+            "source_text": "seattle trip"
+          }
+        ],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 638,
+        "output_tokens": 135,
+        "total_tokens": 773,
+        "latency_ms": 1882.02,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": "Seattle",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1500.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 600.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "UNSPECIFIED",
+            "value": "Seattle trip"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 3,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": false,
+        "actual": false,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "MERGE_FALSE_ACCEPT"
+      ],
+      "failure_class": "MERGE_FALSE_ACCEPT",
+      "selection_category": "noisy_imperfect_english",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [
+          [
+            "UNSPECIFIED",
+            "seattle trip"
+          ]
+        ],
+        "expected_ambiguity_levels": [],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "merge"
+      ]
+    },
+    {
+      "case_id": "SEM200-192",
+      "category": "N_noisy_english",
+      "input": "nyc hotel money cant above 780 total and trip 1900 max",
+      "passed": false,
+      "failure_categories": [
+        "PREFERENCE_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": "New York City",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1900.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 780.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "New York City",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "MONETARY_SEMANTIC_GAP"
+        ],
+        "evidence": [
+          "nyc hotel money cant above 780 total and trip 1900 max"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "HOTEL_TOTAL",
+            "operator": "LTE",
+            "value": 780.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "nyc hotel money cant above 780 total",
+            "extractor_source": "llm"
+          },
+          {
+            "kind": "BUDGET",
+            "scope": "TOTAL_TRIP",
+            "operator": "LTE",
+            "value": 1900.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "trip 1900 max",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "NYC",
+            "source_text": "nyc hotel"
+          }
+        ],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 639,
+        "output_tokens": 138,
+        "total_tokens": 777,
+        "latency_ms": 1714.61,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": "New York City",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 780.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1900.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "NYC"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 3,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": false,
+        "actual": false,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "MERGE_FALSE_ACCEPT"
+      ],
+      "failure_class": "MERGE_FALSE_ACCEPT",
+      "selection_category": "noisy_imperfect_english",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [
+          [
+            "HOTEL",
+            "nyc"
+          ]
+        ],
+        "expected_ambiguity_levels": [],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "merge"
+      ]
+    },
+    {
+      "case_id": "SEM200-194",
+      "category": "N_noisy_english",
+      "input": "wash dc accomodation total under 620, all trip under 1350",
+      "passed": false,
+      "failure_categories": [
+        "PARSER_MISS",
+        "PREFERENCE_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": "Washington DC",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1350.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 620.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1350.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "MONETARY_SEMANTIC_GAP"
+        ],
+        "evidence": [
+          "wash dc accomodation total under 620, all trip under 1350"
+        ],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "HOTEL_TOTAL",
+            "operator": "LTE",
+            "value": 620.0,
+            "currency": "UNS",
+            "strength": "HARD",
+            "source_text": "wash dc accomodation total under 620",
+            "extractor_source": "llm"
+          },
+          {
+            "kind": "BUDGET",
+            "scope": "TOTAL_TRIP",
+            "operator": "LTE",
+            "value": 1350.0,
+            "currency": "UNS",
+            "strength": "HARD",
+            "source_text": "all trip under 1350",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "Accommodation in Washington, DC",
+            "source_text": "wash dc accomodation"
+          }
+        ],
+        "objectives": [],
+        "ambiguities": [
+          {
+            "level": "ASSUMABLE",
+            "source_text": "620; 1350",
+            "reason": "Currency is not specified."
+          }
+        ]
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 639,
+        "output_tokens": 303,
+        "total_tokens": 942,
+        "latency_ms": 3890.17,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "ADDED_FROM_LLM",
+          "DETERMINISTIC_PRESERVED",
+          "CLARIFICATION_REQUIRED",
+          "ADDED_FROM_LLM",
+          "LLM_REJECTED_UNGROUNDED"
+        ],
+        "conflicts": [
+          "EXPLICIT_CONSTRAINT_CONFLICT"
+        ],
+        "requires_clarification": true
+      },
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1350.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 620.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "Accommodation in Washington, DC"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 3,
+        "ungrounded_items": 1,
+        "grounded": false,
+        "ungrounded_rejected": true
+      },
+      "clarification": {
+        "expected": false,
+        "actual": false,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "UNGROUNDED_PROPOSAL",
+        "MERGE_FALSE_ACCEPT"
+      ],
+      "failure_class": "UNGROUNDED_PROPOSAL",
+      "selection_category": "noisy_imperfect_english",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [
+          [
+            "HOTEL",
+            "accommodation in washington, dc"
+          ]
+        ],
+        "expected_ambiguity_levels": [],
+        "proposed_ambiguity_levels": [
+          "ASSUMABLE"
+        ]
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "extractor",
+        "merge"
+      ]
+    },
+    {
+      "case_id": "SEM200-149",
+      "category": "J_preferences",
+      "input": "In Seattle I want seafood, coffee shops, and art museums.",
+      "passed": false,
+      "failure_categories": [
+        "COVERAGE_FALSE_POSITIVE",
+        "PARSER_MISS"
+      ],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": false,
+        "allow_hybrid_gap": false,
+        "destination": "Seattle",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "seafood"
+          },
+          {
+            "category": "FOOD",
+            "value": "coffee shops"
+          },
+          {
+            "category": "ACTIVITY",
+            "value": "art museums"
+          }
+        ],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": true,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Seattle I want seafood",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "I want "
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "seafood",
+            "source_text": "seafood"
+          },
+          {
+            "category": "FOOD",
+            "value": "coffee shops",
+            "source_text": "coffee shops"
+          },
+          {
+            "category": "ACTIVITY",
+            "value": "art museums",
+            "source_text": "art museums"
+          }
+        ],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 637,
+        "output_tokens": 73,
+        "total_tokens": 710,
+        "latency_ms": 1524.28,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": "Seattle I want seafood",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "FOOD",
+            "value": "seafood"
+          },
+          {
+            "category": "FOOD",
+            "value": "coffee shops"
+          },
+          {
+            "category": "ACTIVITY",
+            "value": "art museums"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 3,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": false,
+        "actual": false,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "EXTRACTOR_SEMANTIC_MISS"
+      ],
+      "failure_class": "EXTRACTOR_SEMANTIC_MISS",
+      "selection_category": "complex_preference_requirement",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [],
+        "expected_ambiguity_levels": [],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": true,
+      "failure_origin": [
+        "evaluator",
+        "extractor"
+      ]
+    },
+    {
+      "case_id": "SEM200-150",
+      "category": "J_preferences",
+      "input": "Denver: downtown hotel, public transit, and museums.",
+      "passed": false,
+      "failure_categories": [
+        "COVERAGE_FALSE_POSITIVE"
+      ],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": false,
+        "allow_hybrid_gap": false,
+        "destination": "Denver",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "downtown hotel"
+          },
+          {
+            "category": "TRANSPORT",
+            "value": "public transit"
+          },
+          {
+            "category": "ACTIVITY",
+            "value": "museums"
+          }
+        ],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": true,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Denver",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "downtown hotel"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "downtown hotel",
+            "source_text": "downtown hotel"
+          },
+          {
+            "category": "TRANSPORT",
+            "value": "public transit",
+            "source_text": "public transit"
+          },
+          {
+            "category": "ACTIVITY",
+            "value": "museums",
+            "source_text": "museums"
+          }
+        ],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 635,
+        "output_tokens": 155,
+        "total_tokens": 790,
+        "latency_ms": 2152.91,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": "Denver",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "downtown hotel"
+          },
+          {
+            "category": "TRANSPORT",
+            "value": "public transit"
+          },
+          {
+            "category": "ACTIVITY",
+            "value": "museums"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 3,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": false,
+        "actual": false,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": true,
+      "failure_classes": [],
+      "failure_class": null,
+      "selection_category": "complex_preference_requirement",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [],
+        "expected_ambiguity_levels": [],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": true,
+      "failure_origin": [
+        "evaluator"
+      ]
+    },
+    {
+      "case_id": "SEM200-154",
+      "category": "J_preferences",
+      "input": "Washington DC, please include museums, seafood, and a downtown hotel.",
+      "passed": false,
+      "failure_categories": [
+        "COVERAGE_FALSE_POSITIVE",
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": false,
+        "allow_hybrid_gap": false,
+        "destination": "Washington DC",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "museums"
+          },
+          {
+            "category": "FOOD",
+            "value": "seafood"
+          },
+          {
+            "category": "HOTEL",
+            "value": "downtown hotel"
+          }
+        ],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": true,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Washington DC",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "downtown hotel"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "museums",
+            "source_text": "include museums"
+          },
+          {
+            "category": "FOOD",
+            "value": "seafood",
+            "source_text": "seafood"
+          },
+          {
+            "category": "HOTEL",
+            "value": "downtown hotel",
+            "source_text": "a downtown hotel"
+          }
+        ],
+        "objectives": [],
+        "ambiguities": [
+          {
+            "level": "ASSUMABLE",
+            "source_text": "Washington DC",
+            "reason": "Destination is stated, but no destination field is available in the supplied schema."
+          }
+        ]
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 638,
+        "output_tokens": 107,
+        "total_tokens": 745,
+        "latency_ms": 2028.12,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM",
+          "ADDED_FROM_LLM"
+        ],
+        "conflicts": [],
+        "requires_clarification": false
+      },
+      "final": {
+        "destination": "Washington DC",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "museums"
+          },
+          {
+            "category": "FOOD",
+            "value": "seafood"
+          },
+          {
+            "category": "HOTEL",
+            "value": "downtown hotel"
+          }
+        ],
+        "ambiguity_levels": [
+          "ASSUMABLE"
+        ],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 4,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": false,
+        "actual": false,
+        "correct": true
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [],
+        "semantic_safety_retained": true
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "EXTRACTOR_SEMANTIC_MISS"
+      ],
+      "failure_class": "EXTRACTOR_SEMANTIC_MISS",
+      "selection_category": "complex_preference_requirement",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [],
+        "missing_preferences": [],
+        "extra_preferences": [],
+        "expected_ambiguity_levels": [],
+        "proposed_ambiguity_levels": [
+          "ASSUMABLE"
+        ]
+      },
+      "evaluation_gold_stale": true,
+      "failure_origin": [
+        "evaluator",
+        "extractor"
+      ]
+    },
+    {
+      "case_id": "SEM200-199",
+      "category": "O_adversarial_boundary",
+      "input": "Seattle hotel around $600 total, but the whole trip cannot exceed $1,500.",
+      "passed": false,
+      "failure_categories": [
+        "AMBIGUITY_ERROR"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": "Seattle",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1500.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "around usd 600"
+          }
+        ],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [
+          "HARD_SOFT_BOUNDARY"
+        ],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Seattle",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "around usd 600"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": true,
+        "reasons": [
+          "UNRESOLVED_REQUIREMENT_CLAUSE"
+        ],
+        "evidence": [
+          "hotel around $6"
+        ],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": {
+        "constraints": [
+          {
+            "kind": "BUDGET",
+            "scope": "HOTEL_TOTAL",
+            "operator": "LTE",
+            "value": 600.0,
+            "currency": "USD",
+            "strength": "SOFT",
+            "source_text": "Seattle hotel around $600 total",
+            "extractor_source": "llm"
+          },
+          {
+            "kind": "BUDGET",
+            "scope": "TOTAL_TRIP",
+            "operator": "LTE",
+            "value": 1500.0,
+            "currency": "USD",
+            "strength": "HARD",
+            "source_text": "the whole trip cannot exceed $1,500",
+            "extractor_source": "llm"
+          }
+        ],
+        "preferences": [],
+        "objectives": [],
+        "ambiguities": []
+      },
+      "extraction_error": null,
+      "extractor_observation": {
+        "input_tokens": 642,
+        "output_tokens": 243,
+        "total_tokens": 885,
+        "latency_ms": 2727.99,
+        "error": null
+      },
+      "merge": {
+        "decisions": [
+          "DETERMINISTIC_PRESERVED",
+          "CLARIFICATION_REQUIRED",
+          "DUPLICATE_CONFIRMED"
+        ],
+        "conflicts": [
+          "HARD_SOFT_CONFLICT"
+        ],
+        "requires_clarification": true
+      },
+      "final": {
+        "destination": "Seattle",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 1500.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "HOTEL",
+            "value": "around usd 600"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "proposal_validation": {
+        "schema_valid": true,
+        "grounded_items": 2,
+        "ungrounded_items": 0,
+        "grounded": true,
+        "ungrounded_rejected": false
+      },
+      "clarification": {
+        "expected": true,
+        "actual": false,
+        "correct": false
+      },
+      "unsupported_handling": {
+        "expected_scopes": [],
+        "final_scopes": [],
+        "preserved": true,
+        "expected_semantics": [
+          "HARD_SOFT_BOUNDARY"
+        ],
+        "semantic_safety_retained": false
+      },
+      "hard_safety_outcome": {
+        "silent_hard_constraint_corruption": false,
+        "wrong_hard_scope_accepted": false,
+        "wrong_hard_amount_accepted": false,
+        "soft_to_hard_unsafe_promotion": false,
+        "hard_to_soft_unsafe_downgrade": false,
+        "hallucinated_hard_constraints_accepted": false,
+        "unsupported_hard_constraints_silently_dropped": false
+      },
+      "final_semantics_correct": false,
+      "failure_classes": [
+        "EXTRACTOR_SEMANTIC_MISS",
+        "AMBIGUITY_OVERRESOLUTION",
+        "AMBIGUITY_UNDERDETECTION"
+      ],
+      "failure_class": "EXTRACTOR_SEMANTIC_MISS",
+      "selection_category": "complex_preference_requirement",
+      "extractor_correctness": {
+        "missing_constraints": [],
+        "extra_constraints": [
+          [
+            "HOTEL_TOTAL",
+            600.0,
+            "SOFT"
+          ]
+        ],
+        "missing_preferences": [
+          [
+            "HOTEL",
+            "around usd 600"
+          ]
+        ],
+        "extra_preferences": [],
+        "expected_ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "proposed_ambiguity_levels": []
+      },
+      "evaluation_gold_stale": false,
+      "failure_origin": [
+        "extractor"
+      ]
+    }
+  ],
+  "metrics": {
+    "coverage_gate": {
+      "TP": 19,
+      "TN": 0,
+      "FP": 6,
+      "FN": 0,
+      "precision": 0.76,
+      "recall": 1.0,
+      "f1": 0.8636363636363636,
+      "false_positive_rate": 1.0
+    },
+    "semantic_field_accuracy": {
+      "destination": 0.75,
+      "duration_days": 1.0,
+      "travelers": 1.0,
+      "constraints": 0.76,
+      "preferences": 1.0,
+      "ambiguity_levels": 0.52,
+      "constraint_scope": 0.88,
+      "constraint_amount": 0.76,
+      "constraint_strength": 0.88,
+      "correction": 0.0
+    },
+    "deferred_hybrid_cases": 0,
+    "hard_constraint_safety": {
+      "silent_hard_constraint_corruption": 6,
+      "wrong_hard_scope": 1,
+      "wrong_hard_amount": 3,
+      "soft_to_hard_unsafe_promotion": 0,
+      "hard_to_soft_unsafe_downgrade": 0,
+      "hard_constraint_false_rejection": 3,
+      "hard_constraint_false_acceptance": 6,
+      "unsupported_hard_constraints_silently_dropped": 0
+    },
+    "merge": {
+      "attempted": 25,
+      "accepted_augmentations": 19,
+      "hallucination_rejections": 3,
+      "conflict_detections": 8,
+      "accepted_augmentation_precision": 0.9473684210526315
+    },
+    "failure_counts": {
+      "MERGE_FALSE_REJECT": 3,
+      "PREFERENCE_ERROR": 13,
+      "WRONG_SCOPE": 2,
+      "AMBIGUITY_ERROR": 16,
+      "COVERAGE_FALSE_POSITIVE": 6,
+      "CORRECTION_ERROR": 3,
+      "PARSER_MISS": 2
+    },
+    "category_pass_rates": {
+      "H_ambiguous_scope": {
+        "passed": 0,
+        "total": 7,
+        "pass_rate": 0.0
+      },
+      "L_tradeoff_objective": {
+        "passed": 0,
+        "total": 4,
+        "pass_rate": 0.0
+      },
+      "K_negation_exclusion": {
+        "passed": 0,
+        "total": 3,
+        "pass_rate": 0.0
+      },
+      "E_same_scope_correction": {
+        "passed": 0,
+        "total": 1,
+        "pass_rate": 0.0
+      },
+      "F_mixed_scope_correction": {
+        "passed": 0,
+        "total": 2,
+        "pass_rate": 0.0
+      },
+      "N_noisy_english": {
+        "passed": 0,
+        "total": 4,
+        "pass_rate": 0.0
+      },
+      "J_preferences": {
+        "passed": 0,
+        "total": 3,
+        "pass_rate": 0.0
+      },
+      "O_adversarial_boundary": {
+        "passed": 0,
+        "total": 1,
+        "pass_rate": 0.0
+      }
+    },
+    "case_pass_rate": 0.0
+  },
+  "local_controls": [
+    {
+      "case_id": "HYBRID-005",
+      "category": "multi_scope_deterministic",
+      "input": "Plan a 3-day trip to Columbus for 1 traveler under $900 total. I like zoos and fried chicken. Hotel spending must not exceed $400.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": null,
+        "allow_hybrid_gap": false,
+        "destination": "Columbus",
+        "duration_days": 3,
+        "travelers": 1,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 400.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          },
+          {
+            "category": "FOOD",
+            "value": "fried chicken"
+          }
+        ],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Columbus",
+        "duration_days": 3,
+        "travelers": 1,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 400.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          },
+          {
+            "category": "FOOD",
+            "value": "fried chicken"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 2,
+          "resolved_constraints": 2,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "extractor_observation": null,
+      "merge": null,
+      "final": {
+        "destination": "Columbus",
+        "duration_days": 3,
+        "travelers": 1,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 900.0,
+            "strength": "HARD"
+          },
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 400.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [
+          {
+            "category": "ACTIVITY",
+            "value": "zoo"
+          },
+          {
+            "category": "FOOD",
+            "value": "fried chicken"
+          }
+        ],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "control_checks": {
+        "zero_live_calls": true,
+        "coverage_skipped_llm": true,
+        "supported_constraints_match": true,
+        "preferences_preserved": true,
+        "unsupported_scopes_preserved": true,
+        "blocking_ambiguity_preserved_when_unsupported": true
+      },
+      "control_passed": true
+    },
+    {
+      "case_id": "SEM200-021",
+      "category": "B_total_trip_hard",
+      "input": "Keep the total cost of my Boston trip under $875.",
+      "passed": false,
+      "failure_categories": [
+        "PARSER_MISS"
+      ],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": false,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 875.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 875.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "extractor_observation": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 875.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "control_checks": {
+        "zero_live_calls": true,
+        "coverage_skipped_llm": true,
+        "supported_constraints_match": true,
+        "preferences_preserved": true,
+        "unsupported_scopes_preserved": true,
+        "blocking_ambiguity_preserved_when_unsupported": true
+      },
+      "control_passed": true
+    },
+    {
+      "case_id": "SEM200-041",
+      "category": "C_hotel_total_hard",
+      "input": "In Boston, hotel spending must stay under $430 total.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": false,
+        "allow_hybrid_gap": false,
+        "destination": "Boston",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 430.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 430.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "extractor_observation": null,
+      "merge": null,
+      "final": {
+        "destination": "Boston",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "HOTEL_TOTAL",
+            "value": 430.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "control_checks": {
+        "zero_live_calls": true,
+        "coverage_skipped_llm": true,
+        "supported_constraints_match": true,
+        "preferences_preserved": true,
+        "unsupported_scopes_preserved": true,
+        "blocking_ambiguity_preserved_when_unsupported": true
+      },
+      "control_passed": true
+    },
+    {
+      "case_id": "SEM200-082",
+      "category": "E_same_scope_correction",
+      "input": "My whole-trip cap is $900; change that to $840.",
+      "passed": true,
+      "failure_categories": [],
+      "expected": {
+        "needs_llm": false,
+        "expected_runtime_llm_need": false,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 840.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": true
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "merge_decisions": [],
+        "requires_clarification": false,
+        "unsupported_scopes": [],
+        "unsupported_constraints": [],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 840.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 1,
+          "blocking_ambiguities": 0
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "extractor_observation": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [
+          {
+            "scope": "TOTAL_TRIP",
+            "value": 840.0,
+            "strength": "HARD"
+          }
+        ],
+        "preferences": [],
+        "ambiguity_levels": [],
+        "unsupported_scopes": [],
+        "unsupported_semantics": [],
+        "requires_clarification": false
+      },
+      "control_checks": {
+        "zero_live_calls": true,
+        "coverage_skipped_llm": true,
+        "supported_constraints_match": true,
+        "preferences_preserved": true,
+        "unsupported_scopes_preserved": true,
+        "blocking_ambiguity_preserved_when_unsupported": true
+      },
+      "control_passed": true
+    },
+    {
+      "case_id": "SEM200-131",
+      "category": "I_unsupported_hard_scope",
+      "input": "Food must stay below $260 in Boston.",
+      "passed": false,
+      "failure_categories": [
+        "COVERAGE_FALSE_NEGATIVE"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ],
+        "unsupported_constraints": [
+          {
+            "scope": "FOOD_TOTAL",
+            "value": 260.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": false
+          }
+        ],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Boston",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "extractor_observation": null,
+      "merge": null,
+      "final": {
+        "destination": "Boston",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "FOOD_TOTAL"
+        ],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "control_checks": {
+        "zero_live_calls": true,
+        "coverage_skipped_llm": true,
+        "supported_constraints_match": true,
+        "preferences_preserved": true,
+        "unsupported_scopes_preserved": true,
+        "blocking_ambiguity_preserved_when_unsupported": true
+      },
+      "control_passed": true
+    },
+    {
+      "case_id": "SEM200-132",
+      "category": "I_unsupported_hard_scope",
+      "input": "Chicago transportation cannot exceed $140.",
+      "passed": false,
+      "failure_categories": [
+        "COVERAGE_FALSE_NEGATIVE"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [
+          "TRANSPORT_TOTAL"
+        ],
+        "unsupported_constraints": [
+          {
+            "scope": "TRANSPORT_TOTAL",
+            "value": 140.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": false
+          }
+        ],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Chicago",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "TRANSPORT_TOTAL"
+        ],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 0,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "extractor_observation": null,
+      "merge": null,
+      "final": {
+        "destination": "Chicago",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "TRANSPORT_TOTAL"
+        ],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "control_checks": {
+        "zero_live_calls": true,
+        "coverage_skipped_llm": true,
+        "supported_constraints_match": true,
+        "preferences_preserved": true,
+        "unsupported_scopes_preserved": true,
+        "blocking_ambiguity_preserved_when_unsupported": true
+      },
+      "control_passed": true
+    },
+    {
+      "case_id": "SEM200-133",
+      "category": "I_unsupported_hard_scope",
+      "input": "Activities in Miami must cost no more than $190.",
+      "passed": false,
+      "failure_categories": [
+        "COVERAGE_FALSE_NEGATIVE"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [
+          "ATTRACTIONS_TOTAL"
+        ],
+        "unsupported_constraints": [
+          {
+            "scope": "ATTRACTIONS_TOTAL",
+            "value": 190.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": false
+          }
+        ],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "ATTRACTIONS_TOTAL"
+        ],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "extractor_observation": null,
+      "merge": null,
+      "final": {
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "ATTRACTIONS_TOTAL"
+        ],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "control_checks": {
+        "zero_live_calls": true,
+        "coverage_skipped_llm": true,
+        "supported_constraints_match": true,
+        "preferences_preserved": true,
+        "unsupported_scopes_preserved": true,
+        "blocking_ambiguity_preserved_when_unsupported": true
+      },
+      "control_passed": true
+    },
+    {
+      "case_id": "SEM200-134",
+      "category": "I_unsupported_hard_scope",
+      "input": "Seattle hotel must stay under $210 per night.",
+      "passed": false,
+      "failure_categories": [
+        "COVERAGE_FALSE_NEGATIVE"
+      ],
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "allow_hybrid_gap": false,
+        "destination": null,
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "merge_decisions": [],
+        "requires_clarification": true,
+        "unsupported_scopes": [
+          "HOTEL_PER_NIGHT"
+        ],
+        "unsupported_constraints": [
+          {
+            "scope": "HOTEL_PER_NIGHT",
+            "value": 210.0,
+            "strength": "HARD",
+            "operator": "LTE",
+            "supported_for_execution": false
+          }
+        ],
+        "unsupported_semantics": [],
+        "forbidden_constraints": [],
+        "forbidden_preferences": [],
+        "allowed_grounded_additions": {
+          "preferences": false,
+          "assumable_ambiguities": false
+        }
+      },
+      "deterministic": {
+        "destination": "Seattle",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "HOTEL_PER_NIGHT"
+        ],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "coverage": {
+        "needs_llm": false,
+        "reasons": [],
+        "evidence": [],
+        "signals": {
+          "monetary_expressions": 1,
+          "resolved_constraints": 0,
+          "blocking_ambiguities": 1
+        }
+      },
+      "proposal": null,
+      "extraction_error": null,
+      "extractor_observation": null,
+      "merge": null,
+      "final": {
+        "destination": "Seattle",
+        "duration_days": null,
+        "travelers": null,
+        "constraints": [],
+        "preferences": [],
+        "ambiguity_levels": [
+          "BLOCKING"
+        ],
+        "unsupported_scopes": [
+          "HOTEL_PER_NIGHT"
+        ],
+        "unsupported_semantics": [],
+        "requires_clarification": true
+      },
+      "control_checks": {
+        "zero_live_calls": true,
+        "coverage_skipped_llm": true,
+        "supported_constraints_match": true,
+        "preferences_preserved": true,
+        "unsupported_scopes_preserved": true,
+        "blocking_ambiguity_preserved_when_unsupported": true
+      },
+      "control_passed": true
+    }
+  ],
+  "call_safeguards": {
+    "explicit_live_flag": true,
+    "approved_model": "gpt-5.6-luna",
+    "call_budget": 25,
+    "observed_calls": 25,
+    "retries": 0,
+    "manual_reruns": 0
+  },
+  "live_metrics": {
+    "llm_calls": 25,
+    "completed": 25,
+    "schema_valid": 25,
+    "schema_failures": 0,
+    "provider_failures": 0,
+    "extractor": {
+      "constraint_accuracy": {
+        "matched": 16,
+        "expected": 16,
+        "proposed": 24,
+        "false_positive": 8,
+        "precision": 0.6666666666666666,
+        "recall": 1.0,
+        "f1": 0.8
+      },
+      "scope_accuracy": {
+        "matched": 16,
+        "expected": 16,
+        "proposed": 24,
+        "false_positive": 8,
+        "precision": 0.6666666666666666,
+        "recall": 1.0,
+        "f1": 0.8
+      },
+      "amount_accuracy": {
+        "matched": 16,
+        "expected": 16,
+        "proposed": 24,
+        "false_positive": 8,
+        "precision": 0.6666666666666666,
+        "recall": 1.0,
+        "f1": 0.8
+      },
+      "strength_accuracy": {
+        "matched": 16,
+        "expected": 16,
+        "proposed": 24,
+        "false_positive": 8,
+        "precision": 0.6666666666666666,
+        "recall": 1.0,
+        "f1": 0.8
+      },
+      "preference_accuracy": {
+        "matched": 9,
+        "expected": 10,
+        "proposed": 22,
+        "false_positive": 13,
+        "precision": 0.4090909090909091,
+        "recall": 0.9,
+        "f1": 0.5625
+      },
+      "ambiguity_accuracy": {
+        "matched": 2,
+        "expected": 15,
+        "proposed": 8,
+        "false_positive": 6,
+        "precision": 0.25,
+        "recall": 0.13333333333333333,
+        "f1": 0.17391304347826086
+      }
+    },
+    "merge": {
+      "accepted_augmentations": 19,
+      "rejected_proposals": 3,
+      "duplicates": 5,
+      "conflicts": 8,
+      "clarifications": 7,
+      "unsupported_semantics_retained": {
+        "retained": 7,
+        "expected": 15
+      },
+      "ungrounded_rejections": 3,
+      "accepted_augmentation_precision": {
+        "matched_items": 18,
+        "accepted_items": 40,
+        "precision": 0.45
+      }
+    },
+    "grounding": {
+      "proposed_items": 54,
+      "grounded_items": 53,
+      "ungrounded_items": 1,
+      "cases_with_ungrounded_rejection": 3,
+      "accepted_grounded_additions": 40,
+      "rejected_ungrounded_additions": 3
+    },
+    "final_hybrid_semantic_accuracy": 0.2,
+    "category_outcomes": {
+      "ambiguous_monetary_scope": {
+        "passed": 4,
+        "total": 7,
+        "accuracy": 0.5714285714285714
+      },
+      "tradeoff_compositional": {
+        "passed": 0,
+        "total": 4,
+        "accuracy": 0.0
+      },
+      "negation_exclusion": {
+        "passed": 0,
+        "total": 3,
+        "accuracy": 0.0
+      },
+      "correction_unresolved": {
+        "passed": 0,
+        "total": 3,
+        "accuracy": 0.0
+      },
+      "noisy_imperfect_english": {
+        "passed": 0,
+        "total": 4,
+        "accuracy": 0.0
+      },
+      "complex_preference_requirement": {
+        "passed": 1,
+        "total": 4,
+        "accuracy": 0.25
+      }
+    },
+    "open_world_valid_additions": 0,
+    "evaluation_gold_stale_cases": [
+      "SEM200-081",
+      "SEM200-093",
+      "SEM200-095",
+      "SEM200-149",
+      "SEM200-150",
+      "SEM200-154"
+    ],
+    "unsupported_scope_recognition": {
+      "live": "not_applicable",
+      "local_shadow_controls": "4/4"
+    },
+    "hard_safety": {
+      "silent_hard_constraint_corruption": 3,
+      "wrong_hard_scope_accepted": 1,
+      "wrong_hard_amount_accepted": 3,
+      "soft_to_hard_unsafe_promotion": 0,
+      "hard_to_soft_unsafe_downgrade": 0,
+      "hallucinated_hard_constraints_accepted": 3,
+      "unsupported_hard_constraints_silently_dropped": 0
+    },
+    "failure_classes": {
+      "AMBIGUITY_OVERRESOLUTION": 8,
+      "AMBIGUITY_UNDERDETECTION": 13,
+      "EXTRACTOR_SEMANTIC_MISS": 3,
+      "MERGE_FALSE_ACCEPT": 16,
+      "MERGE_FALSE_REJECT": 3,
+      "UNGROUNDED_PROPOSAL": 1
+    },
+    "latency_ms": {
+      "average": 2474.09,
+      "median": 2152.91,
+      "p95": 4622.14,
+      "max": 5336.03
+    },
+    "tokens": {
+      "input_tokens": 15943,
+      "output_tokens": 3368,
+      "total_tokens": 19311,
+      "average_per_case": 772.44
+    }
+  },
+  "selection": {
+    "note": "Nearest balanced gate-positive mix. M2 marks every retained unsupported-hard scope deterministic-complete, so sending FOOD_TOTAL, TRANSPORT_TOTAL, ATTRACTIONS_TOTAL, or HOTEL_PER_NIGHT live would violate the M3 needs_llm=true rule. Those four scopes are audited as zero-call shadow controls instead.",
+    "live_category_mix": {
+      "ambiguous_monetary_scope": 7,
+      "unsupported_hard_scope": 0,
+      "tradeoff_compositional": 4,
+      "negation_exclusion": 3,
+      "correction_unresolved": 3,
+      "noisy_imperfect_english": 4,
+      "complex_preference_requirement": 4
+    },
+    "case_ids": [
+      "SEM200-116",
+      "SEM200-117",
+      "SEM200-118",
+      "SEM200-119",
+      "SEM200-122",
+      "SEM200-125",
+      "SEM200-130",
+      "SEM200-166",
+      "SEM200-169",
+      "SEM200-172",
+      "SEM200-175",
+      "SEM200-156",
+      "SEM200-158",
+      "SEM200-163",
+      "SEM200-081",
+      "SEM200-093",
+      "SEM200-095",
+      "SEM200-186",
+      "SEM200-189",
+      "SEM200-192",
+      "SEM200-194",
+      "SEM200-149",
+      "SEM200-150",
+      "SEM200-154",
+      "SEM200-199"
+    ]
+  },
+  "local_control_groups": [
+    {
+      "source": "hybrid_semantics_v1.json",
+      "case_ids": [
+        "HYBRID-005"
+      ],
+      "purpose": "Columbus trip-budget plus hotel-budget deterministic control"
+    },
+    {
+      "source": "hybrid_semantics_200_v1.json",
+      "case_ids": [
+        "SEM200-021",
+        "SEM200-041",
+        "SEM200-082"
+      ],
+      "purpose": "Simple total, simple hotel-total, and already-resolved correction controls"
+    },
+    {
+      "source": "hybrid_semantics_200_v1.json",
+      "case_ids": [
+        "SEM200-131",
+        "SEM200-132",
+        "SEM200-133",
+        "SEM200-134"
+      ],
+      "purpose": "Zero-call unsupported-hard shadow controls for FOOD_TOTAL, TRANSPORT_TOTAL, ATTRACTIONS_TOTAL, and HOTEL_PER_NIGHT"
+    }
+  ]
+}

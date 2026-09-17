@@ -5,7 +5,9 @@ from typing import Protocol
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 from pydantic_core import PydanticCustomError
 
-from app.agent.requirements import TravelRequirements
+from app.agent.execution import ValidationViolation
+from app.agent.itinerary import Itinerary
+from app.agent.requirements import ConstraintScope, TravelRequirements
 from app.tools.contracts import BudgetRequest, SearchInput, SearchRequest, ToolRequest
 
 TOOL_ALLOWLIST = frozenset(
@@ -31,6 +33,7 @@ class PlannerDecision(BaseModel):
     can_proceed: bool
     tool_requests: list[ToolRequest] = Field(max_length=5)
     warnings: list[str] = Field(max_length=10)
+    budget_repair: bool = False
 
     @model_validator(mode="before")
     @classmethod
@@ -78,11 +81,21 @@ class PlannerDecision(BaseModel):
 
 
 class PlannerProtocol(Protocol):
-    def plan(self, requirements: TravelRequirements) -> PlannerDecision: ...
+    def plan(
+        self, requirements: TravelRequirements, feedback: "ReplanContext | None" = None
+    ) -> PlannerDecision: ...
+
+
+class ReplanContext(BaseModel):
+    violations: list[ValidationViolation] = Field(min_length=1)
+    previous_itinerary: Itinerary
+    attempt: int = Field(ge=1)
 
 
 class DeterministicTestPlanner:
-    def plan(self, requirements: TravelRequirements) -> PlannerDecision:
+    def plan(
+        self, requirements: TravelRequirements, feedback: ReplanContext | None = None
+    ) -> PlannerDecision:
         if not requirements.destination or requirements.trip_days is None:
             raise ValueError("Preflight must succeed before planning")
         preferences = {
@@ -97,8 +110,30 @@ class DeterministicTestPlanner:
                 arguments=SearchInput(
                     destination=requirements.destination,
                     preferences=tags,
+                    max_price=hotel_price_ceiling(requirements) if name == "search_hotels" else None,
                 ),
             )
             for name, tags in preferences.items()
         ] + [BudgetRequest()]
-        return PlannerDecision(can_proceed=True, tool_requests=requests, warnings=[])
+        return PlannerDecision(
+            can_proceed=True,
+            tool_requests=requests,
+            warnings=[],
+            budget_repair=feedback is not None,
+        )
+
+
+def hotel_price_ceiling(requirements: TravelRequirements) -> float | None:
+    """Translate a supported group hotel cap into the fixture's per-person nightly price."""
+    constraint = next(
+        (
+            item
+            for item in requirements.requirements_v2.constraints
+            if item.scope == ConstraintScope.HOTEL_TOTAL
+        ),
+        None,
+    )
+    nights = (requirements.trip_days or 0) - 1
+    if constraint is None or constraint.currency != "USD" or requirements.travelers is None or nights < 1:
+        return None
+    return constraint.value / (requirements.travelers * nights)

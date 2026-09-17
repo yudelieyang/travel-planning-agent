@@ -1,0 +1,111 @@
+{
+  "endpoint": "https://overpass.private.coffee/api/interpreter",
+  "acquired_at": "2026-09-16T21:25:22.207676Z",
+  "osm_base_timestamp": "2026-07-28T02:16:18Z",
+  "administrative_boundary": {
+    "provider_place_id": "relation/111968",
+    "name": "San Francisco",
+    "admin_level": "6"
+  },
+  "query": "[out:json][timeout:180];rel(111968)->.boundary;area(3600111968)->.searchArea;(rel.boundary;nwr(area.searchArea)[\"name\"][\"tourism\"~\"^(museum|aquarium)$\"];nwr(area.searchArea)[\"name\"][\"leisure\"=\"park\"];);out center tags qt;",
+  "raw_response_sha256": "be82b42873d9542e04827f7c7a913a97237f84f8a8b4b3f775102b9ddfa6c95d",
+  "raw_response_bytes": 135292,
+  "returned_element_count": 349,
+  "selected_count": 3,
+  "duplicate_resolution": [],
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "elements": [
+    {
+      "type": "way",
+      "id": 24588037,
+      "center": {
+        "lat": 37.7802455,
+        "lon": -122.4159975
+      },
+      "tags": {
+        "addr:city": "San Francisco",
+        "addr:country": "US",
+        "addr:housenumber": "200",
+        "addr:postcode": "94102",
+        "addr:state": "CA",
+        "addr:street": "Larkin Street",
+        "building": "yes",
+        "building:levels": "3",
+        "check_date": "2026-02-23",
+        "contact:website": "http://www.asianart.org",
+        "fee": "yes",
+        "height": "46",
+        "name": "Asian Art Museum of San Francisco",
+        "name:en": "Asian Art Museum of San Francisco",
+        "note": "Formerly the Public Library",
+        "opening_hours": "Th 13:00-20:00; Fr-Mo 10:00-17:00",
+        "phone": "+1-415-581-3500",
+        "tourism": "museum",
+        "wheelchair": "yes",
+        "wikidata": "Q727277",
+        "wikipedia": "en:Asian Art Museum (San Francisco)"
+      }
+    },
+    {
+      "type": "way",
+      "id": 30029681,
+      "center": {
+        "lat": 37.7948846,
+        "lon": -122.4119197
+      },
+      "tags": {
+        "addr:city": "San Francisco",
+        "addr:housenumber": "1201",
+        "addr:postcode": "94108",
+        "addr:state": "CA",
+        "addr:street": "Mason Street",
+        "alt_name": "Cable Car Museum",
+        "building": "yes",
+        "check_date": "2026-07-25",
+        "ele": "61",
+        "gnis:feature_id": "1655337",
+        "name": "Cable Car Powerhouse and Barn",
+        "opening_hours": "Tu-Th 10:00-16:00; Fr-Su 10:00-17:00; Mo 00:00-24:00",
+        "opening_hours:url": "http://www.cablecarmuseum.org/info.html",
+        "phone": "+1 415 4741887",
+        "toilets": "yes",
+        "toilets:access": "yes",
+        "tourism": "museum",
+        "website": "http://www.cablecarmuseum.org",
+        "wikidata": "Q5496957",
+        "wikimedia_commons": "Category:San Francisco Cable Car Museum",
+        "wikipedia": "en:San Francisco Cable Car Museum"
+      }
+    },
+    {
+      "type": "way",
+      "id": 28695389,
+      "center": {
+        "lat": 37.7698269,
+        "lon": -122.4660916
+      },
+      "tags": {
+        "addr:city": "San Francisco",
+        "addr:housenumber": "55",
+        "addr:postcode": "94118",
+        "addr:state": "CA",
+        "addr:street": "Music Concourse Drive",
+        "building": "museum",
+        "building:levels": "5",
+        "building:material": "glass",
+        "changing_table": "yes",
+        "ele": "78",
+        "fee": "yes",
+        "gnis:feature_id": "217950",
+        "height": "11",
+        "name": "California Academy of Sciences",
+        "opening_hours": "Mo-Sa 09:30-17:00; Su 11:00-17:00",
+        "roof:material": "grass",
+        "source": "USGS Geonames",
+        "tourism": "museum",
+        "website": "https://www.calacademy.org/",
+        "wikidata": "Q134486471"
+      }
+    }
+  ]
+}

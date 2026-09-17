@@ -147,12 +147,22 @@ def test_trace_is_metadata_only_and_not_in_api_response():
         "input_tokens",
         "output_tokens",
         "total_tokens",
-        "api_latency_ms",
-        "api_error_type",
-    }
-    assert trace.final_status == "success"
-    assert not state["errors"] and not second_state["errors"]
-    assert state["budget_summary"] == state["tool_results"][-1].data
+            "api_latency_ms",
+            "api_error_type",
+            "semantic_coverage",
+            "llm_invoked",
+            "llm_extraction_status",
+                "llm_semantic_proposal",
+                "llm_error_code",
+                "semantic_merge_attempted",
+                "semantic_merge_decisions",
+                "semantic_merge_conflicts",
+                "final_requirements_source",
+                "requires_clarification",
+            }
+    assert trace.final_status == "error"
+    assert state["errors"] == second_state["errors"] == ["Hard budget exceeded"]
+    assert state["budget_summary"] is None
     assert state["tool_results"][-1].source == "deterministic"
     response = service.plan(QUERY).model_dump()
     assert "trace" not in response

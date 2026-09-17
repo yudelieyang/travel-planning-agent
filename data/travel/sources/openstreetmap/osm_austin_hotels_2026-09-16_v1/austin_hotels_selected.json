@@ -1,0 +1,60 @@
+{
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "acquired_at": "2026-09-16T14:54:27.8734226Z",
+  "osm_base_timestamp": "2026-09-16T14:52:01Z",
+  "query": "[out:json][timeout:60];area[\"boundary\"=\"administrative\"][\"name\"=\"Texas\"][\"admin_level\"=\"4\"]->.state;rel(area.state)[\"boundary\"=\"administrative\"][\"name\"=\"Austin\"][\"admin_level\"=\"8\"];map_to_area -> .searchArea;nwr[\"name\"][\"tourism\"=\"hotel\"](area.searchArea);out center tags;",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "returned_element_count": 213,
+  "raw_response_sha256": "382523a433561368edd2810d75b3a297538160df8ffdb1cbc69f449760a6fda6",
+  "selection": "Three conventional tourism=hotel objects with complete observed addresses, valid coordinates, stable identities, and no colocated duplicate representation were retained.",
+  "elements": [
+    {
+      "type": "node",
+      "id": 12577833089,
+      "lat": 30.2652582,
+      "lon": -97.73806,
+      "tags": {
+        "addr:city": "Austin",
+        "addr:housenumber": "500",
+        "addr:postcode": "78701",
+        "addr:state": "TX",
+        "addr:street": "East 4th Street",
+        "name": "Hilton Austin",
+        "tourism": "hotel",
+        "website": "https://www.hilton.com/en/hotels/auscvhh-hilton-austin/",
+        "wikidata": "Q111394173"
+      }
+    },
+    {
+      "type": "way",
+      "id": 104137285,
+      "center": {"lat": 30.2607066, "lon": -97.7467623},
+      "tags": {
+        "addr:city": "Austin",
+        "addr:housenumber": "208",
+        "addr:postcode": "78704",
+        "addr:state": "TX",
+        "addr:street": "Barton Springs Road",
+        "name": "Hyatt Regency Austin",
+        "tourism": "hotel",
+        "website": "https://www.hyatt.com/en-us/hotel/texas/hyatt-regency-austin/ausra"
+      }
+    },
+    {
+      "type": "way",
+      "id": 134807221,
+      "center": {"lat": 30.2616262, "lon": -97.7422786},
+      "tags": {
+        "addr:city": "Austin",
+        "addr:housenumber": "98",
+        "addr:postcode": "78701",
+        "addr:state": "TX",
+        "addr:street": "San Jacinto Blvd",
+        "name": "Four Seasons Hotel Austin",
+        "tourism": "hotel",
+        "website": "https://www.fourseasons.com/austin/",
+        "wikidata": "Q5475492"
+      }
+    }
+  ]
+}

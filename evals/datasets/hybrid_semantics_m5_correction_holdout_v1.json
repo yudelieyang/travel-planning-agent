@@ -1,0 +1,112 @@
+{
+  "version": "hybrid_semantics_m5_correction_holdout_v1",
+  "cases": [
+    {
+      "id": "M5-001",
+      "category": "correction",
+      "input": "Hotel spending for the entire stay must stay under $610. Sorry, revised lodging limit: $560.",
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "constraints": [{"scope": "HOTEL_TOTAL", "value": 560}]
+      }
+    },
+    {
+      "id": "M5-002",
+      "category": "correction",
+      "input": "Keep the whole trip under $1,740. Sorry, change the trip cap to $1,520.",
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "constraints": [{"scope": "TOTAL_TRIP", "value": 1520}]
+      }
+    },
+    {
+      "id": "M5-003",
+      "category": "correction",
+      "input": "All lodging for the trip cannot exceed $690. Actually, revise the lodging limit to $640.",
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "constraints": [{"scope": "HOTEL_TOTAL", "value": 640}]
+      }
+    },
+    {
+      "id": "M5-004",
+      "category": "correction",
+      "input": "The total trip must stay below $2,050. Sorry, lower the trip cap to $1,850.",
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "constraints": [{"scope": "TOTAL_TRIP", "value": 1850}]
+      }
+    },
+    {
+      "id": "M5-005",
+      "category": "correction",
+      "input": "Hotel total ceiling is $720. Adjust the hotel total to $660.",
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "constraints": [{"scope": "HOTEL_TOTAL", "value": 660}]
+      }
+    },
+    {
+      "id": "M5-006",
+      "category": "ambiguous_monetary",
+      "input": "Set aside $475 for the hotel.",
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "ambiguity_levels": ["BLOCKING"],
+        "requires_clarification": true
+      }
+    },
+    {
+      "id": "M5-007",
+      "category": "ambiguous_monetary",
+      "input": "I can do $215 for lodging.",
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "ambiguity_levels": ["BLOCKING"],
+        "requires_clarification": true
+      }
+    },
+    {
+      "id": "M5-008",
+      "category": "multi_scope_correction",
+      "input": "Keep the entire trip under $1,300 and hotel total under $520. Actually make hotel total $470.",
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "constraints": [
+          {"scope": "TOTAL_TRIP", "value": 1300},
+          {"scope": "HOTEL_TOTAL", "value": 470}
+        ]
+      }
+    },
+    {
+      "id": "M5-009",
+      "category": "noisy_correction",
+      "input": "hotel all nites max usd 640... wait actually pls make teh hotel total usd 590",
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "constraints": [{"scope": "HOTEL_TOTAL", "value": 590}]
+      }
+    },
+    {
+      "id": "M5-010",
+      "category": "negative_correction_guard",
+      "input": "Do not make the hotel total $650; I have not set a hotel cap.",
+      "expected": {
+        "needs_llm": true,
+        "expected_runtime_llm_need": true,
+        "ambiguity_levels": ["BLOCKING"],
+        "requires_clarification": true,
+        "forbidden_constraints": [{"scope": "HOTEL_TOTAL", "value": 650}]
+      }
+    }
+  ]
+}

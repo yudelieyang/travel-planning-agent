@@ -28,14 +28,25 @@ class Settings(BaseSettings):
     redis_host: str = "localhost"
     redis_port: int = Field(default=6379, ge=1, le=65535)
     chroma_persist_directory: Path = Path("./chroma_data")
+    candidate_data_mode: Literal["mock", "snapshot"] = "mock"
+    candidate_snapshot_path: Path | None = None
     openai_api_key: SecretStr = SecretStr("")
     openai_model: str = ""
     openai_max_output_tokens: int = Field(default=1024, ge=256, le=2000)
     openai_reasoning_effort: Literal["low"] = "low"
     agent_planner: Literal["deterministic", "openai"] = "deterministic"
+    semantic_augmentation_mode: Literal["deterministic", "hybrid"] = "deterministic"
+    semantic_extractor_prompt_version: Literal[
+        "semantic_extractor_v1", "semantic_extractor_v2", "semantic_extractor_v3"
+    ] = "semantic_extractor_v3"
     planner_prompt_version: Literal["planner_v1"] = "planner_v1"
 
     @field_validator("chroma_persist_directory", mode="after")
     @classmethod
     def resolve_chroma_path(cls, value: Path) -> Path:
         return (PROJECT_ROOT / value).resolve()
+
+    @field_validator("candidate_snapshot_path", mode="after")
+    @classmethod
+    def resolve_candidate_snapshot_path(cls, value: Path | None) -> Path | None:
+        return (PROJECT_ROOT / value).resolve() if value is not None else None
